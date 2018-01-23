@@ -1,0 +1,9 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="EnemyActions.lua"/>
+	<Script file="Objectives.lua"/>
+	<Script file="WorldMap.lua"/>
+	<Script file="Gossip.lua"/>
+	
+	<Script file="BattleListener.lua"/>
+	<Script file="ConfigLoader.lua"/>
+</Ui>

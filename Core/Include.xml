@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Data.lua"/>
+	<Script file="Static.lua"/>
+
+	<Script file="Filters.lua"/>
+	<Script file="Predict.lua"/>
+	<Script file="Compare.lua"/>
+
+	<Script file="Journal.lua"/>
+	<Script file="Specie.lua"/>
+	<Script file="Tamer.lua"/>
+	<Script file="Battle.lua"/>
+</Ui>

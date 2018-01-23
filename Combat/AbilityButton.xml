@@ -1,0 +1,57 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="PetTrackerAbilityButton" motionScriptsWhileDisabled="true" virtual="true">
+		<Size x="29" y="29"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture inherits="Spellbook-EmptySlot">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Size x="33" y="33"/>
+				</Texture>
+			</Layer>
+			
+			<Layer level="BORDER">
+				<Texture parentKey="CooldownShadow" inherits="BattleBar-Countdown-Shadow" hidden="true">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			
+			<Layer level="ARTWORK">
+				<Texture setAllPoints="true" parentKey="Icon"/>
+				<FontString parentKey="Cooldown" inherits="GameFontNormal" hidden="true">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			
+			<Layer level="OVERLAY">
+				<Texture parentKey="Lock" file="Interface\PetBattles\PetBattle-LockIcon" hidden="true">
+					<Size x="20" y="20"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				
+				<Texture parentKey="Type">
+					<Size x="18" y="18"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-7" y="7"/>
+					</Anchors>
+					<TexCoords left="0.79687500" right="0.49218750" top="0.50390625" bottom="0.65625000"/>
+				</Texture>
+				
+				<Texture parentKey="BetterIcon" file="Interface\PetBattles\BattleBar-AbilityBadge-Weak" hidden="true">
+					<Size x="18" y="18"/>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="8" y="-8"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<HighlightTexture name="$parentHighlight" file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+	</Button>
+</Ui>

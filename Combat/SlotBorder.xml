@@ -1,0 +1,134 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<Frame name="PetTrackerSlotBorder" virtual="true">
+		<Size x="410" y="328"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="TopLeft" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-1" y="1"/>
+					</Anchors>
+					<Size x="17" y="17"/>
+					<TexCoords left="0.03125000" right="0.06445313" top="0.02246094" bottom="0.03906250"/>	
+				</Texture>
+				<Texture parentKey="TopRight" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="1" y="1"/>
+					</Anchors>
+					<Size x="17" y="17"/>	
+					<TexCoords left="0.06445313" right="0.03125000" top="0.02246094" bottom="0.03906250"/>	
+				</Texture>
+				<Texture parentKey="BottomLeft" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-1" y="-1"/>
+					</Anchors>
+					<Size x="17" y="17"/>	
+					<TexCoords left="0.03125000" right="0.06445313" top="0.03906250" bottom="0.02246094"/>	
+				</Texture>
+				<Texture parentKey="BottomRight" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="1" y="-1"/>
+					</Anchors>
+					<Size x="17" y="17"/>	
+					<TexCoords left="0.06445313" right="0.03125000" top="0.03906250" bottom="0.02246094"/>	
+				</Texture>
+				<Texture parentKey="Top" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.TopLeft" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeKey="$parent.TopRight" x="0" y="1"/>
+					</Anchors>
+					<TexCoords left="0.00000000" right="1.00000000" top="0.09375000" bottom="0.21875000"/>	
+				</Texture>
+				<Texture parentKey="Bottom" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.BottomLeft" x="0" y="-1"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeKey="$parent.BottomRight" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="0.00000000" right="1.00000000" top="0.21875000" bottom="0.09375000"/>	
+				</Texture>
+				<Texture parentKey="Left" file="Interface\PetBattles\!BattleSlotFrame-Left" vertTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeKey="$parent.TopLeft" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeKey="$parent.BottomLeft" x="-1" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Right" file="Interface\PetBattles\!BattleSlotFrame-Left" vertTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeKey="$parent.TopRight" x="1" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeKey="$parent.BottomRight" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top="0" bottom="1"/>	
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK" textureSubLevel="1">
+				<Texture parentKey="UpperSeparator" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.Left" x="-11" y="54"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeKey="$parent.Right" x="12" y="54"/>
+					</Anchors>
+					<Size x="64" y="9"/>	
+					<TexCoords left="0.00000000" right="1.00000000" top="0.00781250" bottom="0.07812500"/>	
+				</Texture>
+				<Texture parentKey="LowerSeparator" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.Left" x="-11" y="-53"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeKey="$parent.Right" x="12" y="-53"/>
+					</Anchors>
+					<Size x="64" y="9"/>	
+					<TexCoords left="0.00000000" right="1.00000000" top="0.00781250" bottom="0.07812500"/>	
+				</Texture>
+			</Layer>
+		</Layers>
+
+		<Scripts>
+			<OnLoad>
+				self:SetFrameLevel(self:GetFrameLevel() + 6)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="PetTrackerTitledSlotBorder" inherits="PetTrackerSlotBorder" virtual="true">
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Text" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="0" y="40"/>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="TOP" relativeKey="$parent.Top" x="0" y="-4"/>
+					</Anchors>
+				</FontString>
+				<Texture parentKey="TextBG" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Size y="24"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeKey="$parent.Text" x="-10" y="0"/>
+						<Anchor point="RIGHT" relativePoint="RIGHT" relativeKey="$parent.Text" x="10" y="0"/>
+					</Anchors>
+					<TexCoords left="0.00000000" right="1.00000000" top="0.23437500" bottom="0.42187500"/>	
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture parentKey="TextOver" file="Interface\PetBattles\_PetJournalHorizTile" horizTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeKey="$parent.Text" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.Text" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="0.00000000" right="1.00000000" top="0.43750000" bottom="0.75000000"/>	
+				</Texture>
+
+				<Texture parentKey="TextLeft" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeKey="$parent.TextOver" x="0" y="0"/>
+					</Anchors>
+					<Size x="40" y="40"/>	
+					<TexCoords left="0.23437500" right="0.31250000" top="0.06347656" bottom="0.10253906"/>	
+				</Texture>
+				<Texture parentKey="TextRight" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.TextOver" x="0" y="0"/>
+					</Anchors>
+					<Size x="40" y="40"/>	
+					<TexCoords left="0.23437500" right="0.31250000" top="0.02246094" bottom="0.06152344"/>	
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

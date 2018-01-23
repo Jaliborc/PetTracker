@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="BattleTests.lua"/>
+	<Script file="StaticTests.lua"/>
+	<Script file="JournalTests.lua"/>
+	<Script file="FilterTests.lua"/>
+</Ui>

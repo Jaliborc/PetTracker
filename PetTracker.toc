@@ -1,0 +1,24 @@
+## Interface: 70300
+## Title: |cff2020ffPetTracker|r
+## Notes: Tracking pets in and out of combat since 2012.
+## Author: Jaliborc (João Cardoso)
+## Version: 7.3.0
+
+## SavedVariables: PetTracker_Sets
+## SavedVariablesPerCharacter: PetTracker_State
+## X-Category: Battle Pets
+## OptionalDeps: WoWUnit
+
+Libs\Libs.xml
+Localization\Include.xml
+
+PetTracker.lua
+
+Core\Include.xml
+Core\Tests\Include.xml
+
+Map\Include.xml
+Combat\Include.xml
+Tracking\Include.xml
+
+Features\Include.xml

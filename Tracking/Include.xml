@@ -1,0 +1,8 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Include file="ProgressBar.xml"/>
+	<Script file="ProgressBar.lua"/>
+
+	<Include file="Line.xml"/>
+	<Script file="List.lua"/>
+	<Script file="Tracker.lua"/>
+</Ui>

@@ -1,0 +1,244 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Texture name="PetTrackerStatIcon" file="Interface\PetBattles\PetBattle-StatIcons" virtual="true">
+		<Size x="16" y="16"/>
+	</Texture>
+
+	<Frame name="PetTrackerHoverFrame" virtual="true">
+		<Scripts>
+			<OnLoad>
+				self:SetFrameLevel(self:GetFrameLevel() + 4)
+			</OnLoad>
+			<OnEnter></OnEnter>
+		</Scripts>
+	</Frame>
+
+	<Button name="PetTrackerSlot" virtual="true">
+		<Size x="399" y="106"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Bg" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-3" y="0"/>
+					</Anchors>
+					<Size x="404" y="106"/>	
+					<TexCoords left="0.00195313" right="0.79101563" top="0.48730469" bottom="0.59082031"/>	
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND" textureSubLevel="2">
+				<Texture parentKey="Shadows" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="TOPRIGHT" x="-125" y="-120"/>
+					</Anchors>
+					<Size x="138" y="72"/>	
+					<TexCoords left="0.52734375" right="0.79687500" top="0.02246094" bottom="0.09277344"/>	
+				</Texture>
+			</Layer>
+			
+			<Layer level="ARTWORK">
+				<Texture parentKey="Icon">
+					<Size x="38" y="38"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="7" y="-11"/>
+					</Anchors>
+				</Texture>
+
+				<Texture parentKey="PowerIcon" inherits="PetTrackerStatIcon">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Icon" relativePoint="BOTTOMLEFT"  y="-15"/>
+					</Anchors>
+					<TexCoords left="0" right="0.5" top="0" bottom="0.5"/>
+				</Texture>
+				<FontString parentKey="Power" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.PowerIcon" x="3" y="0"/>
+					</Anchors>
+				</FontString>
+				
+				<Texture parentKey="SpeedIcon" inherits="PetTrackerStatIcon">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.PowerIcon" relativePoint="BOTTOMLEFT"  y="-2"/>
+					</Anchors>
+					<TexCoords left="0" right="0.5" top="0.5" bottom="1"/>
+				</Texture>
+				<FontString parentKey="Speed" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.SpeedIcon" x="1" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			
+			<Layer level="ARTWORK" textureSubLevel="1">
+				<Texture parentKey="IconBorder" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="CENTER" relativeKey="$parent.Icon"  y="0"/>
+					</Anchors>
+					<Size x="53" y="54"/>
+					<TexCoords left="0.41992188" right="0.52343750" top="0.02246094" bottom="0.07519531"/>	
+				</Texture>
+				<FontString parentKey="Name" inherits="GameFontNormal" justifyH="LEFT" justifyV="BOTTOM">
+					<Size x="210" y="0"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.Icon" x="12" y="8"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SubName" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size x="150" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeKey="$parent.Name"  y="-2"/>
+					</Anchors>
+					<Color r="1" g="1" b="1" a="1"/>
+				</FontString>
+			</Layer>
+
+			<Layer level="ARTWORK" textureSubLevel="2">
+				<Texture parentKey="Quality" file="Interface\Common\WhiteIconFrame">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeKey="$parent.Icon"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.Icon"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			
+			<Layer level="OVERLAY">
+				<Texture parentKey="LevelBG" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.Icon" x="5" y="-5"/>
+					</Anchors>
+					<Size x="21" y="21"/>	
+					<TexCoords left="0.06835938" right="0.10937500" top="0.02246094" bottom="0.04296875"/>	
+				</Texture>
+				<FontString parentKey="Level" inherits="GameFontNormalSmall" justifyH="CENTER">
+					<Size  y="12"/>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="CENTER" relativeKey="$parent.LevelBG" x="1" y="-1"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<Frames>
+			<PlayerModel parentKey="Model" useParentLevel="true">
+				<Size x="130" y="96"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						Model_OnLoad(self)
+						self:SetRotation(-MODELFRAME_DEFAULT_ROTATION)
+					</OnLoad>
+					<OnEvent function="Model_OnEvent"/>
+				</Scripts>
+			</PlayerModel>
+			
+			<Frame parentKey="Type">
+				<Size x="28" y="28"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-2" y="-3"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="Icon" setAllPoints="true">
+							<TexCoords left="0.79687500" right="0.49218750" top="0.50390625" bottom="0.65625000"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Frame parentKey="Hover">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Icon"/>
+					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon"/>
+				</Anchors>
+			</Frame>
+			
+			<Frame parentKey="IsEmpty" inherits="PetTrackerHoverFrame">
+				<Size x="404" y="106"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="-3" y="0"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK" textureSubLevel="1">
+						<Texture file="Interface\PetBattles\PetJournal">
+							<Anchors>
+								<Anchor point="TOPLEFT"/>
+								<Anchor point="BOTTOMRIGHT"/>
+							</Anchors>
+							<TexCoords left="0.00195313" right="0.79101563" top="0.38183594" bottom="0.48535156"/>	
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame parentKey="IsDead" setAllPoints="true" inherits="PetTrackerHoverFrame" hidden="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture>
+							<Color r="0" g="0" b="0" a="0.5"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<Texture file="Interface\PetBattles\DeadPetIcon">
+							<Size x="38" y="38"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="7" y="-11"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Button>
+
+	<Button name="PetTrackerJournalSlot" inherits="PetTrackerSlot" virtual="true">
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="HealthIcon" inherits="PetTrackerStatIcon">
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Power" relativePoint="RIGHT" x="5"/>
+					</Anchors>
+					<TexCoords left="0.5" right="1.0" top="0.5" bottom="1.0"/>
+				</Texture>
+
+				<FontString parentKey="Health" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.HealthIcon" x="2" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+
+	<Button name="PetTrackerBattleSlot" inherits="PetTrackerSlot" virtual="true">
+		<Frames>
+			<StatusBar parentKey="Health" inherits="PetTrackerStatusBar">
+				<BarColor r="0.1" g="1" b="0.1"/>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" x="65" y="5"/>
+				</Anchors>
+			</StatusBar>
+			<StatusBar parentKey="Xp" inherits="PetTrackerStatusBar">
+				<BarColor r="0.1" g="0.1" b="1"/>
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Health" relativePoint="RIGHT" x="7"/>
+				</Anchors>
+			</StatusBar>
+			<Frame parentKey="Highlight" inherits="PetTrackerSlotHighlight">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="-7" y="5"/>
+					<Anchor point="BOTTOMRIGHT" x="7" y="-7"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonDown", "LeftButtonUp")
+			</OnLoad>
+			<OnEnter>
+				self.Highlight:Show()
+			</OnEnter>
+			<OnLeave>
+				self.Highlight:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+</Ui>

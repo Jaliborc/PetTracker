@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Blip.lua"/>
+	<Script file="SpecieBlip.lua"/>
+	<Script file="StableBlip.lua"/>
+
+	<Script file="Tooltip.lua"/>
+</Ui>

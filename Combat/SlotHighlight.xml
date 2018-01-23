@@ -1,0 +1,70 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Texture name="PetTrackerSlotHighlightTexture" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar-Highlight" alphaMode="ADD" virtual="true">
+		<Size x="16" y="16"/>
+	</Texture>
+	
+	<Frame name="PetTrackerSlotHighlight" enableMouse="false" hidden="true" frameStrata="HIGH" virtual="true">
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="TopLeft" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0.06640625" right="0" top="0.4375" bottom="0.65625"/>
+				</Texture>
+				<Texture parentKey="BottomLeft" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"/>
+					</Anchors>
+					<TexCoords left="0.06640625" right="0" top="0.65625" bottom="0.4375"/>
+				</Texture>		
+				<Texture parentKey="TopRight" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.06640625" top="0.4375" bottom="0.65625"/>
+				</Texture>
+				<Texture parentKey="BottomRight" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.06640625" top="0.65625" bottom="0.4375"/>
+				</Texture>	
+						
+				<Texture parentKey="Top" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopLeft" relativePoint="TOPRIGHT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.TopRight" relativePoint="BOTTOMLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.015" top="0.4375" bottom="0.65625"/>
+				</Texture>
+				<Texture parentKey="Bottom" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.BottomLeft" relativePoint="TOPRIGHT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRight" relativePoint="BOTTOMLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.015" top="0.65625" bottom="0.4375"/>
+				</Texture>			
+				<Texture parentKey="Left" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopLeft" relativePoint="BOTTOMLEFT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomLeft" relativePoint="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.06640625" right="0" top="0.65625" bottom="0.6"/>
+				</Texture>
+				<Texture parentKey="Right" inherits="PetTrackerSlotHighlightTexture">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopRight" relativePoint="BOTTOMLEFT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRight" relativePoint="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.06640625" top="0.65625" bottom="0.6"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self:SetFrameLevel(self:GetFrameLevel()+7)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

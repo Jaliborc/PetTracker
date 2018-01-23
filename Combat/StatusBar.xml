@@ -1,0 +1,50 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<StatusBar name="PetTrackerStatusBar" virtual="true">
+		<Size x="160" y="11"/>
+		<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Text" inherits="TextStatusBarText">
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="0"/>
+					</Anchors>
+				</FontString>
+				<Texture parentKey="Left" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT"  x="9" y="0"/>
+					</Anchors>
+					<Size x="11" y="11"/>	
+					<TexCoords left="0.02734375" right="0.04882813" top="0.00976563" bottom="0.02050781"/>	
+				</Texture>
+				<Texture parentKey="Right" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT"  x="-9" y="0"/>
+					</Anchors>
+					<Size x="11" y="11"/>	
+					<TexCoords left="0.07812500" right="0.09960938" top="0.00976563" bottom="0.02050781"/>	
+				</Texture>
+				<Texture file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Left" relativePoint="TOPRIGHT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" relativePoint="BOTTOMLEFT"/>
+					</Anchors>
+					<TexCoords left="0.05273438" right="0.07421875" top="0.00976563" bottom="0.02050781"/>	
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Bg" file="Interface\PetBattles\PetJournal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Left" x="2"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" x="-2"/>
+					</Anchors>
+					<TexCoords left="0.00195313" right="0.02343750" top="0.00976563" bottom="0.02050781"/>	
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self.Bg:SetDesaturated(true)
+			</OnLoad>
+		</Scripts>
+	</StatusBar>
+</Ui>

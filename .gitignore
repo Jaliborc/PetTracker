@@ -1,0 +1,4 @@
+*.pyc
+Data/*.lua
+.DS_Store
+Icon_

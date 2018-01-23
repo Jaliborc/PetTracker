@@ -1,0 +1,20 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="LibStub\LibStub.lua"/>
+
+	<Script file="CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Script file="LibPetJournal-2.0\LibPetJournal-2.0.lua"/>
+	<Script file="CustomSearch-1.0\CustomSearch-1.0.lua"/>
+
+	<Include file="Poncho-1.0\Poncho-1.0.xml"/>
+	<Include file="Sushi-3.0\Sushi-3.0.lua"/>
+	<Include file="Sushi-3.0\Classes\CallHandler.lua"/>
+	<Include file="Sushi-3.0\Classes\TipOwner.lua"/>
+	<Include file="Sushi-3.0\Classes\GlowBox.lua"/>
+	<Include file="Sushi-3.0\Classes\EditBox.lua"/>
+
+	<Include file="Sushi-3.0\Classes\ButtonBase.lua"/>
+	<Include file="Sushi-3.0\Classes\DropdownButton.lua"/>
+
+	<Include file="Sushi-3.0\Classes\Group.lua"/>
+	<Include file="Sushi-3.0\Classes\DropdownFrame.lua"/>
+</Ui>
