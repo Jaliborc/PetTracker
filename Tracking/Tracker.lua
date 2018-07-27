@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -135,7 +135,7 @@ end
 
 function Tracker:GetColor(quality)
 	if Addon.Sets.CapturedPets then
-		return Addon:GetQualityColor(quality)
+		return Addon.GetQualityColor(quality)
 	end
 	return 1,1,1, HIGHLIGHT_FONT_COLOR_CODE:sub(3)
 end

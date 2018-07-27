@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -39,9 +39,12 @@ function Objectives:Startup()
 	header.Text:SetText(PETS)
 	header:Show()
 
+	self:SetScript('OnEvent', self.TrackingChanged)
+	self:RegisterEvent('ZONE_CHANGED_NEW_AREA')
+	self:SetParent(Parent)
+
 	self.Anchor:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
 	self.Anchor:SetScript('OnMouseDown', self.ToggleOptions)
-	self:SetParent(Parent)
 	self.Header = header
 
 	hooksecurefunc('ObjectiveTracker_Update', function()
@@ -75,9 +78,13 @@ end
 --[[ API ]]--
 
 function Objectives:GetUsedHeight()
-	local height = DEFAULT_OBJECTIVE_TRACKER_MODULE.BlocksFrame.contentsHeight + 15
+	local height = DEFAULT_OBJECTIVE_TRACKER_MODULE.BlocksFrame.contentsHeight
 	for i = 1, self.Index-1 do
 		height = height + OBJECTIVE_TRACKER_ADDONS[i]
+	end
+
+	if height > 0 then
+		height = height + 15
 	end
 
 	return height

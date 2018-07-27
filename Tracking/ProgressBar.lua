@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -25,20 +25,20 @@ local Format = PLAYERS_FOUND_OUT_OF_MAX
 function Progress:OnCreate()
 	self.Overlay:SetFrameLevel(self:GetFrameLevel() + Addon.MaxQuality + 1)
 	self.Bars = {}
-	
+
 	for i = 1, Addon.MaxQuality do
 		self.Bars[i] = self:CreateBar(i)
 	end
 end
 
 function Progress:CreateBar(i)
-	local r, g, b = Addon:GetQualityColor(i)
+	local r, g, b = Addon.GetQualityColor(i)
 	local bar = CreateFrame('StatusBar', nil, self)
 	bar:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
 	bar:SetFrameLevel(self:GetFrameLevel() + i)
 	bar:SetStatusBarColor(r, g, b)
 	bar:SetAllPoints()
-	
+
 	return bar
 end
 
@@ -47,14 +47,14 @@ end
 
 function Progress:SetProgress(progress)
 	local owned = 0
-	
+
 	for i = Addon.MaxQuality, 1, -1 do
 		owned = owned + progress[i].total
 
 		self.Bars[i]:SetMinMaxValues(0, progress.total)
 		self.Bars[i]:SetValue(owned)
 	end
-	
+
 	self.Overlay.Text:SetFormattedText(Format, owned, progress.total)
 	self:SetShown(progress.total > 0)
 end

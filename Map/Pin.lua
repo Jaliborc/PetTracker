@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -15,18 +15,15 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local _, Addon = ...
-local Blip = Addon:NewClass(nil, 'StableBlip', nil, Addon.Blip)
+local ADDON, Addon = ...
+local Pin = Addon:NewClass('Button', 'Pin')
 
-
---[[ Overrides ]]--
-
-function Blip:OnCreate()
-	self.__super.OnCreate(self)
-	self.icon:SetTexture('Interface/Minimap/Tracking/StableMaster')
-	self:SetSize(18, 18)
+function Pin:OnCreate()
+	self:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
+	self.icon = self:CreateTexture(nil, 'ARTWORK')
+	self.icon:SetPoint('CENTER')
 end
 
-function Blip:GetTooltip()
-	return MINIMAP_TRACKING_STABLEMASTER, Addon.Locals.StableTip
+function Pin:OnRelease()
+	self:Hide()
 end

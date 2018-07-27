@@ -3,14 +3,13 @@ Core/Compare.lua
 
 Libs/LibPetBreedInfo-1.0/LibStub.lua
 Libs/LibPetBreedInfo-1.0/LibPetBreedInfo-1.0.toc
-Libs/CustomTutorials-2.1/CustomTutorials-2.1.toc
-Libs/SecureTabs-2.0/SecureTabs-2.0.toc
-Libs/Poncho-1.0/Poncho-1.0.toc
-Libs/Sushi-3.0/Sushi-3.0.toc
 
 Libs/Sushi-3.0/Classes/ColorPicker.lua
 Libs/Sushi-3.0/Classes/Dropdown.lua
+Libs/Sushi-3.0/Classes/ExpandCheck.lua
+Libs/Sushi-3.0/Classes/FauxScrollGroup.lua
 Libs/Sushi-3.0/Classes/GrayButton.lua
+Libs/Sushi-3.0/Classes/GlowBox.lua
 Libs/Sushi-3.0/Classes/HelpButton.lua
 Libs/Sushi-3.0/Classes/IconCheck.lua
 Libs/Sushi-3.0/Classes/Slider.lua

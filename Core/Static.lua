@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -20,12 +20,11 @@ local Missing = RED_FONT_COLOR
 local L = Addon.Locals
 
 
---[[ Values ]]--
+--[[ Constants ]]--
 
 Addon.MaxLevel = 25
 Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
 Addon.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
-Addon.ContinentByZone = {}
 
 Addon.SourceIcons = {
 	'Interface/WorldMap/TreasureChest_64',
@@ -41,7 +40,7 @@ Addon.BreedStats = {
 	[3] = {.5,.5,.5},
 	[4] = {0,2,0},
 	[5] = {0,0,2},
-	[6] = {2,0,0}, 
+	[6] = {2,0,0},
 	[7] = {.9,.9,0},
 	[8] = {0,.9,.9},
 	[9] = {.9,0,.9},
@@ -76,30 +75,30 @@ Addon.BreedIcons = {
 	[11] = {'|TInterface\\PetBattles\\PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:16:32|t', 17, 17}
 }
 
-for i = 1, select('#', GetMapContinents())/2 do
-	local continent = select(i*2, GetMapContinents())
 
-	for k = 1, select('#', GetMapZones(i)) do
-		Addon.ContinentByZone[select(k, GetMapZones(i))] = continent
-	end
-end
+--[[ Static ]]--
 
-
---[[ Constants ]]--
-
-function Addon:GetQualityColor(quality)
+function Addon.GetQualityColor(quality)
 	if quality > 0 then
 		return GetItemQualityColor(quality - 1)
 	end
-	
+
 	return Missing.r, Missing.g, Missing.b, RED_FONT_COLOR_CODE:sub(3)
 end
 
-function Addon:GetTypeName(type)
+function Addon.GetMapTypeName(type)
+	for name, id in pairs(Enum.UIMapType) do
+		if type == id then
+			return name
+		end
+	end
+end
+
+function Addon.GetTypeName(type)
 	return _G['BATTLE_PET_NAME_' .. type]
 end
 
-function Addon:GetTypeIcon(type)
+function Addon.GetTypeIcon(type)
 	return type and 'Interface/PetBattles/PetIcon-' .. PET_TYPE_SUFFIX[type]
 end
 
@@ -115,15 +114,15 @@ end
 
 --[[ Utilities ]]--
 
-function Addon:KeepShort(text)
+function Addon.KeepShort(text)
 	if not text:find('|n') and strlen(text) > 100 then
 		return text:sub(0, 97) .. '...'
 	end
-	
+
 	return text
 end
 
-function Addon:UnpackDate(date)
+function Addon.UnpackDate(date)
 	local yearDate = date % (31*12)
 
 	return yearDate % 31 + 1,
@@ -131,7 +130,7 @@ function Addon:UnpackDate(date)
 		   floor(date / 31 / 12) + 2014
 end
 
-function Addon:GetDate()
+function Addon.GetDate()
 	local _, month, day, year = CalendarGetDate()
 	return (year-2014) * 31*12 + (month-1) * 31 + day-1
 end

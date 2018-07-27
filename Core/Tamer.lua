@@ -15,13 +15,13 @@ end
 function Tamer:Get(id)
 	local data = Addon.Tamers[id]
 	if data then
-		local name, model, zone, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
+		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
 		local tamer = setmetatable({
 			name = name, items = items, currencies = currencies,
 			gold = tonumber(gold, 36),
 			quest = tonumber(quest, 36),
 			model = tonumber(model, 36),
-			zone = tonumber(zone, 36),
+			map = tonumber(map, 36),
 			id = id
 		}, self)
 
@@ -51,18 +51,14 @@ function Tamer:Display()
 	end
 end
 
-function Tamer:GetZoneTitle()
-	local name = GetMapNameByID(self:GetZone()) or UNKNOWN
-	local continent = Addon.ContinentByZone[name]
-	if continent == 'Draenor' and self:GetLevel() < 25 then
-		continent = 'Outland'
-	end
-
-	return name .. (continent and (', ' .. continent) or '')
+function Tamer:GetMapTitle()
+	local info = C_Map.GetMapInfo(self:GetMap()) or UNKNOWN
+	local parent = C_Map.GetMapInfo(info.parentMapID)
+	return info.name .. ', ' .. parent.name
 end
 
-function Tamer:GetZone()
-	return self.zone == 971 and UnitFactionGroup('player') == 'Horde' and 976 or self.zone
+function Tamer:GetMap()
+	return self.map == 971 and UnitFactionGroup('player') == 'Horde' and 976 or self.map
 end
 
 function Tamer:GetCompleteState()
@@ -116,7 +112,7 @@ function Tamer:GetRewards()
 end
 
 function Tamer:GetAbstract()
-	local text = self.name .. ' ' .. self:GetZoneTitle() .. ' ' .. self:GetCompleteState()
+	local text = self.name .. ' ' .. self:GetMapTitle() .. ' ' .. self:GetCompleteState()
 
 	for i, pet in ipairs(self) do
 		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()

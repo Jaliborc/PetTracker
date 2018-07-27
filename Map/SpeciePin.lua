@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -16,35 +16,28 @@ This file is part of PetTracker.
 --]]
 
 local _, Addon = ...
-local Blip = Addon:NewClass(nil, 'SpecieBlip', nil, Addon.Blip)
-local Journal = Addon.Journal
+local Pin = Addon:NewClass(nil, 'SpeciePin', nil, Addon.Pin)
 
+function Pin:OnCreate()
+	 self.__super.OnCreate(self)
+	 self.icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
+	 self.icon:SetSize(16, 16)
 
---[[ Overrides ]]--
-
-function Blip:OnCreate()
-	local border = self:CreateTexture(nil, 'BORDER')
-	border:SetTexture('Interface/Minimap/UI-Minimap-TargetOverlay')
-	border:SetPoint('CENTER', .3, .3)
-	border:SetTexCoord(1, .5, 1, 0)
-	border:SetSize(28, 28)
-	border:Hide()
-
-	self.__super.OnCreate(self)
-	self.icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
-	self.border = border
-	self:SetSize(13, 13)
+	 self:SetScript('OnClick', self.OnClick)
+	 self:SetSize(16, 16)
 end
 
-function Blip:ShowJournal()
-	HideUIPanel(WorldMapFrame)
-	self.specie:Display()
+function Pin:OnClick(button)
+	 if button == 'LeftButton' then
+	 	 HideUIPanel(WorldMapFrame)
+		 self.specie:Display()
+	 end
 end
 
-function Blip:GetTooltip()
+function Pin:GetTooltip()
 	local name, icon, _,_, source = self.specie:GetInfo()
 	local title = ('|T%s:%d:%d:-2:0|t'):format(icon, 20, 20) .. name
 	local owned = self.specie:GetOwnedText()
-	
-	return title, (owned and (owned .. '|n') or '') .. Addon:KeepShort(source)
+
+	return title, (owned and (owned .. '|n') or '') .. Addon.KeepShort(source)
 end

@@ -16,16 +16,14 @@ This file is part of PetTracker.
 --]]
 
 local _, Addon = ...
-local Loader = Addon:NewModule('ConfigLoader')
+local Blip = Addon:NewClass(nil, 'StableBlip', nil, Addon.Blip)
 
-function Loader:Startup()
-	if (Addon.Sets.MainTutorial or 0) < 8 then
-		LoadAddOn('PetTracker_Config')
-	else
-		local original = InterfaceOptionsFrame:GetScript('OnShow')
-		InterfaceOptionsFrame:SetScript('OnShow', function(...)
-			LoadAddOn('PetTracker_Config')
-			original(...)
-		end)
-	end
+function Blip:OnCreate()
+	self.__super.OnCreate(self)
+	self.icon:SetTexture('Interface/Minimap/Tracking/StableMaster')
+	self:SetSize(16, 16)
+end
+
+function Blip:GetTooltip()
+	return MINIMAP_TRACKING_STABLEMASTER, Addon.Locals.StableTip
 end

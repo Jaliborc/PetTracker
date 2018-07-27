@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -35,33 +35,33 @@ end
 --[[ Progress ]]--
 
 function Journal:GetCurrentProgress()
-	return self:GetProgressIn(Addon.zone)
+	return self:GetProgressIn(C_Map.GetBestMapForUnit('player'))
 end
 
-function Journal:GetProgressIn(...)
+function Journal:GetProgressIn(map)
 	local progress = {total = 0}
 	for i = 0, Addon.MaxQuality do
 		progress[i] = {total = 0}
 	end
-	
-	local species = self:GetSpeciesIn(...)
+
+	local species = self.GetSpeciesIn(map)
 	for specie in pairs(species) do
 		local pet, quality, level = self:GetBestOwned(specie)
 		local quality = progress[quality]
 
 		progress.total = progress.total + 1
 		quality.total = quality.total + 1
-		
+
 		quality[level] = quality[level] or {}
 		tinsert(quality[level], specie)
 	end
-	
+
 	return progress
 end
 
 function Journal:GetBestOwned(specie)
 	local quality, level, best = 0, 0
-	
+
 	for i, pet in pairs(self:GetOwned(specie)) do
 		local q = self:GetQuality(pet)
 		local l = self:GetLevel(pet)
@@ -71,7 +71,7 @@ function Journal:GetBestOwned(specie)
 			best = pet
 		end
 	end
-	
+
 	return best, quality, level
 end
 
@@ -83,13 +83,13 @@ function Journal:GetOwnedText(specie)
 		for i, pet in ipairs(owned) do
 			local quality, level = Journal:GetQuality(pet), Journal:GetLevel(pet)
 			local breed, confidence = Journal:GetBreed(pet)
-			
-			local color = select(4, Addon:GetQualityColor(quality))
+
+			local color = select(4, Addon.GetQualityColor(quality))
 			local icon = Addon:GetBreedIcon(breed, .8, -2)
 
 			collected = collected .. format('  %s|c%s%d|r', icon, color, level)
 		end
-		
+
 		return collected
 	end
 end
@@ -101,7 +101,7 @@ function Journal:GetOwned(specie)
 			tinsert(list, pet)
 		end
 	end
-	
+
 	return list
 end
 
@@ -147,11 +147,11 @@ function Journal:GetAvailableBreeds(specie)
 end
 
 function Journal:GetTypeName(specie)
-	return Addon:GetTypeName(self:GetType(specie))
+	return Addon.GetTypeName(self:GetType(specie))
 end
 
 function Journal:GetTypeIcon(specie)
-	return Addon:GetTypeIcon(self:GetType(specie))
+	return Addon.GetTypeIcon(self:GetType(specie))
 end
 
 function Journal:GetSourceIcon(specie)
@@ -182,11 +182,11 @@ end
 
 --[[ Locations ]]--
 
-function Journal:GetSpeciesIn(zone)
-	return Addon.Species[zone] or {}
+function Journal.GetSpeciesIn(map)
+	return Addon.Species[map] or {}
 end
 
-function Journal:GetStablesIn(zone, level)
-	zone = Addon.Stables[zone]
-	return zone and zone[level] or ''
+function Journal.GetStablesIn(map)
+	map = Addon.Stables[map]
+	return map or ''
 end

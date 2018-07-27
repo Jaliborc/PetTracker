@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -58,7 +58,7 @@ end
 function Slot:Display(pet, target)
 	if pet then
 		local specie, icon, type = pet:GetInfo()
-		local r,g,b = Addon:GetQualityColor(pet:GetQuality())
+		local r,g,b = Addon.GetQualityColor(pet:GetQuality())
 		local health, power, speed = pet:GetStats()
 		local name = pet:GetName()
 		
