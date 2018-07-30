@@ -24,6 +24,17 @@ function Pin:OnCreate()
 	self.icon:SetPoint('CENTER')
 end
 
+function Pin:Place(frame, x, y)
+	local canvas = frame:GetCanvas()
+	local levelmanager = frame:GetPinFrameLevelsManager()
+
+	self:SetPoint('CENTER', canvas, 'TOPLEFT', canvas:GetWidth() * tonumber(x, 36) / 1000, -canvas:GetHeight() * tonumber(y, 36) / 1000)
+	self:SetFrameLevel(levelmanager:GetValidFrameLevel('PIN_FRAME_LEVEL_FLIGHT_POINT'))
+	self:Show()
+
+	return self
+end
+
 function Pin:OnRelease()
 	self:Hide()
 end

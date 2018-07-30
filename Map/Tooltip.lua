@@ -31,7 +31,7 @@ end
 function Tooltip:Anchor(...)
 	self:SetOwner(...)
 	self.NumStrokes = 0
-	
+
 	for i, stroke in pairs(self.Strokes) do
 		stroke:Hide()
 	end
@@ -62,7 +62,7 @@ function Tooltip:Display()
 	self:SetShown(self:NumLines() > 0)
 	if self:IsShown() then
 		local parent = self:GetParent()
-		
+
 		self:SetHeight(self:GetHeight() + self.NumStrokes * 8)
 		self:SetScale(parent and (1 / parent:GetScale()) or UIParent:GetScale())
 		self:SetFrameStrata('FULLSCREEN_DIALOG')
@@ -87,7 +87,7 @@ function Tooltip:CreateStroke(i)
 	stroke:SetPoint('TOPRIGHT', line, 'BOTTOMRIGHT', 5, -3)
 	stroke:SetColorTexture(.3, .3, .3)
 	stroke:SetHeight(1)
-	
+
 	self.Strokes[i] = stroke
 	return stroke
 end

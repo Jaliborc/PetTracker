@@ -18,14 +18,30 @@ This file is part of PetTracker.
 local ADDON, Addon = ...
 local Journal, Tamer = Addon.Journal, Addon.Tamer
 local MapCanvas = Addon:NewModule('MapCanvas')
-MapCanvas.pins = {}
-MapCanvas.tips = {}
+MapCanvas.pins, MapCanvas.tips = {}, {}
 
 hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 	MapCanvas:Init(frame)
-	MapCanvas:Clear(frame)
-	MapCanvas:Draw(frame)
+
+	if Addon.Sets then
+		MapCanvas:Redraw(frame)
+	end
 end)
+
+
+--[[ Events ]]--
+
+function MapCanvas:Startup()
+	self:TrackingChanged()
+end
+
+function MapCanvas:TrackingChanged()
+	for frame in pairs(self.pins) do
+		if frame:IsVisible() then
+			self:Redraw(frame)
+		end
+	end
+end
 
 
 --[[ API ]]--
@@ -44,6 +60,12 @@ function MapCanvas:Init(frame)
 	frame:HookScript('OnHide', function(f) self:Clear(f) end)
 end
 
+function MapCanvas:Redraw(frame)
+		self:Clear(frame)
+		self:Draw(frame)
+		self:Scale(frame)
+end
+
 function MapCanvas:Clear(frame)
 	for _, pin in ipairs(self.pins[frame]) do
 		pin:Release()
@@ -54,6 +76,7 @@ end
 function MapCanvas:Draw(frame)
 	local mapID = frame:GetMapID()
 	local species = Journal.GetSpeciesIn(mapID)
+	local stables = Journal.GetStablesIn(mapID)
 	local canvas = frame:GetCanvas()
 
 	for specie, spots in pairs(species) do
@@ -63,26 +86,17 @@ function MapCanvas:Draw(frame)
 			local icon = specie:GetTypeIcon()
 
 			for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-				local x = tonumber(x, 36) / 1000
-				local y = tonumber(y, 36) / 1000
-
-				local pin = Addon.SpeciePin(canvas)
-				pin:SetPoint('CENTER', canvas, 'TOPLEFT', canvas:GetWidth() * x, -canvas:GetHeight() * y)
-				pin:SetFrameLevel(frame:GetPinFrameLevelsManager():GetValidFrameLevel('PIN_FRAME_LEVEL_FLIGHT_POINT'))
+				local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
 				pin.icon:SetTexture(icon)
 				pin.specie = specie
-				pin:Show()
 
 				tinsert(self.pins[frame], pin)
 			end
 		end
 	end
-end
 
-function MapCanvas:Scale(frame)
-	local scale = max(frame:GetCanvasScale(), 0.5)
-	for _, pin in ipairs(self.pins[frame]) do
-			pin.icon:SetScale(1 / scale)
+	for x, y in gmatch(stables, '(%w%w)(%w%w)') do
+		tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
 	end
 end
 
@@ -101,10 +115,15 @@ function MapCanvas:DrawTip(frame)
 				tip:AddHeader(title)
 				tip:AddLine(text, 1,1,1)
 			end
-
-			--pin:SetFocus(focus)
 		end
 
 		tip:Display()
+	end
+end
+
+function MapCanvas:Scale(frame)
+	local scale = max(frame:GetCanvasScale(), 0.5)
+	for _, pin in ipairs(self.pins[frame]) do
+			pin.icon:SetScale(1 / scale)
 	end
 end

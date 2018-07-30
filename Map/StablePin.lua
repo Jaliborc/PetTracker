@@ -16,14 +16,15 @@ This file is part of PetTracker.
 --]]
 
 local _, Addon = ...
-local Blip = Addon:NewClass(nil, 'StableBlip', nil, Addon.Blip)
+local Pin = Addon:NewClass(nil, 'StablePin', nil, Addon.Pin)
 
-function Blip:OnCreate()
+function Pin:OnCreate()
 	self.__super.OnCreate(self)
 	self.icon:SetTexture('Interface/Minimap/Tracking/StableMaster')
-	self:SetSize(16, 16)
+	self.icon:SetSize(18, 18)
+	self:SetSize(18, 18)
 end
 
-function Blip:GetTooltip()
+function Pin:GetTooltip()
 	return MINIMAP_TRACKING_STABLEMASTER, Addon.Locals.StableTip
 end
