@@ -8,6 +8,9 @@ about: Create a report to help us improve
  - Game patch [e.g. Build 8.0.1.27178]
  - Addon version
 
+**Have you read the changelog? (please don't waste our time)**
+Mark if read.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
