@@ -1,15 +1,11 @@
 Core/Tests
 Core/Compare.lua
 
-Libs/LibPetBreedInfo-1.0/LibStub.lua
-Libs/LibPetBreedInfo-1.0/LibPetBreedInfo-1.0.toc
-
 Libs/Sushi-3.0/Classes/ColorPicker.lua
 Libs/Sushi-3.0/Classes/Dropdown.lua
 Libs/Sushi-3.0/Classes/ExpandCheck.lua
 Libs/Sushi-3.0/Classes/FauxScrollGroup.lua
 Libs/Sushi-3.0/Classes/GrayButton.lua
-Libs/Sushi-3.0/Classes/GlowBox.lua
 Libs/Sushi-3.0/Classes/HelpButton.lua
 Libs/Sushi-3.0/Classes/IconCheck.lua
 Libs/Sushi-3.0/Classes/Slider.lua

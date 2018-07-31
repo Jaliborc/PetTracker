@@ -22,10 +22,7 @@ MapCanvas.pins, MapCanvas.tips = {}, {}
 
 hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 	MapCanvas:Init(frame)
-
-	if Addon.Sets then
-		MapCanvas:Redraw(frame)
-	end
+	MapCanvas:Redraw(frame)
 end)
 
 
@@ -56,7 +53,7 @@ function MapCanvas:Init(frame)
 
 	hooksecurefunc(frame, 'OnCanvasScaleChanged', function(f) self:Scale(f) end)
 	frame:HookScript('OnShow', function(f) self:Draw(f) end)
-	frame:HookScript('OnUpdate', function(f) self:DrawTip(f) end)
+	frame:HookScript('OnUpdate', function(f) self:AnchorTip(f) end)
 	frame:HookScript('OnHide', function(f) self:Clear(f) end)
 end
 
@@ -73,38 +70,55 @@ function MapCanvas:Clear(frame)
 	wipe(self.pins[frame])
 end
 
-function MapCanvas:Draw(frame)
-	local mapID = frame:GetMapID()
-	local canvas = frame:GetCanvas()
-
-	if not Addon.Sets.HideSpecies then
-		local species = Journal.GetSpeciesIn(mapID)
-		for specie, spots in pairs(species) do
-			local specie = Addon.Specie:Get(specie)
-
-			if Addon:Filter(specie, Addon.Sets.MapFilter) then
-				local icon = specie:GetTypeIcon()
-
-				for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-					local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
-					pin.icon:SetTexture(icon)
-					pin.specie = specie
-
-					tinsert(self.pins[frame], pin)
-				end
-			end
-		end
-	end
-
-	if not Addon.Sets.HideStables then
-		local stables = Journal.GetStablesIn(mapID)
-		for x, y in gmatch(stables, '(%w%w)(%w%w)') do
-			tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
+function MapCanvas:Validate(frame)
+	for provider in pairs(frame.dataProviders) do
+		if provider.RefreshAllData == PetTamerDataProviderMixin.RefreshAllData then
+			return true
 		end
 	end
 end
 
-function MapCanvas:DrawTip(frame)
+function MapCanvas:Draw(frame)
+	if Addon.Sets and self:Validate(frame) then
+		local mapID = frame:GetMapID()
+		local canvas = frame:GetCanvas()
+
+		if not Addon.Sets.HideSpecies then
+			local species = Journal.GetSpeciesIn(mapID)
+			for specie, spots in pairs(species) do
+				local specie = Addon.Specie:Get(specie)
+
+				if Addon:Filter(specie, Addon.Sets.MapFilter) then
+					local icon = specie:GetTypeIcon()
+
+					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
+						local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
+						pin.icon:SetTexture(icon)
+						pin.specie = specie
+
+						tinsert(self.pins[frame], pin)
+					end
+				end
+			end
+		end
+
+		if not Addon.Sets.HideStables then
+			local stables = Journal.GetStablesIn(mapID)
+			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
+				tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
+			end
+		end
+	end
+end
+
+function MapCanvas:Scale(frame)
+	local scale = max(frame:GetCanvasScale(), 0.5)
+	for _, pin in ipairs(self.pins[frame]) do
+			pin.icon:SetScale(1 / scale)
+	end
+end
+
+function MapCanvas:AnchorTip(frame)
 	local tip = self.tips[frame]
 
 	if GameTooltip:IsVisible() then
@@ -122,12 +136,5 @@ function MapCanvas:DrawTip(frame)
 		end
 
 		tip:Display()
-	end
-end
-
-function MapCanvas:Scale(frame)
-	local scale = max(frame:GetCanvasScale(), 0.5)
-	for _, pin in ipairs(self.pins[frame]) do
-			pin.icon:SetScale(1 / scale)
 	end
 end

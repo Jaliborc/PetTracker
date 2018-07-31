@@ -53,7 +53,7 @@ end
 
 function Rival:GetMapName()
 	local map = self:GetMap()
-	if map ~= 0 then
+	if map then
 		local info = C_Map.GetMapInfo(map)
 		local parent = C_Map.GetMapInfo(info.parentMapID)
 		return info.name .. ', ' .. parent.name
@@ -62,8 +62,23 @@ function Rival:GetMapName()
 	end
 end
 
+function Rival:GetLocation()
+	if self.location then
+		return self.locationX, self.locationY
+	else
+		local map = self:GetMap()
+		if map then
+			for i,tamer in ipairs(C_PetInfo.GetPetTamersForMap(map)) do
+				if tamer.name:lower() == self.name:lower() then
+					return tamer.position.x, tamer.position.y
+				end
+			end
+		end
+	end
+end
+
 function Rival:GetMap()
-	return self.map == 971 and UnitFactionGroup('player') == 'Horde' and 976 or self.map
+	return self.map > 0 and self.map
 end
 
 function Rival:GetCompleteState()

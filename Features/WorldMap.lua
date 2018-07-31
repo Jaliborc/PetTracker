@@ -24,19 +24,23 @@ WorldMap.SUGGESTIONS = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '
 --[[ Search Box ]]--
 
 function WorldMap:Startup()
-  self.clearButton:Show()
   self.Instructions:SetText(L.FilterPets)
   self.TrackButton = self:GetParent()
   self.TrackButton:SetScript('OnClick', function()
     SushiDropFrame:Toggle('TOPLEFT', self.TrackButton, 'BOTTOMLEFT', 0, -15, true, WorldMap.ShowTrackingTypes)
   end)
 
+  self:UpdateShown()
   self:SetSize(128, 20)
   self:SetText(Addon.Sets.MapFilter or '')
   self:SetPoint('RIGHT', self.TrackButton, 'LEFT', 0, 1)
   self:SetScript('OnTextChanged', self.TextChanged)
-  self:SetScript('OnEditFocusGained', self.FocusGained)
-  self:SetScript('OnEditFocusLost', self.FocusLost)
+  self:HookScript('OnEditFocusGained', self.FocusGained)
+  self:HookScript('OnEditFocusLost', self.FocusLost)
+end
+
+function WorldMap:UpdateShown()
+  self:SetShown(not Addon.Sets.HideSpecies)
 end
 
 function WorldMap:TextChanged()
@@ -126,6 +130,7 @@ function WorldMap:ShowTrackingTypes()
 
             PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
             WorldMapFrame:OnMapChanged()
+            WorldMap:UpdateShown()
           end,
         }
       end
