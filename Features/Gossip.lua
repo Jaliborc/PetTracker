@@ -24,7 +24,7 @@ hooksecurefunc('GossipFrameUpdate', function()
 	local unit = UnitGUID('npc')
 	local id = unit and tonumber(select(6, strsplit('-', unit)), nil)
 
-	if Addon.Tamers[id] then
+	if Addon.Rivals[id] then
 		local index = GossipFrame.buttonIndex
 		local button = _G['GossipTitleButton' .. index]
 		button:SetText(Addon.Locals.TellMore)
@@ -34,7 +34,7 @@ hooksecurefunc('GossipFrameUpdate', function()
 
 		local icon = _G[button:GetName() .. 'GossipIcon']
 		icon:SetTexture('Interface/GossipFrame/GossipGossipIcon')
-		
+
 		GossipResize(button)
 		GossipFrame.buttonIndex = index + 1
 		GossipFrame.tamer = id
@@ -44,6 +44,6 @@ end)
 hooksecurefunc('SelectGossipOption', function(index)
 	local button = _G['GossipTitleButton' .. index]
 	if button and button.type == ADDON then
-		Addon.Tamer:Get(GossipFrame.tamer):Display()
+		Addon.Rival:Get(GossipFrame.tamer):Display()
 	end
 end)

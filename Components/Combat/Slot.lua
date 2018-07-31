@@ -33,7 +33,7 @@ function Slot:CreateLine(point, parent, x, y)
 		slots[i] = self(parent)
 		slots[i]:SetPoint(point, parent, x, y - i*107)
 	end
-	
+
 	return slots
 end
 
@@ -41,7 +41,7 @@ function Slot:OnCreate()
 	self.Type:SetScript('OnEnter', Ability.OnEnter)
 	self.Type:SetScript('OnLeave', Ability.OnLeave)
 	self.Ability = {}
-	
+
 	for i = 1, 6 do
 		self.Ability[i] = Ability(self)
 		self.Ability[i]:SetPoint('CENTER', -196 + i * 42, 20)
@@ -61,7 +61,7 @@ function Slot:Display(pet, target)
 		local r,g,b = Addon.GetQualityColor(pet:GetQuality())
 		local health, power, speed = pet:GetStats()
 		local name = pet:GetName()
-		
+
 		self.Name:SetText(name)
 		self.SubName:SetText(specie ~= name and specie)
 
@@ -72,7 +72,7 @@ function Slot:Display(pet, target)
 		self.Power:SetText(power)
 		self.Speed:SetText(speed)
 
-		self.Type.Icon:SetTexture(Addon:GetTypeIcon(type))
+		self.Type.Icon:SetTexture(Addon.GetTypeIcon(type))
 		self.Type.id = PET_BATTLE_PET_TYPE_PASSIVES[type]
 		self.Type.pet = pet
 
@@ -88,12 +88,12 @@ function Slot:Display(pet, target)
 		else
 			self.Health:SetText(health)
 		end
-	
+
 		for i = 1, 6 do
 			self.Ability[i]:Display(pet, i, target)
 		end
 	end
-	
+
 	self.IsEmpty:SetShown(not pet)
 	self.pet = pet
 end

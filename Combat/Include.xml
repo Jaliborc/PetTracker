@@ -1,4 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Include file="AbilityButton.xml"/>
-	<Script file="AbilityButton.lua"/>
-</Ui>

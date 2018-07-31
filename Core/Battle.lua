@@ -55,14 +55,14 @@ function Battle:AnyUpgrade()
 	return false
 end
 
-function Battle:GetTamer()
+function Battle:GetRival()
 	if self:IsPvE() then
 		local specie1 = self:Get(ENEMY, 1):GetSpecie()
 		local specie2 = self:Get(ENEMY, 2):GetSpecie()
 		local specie3 = self:Get(ENEMY, 3):GetSpecie()
 
-		for id, tamer in pairs(Addon.Tamers) do
-			local first = tonumber(tamer:match('^[^:]+:[^:]+:[^:]*:[^:]+:%w%w%w%w(%w%w%w)'), 36)
+		for id, rival in pairs(Addon.Rivals) do
+			local first = tonumber(rival:match('^[^:]+:[^:]+:[^:]*:[^:]+:%w%w%w%w(%w%w%w)'), 36)
 			if first == specie1 or first == specie2 or first == specie3 then
 				return id
 			end
@@ -89,10 +89,10 @@ function Battle:Exists()
 end
 
 function Battle:IsUpgrade()
-	if self:IsWildBattle() then 
+	if self:IsWildBattle() then
 		if self:GetSpecie() and self:GetSource() == PET_BATTLE then
 			local pet, quality, level = self:GetBestOwned()
-			
+
 			if self:GetQuality() > quality then
 				return true
 

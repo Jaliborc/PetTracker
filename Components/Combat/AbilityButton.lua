@@ -56,7 +56,7 @@ function Ability:Display(pet, i, target)
 		self.Cooldown:SetShown(cooldown)
 
 		if self.Type then
-			self.Type:SetTexture(Addon:GetTypeIcon(type))
+			self.Type:SetTexture(Addon.GetTypeIcon(type))
 		end
 
 		self.pet, self.id = pet, id

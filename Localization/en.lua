@@ -32,7 +32,7 @@ L.PromptForfeitTip = 'If enabled, you will be prompted to forfeit a battle when 
 L.UnlockActions = 'Unlock Enemy Actions'
 L.UnlockActionsTip = 'If enabled, the enemy actions bar can be dragged to anywhere on the screen.'
 L.UpgradeAlert = 'Wild upgrades have appeared!'
-L.TotalTamers = 'Total Rivals'
+L.TotalRivals = 'Total Rivals'
 L.Victory = 'Victory'
 L.ZoneTracker = 'Zone Tracker'
 

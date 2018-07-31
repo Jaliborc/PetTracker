@@ -1,22 +1,22 @@
 local _, Addon = ...
-local Pet = setmetatable(Addon:NewModule('TamerPet'), Addon.Specie)
-local Tamer = Addon:NewModule('Tamer')
+local Pet = setmetatable(Addon:NewModule('RivalPet'), Addon.Specie)
+local Rival = Addon:NewModule('Rival')
 
-Tamer.__index = Tamer
+Rival.__index = Rival
 Pet.__index = Pet
 
 
 --[[ Constructors ]]--
 
-function Tamer:At(landmark)
-	return self:Get(Addon.TamerLandmarks[landmark])
-end
+--[[function Rival:At(landmark)
+	return self:Get(Addon.RivalLandmarks[landmark])
+end]]--
 
-function Tamer:Get(id)
-	local data = Addon.Tamers[id]
+function Rival:Get(id)
+	local data = Addon.Rivals[id]
 	if data then
 		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
-		local tamer = setmetatable({
+		local rival = setmetatable({
 			name = name, items = items, currencies = currencies,
 			gold = tonumber(gold, 36),
 			quest = tonumber(quest, 36),
@@ -26,7 +26,7 @@ function Tamer:Get(id)
 		}, self)
 
 		for name, model, specie, level, quality in pets:gmatch('([^:]+):(%w%w%w%w)(%w%w%w)(%w)(%w)') do
-			tinsert(tamer, setmetatable({
+			tinsert(rival, setmetatable({
 				Name = name,
 				Model = tonumber(model, 36),
 				Specie = tonumber(specie, 36),
@@ -35,41 +35,46 @@ function Tamer:Get(id)
 			}, Pet))
 		end
 
-		return tamer
+		return rival
 	end
 end
 
 
 --[[ API ]]--
 
-function Tamer:Display()
+function Rival:Display()
 	if GetAddOnEnableState(UnitName('player'), 'PetTracker_Journal') >= 2 then
 		CollectionsJournal_LoadUI()
 		ShowUIPanel(CollectionsJournal) -- this here causes taint for sure
-		PetTrackerTamerJournal.PanelTab:GetScript('OnClick')(PetTrackerTamerJournal.PanelTab)
-		PetTrackerTamerJournal:SetTamer(self)
+		PetTrackerRivalJournal.PanelTab:GetScript('OnClick')(PetTrackerRivalJournal.PanelTab)
+		PetTrackerRivalJournal:SetRival(self)
 	end
 end
 
-function Tamer:GetMapTitle()
-	local info = C_Map.GetMapInfo(self:GetMap()) or UNKNOWN
-	local parent = C_Map.GetMapInfo(info.parentMapID)
-	return info.name .. ', ' .. parent.name
+function Rival:GetMapName()
+	local map = self:GetMap()
+	if map ~= 0 then
+		local info = C_Map.GetMapInfo(map)
+		local parent = C_Map.GetMapInfo(info.parentMapID)
+		return info.name .. ', ' .. parent.name
+	else
+		return UNKNOWN
+	end
 end
 
-function Tamer:GetMap()
+function Rival:GetMap()
 	return self.map == 971 and UnitFactionGroup('player') == 'Horde' and 976 or self.map
 end
 
-function Tamer:GetCompleteState()
+function Rival:GetCompleteState()
 	return self.quest ~= 0 and (self:IsCompleted() and COMPLETE or AVAILABLE) or ''
 end
 
-function Tamer:IsCompleted()
+function Rival:IsCompleted()
 	return IsQuestFlaggedCompleted(self.quest)
 end
 
-function Tamer:GetType()
+function Rival:GetType()
 	if #self > 1 then
 		local list = {}
 		for i, pet in ipairs(self) do
@@ -85,7 +90,7 @@ function Tamer:GetType()
 	end
 end
 
-function Tamer:GetRewards()
+function Rival:GetRewards()
 	local rewards = {}
 
 	for item, count in self.items:gmatch('(%w%w%w%w)(%w)') do
@@ -111,8 +116,8 @@ function Tamer:GetRewards()
 	return rewards
 end
 
-function Tamer:GetAbstract()
-	local text = self.name .. ' ' .. self:GetMapTitle() .. ' ' .. self:GetCompleteState()
+function Rival:GetAbstract()
+	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
 
 	for i, pet in ipairs(self) do
 		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
@@ -136,7 +141,7 @@ function Tamer:GetAbstract()
 end
 
 for _, key in pairs {'Level', 'Quality'} do
-	Tamer['Get' .. key] = function(self)
+	Rival['Get' .. key] = function(self)
 		local value = 0
 		for i, pet in ipairs(self) do
 			value = value + pet['Get' .. key](pet)

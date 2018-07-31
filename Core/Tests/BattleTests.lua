@@ -31,20 +31,20 @@ function Tests:AnyUpgrade()
 	Replace(Battle, 'GetNum', function() return 2 end)
 	Replace(Battle, 'IsUpgrade', function() return true end)
 	IsTrue(Battle:AnyUpgrade())
-	
+
 	Replace(Battle, 'IsUpgrade', function() return false end)
 	IsFalse(Battle:AnyUpgrade())
 end
 
-function Tests:GetTamer()
+function Tests:GetRival()
 	Replace(Battle, 'IsPvE', function() return true end)
 	Replace(Battle, 'GetSpecie', function() return 1 end)
-	AreEqual(Battle:GetTamer(), nil)
+	AreEqual(Battle:GetRival(), nil)
 
 	Replace(Battle, 'GetSpecie', function() return 872 end)
-	AreEqual(Battle:GetTamer(), 64330)
+	AreEqual(Battle:GetRival(), 64330)
 	Replace(Battle, 'GetSpecie', function() return 876 end)
-	AreEqual(Battle:GetTamer(), 65648)
+	AreEqual(Battle:GetRival(), 65648)
 end
 
 function Tests:IsPvE()
@@ -60,7 +60,7 @@ end
 function Tests:IsAlive()
 	Replace(Server, 'GetHealth', function() return 5 end)
 	IsTrue(Pet:IsAlive())
-	
+
 	Replace(Server, 'GetHealth', function() return 0 end)
 	IsFalse(Pet:IsAlive())
 end
@@ -68,7 +68,7 @@ end
 function Tests:IsUpgrade()
 	Replace(Battle, 'GetBestOwned', function() return nil, 2, 17 end)
 	Replace(Battle, 'IsWildBattle', function() return true end)
-	
+
 	local function Test(specie, quality, level)
 		Replace(Pet, 'GetSpecie', function() return specie end)
 		Replace(Pet, 'GetQuality', function() return quality end)
@@ -92,7 +92,7 @@ end
 function Tests:__index()
 	local pet = Battle:Get(1, 2)
 	local expected = {1, 2}
-	
+
 	Replace(Server, 'GetPetSpeciesID', function(...) return {...} end)
 	AreEqual(expected, pet:GetSpecie())
 end

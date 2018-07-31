@@ -16,7 +16,7 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local Journal, Tamer = Addon.Journal, Addon.Tamer
+local Journal, Rival = Addon.Journal, Addon.Rival
 local MapCanvas = Addon:NewModule('MapCanvas')
 MapCanvas.pins, MapCanvas.tips = {}, {}
 
@@ -75,28 +75,32 @@ end
 
 function MapCanvas:Draw(frame)
 	local mapID = frame:GetMapID()
-	local species = Journal.GetSpeciesIn(mapID)
-	local stables = Journal.GetStablesIn(mapID)
 	local canvas = frame:GetCanvas()
 
-	for specie, spots in pairs(species) do
-		local specie = Addon.Specie:Get(specie)
+	if not Addon.Sets.HideSpecies then
+		local species = Journal.GetSpeciesIn(mapID)
+		for specie, spots in pairs(species) do
+			local specie = Addon.Specie:Get(specie)
 
-		if Addon:Filter(specie, Addon.Sets.MapFilter) then
-			local icon = specie:GetTypeIcon()
+			if Addon:Filter(specie, Addon.Sets.MapFilter) then
+				local icon = specie:GetTypeIcon()
 
-			for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-				local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
-				pin.icon:SetTexture(icon)
-				pin.specie = specie
+				for x, y in gmatch(spots, '(%w%w)(%w%w)') do
+					local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
+					pin.icon:SetTexture(icon)
+					pin.specie = specie
 
-				tinsert(self.pins[frame], pin)
+					tinsert(self.pins[frame], pin)
+				end
 			end
 		end
 	end
 
-	for x, y in gmatch(stables, '(%w%w)(%w%w)') do
-		tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
+	if not Addon.Sets.HideStables then
+		local stables = Journal.GetStablesIn(mapID)
+		for x, y in gmatch(stables, '(%w%w)(%w%w)') do
+			tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
+		end
 	end
 end
 

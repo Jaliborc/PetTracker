@@ -20,10 +20,16 @@ local L = Addon.Locals
 local WorldMap = Addon:NewModule('WorldMap', CreateFrame('EditBox', ADDON..'MapFilter', WorldMapFrame.overlayFrames[2], 'SearchBoxTemplate'))
 WorldMap.SUGGESTIONS = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
 
+
+--[[ Search Box ]]--
+
 function WorldMap:Startup()
+  self.clearButton:Show()
   self.Instructions:SetText(L.FilterPets)
   self.TrackButton = self:GetParent()
-  self.TrackButton:SetScript('OnClick', self.ShowTrackingTypes)
+  self.TrackButton:SetScript('OnClick', function()
+    SushiDropFrame:Toggle('TOPLEFT', self.TrackButton, 'BOTTOMLEFT', 0, -15, true, WorldMap.ShowTrackingTypes)
+  end)
 
   self:SetSize(128, 20)
   self:SetText(Addon.Sets.MapFilter or '')
@@ -48,6 +54,9 @@ function WorldMap:FocusLost()
     SushiDropFrame:CloseAll()
 end
 
+
+--[[ Dropdopwns ]]--
+
 function WorldMap:ShowSuggestions()
 	self:AddLine {
 		text = L.CommonSearches,
@@ -65,4 +74,60 @@ function WorldMap:ShowSuggestions()
       end
     }
   end
+end
+
+function WorldMap:ShowTrackingTypes()
+    local map = WorldMapFrame:GetMapID()
+    local bounties = map and MapUtil.MapHasUnlockedBounties(map)
+    local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
+    local types = {
+      {SHOW, '', true, title = true},
+      {SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, 'questPOI', true},
+      {ARCHAEOLOGY_SHOW_DIG_SITES, 'digSites', arch},
+      {SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, 'primaryProfessionsFilter', bounties and (prof1 or prof2)},
+      {SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, 'secondaryProfessionsFilter', bounties and (fish or cook or firstAid)},
+
+      {PETS, '', true, title = true},
+      {L.Species, 'HideSpecies', true, custom = true},
+      {L.Battles, 'showTamers', CanTrackBattlePets()},
+      {STABLES, 'HideStables', true, custom = true},
+
+      {WORLD_QUEST_REWARD_FILTERS_TITLE, '', bounties, title = true},
+      {WORLD_QUEST_REWARD_FILTERS_RESOURCES, 'worldQuestFilterResources', bounties},
+      {WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, 'worldQuestFilterArtifactPower', bounties},
+      {WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, 'worldQuestFilterProfessionMaterials', bounties},
+      {WORLD_QUEST_REWARD_FILTERS_GOLD, 'worldQuestFilterGold', bounties},
+      {WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, 'worldQuestFilterEquipment', bounties},
+    }
+
+    for i, entry in ipairs(types) do
+      local text, var, shown = entry[1], entry[2], entry[3]
+      if shown then
+        local checked
+        if entry.custom then
+          checked = not Addon.Sets[var]
+        else
+          checked = GetCVarBool(var)
+        end
+
+        self:AddLine {
+          text = text,
+          isTitle = entry.title,
+          notCheckable = entry.title,
+          checked = checked,
+          keepShownOnClick = true,
+          isNotRadio = true,
+          func = function()
+            if entry.custom then
+              Addon.Sets[var] = checked and true or nil
+            else
+              SetCVar(var, checked and '0' or '1')
+            end
+
+            PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+            WorldMapFrame:OnMapChanged()
+          end,
+        }
+      end
+    end
 end

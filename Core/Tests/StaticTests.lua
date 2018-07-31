@@ -15,7 +15,7 @@ function Tests.GetQualityColor()
 end
 
 function Tests:GetTypeIcon()
-	local actual = Addon:GetTypeIcon(6)
+	local actual = Addon.GetTypeIcon(6)
 	local expected = 'Interface/PetBattles/PetIcon-Magical'
 	
 	AreEqual(actual, expected)

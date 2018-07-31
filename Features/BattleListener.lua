@@ -23,7 +23,7 @@ local Listener = Addon:NewModule('BattleListener', CreateFrame('Frame'))
 --[[ Startup ]]--
 
 function Listener:Startup()
-	Addon.Sets.TamerHistory = Addon.Sets.TamerHistory or {}
+	Addon.Sets.RivalHistory = Addon.Sets.RivalHistory or {}
 	if not Addon.State.Casts then
 		self:Reset()
 	end
@@ -37,7 +37,7 @@ function Listener:Startup()
 end
 
 function Listener:Upgrade()
-	for tamer, games in pairs(Addon.Sets.TamerHistory) do
+	for rival, games in pairs(Addon.Sets.RivalHistory) do
 		for i = #games, 1, -1 do
 			local data = games[i]
 			local len = data:len()
@@ -76,7 +76,7 @@ function Listener:CHAT_MSG_PET_BATTLE_COMBAT_LOG(message)
 					casts.turn[k] = Addon.State.Turn
 					casts.id[k] = id
 					return
-				end 
+				end
 			end
 		end
 	else
@@ -88,9 +88,9 @@ function Listener:CHAT_MSG_PET_BATTLE_COMBAT_LOG(message)
 end
 
 function Listener:PET_BATTLE_FINAL_ROUND(winner)
-	local tamer = Battle:GetTamer()
-	if tamer then
-		local history = Addon.Sets.TamerHistory[tamer] or {}
+	local rival = Battle:GetRival()
+	if rival then
+		local history = Addon.Sets.RivalHistory[rival] or {}
 		local entry = tostring(winner) .. format('%03x', Addon.GetDate())
 
 		for i = 1,3 do
@@ -109,7 +109,7 @@ function Listener:PET_BATTLE_FINAL_ROUND(winner)
 			tremove(history)
 		end
 
-		Addon.Sets.TamerHistory[tamer] = history
+		Addon.Sets.RivalHistory[rival] = history
 	end
 
 	self:Reset()

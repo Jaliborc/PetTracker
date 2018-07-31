@@ -2,7 +2,7 @@
 ## Title: |cff2020ffPetTracker|r
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
-## Version: 8.0.0
+## Version: 8.0.1
 
 ## SavedVariables: PetTracker_Sets
 ## SavedVariablesPerCharacter: PetTracker_State
@@ -17,8 +17,8 @@ PetTracker.lua
 Core\Include.xml
 Core\Tests\Include.xml
 
-Map\Include.xml
-Combat\Include.xml
-Tracking\Include.xml
+Components\Maps\Include.xml
+Components\Combat\Include.xml
+Components\Tracking\Include.xml
 
 Features\Include.xml

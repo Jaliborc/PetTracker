@@ -82,7 +82,7 @@ function Tests:GetQuality()
 end
 
 function Tests:GetTypeIcon()
-	local expected = Addon:GetTypeIcon(3)
+	local expected = Addon.GetTypeIcon(3)
 	AreEqual(expected, Journal:GetTypeIcon(395))
 end
 

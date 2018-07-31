@@ -8,6 +8,6 @@
 
 	<Script file="Journal.lua"/>
 	<Script file="Specie.lua"/>
-	<Script file="Tamer.lua"/>
+	<Script file="Rival.lua"/>
 	<Script file="Battle.lua"/>
 </Ui>
