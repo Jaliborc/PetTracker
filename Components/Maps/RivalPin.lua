@@ -16,28 +16,31 @@ This file is part of PetTracker.
 --]]
 
 local _, Addon = ...
-local Pin = Addon:NewClass(nil, 'SpeciePin', nil, Addon.Pin)
+local Pin = Addon:NewClass(nil, 'RivalPin', 'EncounterJournalPinTemplate', Addon.Pin)
 
 function Pin:OnCreate()
 	 self.__super.OnCreate(self)
-	 self.icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
-	 self.icon:SetSize(16, 16)
-
-	 self:SetScript('OnClick', self.OnClick)
-	 self:SetSize(16, 16)
+	 self:SetScript('OnClick', self.__index.OnClick)
 end
 
-function Pin:OnClick(button)
-	 if button == 'LeftButton' then
-	 	 HideUIPanel(WorldMapFrame)
-		 self.specie:Display()
-	 end
+function Pin:Display(rival)
+  SetPortraitTextureFromCreatureDisplayID(self.Background, rival.model)
+	self.Background:SetDesaturated(IsQuestFlaggedCompleted(rival.quest))
+  self.rival = rival
+end
+
+function Pin:OnClick()
+	self.rival:Display()
 end
 
 function Pin:OnTooltip(tip)
-	local name, icon, _,_, source = self.specie:GetInfo()
-	local owned = self.specie:GetOwnedText()
+	tip:AddHeader(self.rival.name)
+	tip:AddLine(Addon.Locals.PetBattle)
 
-	tip:AddHeader(('|T%s:%d:%d:-2:0|t'):format(icon, 20, 20) .. name)
-	tip:AddLine((owned and (owned .. '|n') or '') .. Addon.KeepShort(source), 1,1,1)
+	for i, pet in ipairs(self.rival) do
+		local r,g,b = Addon.GetQualityColor(pet:GetQuality())
+		local icon = format('|T%s:16:16:-3:0:128:256:60:100:130:170:255:255:255|t', pet:GetTypeIcon())
+
+		tip:AddLine(icon .. pet:GetName() .. ' (' .. pet:GetLevel() .. ')', r,g,b)
+	end
 end

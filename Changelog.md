@@ -1,12 +1,35 @@
+#### 8.0.3
+* World Map:
+  * Now shows rival locations.
+* Rivals:
+  * Nicer pin location button on the map.
+* Other:
+  * Fixed Dalaran.
+
+#### 8.0.2
+* World Map:
+  * Filter box now hides when pets are not being tracked.
+  * Fixed start error message.
+* Rivals:
+  * Fixed visual issue.
+  * Rival zone map is back.
+  * The map is now fully interactive and displays the player and party members locations.
+* Other:
+  * Fixed an assortment of minor issues.
+  * No longer show pet locations on the flight map (yes, that was unintentionally a thing).
+  * There are still issues with some zones, such as Dalaran and Nagrand.
+  * Zone Map doesn't update yet when filters are changed.
+  * 99% appears functional as intended, so tagging release.
+
 #### 8.0.1 (barebones)
 * This is a **barebones release**!
-** All of the submodules are back: Journal, Upgrades, Breeds and Config.
-** Yet, not all of the features are currently running.
+  * All of the submodules are back: Journal, Upgrades, Breeds and Config.
+  * Yet, not all of the features are currently running.
 * World Map:
-** Filter box and tracking type toggle options are back.
-** Stables locations are back.
+  * Filter box and tracking type toggle options are back.
+  * Stables locations are back.
 * Config:
-** Redesigned the FAQ.
+  * Redesigned the FAQ.
 
 #### 8.0.0 (barebones)
 * Updated for Battle for Azeroth

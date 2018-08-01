@@ -25,6 +25,7 @@ function Pin:OnCreate()
 	self:SetSize(18, 18)
 end
 
-function Pin:GetTooltip()
-	return MINIMAP_TRACKING_STABLEMASTER, Addon.Locals.StableTip
+function Pin:OnTooltip(tip)
+	tip:AddHeader(MINIMAP_TRACKING_STABLEMASTER)
+	tip:AddLine(Addon.Locals.StableTip, 1,1,1)
 end

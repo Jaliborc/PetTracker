@@ -18,7 +18,7 @@ This file is part of PetTracker.
 local ADDON, Addon = ...
 local Journal, Rival = Addon.Journal, Addon.Rival
 local MapCanvas = Addon:NewModule('MapCanvas')
-MapCanvas.pins, MapCanvas.tips = {}, {}
+MapCanvas.pins = {}
 
 hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 	MapCanvas:Init(frame)
@@ -30,6 +30,8 @@ end)
 
 function MapCanvas:Startup()
 	self:TrackingChanged()
+	self.tip = Addon.MapTip()
+	self.tip:SetScript('OnUpdate', function() self:AnchorTip() end)
 end
 
 function MapCanvas:TrackingChanged()
@@ -46,10 +48,9 @@ end
 function MapCanvas:Init(frame)
 	if self.pins[frame] then
 		return
+	else
+		self.pins[frame] = {}
 	end
-
-	self.tips[frame] = Addon.MapTip(frame)
-	self.pins[frame] = {}
 
 	hooksecurefunc(frame, 'OnCanvasScaleChanged', function(f) self:Scale(f) end)
 	frame:HookScript('OnShow', function(f) self:Draw(f) end)
@@ -92,7 +93,7 @@ function MapCanvas:Draw(frame)
 					local icon = specie:GetTypeIcon()
 
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-						local pin = Addon.SpeciePin(canvas):Place(frame, x, y)
+						local pin = Addon.SpeciePin():PlaceEncoded(frame, x, y)
 						pin.icon:SetTexture(icon)
 						pin.specie = specie
 
@@ -105,7 +106,7 @@ function MapCanvas:Draw(frame)
 		if not Addon.Sets.HideStables then
 			local stables = Journal.GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
-				tinsert(self.pins[frame], Addon.StablePin(canvas):Place(frame, x, y))
+				tinsert(self.pins[frame], Addon.StablePin():PlaceEncoded(frame, x, y))
 			end
 		end
 	end
@@ -118,23 +119,23 @@ function MapCanvas:Scale(frame)
 	end
 end
 
-function MapCanvas:AnchorTip(frame)
-	local tip = self.tips[frame]
-
+function MapCanvas:AnchorTip()
 	if GameTooltip:IsVisible() then
-		tip:Hide()
+		self.tip:Hide()
 	else
-		tip:Anchor(frame:GetCanvas(), 'ANCHOR_CURSOR')
+		self.tip:Anchor(UIParent, 'ANCHOR_CURSOR')
 
-		for _, pin in ipairs(self.pins[frame]) do
-			local focus = pin:IsMouseOver()
-			if focus then
-				local title, text = pin:GetTooltip()
-				tip:AddHeader(title)
-				tip:AddLine(text, 1,1,1)
+		for frame, pins in pairs(self.pins) do
+			if frame:IsVisible() then
+				for _, pin in ipairs(pins) do
+					local focus = pin:IsMouseOver()
+					if focus then
+						pin:OnTooltip(self.tip)
+					end
+				end
 			end
 		end
 
-		tip:Display()
+		self.tip:Display()
 	end
 end
