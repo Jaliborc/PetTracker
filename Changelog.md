@@ -1,3 +1,7 @@
+#### 8.0.4
+* World Map:
+  * Fixed 2 minor bugs.
+
 #### 8.0.3
 * World Map:
   * Now shows rival locations and their portraits everywhere.
