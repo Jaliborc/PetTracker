@@ -64,11 +64,8 @@ function MapFilter:Init(frame)
   end
 end
 
-function MapFilter:SetTextFilter(text)
-  if Addon.Sets.MapFilter ~= text then
-    Addon.Sets.MapFilter = text
-    Addon:ForAllModules('TrackingChanged')
-  end
+function MapFilter:Startup()
+	self:TrackingChanged()
 end
 
 function MapFilter:TrackingChanged()
@@ -80,19 +77,30 @@ function MapFilter:TrackingChanged()
 end
 
 function MapFilter:UpdateSearch(frame)
-  local text = Addon.Sets.MapFilter or ''
-  local search = self.frames[frame]
-  search.Instructions:SetShown(text == '')
-  search:SetShown(not Addon.Sets.HideSpecies)
-  search:SetText(text)
+	if Addon.Sets then
+	  local text = Addon.Sets.MapFilter or ''
+	  local search = self.frames[frame]
+	  search.Instructions:SetShown(text == '')
+	  search:SetShown(not Addon.Sets.HideSpecies)
+	  search:SetText(text)
+	end
 end
 
 function MapFilter:UpdateFrames()
-  for frame, search in pairs(self.frames) do
-    frame:OnMapChanged()
+  for frame in pairs(self.frames) do
+		if frame:IsVisible() then
+    	frame:OnMapChanged()
+		end
   end
 
   self:TrackingChanged()
+end
+
+function MapFilter:SetTextFilter(text)
+  if Addon.Sets and Addon.Sets.MapFilter ~= text then
+    Addon.Sets.MapFilter = text
+    Addon:ForAllModules('TrackingChanged')
+  end
 end
 
 
