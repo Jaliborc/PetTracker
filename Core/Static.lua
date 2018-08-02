@@ -124,13 +124,12 @@ end
 
 function Addon.UnpackDate(date)
 	local yearDate = date % (31*12)
-
 	return yearDate % 31 + 1,
 		   floor(yearDate / 31) + 1,
 		   floor(date / 31 / 12) + 2014
 end
 
 function Addon.GetDate()
-	local _, month, day, year = CalendarGetDate()
-	return (year-2014) * 31*12 + (month-1) * 31 + day-1
+	local date = C_Calendar.GetDate()
+	return (date.year-2014) * 31*12 + (date.month-1) * 31 + date.monthDay-1
 end

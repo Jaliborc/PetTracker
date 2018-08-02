@@ -17,7 +17,7 @@ end
 function Tests:GetTypeIcon()
 	local actual = Addon.GetTypeIcon(6)
 	local expected = 'Interface/PetBattles/PetIcon-Magical'
-	
+
 	AreEqual(actual, expected)
 end
 
@@ -33,17 +33,17 @@ end
 function Tests:KeepShort()
 	local short = strrep('a', 20)
 	local long = strrep('a', 300)
-	
+
 	short = Addon.KeepShort(short)
 	long = Addon.KeepShort(long)
-	
+
 	AreEqual(strlen(short), 20)
 	AreEqual(strlen(long), 100)
 end
 
 function Tests:Date()
-	local function test(day, month, year) 
-		Replace('CalendarGetDate', function() return nil, month, day, year end)
+	local function test(day, month, year)
+		Replace(C_Calendar, 'GetDate', function() return {month=month, monthDay=day, year=year} end)
 		AreEqual({day, month, year}, {Addon.UnpackDate(Addon.GetDate())})
 	end
 
