@@ -1,4 +1,4 @@
-`if GetLocale() ~= 'zhTW' then return end
+if GetLocale() ~= 'zhTW' then return end
 local _, Addon = ...
 local L = Addon.Locals
 

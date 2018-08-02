@@ -1,8 +1,9 @@
 #### 8.0.4
 * World Map:
   * Fixed 2 minor bugs.
-* Battle:
+* Rivals:
   * Fixed error at the end of a rival battle.
+  * Fixed issue with battle history display.
 
 #### 8.0.3
 * World Map:
