@@ -21,6 +21,7 @@ local Pin = Addon:NewClass(nil, 'RivalPin', 'EncounterJournalPinTemplate', Addon
 function Pin:OnCreate()
 	 self.__super.OnCreate(self)
 	 self:SetScript('OnClick', self.__index.OnClick)
+	 self.framelevel = 'PIN_FRAME_LEVEL_ENCOUNTER'
 end
 
 function Pin:Display(rival)

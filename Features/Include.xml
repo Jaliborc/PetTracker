@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Objectives.lua"/>
 	<Script file="MapCanvas.lua"/>
-	<Script file="WorldMap.lua"/>
+	<Script file="MapFilter.lua"/>
 
 	<Script file="Gossip.lua"/>
 	<Script file="EnemyActions.lua"/>

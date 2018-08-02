@@ -186,6 +186,10 @@ function Journal.GetSpeciesIn(map)
 	return Addon.Species[map] or {}
 end
 
+function Journal.GetRivalsIn(map)
+	return Addon.Rivals[map] or {}
+end
+
 function Journal.GetStablesIn(map)
 	map = Addon.Stables[map]
 	return map or ''

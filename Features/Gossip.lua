@@ -24,7 +24,7 @@ hooksecurefunc('GossipFrameUpdate', function()
 	local unit = UnitGUID('npc')
 	local id = unit and tonumber(select(6, strsplit('-', unit)), nil)
 
-	if Addon.Rivals[id] then
+	if Addon.RivalInfo[id] then
 		local index = GossipFrame.buttonIndex
 		local button = _G['GossipTitleButton' .. index]
 		button:SetText(Addon.Locals.TellMore)

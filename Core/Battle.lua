@@ -61,7 +61,7 @@ function Battle:GetRival()
 		local specie2 = self:Get(ENEMY, 2):GetSpecie()
 		local specie3 = self:Get(ENEMY, 3):GetSpecie()
 
-		for id, rival in pairs(Addon.Rivals) do
+		for id, rival in pairs(Addon.RivalInfo) do
 			local first = tonumber(rival:match('^[^:]+:[^:]+:[^:]*:[^:]+:%w%w%w%w(%w%w%w)'), 36)
 			if first == specie1 or first == specie2 or first == specie3 then
 				return id

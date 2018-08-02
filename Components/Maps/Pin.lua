@@ -20,22 +20,23 @@ local Pin = Addon:NewClass('Button', 'Pin')
 
 function Pin:OnCreate()
 	self:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
+	self.framelevel = 'PIN_FRAME_LEVEL_DIG_SITE'
 	self.icon = self:CreateTexture(nil, 'ARTWORK')
 	self.icon:SetPoint('CENTER')
 end
 
-function Pin:PlaceEncoded(frame, x, y)
-	return self:Place(frame, tonumber(x, 36) / 1000, tonumber(y, 36) / 1000)
+function Pin:PlaceEncoded(frame, index, x, y)
+	return self:Place(frame, index, tonumber(x, 36) / 1000, tonumber(y, 36) / 1000)
 end
 
-function Pin:Place(frame, x, y)
+function Pin:Place(frame, index, x, y)
 	local canvas = frame:GetCanvas()
 	local levelmanager = frame:GetPinFrameLevelsManager()
 
 	self:Show()
 	self:SetParent(canvas)
 	self:SetPoint('CENTER', canvas, 'TOPLEFT', canvas:GetWidth() * x, -canvas:GetHeight() * y)
-	self:SetFrameLevel(levelmanager:GetValidFrameLevel('PIN_FRAME_LEVEL_DIG_SITE')+1)
+	self:SetFrameLevel(levelmanager:GetValidFrameLevel(self.framelevel)+index)
 
 	return self
 end

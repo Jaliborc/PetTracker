@@ -8,12 +8,8 @@ Pet.__index = Pet
 
 --[[ Constructors ]]--
 
---[[function Rival:At(landmark)
-	return self:Get(Addon.RivalLandmarks[landmark])
-end]]--
-
 function Rival:Get(id)
-	local data = Addon.Rivals[id]
+	local data = Addon.RivalInfo[id]
 	if data then
 		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
 		local rival = setmetatable({
@@ -45,6 +41,7 @@ end
 function Rival:Display()
 	if GetAddOnEnableState(UnitName('player'), 'PetTracker_Journal') >= 2 then
 		CollectionsJournal_LoadUI()
+		HideUIPanel(WorldMapFrame)
 		ShowUIPanel(CollectionsJournal) -- this here causes taint for sure
 		PetTrackerRivalJournal.PanelTab:GetScript('OnClick')(PetTrackerRivalJournal.PanelTab)
 		PetTrackerRivalJournal:SetRival(self)
@@ -63,17 +60,11 @@ function Rival:GetMapName()
 end
 
 function Rival:GetLocation()
-	if self.location then
-		return self.locationX, self.locationY
-	else
-		local map = self:GetMap()
-		if map then
-			for i,tamer in ipairs(C_PetInfo.GetPetTamersForMap(map)) do
-				if tamer.name:lower() == self.name:lower() then
-					return tamer.position.x, tamer.position.y
-				end
-			end
-		end
+	local map = self:GetMap()
+	if map then
+		local position = Addon.Rivals[map][self.id]
+		local x, y = position:match('(%w%w)(%w%w)')
+		return tonumber(x, 36) / 1000, tonumber(y, 36) / 1000
 	end
 end
 

@@ -1,10 +1,12 @@
 #### 8.0.3
 * World Map:
-  * Now shows rival locations.
+  * Now shows rival locations and their portraits everywhere.
+  * Fixed Dalaran, Nagrand (Draenor) and Shadowmoon Valley (Draenor).
+  * Improved pin scaling with zoom and different maps.
+  * Changing the filtering options in one map now updates the others.
 * Rivals:
   * Nicer pin location button on the map.
-* Other:
-  * Fixed Dalaran.
+  * Removed some wrongly classified elite pets belonging to tamers from the list.
 
 #### 8.0.2
 * World Map:

@@ -17,70 +17,106 @@ This file is part of PetTracker.
 
 local ADDON, Addon = ...
 local L = Addon.Locals
-local WorldMap = Addon:NewModule('WorldMap', CreateFrame('EditBox', ADDON..'MapFilter', WorldMapFrame.overlayFrames[2], 'SearchBoxTemplate'))
-WorldMap.SUGGESTIONS = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
+local MapFilter = Addon:NewModule('MapFilter')
+MapFilter.suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
+MapFilter.frames = {}
+
+SetCVar('showTamers', '0')
+hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
+	MapFilter:Init(frame)
+end)
 
 
 --[[ Search Box ]]--
 
-function WorldMap:Startup()
-  self.Instructions:SetText(L.FilterPets)
-  self.TrackButton = self:GetParent()
-  self.TrackButton:SetScript('OnClick', function()
-    SushiDropFrame:Toggle('TOPLEFT', self.TrackButton, 'BOTTOMLEFT', 0, -15, true, WorldMap.ShowTrackingTypes)
-  end)
+function MapFilter:Init(frame)
+  if self.frames[frame] then
+    return
+  else
+    self.frames[frame] = 1
+  end
 
-  self:UpdateShown()
-  self:SetSize(128, 20)
-  self:SetText(Addon.Sets.MapFilter or '')
-  self:SetPoint('RIGHT', self.TrackButton, 'LEFT', 0, 1)
-  self:SetScript('OnTextChanged', self.TextChanged)
-  self:HookScript('OnEditFocusGained', self.FocusGained)
-  self:HookScript('OnEditFocusLost', self.FocusLost)
+  for i, overlay in ipairs(frame.overlayFrames or {}) do
+    if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
+      local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Filter', overlay, 'SearchBoxTemplate')
+      search.Instructions:SetText(L.FilterPets)
+      search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
+      search:SetSize(128, 20)
+      search:SetScript('OnTextChanged', function(search, manual)
+        self:SetTextFilter(search:GetText())
+      end)
+
+      search:HookScript('OnEditFocusGained', function()
+        SushiDropFrame:Toggle('TOP', search, 'BOTTOM', 0, -15, true, self.ShowSuggestions)
+      end)
+
+      search:HookScript('OnEditFocusLost', function()
+        SushiDropFrame:CloseAll()
+      end)
+
+      overlay:SetScript('OnClick', function()
+        SushiDropFrame:Toggle('TOPLEFT', overlay, 'BOTTOMLEFT', 0, -15, true, self.ShowTrackingTypes)
+      end)
+
+      self.frames[frame] = search
+      self:UpdateSearch(frame)
+    end
+  end
 end
 
-function WorldMap:UpdateShown()
-  self:SetShown(not Addon.Sets.HideSpecies)
-end
-
-function WorldMap:TextChanged()
-    Addon.Sets.MapFilter = self:GetText()
+function MapFilter:SetTextFilter(text)
+  if Addon.Sets.MapFilter ~= text then
+    Addon.Sets.MapFilter = text
     Addon:ForAllModules('TrackingChanged')
-    self.Instructions:SetShown(self:GetText() == '')
+  end
 end
 
-function WorldMap:FocusGained()
-  SushiDropFrame:Toggle('TOP', self, 'BOTTOM', 0, -15, true, WorldMap.ShowSuggestions)
+function MapFilter:TrackingChanged()
+  for frame, search in pairs(self.frames) do
+    if search ~= 1 then
+      self:UpdateSearch(frame)
+    end
+  end
 end
 
-function WorldMap:FocusLost()
-    SearchBoxTemplate_OnEditFocusLost(self)
-    SushiDropFrame:CloseAll()
+function MapFilter:UpdateSearch(frame)
+  local text = Addon.Sets.MapFilter or ''
+  local search = self.frames[frame]
+  search.Instructions:SetShown(text == '')
+  search:SetShown(not Addon.Sets.HideSpecies)
+  search:SetText(text)
+end
+
+function MapFilter:UpdateFrames()
+  for frame, search in pairs(self.frames) do
+    frame:OnMapChanged()
+  end
+
+  self:TrackingChanged()
 end
 
 
 --[[ Dropdopwns ]]--
 
-function WorldMap:ShowSuggestions()
+function MapFilter:ShowSuggestions()
 	self:AddLine {
 		text = L.CommonSearches,
 		isTitle = true,
 		notCheckable = true
 	}
 
-  for i, text in ipairs(WorldMap.SUGGESTIONS) do
+  for i, text in ipairs(MapFilter.suggestions) do
     self:AddLine {
       text = text,
       notCheckable = true,
       func = function()
-        WorldMap:SetText(text)
-        WorldMap:ClearFocus()
+        MapFilter:SetTextFilter(text)
       end
     }
   end
 end
 
-function WorldMap:ShowTrackingTypes()
+function MapFilter:ShowTrackingTypes()
     local map = WorldMapFrame:GetMapID()
     local bounties = map and MapUtil.MapHasUnlockedBounties(map)
     local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
@@ -93,7 +129,7 @@ function WorldMap:ShowTrackingTypes()
 
       {PETS, '', true, title = true},
       {L.Species, 'HideSpecies', true, custom = true},
-      {L.Battles, 'showTamers', CanTrackBattlePets()},
+      {L.Battles, 'HideRivals', true, custom = true},
       {STABLES, 'HideStables', true, custom = true},
 
       {WORLD_QUEST_REWARD_FILTERS_TITLE, '', bounties, title = true},
@@ -129,8 +165,7 @@ function WorldMap:ShowTrackingTypes()
             end
 
             PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-            WorldMapFrame:OnMapChanged()
-            WorldMap:UpdateShown()
+            MapFilter:UpdateFrames()
           end,
         }
       end
