@@ -21,7 +21,6 @@ local MapFilter = Addon:NewModule('MapFilter')
 MapFilter.suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
 MapFilter.frames = {}
 
-SetCVar('showTamers', '0')
 hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 	MapFilter:Init(frame)
 end)
@@ -129,34 +128,29 @@ function MapFilter:ShowTrackingTypes()
     local bounties = map and MapUtil.MapHasUnlockedBounties(map)
     local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
     local types = {
-      {SHOW, '', true, title = true},
-      {SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, 'questPOI', true},
-      {ARCHAEOLOGY_SHOW_DIG_SITES, 'digSites', arch},
-      {SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, 'primaryProfessionsFilter', bounties and (prof1 or prof2)},
-      {SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, 'secondaryProfessionsFilter', bounties and (fish or cook or firstAid)},
+      {SHOW, true, title = true},
+      {SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, true, var = 'questPOI'},
+      {ARCHAEOLOGY_SHOW_DIG_SITES, arch, var = 'digSites'},
+      {SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, bounties and (prof1 or prof2), var = 'primaryProfessionsFilter'},
+      {SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, bounties and (fish or cook or firstAid), var = 'secondaryProfessionsFilter'},
 
-      {PETS, '', true, title = true},
-      {L.Species, 'HideSpecies', true, custom = true},
-      {L.Battles, 'HideRivals', true, custom = true},
-      {STABLES, 'HideStables', true, custom = true},
+      {PETS, true, title = true},
+      {L.Species, true, set = 'HideSpecies'},
+			{L.Battles, true, set = 'HideRivals', var = 'showTamers'},
+			{STABLES, true, set = 'HideStables'},
 
-      {WORLD_QUEST_REWARD_FILTERS_TITLE, '', bounties, title = true},
-      {WORLD_QUEST_REWARD_FILTERS_RESOURCES, 'worldQuestFilterResources', bounties},
-      {WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, 'worldQuestFilterArtifactPower', bounties},
-      {WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, 'worldQuestFilterProfessionMaterials', bounties},
-      {WORLD_QUEST_REWARD_FILTERS_GOLD, 'worldQuestFilterGold', bounties},
-      {WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, 'worldQuestFilterEquipment', bounties},
+      {WORLD_QUEST_REWARD_FILTERS_TITLE, bounties, title = true},
+      {WORLD_QUEST_REWARD_FILTERS_RESOURCES, bounties, var = 'worldQuestFilterResources'},
+      {WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, bounties, var = 'worldQuestFilterArtifactPower'},
+      {WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, bounties, var = 'worldQuestFilterProfessionMaterials'},
+      {WORLD_QUEST_REWARD_FILTERS_GOLD, bounties, var = 'worldQuestFilterGold'},
+      {WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, bounties, var = 'worldQuestFilterEquipment'},
     }
 
     for i, entry in ipairs(types) do
-      local text, var, shown = entry[1], entry[2], entry[3]
+      local text, shown = entry[1], entry[2]
       if shown then
-        local checked
-        if entry.custom then
-          checked = not Addon.Sets[var]
-        else
-          checked = GetCVarBool(var)
-        end
+        local checked = entry.set and not Addon.Sets[entry.set] or entry.var and GetCVarBool(entry.var)
 
         self:AddLine {
           text = text,
@@ -166,10 +160,12 @@ function MapFilter:ShowTrackingTypes()
           keepShownOnClick = true,
           isNotRadio = true,
           func = function()
-            if entry.custom then
-              Addon.Sets[var] = checked and true or nil
-            else
-              SetCVar(var, checked and '0' or '1')
+            if entry.set then
+              Addon.Sets[entry.set] = checked and true or nil
+            end
+
+						if entry.var then
+              SetCVar(entry.var, checked and '0' or '1')
             end
 
             PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
