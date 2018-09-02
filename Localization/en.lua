@@ -13,12 +13,16 @@ L.CapturedPets = 'Show Captured'
 L.CommonSearches = 'Common Searches'
 L.Defeat = 'Defeat'
 L.EnemyTeam = 'Enemy Team'
+L.FAQDescription = 'These are the most frequently asked questions. To see the tutorials again, reset the addon settings using the "Defaults" button at the lower left corner.'
 L.FilterPets = 'Filter Pets'
 L.LoadTeam = 'Load Team'
 L.Maximized = 'Maximized'
 L.Ninja = 'Ninja'
 L.NoHistory = 'PetTracker has never seen you\nfight this adversary'
 L.NoneCollected = 'None Collected'
+L.PetBattle = 'Pet Battle'
+L.PromptForfeit = 'Prompt for Forfeit'
+L.PromptForfeitTip = 'If enabled, you will be prompted to forfeit a battle when no upgrades are available.'
 L.Rivals = 'Rivals'
 L.ShowJournal = 'Show in Journal'
 L.ShowPets = 'Show Battle Pets'
@@ -27,9 +31,6 @@ L.Species = 'Species'
 L.StableTip = '|cffffd200Come here to heal your|npets for a small fee.|r'
 L.TrackPets = 'Track Pets'
 L.TellMore = 'Tell me more about yourself.'
-L.PetBattle = 'Pet Battle'
-L.PromptForfeit = 'Prompt for Forfeit'
-L.PromptForfeitTip = 'If enabled, you will be prompted to forfeit a battle when no upgrades are available.'
 L.UnlockActions = 'Unlock Enemy Actions'
 L.UnlockActionsTip = 'If enabled, the enemy actions bar can be dragged to anywhere on the screen.'
 L.UpgradeAlert = 'Wild upgrades have appeared!'
@@ -55,10 +56,7 @@ L.FAQ = {
 	'Click on Battle Pets at the tracker and enable Captured Pets',
 
 	'How do I disable all the upgrade alerts?',
-	'Go to the Main Menu, open the addons list and disable PetTracker Upgrades.',
-
-	'How can I see the tutorial again?',
-	'Click on the button at your right.'
+	'Go to the Main Menu, open the addons list and disable PetTracker Upgrades.'
 }
 
 L.Tutorial = {

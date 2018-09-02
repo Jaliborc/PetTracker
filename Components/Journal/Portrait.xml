@@ -1,0 +1,78 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="PetTrackerPortrait" virtual="true">
+		<Size x="38" y="38"/>
+		<Layers>
+			<Layer level="ARTWORK" textureSubLevel="1">
+				<Texture parentKey="HealthBg">
+					<Size x="36" y="8"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="1"/>
+					</Anchors>
+					<Color r="0" g="0" b="0" a="0.7"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK" textureSubLevel="2">
+				<Texture parentKey="Health" file="Interface\PetBattles\PetBattleHud">
+					<Size x="36" y="8"/>	
+					<TexCoords left="0.77734375" right="0.91894531" top="0.34960938" bottom="0.42187500"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="1"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Dead" file="Interface\PetBattles\PetBattleHud">
+					<Size x="40" y="40"/>
+					<Color r="1" g="0" b="0" a="1"/>
+					<TexCoords left="0.82519531" right="0.87109375" top="0.88085938" bottom="0.97265625"/>	
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK" textureSubLevel="3">
+				<Texture parentKey="HealthBorder">
+					<Size y="1"/>
+					<Color r="0.2" g="0.2" b="0.2"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.HealthBg" relativePoint="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.HealthBg" relativePoint="TOPRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="IconBorder" file="Interface\PetBattles\PetJournal">
+					<Size x="53" y="54"/>
+					<TexCoords left="0.41992188" right="0.52343750" top="0.02246094" bottom="0.07519531"/>	
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				CollectionsJournal_LoadUI()
+				ShowUIPanel(CollectionsJournal)
+				CollectionsJournal_SetTab(CollectionsJournal, 2)
+				PetJournal_SelectPet(PetJournal, self.id)
+			</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT')
+
+				if self.id then
+					local specie, name, level = C_PetJournal.GetPetInfoByPetID(self.id)
+					local _, maxHealth, power, speed, rarity = C_PetJournal.GetPetStats(self.id)
+
+					BattlePetToolTip_Show(specie, level, rarity-1, maxHealth, power, speed, name)
+				else
+					GameTooltip:SetText(ITEM_MISSING:format(PET), 1, 0.1, 0.1)
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+				BattlePetTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+</Ui>

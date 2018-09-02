@@ -1,0 +1,20 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="PetTrackerReward" inherits="ItemButtonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				if self.link then
+					GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT')
+					GameTooltip:SetHyperlink(self.link)
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>			
+			<OnClick>
+				if self.link and IsModifiedClick() then
+					HandleModifiedItemClick(self.link)
+				end
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>

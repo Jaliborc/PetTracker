@@ -23,7 +23,6 @@ local Listener = Addon:NewModule('BattleListener', CreateFrame('Frame'))
 --[[ Startup ]]--
 
 function Listener:Startup()
-	Addon.Sets.RivalHistory = Addon.Sets.RivalHistory or {}
 	if not Addon.State.Casts then
 		self:Reset()
 	end

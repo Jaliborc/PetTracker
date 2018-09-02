@@ -1,3 +1,22 @@
+#### 8.0.6
+* World Map:
+  * Added points of interest (pets, stables and rivals) to the two new continents.
+* Journal:
+  * Redesigned rival map artwork.
+  * Tabs and rival selection now play sound effects like the rest of the journal.
+* Config:
+  * Added patron list. See patreon.com/jaliborc to learn how to join the list.
+  * The "defaults" button now actually resets the addon settings. It also restarts the tutorial.
+  * All panels now have icons.
+* Technical:
+  * Optional and load on demand modules now only contain a .toc file. All source code is in the main directory.
+  * Framework reconstructions in the configuration code to support the patrons list.
+
+
+#### 8.0.5
+* Fixed issue with pet related world quest pins.
+* Hopefully fixed Twitch packaging issue.
+
 #### 8.0.4
 * World Map:
   * Fixed 2 minor bugs.

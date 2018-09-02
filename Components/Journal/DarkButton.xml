@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="PetTrackerDarkButton" virtual="true">
+		<NormalTexture parentKey="NormalTexture" file="Interface\PVPFrame\PvPMegaQueue">
+			<TexCoords left="0.00195313" right="0.58789063" top="0.87304688" bottom="0.92773438"/>
+		</NormalTexture>
+		<PushedTexture file="Interface\PVPFrame\PvPMegaQueue">
+			<TexCoords left="0.00195313" right="0.58789063" top="0.92968750" bottom="0.98437500"/>
+		</PushedTexture>
+		<HighlightTexture parentKey="HighlightTexture" file="Interface\PVPFrame\PvPMegaQueue" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT" x="0" y="-2"/>
+				<Anchor point="BOTTOMRIGHT" x="0" y="2"/>
+			</Anchors>
+			<TexCoords left="0.00195313" right="0.63867188" top="0.70703125" bottom="0.76757813"/>
+		</HighlightTexture>
+
+		<Layers>	
+			<Layer level="OVERLAY">
+				<Texture parentKey="Selected" file="Interface\PVPFrame\PvPMegaQueue" alphaMode="ADD" hidden="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="-2"/>
+						<Anchor point="BOTTOMRIGHT" x="0" y="2"/>
+					</Anchors>
+					<TexCoords left="0.00195313" right="0.63867188" top="0.76953125" bottom="0.83007813"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Button>
+</Ui>

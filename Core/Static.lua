@@ -27,13 +27,13 @@ Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
 Addon.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
 
 Addon.SourceIcons = {
-	'Interface/WorldMap/TreasureChest_64',
-	'Interface/GossipFrame/AvailableQuestIcon',
-	'Interface/Minimap/Tracking/Banker',
-	'Interface/Archeology/Arch-Icon-Marker',
-	'Interface/Icons/Tracking_WildPet',
-	'Interface/AchievementFrame/UI-Achievement-TinyShield',
-	'Interface/GossipFrame/DailyQuestIcon'
+	'Interface\\WorldMap\\TreasureChest_64',
+	'Interface\\GossipFrame\\AvailableQuestIcon',
+	'Interface\\Minimap\\Tracking\\Banker',
+	'Interface\\Archeology\\Arch-Icon-Marker',
+	'Interface\\Icons\\Tracking_WildPet',
+	'Interface\\AchievementFrame\\UI-Achievement-TinyShield',
+	'Interface\\GossipFrame\\DailyQuestIcon'
 }
 
 Addon.BreedStats = {
@@ -99,7 +99,7 @@ function Addon.GetTypeName(type)
 end
 
 function Addon.GetTypeIcon(type)
-	return type and 'Interface/PetBattles/PetIcon-' .. PET_TYPE_SUFFIX[type]
+	return type and 'Interface\\PetBattles\\PetIcon-' .. PET_TYPE_SUFFIX[type]
 end
 
 function Addon:GetBreedName(breed)

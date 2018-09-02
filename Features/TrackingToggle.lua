@@ -15,15 +15,16 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local _, Addon = ...
-local Loader = Addon:NewModule('ConfigLoader')
+local ADDON, Addon = 'PetTracker', PetTracker
+local Toggle = Addon:NewModule('TrackToggle', CreateFrame('CheckButton', ADDON .. 'TrackToggle', PetJournal, 'InterfaceOptionsCheckButtonTemplate'))
+local Anchor = CollectMeOpen2Button or PetJournalFindBattle
 
-function Loader:Startup()
-	if (Addon.Sets.MainTutorial or 0) < 6 or (Addon.Sets.JournalTutorial or 0) < 7 then
-		LoadAddOn('PetTracker_Config')
-	else
-		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function()
-			LoadAddOn('PetTracker_Config')
-		end)
-	end
+Toggle.Text:SetText(Addon.Locals.ZoneTracker)
+Toggle:SetPoint('RIGHT', Anchor, 'LEFT', -Toggle.Text:GetWidth() - 15, -2)
+Toggle.TrackingChanged = function()
+	Toggle:SetChecked(not PetTracker.Sets.HideTracker)
 end
+
+Toggle:SetScript('OnClick', function()
+	Addon.Tracker:Toggle()
+end)

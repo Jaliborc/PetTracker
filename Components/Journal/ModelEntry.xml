@@ -1,0 +1,49 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="PetTrackerModelEntry" inherits="CompanionListButtonTemplate" virtual="true">
+		<Frames>
+			<PlayerModel parentKey="model" useParentLevel="true">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.icon" x="1" y="1"/>
+					<Anchor point="TOPRIGHT" relativeKey="$parent.icon" x="-1"/>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY" textureSubLevel="1">
+						<Texture parentKey="quality" file="Interface\Common\WhiteIconFrame">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="-2"/>
+								<Anchor point="BOTTOMRIGHT" y="-1"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="2">
+						<Texture parentKey="levelRing" file="Interface\PetBattles\PetJournal">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" x="3" y="-4"/>
+							</Anchors>
+							<Size x="21" y="21"/>	
+							<TexCoords left="0.06835938" right="0.10937500" top="0.02246094" bottom="0.04296875"/>	
+						</Texture>
+						<FontString parentKey="level" inherits="GameFontNormalSmall" justifyH="CENTER">
+							<Size x="0" y="12"/>
+							<Anchors>
+								<Anchor point="CENTER" relativeKey="$parent.levelRing" x="1" y="-1"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEvent function="Model_OnEvent"/>
+				</Scripts>
+			</PlayerModel>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Model_OnLoad(self.model)
+				self.model:SetPortraitZoom(1)
+				self.model:SetRotation(-.2)
+				self.dragButton:Hide()
+			</OnLoad>
+			<OnDragStart></OnDragStart>
+		</Scripts>
+	</Button>
+</Ui>
