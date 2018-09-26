@@ -89,8 +89,9 @@ function MapCanvas:Draw(frame)
 			local species = Journal.GetSpeciesIn(mapID)
 			for specie, spots in pairs(species) do
 				local specie = Addon.Specie:Get(specie)
+				local quality = specie:GetQuality()
 
-				if Addon:Filter(specie, Addon.Sets.MapFilter) then
+				if (Addon.Sets.mapCaptured or quality == 0) and Addon:Filter(specie, Addon.Sets.MapFilter) then
 					local icon = specie:GetTypeIcon()
 
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do

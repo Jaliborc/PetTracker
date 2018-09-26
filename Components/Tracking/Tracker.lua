@@ -93,36 +93,17 @@ end
 --[[ Interaction ]]--
 
 function Tracker:ToggleOptions()
-	SushiDropFrame:Toggle('TOPLEFT', self, 'BOTTOMLEFT', 5, -12, true, Tracker.ShowOptions)
-end
-
-function Tracker:ShowOptions()
-	self:AddLine {
-		text = 'Battle Pets',
-		isTitle = true,
-		notCheckable = true
-	}
-
-	self:AddLine {
-		text = Addon.Locals.TrackPets,
-		checked = not Addon.Sets.HideTracker,
-		func = function() Tracker:Toggle() end,
-		isNotRadio = true
-	}
-
-	self:AddLine {
-		text = Addon.Locals.CapturedPets,
-		checked = Addon.Sets.CapturedPets,
-		isNotRadio = true,
-		func = function()
-			Addon.Sets.CapturedPets = not Addon.Sets.CapturedPets
-			Addon:ForAllModules('TrackingChanged')
-		end
-	}
+	_G.InterfaceOptionsFrame_OpenToCategory(Addon.gui)
+	_G.InterfaceOptionsFrame_OpenToCategory(Addon.gui)
 end
 
 function Tracker:Toggle()
 	Addon.Sets.HideTracker = not Addon.Sets.HideTracker
+	Addon:ForAllModules('TrackingChanged')
+end
+
+
+function Tracker:ConfigChanged()
 	Addon:ForAllModules('TrackingChanged')
 end
 

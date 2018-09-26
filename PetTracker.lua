@@ -21,7 +21,6 @@ local Listener = CreateFrame('Frame', ADDON .. 'Listener')
 Listener:SetScript('OnEvent', function(_, event) Addon[event](Addon) end)
 Listener:RegisterEvent('PLAYER_ENTERING_WORLD')
 
-
 --[[ API ]]--
 
 function Addon:NewClass(type, name, ...)
@@ -42,13 +41,13 @@ function Addon:ForAllModules(key, ...)
 	end
 end
 
-
 --[[ Events ]]--
 
 function Addon:PLAYER_ENTERING_WORLD()
 	PetTracker_Sets = PetTracker_Sets or {RivalHistory = {}}
 	PetTracker_State = PetTracker_State or {}
 
+	ChatFrame1:AddMessage("load");
 	self.Sets = PetTracker_Sets
 	self.State = PetTracker_State
 	self:ForAllModules('Startup')

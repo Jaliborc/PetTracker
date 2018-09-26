@@ -13,6 +13,7 @@ Libs\Libs.xml
 Localization\Include.xml
 
 PetTracker.lua
+PetTrackerConfig.lua
 
 Core\Include.xml
 Core\Tests\Include.xml
