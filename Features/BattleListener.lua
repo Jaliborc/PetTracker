@@ -92,7 +92,8 @@ end
 function Listener:PET_BATTLE_FINAL_ROUND(winner)
 	local rival = Battle:GetRival()
 	if rival then
-		local history = Addon.Sets.RivalHistory[rival] or {}
+		local rivals = Addon.Sets.RivalHistory or {}
+		local history = rivals[rival] or {}
 		local entry = tostring(winner) .. format('%03x', Addon.GetDate())
 
 		for i = 1,3 do
@@ -110,7 +111,9 @@ function Listener:PET_BATTLE_FINAL_ROUND(winner)
 		if #history > 9 then
 			tremove(history)
 		end
-
+		if not Addon.Sets.RivalHistory then
+			Addon.Sets.RivalHistory = {}
+		end
 		Addon.Sets.RivalHistory[rival] = history
 	end
 

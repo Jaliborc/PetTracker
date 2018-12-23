@@ -249,7 +249,8 @@ function Journal.Map:Display(rival)
 end
 
 function Journal.History:Display(rival)
-	local entries = Addon.Sets.RivalHistory[rival.id] or {}
+	local rivals = Addon.Sets.RivalHistory or {}
+	local entries = rivals[rival.id] or {}
 	self.Empty:SetShown(#entries == 0)
 	self:SetSelected(nil)
 
