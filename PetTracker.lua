@@ -46,7 +46,11 @@ end
 --[[ Events ]]--
 
 function Addon:PLAYER_ENTERING_WORLD()
-	PetTracker_Sets = PetTracker_Sets or {RivalHistory = {}}
+	PetTracker_Sets = PetTracker_Sets or {}
+	if not PetTracker_Sets.RivalHistory then
+		PetTracker_Sets.RivalHistory = {}
+	end
+
 	PetTracker_State = PetTracker_State or {}
 
 	self.Sets = PetTracker_Sets

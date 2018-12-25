@@ -36,18 +36,15 @@ function Listener:Startup()
 end
 
 function Listener:Upgrade()
-	if Addon.Sets.RivalHistory then
-		for rival, games in pairs(Addon.Sets.RivalHistory) do
-			for i = #games, 1, -1 do
-				local data = games[i]
-				local len = data:len()
-				if len ~= 26 and len ~= 48 and len ~= 70 then
-					if len == 82 and data:sub(15, 18) == '0000' then
-						-- MoP format
-						games[i] = data:sub(1, 14) .. data:sub(19, 40) .. data:sub(45, 66) .. data:sub(71, 82)
-					else
-						tremove(games, i) -- corrupted data
-					end
+	for rival, games in pairs(Addon.Sets.RivalHistory) do
+		for i = #games, 1, -1 do
+			local data = games[i]
+			local len = data:len()
+			if len ~= 26 and len ~= 48 and len ~= 70 then
+				if len == 82 and data:sub(15,18) == '0000' then -- MoP format
+					games[i] = data:sub(1,14) .. data:sub(19,40) .. data:sub(45,66) .. data:sub(71, 82)
+				else
+					tremove(games, i) -- corrupted data
 				end
 			end
 		end
@@ -92,8 +89,7 @@ end
 function Listener:PET_BATTLE_FINAL_ROUND(winner)
 	local rival = Battle:GetRival()
 	if rival then
-		local rivals = Addon.Sets.RivalHistory or {}
-		local history = rivals[rival] or {}
+		local history = Addon.Sets.RivalHistory[rival] or {}
 		local entry = tostring(winner) .. format('%03x', Addon.GetDate())
 
 		for i = 1,3 do
@@ -111,9 +107,7 @@ function Listener:PET_BATTLE_FINAL_ROUND(winner)
 		if #history > 9 then
 			tremove(history)
 		end
-		if not Addon.Sets.RivalHistory then
-			Addon.Sets.RivalHistory = {}
-		end
+
 		Addon.Sets.RivalHistory[rival] = history
 	end
 
