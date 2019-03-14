@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -32,6 +32,10 @@ function MapCanvas:Startup()
 	self:TrackingChanged()
 	self.tip = Addon.MapTip()
 	self.tip:SetScript('OnUpdate', function() self:AnchorTip() end)
+end
+
+function MapCanvas:AddOptions(panel)
+	panel:Create('CheckButton', 'HideRivals')
 end
 
 function MapCanvas:TrackingChanged()
@@ -82,7 +86,6 @@ end
 function MapCanvas:Draw(frame)
 	if Addon.Sets and self:Validate(frame) then
 		local mapID = frame:GetMapID()
-		local canvas = frame:GetCanvas()
 		local index = 1
 
 		if not Addon.Sets.HideSpecies then
@@ -105,7 +108,7 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.Sets.HideRivals then
+		if not Addon.Sets.HideRivals and GetCVarBool('showTamers') then
 			local rivals = Journal.GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
 					local rival = Addon.Rival:Get(rival)

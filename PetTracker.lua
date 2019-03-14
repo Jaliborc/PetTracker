@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -46,8 +46,8 @@ end
 --[[ Events ]]--
 
 function Addon:PLAYER_ENTERING_WORLD()
-	PetTracker_Sets = PetTracker_Sets or {RivalHistory = {}}
 	PetTracker_State = PetTracker_State or {}
+	PetTracker_Sets = PetTracker_Sets or {}
 
 	self.Sets = PetTracker_Sets
 	self.State = PetTracker_State

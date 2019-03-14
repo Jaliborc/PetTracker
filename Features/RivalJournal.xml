@@ -125,7 +125,7 @@
 								</FontString>
 							</Layer>
 							<Layer level="BACKGROUND">
-								<Texture parentKey="bg" blendMode="DISABLE" file="Interface/Glues/Models/UI_Tauren/BlackGlow01">
+								<Texture parentKey="bg" file="Interface/Glues/Models/UI_Tauren/BlackGlow01">
 									<Size x="40" y="40"/>
 									<Anchors>
 										<Anchor point="CENTER" relativeKey="$parent.ring"/>

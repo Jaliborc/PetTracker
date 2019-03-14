@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -15,14 +15,15 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local Addon = PetTracker
+local ADDON, Addon = 'PetTracker', PetTracker
 local Slot = LibStub('Poncho-1.0')('Button')
-local BattleSlot = Addon:NewClass(nil, 'BattleSlot', 'PetTrackerBattleSlot', Slot)
-local JournalSlot = Addon:NewClass(nil, 'JournalSlot', 'PetTrackerJournalSlot', Slot)
 
 local Ability, Journal = Addon.AbilityButton, Addon.Journal
 local PetTooltip = PetBattlePrimaryUnitTooltip
 local NumPets = NUM_BATTLE_PETS_IN_BATTLE
+
+BattleSlot = Addon:NewClass(nil, 'BattleSlot', ADDON .. 'BattleSlot', Slot)
+JournalSlot = Addon:NewClass(nil, 'JournalSlot', ADDON .. 'JournalSlot', Slot)
 
 
 --[[ Create ]]--

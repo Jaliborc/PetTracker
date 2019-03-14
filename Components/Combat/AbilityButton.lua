@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -17,13 +17,14 @@ This file is part of PetTracker.
 
 local ADDON, Addon = ...
 local Ability = LibStub('Poncho-1.0')('Button')
-local AbilityButton = Addon:NewClass(nil, 'AbilityButton', ADDON..'AbilityButton', Ability)
-local AbilityAction = Addon:NewClass(nil, 'AbilityAction', 'PetBattleAbilityButtonTemplate', Ability)
 
 local GetInfo, GetModifier = C_PetBattles.GetAbilityInfoByID, C_PetBattles.GetAttackModifier
 local ModifierIcon = 'Interface\\PetBattles\\BattleBar-AbilityBadge-'
 local RequiresLevel = PET_ABILITY_REQUIRES_LEVEL
 local Tooltip = PetBattlePrimaryAbilityTooltip
+
+Addon:NewClass(nil, 'AbilityButton', ADDON..'AbilityButton', Ability)
+Addon:NewClass(nil, 'AbilityAction', 'PetBattleAbilityButtonTemplate', Ability)
 
 
 --[[ Startup ]]--
@@ -40,7 +41,7 @@ function Ability:Display(pet, i, target)
 	if id then
 		local unusable = cooldown or requisite
 		local color = (unusable or not certain) and .5 or 1
-		local _, name, icon, _,_,_, type, healing = GetInfo(id)
+		local _, _, icon, _,_,_, type, healing = GetInfo(id)
 		local modifier = not healing and target and GetModifier(type, target) or 1
 
 		self.BetterIcon:SetTexture(ModifierIcon .. (modifier > 1 and 'Strong' or 'Weak'))

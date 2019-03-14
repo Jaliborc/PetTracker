@@ -3,7 +3,7 @@ if not WoWUnit then
 end
 
 local _, Addon = ...
-local Tests = WoWUnit('PetTracker.Journal', 'PET_JOURNAL_LIST_UPDATE', 'GUILD_ROSTER_UPDATE')
+local Tests = WoWUnit('PetTracker.Journal', 'PET_JOURNAL_LIST_UPDATE')
 
 local AreEqual, Exists, Disable = WoWUnit.AreEqual, WoWUnit.Exists, WoWUnit.Disable
 local Replace = WoWUnit.Replace
@@ -23,50 +23,22 @@ end
 
 --[[ Listings ]]--
 
-function Tests:GetProgressIn()
-	local qualities = {4, 1, 0, 0, 3, 3}
-	local levels = {15, 15, 0, 0, 17, 18}
-	local filled = {
-		total = 6,
-		
-		[0] = {[0] = {3, 4}, total = 2},
-		[1] = {[15] = {2}, total = 1},
-		[2] = {total = 0},
-		[3] = {[17] = {5}, [18] = {6}, total = 2},
-		[4] = {[15] = {1}, total = 1},
+function Tests:GetSpeciesIn()
+	local elwynn = Journal.GetSpeciesIn(37)
+	local expected = {
+		40,
+		162,
+		200,
 	}
 
-	local empty = {
-		total = 0,
-
-		[0] = {total = 0},
-		[1] = {total = 0},
-		[2] = {total = 0},
-		[3] = {total = 0},
-		[4] = {total = 0},
-	}
-
-	Replace(Journal, 'GetSpeciesIn', function(self, zone) return zone == 2 and qualities or {} end)
-	Replace(Journal, 'GetBestOwned', function(self, specie) return nil, qualities[specie], levels[specie] end)
-	
-	AreEqual(empty, Journal:GetProgressIn(1))
-	AreEqual(filled, Journal:GetProgressIn(2))
+	for _, specie in pairs(expected) do
+		Exists(elwynn[specie])
+	end
 end
 
-function Tests:GetSpeciesIn()
-	local results = Journal:GetSpeciesIn(36)
-	local expected = {
-		424,
-		391,
-		309,
-		395,
-		646,
-		266,
-	}
-	
-	for _, specie in pairs(expected) do
-		Exists(results[specie])
-	end
+function Tests:GetRivalsIn()
+	local elwynn = Journal.GetRivalsIn(37)
+	Exists(elwynn[64330])
 end
 
 

@@ -16,7 +16,7 @@ end
 
 function Tests:GetTypeIcon()
 	local actual = Addon.GetTypeIcon(6)
-	local expected = 'Interface/PetBattles/PetIcon-Magical'
+	local expected = 'Interface\\PetBattles\\PetIcon-Magical'
 
 	AreEqual(actual, expected)
 end

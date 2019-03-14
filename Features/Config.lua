@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -21,7 +21,7 @@ local L = Addon.Locals
 
 local PAW_ICON = '|TInterface\\Garrison\\MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t '
 local HELP_ICON = '|TInterface\\HelpFrame\\HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t '
-local PATRONS = {{title='Jenkins', people={'Robert Schultz'}},{},{title='Ambassador', people={'Fernando Bandeira','Gnare','Julia Frizzell','Michael Irving','Peter Palma'}}} -- generated patron list
+local PATRONS = {{title='Jenkins',people={'Robert Schultz','Gnare','Robert McCarthy','Sandra Stevens'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia Frizzell','Peggy Webb','Lolari','Craig Falb','Chris Jones'}}} -- generated patron list
 local FAQ = L.FAQ
 
 function Config:Startup()
@@ -47,7 +47,7 @@ end
 function Config:CreatePanel(class, ...)
 	local group = class:CreateOptionsCategory(...)
 	group:SetAddon(ADDON)
-	group:SetFooter('Copyright 2012-2018 João Cardoso')
+	group:SetFooter('Copyright 2012-2019 João Cardoso')
 	group.Category.default = function()
 		for k, v in pairs(Addon.Sets) do
 			if type(v) ~= 'table' then

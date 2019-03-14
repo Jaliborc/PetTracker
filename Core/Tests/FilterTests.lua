@@ -10,8 +10,8 @@ local Ram = Addon.Specie:Get(374)
 local Rabbit = Addon.Specie:Get(378)
 local Robot = Addon.Specie:Get(254)
 
-local Aki = Addon.Rival:At(3045)
-local Zunta = Addon.Rival:At(3007)
+local Aki = Addon.Rival:Get(66741)
+local Zunta = Addon.Rival:Get(66126)
 
 function Tests:Empty()
 	IsTrue(Addon:Filter(Ram, ''))

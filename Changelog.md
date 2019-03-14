@@ -1,4 +1,16 @@
-#### 8.0.6
+##### 8.1.1
+* General:
+  * Fixed settings starting up issue causing many different bugs.
+* World Map:
+  * Added option to hide rival portraits in the interface options.
+
+##### 8.1.0
+* General:
+  * Updated for Tides of Vengeance.
+* World Map:
+  * Updated points of interest.
+
+##### 8.0.6
 * World Map:
   * Added points of interest (pets, stables and rivals) to the two new continents.
 * Journal:
@@ -13,18 +25,18 @@
   * Framework reconstructions in the configuration code to support the patrons list.
 
 
-#### 8.0.5
+##### 8.0.5
 * Fixed issue with pet related world quest pins.
 * Hopefully fixed Twitch packaging issue.
 
-#### 8.0.4
+##### 8.0.4
 * World Map:
   * Fixed 2 minor bugs.
 * Rivals:
   * Fixed error at the end of a rival battle.
   * Fixed issue with battle history display.
 
-#### 8.0.3
+##### 8.0.3
 * World Map:
   * Now shows rival locations and their portraits everywhere.
   * Fixed Dalaran, Nagrand (Draenor) and Shadowmoon Valley (Draenor).
@@ -34,7 +46,7 @@
   * Nicer pin location button on the map.
   * Removed some wrongly classified elite pets belonging to tamers from the list.
 
-#### 8.0.2
+##### 8.0.2
 * World Map:
   * Filter box now hides when pets are not being tracked.
   * Fixed start error message.
@@ -49,7 +61,7 @@
   * Zone Map doesn't update yet when filters are changed.
   * 99% appears functional as intended, so tagging release.
 
-#### 8.0.1 (barebones)
+##### 8.0.1 (barebones)
 * This is a **barebones release**!
   * All of the submodules are back: Journal, Upgrades, Breeds and Config.
   * Yet, not all of the features are currently running.

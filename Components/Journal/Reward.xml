@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Button name="PetTrackerReward" inherits="ItemButtonTemplate" virtual="true">
+	<ItemButton name="PetTrackerReward" virtual="true">
 		<Scripts>
 			<OnEnter>
 				if self.link then
@@ -9,12 +9,12 @@
 			</OnEnter>
 			<OnLeave>
 				GameTooltip:Hide()
-			</OnLeave>			
+			</OnLeave>
 			<OnClick>
 				if self.link and IsModifiedClick() then
 					HandleModifiedItemClick(self.link)
 				end
 			</OnClick>
 		</Scripts>
-	</Button>
+	</ItemButton>
 </Ui>

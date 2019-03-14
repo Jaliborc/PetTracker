@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -36,18 +36,22 @@ function Listener:Startup()
 end
 
 function Listener:Upgrade()
-	for rival, games in pairs(Addon.Sets.RivalHistory) do
-		for i = #games, 1, -1 do
-			local data = games[i]
-			local len = data:len()
-			if len ~= 26 and len ~= 48 and len ~= 70 then
-				if len == 82 and data:sub(15,18) == '0000' then -- MoP format
-					games[i] = data:sub(1,14) .. data:sub(19,40) .. data:sub(45,66) .. data:sub(71, 82)
-				else
-					tremove(games, i) -- corrupted data
+	if Addon.Sets.RivalHistory then
+		for rival, games in pairs(Addon.Sets.RivalHistory) do
+			for i = #games, 1, -1 do
+				local data = games[i]
+				local len = data:len()
+				if len ~= 26 and len ~= 48 and len ~= 70 then
+					if len == 82 and data:sub(15,18) == '0000' then -- MoP format
+						games[i] = data:sub(1,14) .. data:sub(19,40) .. data:sub(45,66) .. data:sub(71, 82)
+					else
+						tremove(games, i) -- corrupted data
+					end
 				end
 			end
 		end
+	else
+		Addon.Sets.RivalHistory = {}
 	end
 end
 

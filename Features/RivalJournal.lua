@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -62,7 +62,7 @@ function Journal:Startup()
 	self.Map.Destination = Addon.RivalPin()
 
 	for i = 1, 4 do
-		local loot = CreateFrame('Button', '$parentLoot' .. i, self.Card, ADDON..'Reward')
+		local loot = CreateFrame('ItemButton', '$parentLoot' .. i, self.Card, ADDON..'Reward')
 		loot:SetPoint('TOPRIGHT', -58 + 45 * (i % 2), - 45 * ceil(i/2))
 		loot.Count:Show()
 

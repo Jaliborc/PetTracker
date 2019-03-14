@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2018 João Cardoso
+Copyright 2012-2019 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -54,8 +54,7 @@ Filters.abilities = {
 
 	match = function(self, target, _, search)
 		for i, id in ipairs(target:GetAbilities()) do
-			local id, name = C_PetBattles.GetAbilityInfoByID(id)
-			
+			local _, name = C_PetBattles.GetAbilityInfoByID(id)
 			if Search:Find(search, name) then
 				return true
 			end
