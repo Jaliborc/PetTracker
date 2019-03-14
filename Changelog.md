@@ -1,3 +1,6 @@
+##### 8.1.2
+* Updated for World of Warcraft patch 8.1.5.
+
 ##### 8.1.1
 * General:
   * Fixed settings starting up issue causing many different bugs.
