@@ -1,6 +1,7 @@
 ![Preview](http://jaliborc.com/images/addons/large/pettracker/map.jpg)
 
 [![Install](http://jaliborc.com/images/external/twitch_client.png)](https://www.curseforge.com/wow/addons/pettracker/download?client=y) [![Patreon](http://jaliborc.com/images/external/patreon.png#1)](https://www.patreon.com/jaliborc)
+[![Wiki](http://jaliborc.com/images/external/github_wiki.png)](https://github.com/jaliborc/PetTracker/wiki)
 
 
 # PetTracker :dog: :mouse: :tiger:
