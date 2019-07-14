@@ -1,3 +1,7 @@
+##### 8.2.0
+* Updated for World of Warcraft patch 8.2.
+* Updated species and rival database.
+
 ##### 8.1.2
 * Updated for World of Warcraft patch 8.1.5.
 
