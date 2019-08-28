@@ -1,4 +1,4 @@
-![Preview](http://jaliborc.com/images/addons/large/pettracker/map.jpg)
+![Preview](http://jaliborc.com/images/addons/large/pettracker/map.jpg?1)
 
 [![Install](http://img.shields.io/badge/install-twitch-blueviolet)](https://www.curseforge.com/wow/addons/pettracker/files)
 [![Patreon](http://img.shields.io/badge/donate-patreon-orange)](https://www.patreon.com/jaliborc)
