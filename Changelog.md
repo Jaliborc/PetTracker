@@ -1,3 +1,6 @@
+##### 8.2.1
+* Fixed issue with Mechagon Island and Nazjatar preventing pet species from appearing.
+
 ##### 8.2.0
 * Updated for World of Warcraft patch 8.2.
 * Updated species and rival database.
