@@ -21,7 +21,7 @@ local L = Addon.Locals
 
 local PAW_ICON = '|TInterface\\Garrison\\MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t '
 local HELP_ICON = '|TInterface\\HelpFrame\\HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t '
-local PATRONS = {{title='Jenkins',people={'Sembiance ','Gnare ','Eitrigg A. Runefire','Lars Romeijn'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia Frizzell','Peggy Webb','Lolari ','Craig Falb','Mary Barrentine','Grey Sample'}}} -- generated patron list
+local PATRONS = {{title='Jenkins',people={'Gnare','Arriana Sylvester','SirZooro','ProfessahX'}},{},{title='Ambassador',people={'Sembiance','Fernando Bandeira','Michael Irving','Julia F','Peggy Webb','Lolari','Craig Falb','Mary Barrentine','Grey Sample','Patryk Kalis','Lifeprayer','Steve Lund'}}} -- generated patron list
 local FAQ = L.FAQ
 
 function Config:Startup()
