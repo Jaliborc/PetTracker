@@ -1,0 +1,25 @@
+[project]
+  45502
+[modules]
+  PetTracker_Breeds
+  PetTracker_Config
+  PetTracker_Journal
+  PetTracker_Switcher
+  PetTracker_Upgrades
+[ignore]
+  Core/Tests
+  Core/Compare.lua
+  Libs/Sushi-3.0/Classes/ColorPicker.lua
+  Libs/Sushi-3.0/Classes/Dropdown.lua
+  Libs/Sushi-3.0/Classes/EditBox.lua
+  Libs/Sushi-3.0/Classes/ExpandCheck.lua
+  Libs/Sushi-3.0/Classes/FauxScrollGroup.lua
+  Libs/Sushi-3.0/Classes/GrayButton.lua
+  Libs/Sushi-3.0/Classes/HelpButton.lua
+  Libs/Sushi-3.0/Classes/IconCheck.lua
+  Libs/Sushi-3.0/Classes/Slider.lua
+  Libs/Sushi-3.0/Classes/TabButtons.lua
+  Libs/Sushi-3.0/Classes/TabGroup.lua
+  Libs/Sushi-3.0/Classes/TextButton.lua
+  Libs/Sushi-3.0/Classes/TextureButton.lua
+  Libs/Sushi-3.0/Classes/TextureDropdown.lua

@@ -17,7 +17,7 @@ This file is part of PetTracker.
 
 local Addon = PetTracker
 local Tooltip = Addon.MapTip()
-local Icons = {}
+local Icons, HookedTips = {}, {}
 
 local L, Journal, Battle = Addon.Locals, Addon.Journal, Addon.Battle
 local NoneCollected = NORMAL_FONT_COLOR_CODE .. L.NoneCollected .. FONT_COLOR_CODE_CLOSE
@@ -119,25 +119,17 @@ end
 
 --[[ Tooltips ]]--
 
-local owned = {}
-
 hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tooltip, data)
-	local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
-	local string = tooltip.Owned
+	if not HookedTips[tooltip] then
+		hooksecurefunc(tooltip, 'Show', function()
+			local data = HookedTips[tooltip]
+			local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
 
-	if not string.__SetText then
-		string.__SetText = string.SetText
-
-		function string:SetText(text)
-			if owned[string] then
-				string:__SetText(owned[self])
-				owned[self] = nil
-			else
-				string:__SetText(text)
-			end
-		end
+			tooltip.Owned:SetText(Journal:GetOwnedText(data.speciesID) or tooltip.Owned:GetText())
+			tooltip.Name:SetText((tooltip.Name:GetText() or '') .. Addon:GetBreedIcon(breed, .8, 5, 0))
+			tooltip:SetHeight(tooltip:GetHeight() + 4)
+		end)
 	end
 
-	tooltip.Name:SetText((tooltip.Name:GetText() or '') .. Addon:GetBreedIcon(breed, .8, 5, -2))
-	owned[string] = Journal:GetOwnedText(data.speciesID)
+	HookedTips[tooltip] = data
 end)

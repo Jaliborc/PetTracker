@@ -1,3 +1,6 @@
+##### 8.2.2
+* Now shows specie source in all pet tooltips.
+
 ##### 8.2.1
 * Fixed issue with Mechagon Island and Nazjatar preventing pet species from appearing.
 

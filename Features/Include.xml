@@ -4,6 +4,7 @@
 	<Script file="MapFilter.lua"/>
 
 	<Script file="Gossip.lua"/>
+	<Script file="Tooltips.lua"/>
 	<Script file="EnemyActions.lua"/>
 	<Script file="BattleListener.lua"/>
 
