@@ -99,8 +99,8 @@ end
 function Rival:GetRewards()
 	local rewards = {}
 
-	for item, count in self.items:gmatch('(%w%w%w%w)(%w)') do
-		local id = tonumber(item, 36)
+	for id, count in self.items:gmatch('(%w%w%w%w)(%w)') do
+		id = tonumber(id, 36)
 
 		tinsert(rewards, {
 			icon = GetItemIcon(id),
@@ -109,13 +109,14 @@ function Rival:GetRewards()
 		})
 	end
 
-	for currency, count in self.currencies:gmatch('(%w%w)(%w)') do
-		local id = tonumber(currency, 36)
+	for id, count in self.currencies:gmatch('(%w%w)(%w)') do
+		id = tonumber(id, 36)
+		count = tonumber(count, 36)
 
 		tinsert(rewards, {
-			link = GetCurrencyLink(id),
+			link = GetCurrencyLink(id, count),
 			icon = select(3, GetCurrencyInfo(id)),
-			count = tonumber(count, 36)
+			count = count
 		})
 	end
 
