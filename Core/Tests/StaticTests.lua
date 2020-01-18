@@ -1,10 +1,8 @@
-if not WoWUnit then
-	return
-end
+local Tests = WoWUnit and WoWUnit('PetTracker.Static')
+if not Tests then return end
 
 local _, Addon = ...
 local AreEqual, Replace = WoWUnit.AreEqual, WoWUnit.Replace
-local Tests = WoWUnit('PetTracker.Static')
 
 
 --[[ Values ]]--

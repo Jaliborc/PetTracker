@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2019 João Cardoso
+Copyright 2012-2020 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -36,7 +36,7 @@ function MapFilter:Init(frame)
   end
 
   for i, overlay in ipairs(frame.overlayFrames or {}) do
-    if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
+    if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick and overlay:IsObjectType('Button') then
       local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Filter', overlay, 'SearchBoxTemplate')
       search.Instructions:SetText(L.FilterPets)
       search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
@@ -53,7 +53,7 @@ function MapFilter:Init(frame)
         SushiDropFrame:CloseAll()
       end)
 
-      overlay:SetScript('OnClick', function()
+      overlay:SetScript('OnMouseDown', function()
         SushiDropFrame:Toggle('TOPLEFT', overlay, 'BOTTOMLEFT', 0, -15, true, self.ShowTrackingTypes)
       end)
 

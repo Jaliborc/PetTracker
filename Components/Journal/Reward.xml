@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<ItemButton name="PetTrackerReward" virtual="true">
 		<Scripts>
 			<OnEnter>

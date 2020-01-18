@@ -1,11 +1,8 @@
-if not WoWUnit then
-	return
-end
+local Tests = WoWUnit and WoWUnit('PetTracker.Battle')
+if not Tests then return end
 
 local _, Addon = ...
 local AreEqual, IsTrue, IsFalse, Replace = WoWUnit.AreEqual, WoWUnit.IsTrue, WoWUnit.IsFalse, WoWUnit.Replace
-local Tests = WoWUnit('PetTracker.Battle')
-
 local Battle, Journal = Addon.Battle, Addon.Journal
 local Server = C_PetBattles
 local Pet = Battle:Get()

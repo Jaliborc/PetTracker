@@ -1,5 +1,5 @@
 --[[
- Copyright (c) 2012-2019 Robin Schoonover
+ Copyright (c) 2012-2020 Robin Schoonover
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to

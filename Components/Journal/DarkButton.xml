@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Button name="PetTrackerDarkButton" virtual="true">
 		<NormalTexture parentKey="NormalTexture" file="Interface\PVPFrame\PvPMegaQueue">
 			<TexCoords left="0.00195313" right="0.58789063" top="0.87304688" bottom="0.92773438"/>

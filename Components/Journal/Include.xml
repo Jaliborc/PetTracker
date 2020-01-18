@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Include file="Reward.xml"/>
 	<Include file="Portrait.xml"/>
 	<Include file="DarkButton.xml"/>

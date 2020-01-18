@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Script file="Objectives.lua"/>
 	<Script file="MapCanvas.lua"/>
 	<Script file="MapFilter.lua"/>

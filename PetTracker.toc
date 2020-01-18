@@ -1,8 +1,8 @@
-## Interface: 80200
+## Interface: 11303
 ## Title: |cff2020ffPetTracker|r
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
-## Version: 8.2.2
+## Version: 8.3.0
 
 ## SavedVariables: PetTracker_Sets
 ## SavedVariablesPerCharacter: PetTracker_State

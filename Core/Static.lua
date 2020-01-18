@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2019 João Cardoso
+Copyright 2012-2020 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -27,13 +27,13 @@ Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
 Addon.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
 
 Addon.SourceIcons = {
-	'Interface\\WorldMap\\TreasureChest_64',
-	'Interface\\GossipFrame\\AvailableQuestIcon',
-	'Interface\\Minimap\\Tracking\\Banker',
-	'Interface\\Archeology\\Arch-Icon-Marker',
-	'Interface\\Icons\\Tracking_WildPet',
-	'Interface\\AchievementFrame\\UI-Achievement-TinyShield',
-	'Interface\\GossipFrame\\DailyQuestIcon'
+	'Interface/WorldMap/TreasureChest_64',
+	'Interface/GossipFrame/AvailableQuestIcon',
+	'Interface/Minimap/Tracking/Banker',
+	'Interface/Archeology/Arch-Icon-Marker',
+	'Interface/Icons/Tracking_WildPet',
+	'Interface/AchievementFrame/UI-Achievement-TinyShield',
+	'Interface/GossipFrame/DailyQuestIcon'
 }
 
 Addon.BreedStats = {
@@ -63,16 +63,16 @@ Addon.BreedNames = {
 }
 
 Addon.BreedIcons = {
-	[3] = {'|TInterface\\PetBattles\\PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:0:16|t', 22, 22},
-	[4] = {'|TInterface\\WorldStateFrame\\CombatSwords:%d:%d:%d:%d:64:64:0:32:0:32|t', 19, 19},
-	[5] = {'|TInterface\\Addons\\PetTracker\\Art\\Breeds:%d:%d:%d:%d:64:64:40:64:22:39|t', 17 * .9, 24 * .9},
-	[6] = {'|TInterface\\Addons\\PetTracker\\Art\\Breeds:%d:%d:%d:%d:64:64:34:64:0:21|t', 21 * .8, 30 * .8},
-	[7] = {'|TInterface\\Addons\\PetTracker\\Art\\Breeds:%d:%d:%d:%d:64:64:2:26:0:17|t', 17, 24},
-	[8] = {'|TInterface\\Addons\\PetTracker\\Art\\Breeds:%d:%d:%d:%d:64:64:2:26:17:34|t', 17, 24},
-	[9] = {'|TInterface\\Addons\\PetTracker\\Art\\Breeds:%d:%d:%d:%d:64:64:0:26:34:51|t', 17, 26},
-	[10] = {'|TInterface\\PetBattles\\PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:0:16|t', 17, 17},
-	[12] = {'|TInterface\\PetBattles\\PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:16:32|t', 17, 17},
-	[11] = {'|TInterface\\PetBattles\\PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:16:32|t', 17, 17}
+	[3] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:0:16|t', 22, 22},
+	[4] = {'|TInterface/WorldStateFrame/CombatSwords:%d:%d:%d:%d:64:64:0:32:0:32|t', 19, 19},
+	[5] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:40:64:22:39|t', 17 * .9, 24 * .9},
+	[6] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:34:64:0:21|t', 21 * .8, 30 * .8},
+	[7] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:2:26:0:17|t', 17, 24},
+	[8] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:2:26:17:34|t', 17, 24},
+	[9] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:0:26:34:51|t', 17, 26},
+	[10] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:0:16|t', 17, 17},
+	[12] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:16:32|t', 17, 17},
+	[11] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:16:32|t', 17, 17}
 }
 
 
@@ -99,7 +99,7 @@ function Addon.GetTypeName(type)
 end
 
 function Addon.GetTypeIcon(type)
-	return type and 'Interface\\PetBattles\\PetIcon-' .. PET_TYPE_SUFFIX[type]
+	return type and 'Interface/PetBattles/PetIcon-' .. PET_TYPE_SUFFIX[type]
 end
 
 function Addon:GetBreedName(breed)

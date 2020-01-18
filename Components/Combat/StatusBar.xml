@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<StatusBar name="PetTrackerStatusBar" virtual="true">
 		<Size x="160" y="11"/>
 		<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>

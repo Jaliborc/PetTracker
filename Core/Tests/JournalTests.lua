@@ -1,10 +1,7 @@
-if not WoWUnit then
-	return
-end
+local Tests = WoWUnit and WoWUnit('PetTracker.Journal', 'PET_JOURNAL_LIST_UPDATE')
+if not Tests then return end
 
 local _, Addon = ...
-local Tests = WoWUnit('PetTracker.Journal', 'PET_JOURNAL_LIST_UPDATE')
-
 local AreEqual, Exists, Disable = WoWUnit.AreEqual, WoWUnit.Exists, WoWUnit.Disable
 local Replace = WoWUnit.Replace
 local Journal = Addon.Journal

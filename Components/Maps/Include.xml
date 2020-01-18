@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Script file="Pin.lua"/>
 	<Script file="RivalPin.lua"/>
 	<Script file="SpeciePin.lua"/>

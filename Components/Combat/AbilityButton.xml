@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Button name="PetTrackerAbilityButton" motionScriptsWhileDisabled="true" virtual="true">
 		<Size x="29" y="29"/>
 		<Layers>

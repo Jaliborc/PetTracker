@@ -1,10 +1,8 @@
-if not WoWUnit then
-	return
-end
+local Tests = WoWUnit and WoWUnit('PetTracker.Filters')
+if not Tests then return end
 
 local _, Addon = ...
 local IsTrue, IsFalse, Replace = WoWUnit.IsTrue, WoWUnit.IsFalse, WoWUnit.Replace
-local Tests = WoWUnit('PetTracker.Filters')
 
 local Ram = Addon.Specie:Get(374)
 local Rabbit = Addon.Specie:Get(378)

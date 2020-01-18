@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Button name="PetTrackerModelEntry" inherits="CompanionListButtonTemplate" virtual="true">
 		<Frames>
 			<PlayerModel parentKey="model" useParentLevel="true">

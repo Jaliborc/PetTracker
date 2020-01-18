@@ -1,3 +1,7 @@
+#### 8.3.0
+* Updated for Visions of N'Zoth.
+* World Map: tracking type dropdown is currently not fully functional.
+
 ##### 8.2.2
 * Now shows specie source in all pet tooltips.
 * Fixed bug in rival journal.

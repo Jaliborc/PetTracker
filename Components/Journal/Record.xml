@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Button name="PetTrackerRecord" inherits="PetTrackerDarkButton" virtual="true">
 		<Size x="390" y="40"/>
 		<ButtonText>

@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Texture name="PetTrackerSlotHighlightTexture" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar-Highlight" alphaMode="ADD" virtual="true">
 		<Size x="16" y="16"/>
 	</Texture>

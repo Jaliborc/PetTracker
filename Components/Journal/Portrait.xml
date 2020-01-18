@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Button name="PetTrackerPortrait" virtual="true">
 		<Size x="38" y="38"/>
 		<Layers>

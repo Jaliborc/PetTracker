@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Texture name="PetTrackerStatIcon" file="Interface\PetBattles\PetBattle-StatIcons" virtual="true">
 		<Size x="16" y="16"/>
 	</Texture>
