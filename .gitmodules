@@ -1,19 +1,23 @@
-[submodule "Poncho-1.0"]
-	path = Libs/Poncho-1.0
-	url = git://github.com/Jaliborc/Poncho-1.0.git
-	
-[submodule "Sushi-3.0"]
-	path = Libs/Sushi-3.0
-	url = git://github.com/Jaliborc/Sushi-3.0.git
+[submodule "WildAddon-1.0"]
+	path = libs/WildAddon-1.0
+	url = git://github.com/Jaliborc/WildAddon-1.0.git
+
+[submodule "Poncho-2.0"]
+	path = libs/Poncho-2.0
+	url = git://github.com/Jaliborc/Poncho-2.0.git
+
+[submodule "Sushi-3.1"]
+	path = libs/Sushi-3.1
+	url = git://github.com/Jaliborc/Sushi-3.1.git
 
 [submodule "CustomSearch-1.0"]
-	path = Libs/CustomSearch-1.0
+	path = libs/CustomSearch-1.0
 	url = git://github.com/Jaliborc/CustomSearch-1.0.git
 
 [submodule "CustomTutorials-2.1"]
-	path = Libs/CustomTutorials-2.1
+	path = libs/CustomTutorials-2.1
 	url = git://github.com/Jaliborc/CustomTutorials-2.1.git
 
-[submodule "Libs/SecureTabs-2.0"]
-	path = Libs/SecureTabs-2.0
+[submodule "libs/SecureTabs-2.0"]
+	path = libs/SecureTabs-2.0
 	url = https://github.com/Jaliborc/SecureTabs-2.0.git
