@@ -16,29 +16,30 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local Journal, Rival = Addon.Journal, Addon.Rival
 local MapCanvas = Addon:NewModule('MapCanvas')
-MapCanvas.pins = {}
-
-hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
-	MapCanvas:Init(frame)
-	MapCanvas:Redraw(frame)
-end)
 
 
---[[ Events ]]--
+--[[ Startup ]]--
 
-function MapCanvas:Startup()
-	self:TrackingChanged()
-	self.tip = Addon.MapTip()
+function MapCanvas:OnEnable()
+	self.tip, self.pins = Addon.MapTip(), {}
 	self.tip:SetScript('OnUpdate', function() self:AnchorTip() end)
+	self:RegisterSignal('TRACKING_CHANGED', 'UpdateAll')
+
+	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
+		self:Init(frame)
+		self:Redraw(frame)
+	end)
 end
 
-function MapCanvas:AddOptions(panel)
+function MapCanvas:OnOptions(panel)
 	panel:Create('CheckButton', 'HideRivals')
 end
 
-function MapCanvas:TrackingChanged()
+
+--[[ Global API ]]--
+
+function MapCanvas:UpdateAll()
 	for frame in pairs(self.pins) do
 		if frame:IsVisible() then
 			self:Redraw(frame)
@@ -47,7 +48,29 @@ function MapCanvas:TrackingChanged()
 end
 
 
---[[ API ]]--
+function MapCanvas:AnchorTip()
+	if GameTooltip:IsVisible() then
+		self.tip:Hide()
+	else
+		self.tip:Anchor(UIParent, 'ANCHOR_CURSOR')
+
+		for frame, pins in pairs(self.pins) do
+			if frame:IsVisible() then
+				for _, pin in ipairs(pins) do
+					local focus = pin:IsMouseOver()
+					if focus then
+						pin:OnTooltip(self.tip)
+					end
+				end
+			end
+		end
+
+		self.tip:Display()
+	end
+end
+
+
+--[[ Frames API ]]--
 
 function MapCanvas:Init(frame)
 	if self.pins[frame] then
@@ -84,16 +107,16 @@ function MapCanvas:Validate(frame)
 end
 
 function MapCanvas:Draw(frame)
-	if Addon.Sets and self:Validate(frame) then
+	if Addon.sets and self:Validate(frame) then
 		local mapID = frame:GetMapID()
 		local index = 1
 
-		if not Addon.Sets.HideSpecies then
-			local species = Journal.GetSpeciesIn(mapID)
+		if not Addon.sets.HideSpecies then
+			local species = Addon.Journal.GetSpeciesIn(mapID)
 			for specie, spots in pairs(species) do
 				local specie = Addon.Specie:Get(specie)
 
-				if Addon:Filter(specie, Addon.Sets.MapFilter) then
+				if Addon:Filter(specie, Addon.sets.MapFilter) then
 					local icon = specie:GetTypeIcon()
 
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
@@ -108,8 +131,8 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.Sets.HideRivals and GetCVarBool('showTamers') then
-			local rivals = Journal.GetRivalsIn(mapID)
+		if not Addon.sets.HideRivals and GetCVarBool('showTamers') then
+			local rivals = Addon.Journal.GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
 					local rival = Addon.Rival:Get(rival)
 					local pin = Addon.RivalPin()
@@ -121,8 +144,8 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.Sets.HideStables then
-			local stables = Journal.GetStablesIn(mapID)
+		if not Addon.sets.HideStables then
+			local stables = Addon.Journal.GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
 				tinsert(self.pins[frame], Addon.StablePin():PlaceEncoded(frame, index, x, y))
 			end
@@ -134,26 +157,5 @@ function MapCanvas:Scale(frame)
 	local scale = frame:GetGlobalPinScale() / frame:GetCanvasScale()
 	for _, pin in ipairs(self.pins[frame]) do
 			pin.icon:SetScale(scale)
-	end
-end
-
-function MapCanvas:AnchorTip()
-	if GameTooltip:IsVisible() then
-		self.tip:Hide()
-	else
-		self.tip:Anchor(UIParent, 'ANCHOR_CURSOR')
-
-		for frame, pins in pairs(self.pins) do
-			if frame:IsVisible() then
-				for _, pin in ipairs(pins) do
-					local focus = pin:IsMouseOver()
-					if focus then
-						pin:OnTooltip(self.tip)
-					end
-				end
-			end
-		end
-
-		self.tip:Display()
 	end
 end

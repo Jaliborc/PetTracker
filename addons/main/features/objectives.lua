@@ -20,8 +20,8 @@ if IsAddOnLoaded('Carbonite.Quests') then
 end
 
 local ADDON, Addon = ...
-local Objectives = Addon:NewModule('Objectives', Addon.Tracker())
 local Parent, HeaderButton = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.HeaderMenu
+local Objectives = Addon:NewModule('Objectives', Addon.Tracker(Parent))
 
 do
 	OBJECTIVE_TRACKER_ADDONS = OBJECTIVE_TRACKER_ADDONS or {}
@@ -32,17 +32,15 @@ end
 
 --[[ Events ]]--
 
-function Objectives:Startup()
+function Objectives:OnEnable()
 	local header = CreateFrame('Button', nil, self, 'ObjectiveTrackerHeaderTemplate')
 	header:SetScript('OnClick', self.ToggleOptions)
 	header:SetPoint('TOPLEFT')
 	header.Text:SetText(PETS)
 	header:Show()
 
-	self:SetScript('OnEvent', self.TrackingChanged)
-	self:RegisterEvent('ZONE_CHANGED_NEW_AREA')
-	self:SetParent(Parent)
-
+	self:RegisterSignal('TRACKING_CHANGED', 'OnEvent')
+	self:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'OnEvent')
 	self.Anchor:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
 	self.Anchor:SetScript('OnMouseDown', self.ToggleOptions)
 	self.Header = header
@@ -53,7 +51,7 @@ function Objectives:Startup()
 
 		if availableEntries ~= self.maxEntries then
 			self.maxEntries = availableEntries
-			self:TrackingChanged()
+			self:OnEvent()
 		end
 
 		self:SetPoint('TOPLEFT', Parent, -10, -off)
@@ -66,7 +64,7 @@ function Objectives:Startup()
 	end)
 end
 
-function Objectives:TrackingChanged()
+function Objectives:OnEvent()
 	self:Update()
 	self:SetShown(not Addon.Sets.HideTracker and self.Anchor:IsShown())
 
@@ -75,7 +73,7 @@ function Objectives:TrackingChanged()
 end
 
 
---[[ API ]]--
+--[[ API Override ]]--
 
 function Objectives:GetUsedHeight()
 	local height = DEFAULT_OBJECTIVE_TRACKER_MODULE.BlocksFrame.contentsHeight or 0

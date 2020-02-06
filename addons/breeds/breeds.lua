@@ -115,21 +115,3 @@ do
 		end)
 	end
 end
-
-
---[[ Tooltips ]]--
-
-hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tooltip, data)
-	if not HookedTips[tooltip] then
-		hooksecurefunc(tooltip, 'Show', function()
-			local data = HookedTips[tooltip]
-			local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
-
-			tooltip.Owned:SetText(Journal:GetOwnedText(data.speciesID) or tooltip.Owned:GetText())
-			tooltip.Name:SetText((tooltip.Name:GetText() or '') .. Addon:GetBreedIcon(breed, .8, 5, 0))
-			tooltip:SetHeight(tooltip:GetHeight() + 4)
-		end)
-	end
-
-	HookedTips[tooltip] = data
-end)

@@ -15,52 +15,36 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local ADDON, Addon = ...
-local NewClass = LibStub('Poncho-1.0')
-local Listener = CreateFrame('Frame', ADDON .. 'Listener')
-Listener:SetScript('OnEvent', function(_, event) Addon[event](Addon) end)
-Listener:RegisterEvent('PLAYER_ENTERING_WORLD')
+local Addon = LibStub('WildAddon-1.0'):NewAddon(...)
 
-
---[[ API ]]--
-
-function Addon:NewClass(type, name, ...)
-	return self:NewModule(name, NewClass(type, ADDON .. name, nil, ...))
-end
-
-function Addon:NewModule(name, object)
-	object = object or {}
-	self[name] = object
-	return object
-end
-
-function Addon:ForAllModules(key, ...)
-	for name, module in pairs(Addon) do
-		if type(module) == 'table' and module[key] then
-			module[key](module, ...)
-		end
-	end
-end
-
-
---[[ Events ]]--
-
-function Addon:PLAYER_ENTERING_WORLD()
+function Addon:OnEnable()
 	PetTracker_State = PetTracker_State or {}
 	PetTracker_Sets = PetTracker_Sets or {}
 
-	self.Sets = PetTracker_Sets
-	self.State = PetTracker_State
-	self:ForAllModules('Startup')
+	self.sets, self.state = PetTracker_Sets, PetTracker_State
+	self:RegisterEvent('PLAYER_ENTERING_WORLD')
 
-	Listener:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	Listener:RegisterEvent('PET_JOURNAL_LIST_UPDATE')
+	if self.sets.MainTutorial then
+		--[[for k,v in pairs(self.sets) do
+			self.sets[k] = nil
+			self.sets[k:gsub('^.', strlower)] = v
+		end]]--
+	end
+
+	if (self.sets.mainTutorial or 0) < 6 or (self.sets.journalTutorial or 0) < 7 then
+		LoadAddOn('PetTracker_Config')
+	else
+		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function()
+			LoadAddOn('PetTracker_Config')
+		end)
+	end
+end
+
+function Addon:PLAYER_ENTERING_WORLD()
+	self:RegisterEvent('PET_JOURNAL_LIST_UPDATE')
+	self:FireSignal('TRACKING_CHANGED')
 end
 
 function Addon:PET_JOURNAL_LIST_UPDATE()
-	C_Timer.After(1, function() -- data on client doesnt update immediately every time
-			self:ForAllModules('TrackingChanged')
-	end)
+	self:Delay(2, 'FireSignal', 'TRACKING_CHANGED') -- data on client doesnt update immediately every time
 end
-
-_G[ADDON] = Addon

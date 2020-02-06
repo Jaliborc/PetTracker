@@ -1,6 +1,10 @@
-if GetLocale() ~= 'deDE' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+	German Localization
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'deDE')
+if not L then return end
 
 L.AddWaypoint = 'Wegpunkt hinzuf\195\188gen'
 L.AlertUpgrades = 'Hinweis bei Upgrades'

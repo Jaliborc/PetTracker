@@ -1,5 +1,9 @@
-local _, Addon = ...
-local L = {}
+--[[
+	English Localization (default)
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'enUS', true)
 
 L.AddWaypoint = 'Add Waypoint'
 L.AlertUpgrades = 'Alert for Upgrades'

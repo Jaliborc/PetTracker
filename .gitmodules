@@ -21,3 +21,7 @@
 [submodule "libs/SecureTabs-2.0"]
 	path = libs/SecureTabs-2.0
 	url = https://github.com/Jaliborc/SecureTabs-2.0.git
+
+[submodule "libs/MutexDelay-1.0"]
+	path = libs/MutexDelay-1.0
+	url = https://github.com/Jaliborc/MutexDelay-1.0.git

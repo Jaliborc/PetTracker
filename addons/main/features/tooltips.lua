@@ -16,26 +16,34 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local SourceStrings = {}
+local Tooltips = Addon:NewModule('Tooltips')
 
-local function CreateString(tooltip)
-  local string = tooltip:CreateFontString(nil, 'ARTWORK', 'GameFontHighlightLeft')
-  string:SetPoint('TOPLEFT', tooltip.Owned, 'BOTTOMLEFT', 0,-2)
-  string:SetSize(tooltip:GetWidth(), 0)
+function Tooltips:OnEnable()
+  self.data = {}
 
-  hooksecurefunc(tooltip, 'Show', function()
-    tooltip:SetHeight(tooltip:GetHeight() + string:GetHeight() + 4)
+  hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tip, data)
+    if data.speciesID and not tip.Source then
+      self:Init(tip)
+    end
+
+    self.data[tip] = data
   end)
-
-  SourceStrings[tooltip] = string
-  return string
 end
 
-hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tooltip, data)
-  if data.speciesID then
-    local string = SourceStrings[tooltip] or CreateString(tooltip)
+function Tooltips:Init(tip)
+  local source = tip:CreateFontString(nil, 'ARTWORK', 'GameFontHighlightLeft')
+  source:SetPoint('TOPLEFT', tip.Owned, 'BOTTOMLEFT', 0,-2)
+  source:SetSize(tip:GetWidth(), 0)
+  tip.Source = source
+
+  hooksecurefunc(tip, 'Show', function()
+    local data = self.data[tip]
+    local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
     local _,_,_,_, source = Addon.Journal:GetInfo(data.speciesID)
 
-    string:SetText(source)
-  end
-end)
+    tip.Source:SetText(source)
+    tip.Name:SetText((tip.Name:GetText() or '') .. Addon:GetBreedIcon(breed, .8, 5, 0))
+    tip.Owned:SetText(Addon.Journal:GetOwnedText(data.speciesID) or tip.Owned:GetText())
+    tip:SetHeight(tip:GetHeight() + tip.Source:GetHeight() + 4)
+  end)
+end

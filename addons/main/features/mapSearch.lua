@@ -16,19 +16,44 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local L = Addon.Locals
-local MapFilter = Addon:NewModule('MapFilter')
-MapFilter.suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
-MapFilter.frames = {}
+local MapSearch = Addon:NewModule('MapSearch')
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
-	MapFilter:Init(frame)
-end)
+
+--[[ Startup ]]--
+
+function MapSearch:OnEnable()
+	self.frames = {}
+	self.suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
+	self:RegisterSignal('TRACKING_CHANGED', 'UpdateBoxes')
+
+	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
+		self:Init(frame)
+	end)
+end
+
+function MapSearch:UpdateFrames()
+  for frame in pairs(self.frames) do
+		if frame:IsVisible() then
+    	frame:OnMapChanged()
+		end
+  end
+
+  self:UpdateBoxes()
+end
+
+function MapSearch:UpdateBoxes()
+  for frame, search in pairs(self.frames) do
+    if search ~= 1 then
+      self:UpdateBox(frame)
+    end
+  end
+end
 
 
 --[[ Search Box ]]--
 
-function MapFilter:Init(frame)
+function MapSearch:Init(frame)
   if self.frames[frame] then
     return
   else
@@ -37,7 +62,7 @@ function MapFilter:Init(frame)
 
   for i, overlay in ipairs(frame.overlayFrames or {}) do
     if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick and overlay:IsObjectType('Button') then
-      local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Filter', overlay, 'SearchBoxTemplate')
+      local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Search', overlay, 'SearchBoxTemplate')
       search.Instructions:SetText(L.FilterPets)
       search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
       search:SetSize(128, 20)
@@ -46,84 +71,60 @@ function MapFilter:Init(frame)
       end)
 
       search:HookScript('OnEditFocusGained', function()
-        SushiDropFrame:Toggle('TOP', search, 'BOTTOM', 0, -15, true, self.ShowSuggestions)
+        --SushiDropFrame:Toggle('TOP', search, 'BOTTOM', 0, -15, true, self.ShowSuggestions)
       end)
 
       search:HookScript('OnEditFocusLost', function()
-        SushiDropFrame:CloseAll()
+        --SushiDropFrame:CloseAll()
       end)
 
       overlay:SetScript('OnMouseDown', function()
-        SushiDropFrame:Toggle('TOPLEFT', overlay, 'BOTTOMLEFT', 0, -15, true, self.ShowTrackingTypes)
+        --SushiDropFrame:Toggle('TOPLEFT', overlay, 'BOTTOMLEFT', 0, -15, true, self.ShowTrackingTypes)
       end)
 
       self.frames[frame] = search
-      self:UpdateSearch(frame)
+      self:UpdateBox(frame)
     end
   end
 end
 
-function MapFilter:Startup()
-	self:TrackingChanged()
+function MapSearch:UpdateBox(frame)
+  local text = Addon.sets.mapFilter or ''
+  local search = self.frames[frame]
+  search.Instructions:SetShown(text == '')
+  search:SetShown(not Addon.sets.HideSpecies)
+  search:SetText(text)
 end
 
-function MapFilter:TrackingChanged()
-  for frame, search in pairs(self.frames) do
-    if search ~= 1 then
-      self:UpdateSearch(frame)
-    end
-  end
-end
-
-function MapFilter:UpdateSearch(frame)
-	if Addon.Sets then
-	  local text = Addon.Sets.MapFilter or ''
-	  local search = self.frames[frame]
-	  search.Instructions:SetShown(text == '')
-	  search:SetShown(not Addon.Sets.HideSpecies)
-	  search:SetText(text)
-	end
-end
-
-function MapFilter:UpdateFrames()
-  for frame in pairs(self.frames) do
-		if frame:IsVisible() then
-    	frame:OnMapChanged()
-		end
-  end
-
-  self:TrackingChanged()
-end
-
-function MapFilter:SetTextFilter(text)
-  if Addon.Sets and Addon.Sets.MapFilter ~= text then
-    Addon.Sets.MapFilter = text
-    Addon:ForAllModules('TrackingChanged')
+function MapSearch:SetTextFilter(text)
+  if Addon.sets.mapFilter ~= text then
+    Addon.sets.mapFilter = text
+    self:SendSignal('TRACKING_CHANGED')
   end
 end
 
 
 --[[ Dropdopwns ]]--
 
-function MapFilter:ShowSuggestions()
+function MapSearch:ToggleSuggestions(parent)
 	self:AddLine {
 		text = L.CommonSearches,
 		isTitle = true,
 		notCheckable = true
 	}
 
-  for i, text in ipairs(MapFilter.suggestions) do
+  for i, text in ipairs(MapSearch.suggestions) do
     self:AddLine {
       text = text,
       notCheckable = true,
       func = function()
-        MapFilter:SetTextFilter(text)
+        MapSearch:SetTextFilter(text)
       end
     }
   end
 end
 
-function MapFilter:ShowTrackingTypes()
+function MapSearch:ToggleTrackingTypes(parent)
     local map = WorldMapFrame:GetMapID()
     local bounties = map and MapUtil.MapHasUnlockedBounties(map)
     local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
@@ -150,7 +151,7 @@ function MapFilter:ShowTrackingTypes()
     for i, entry in ipairs(types) do
       local text, shown = entry[1], entry[2]
       if shown then
-        local checked = entry.set and not Addon.Sets[entry.set] or entry.var and GetCVarBool(entry.var)
+        local checked = entry.set and not Addon.sets[entry.set] or entry.var and GetCVarBool(entry.var)
 
         self:AddLine {
           text = text,
@@ -161,7 +162,7 @@ function MapFilter:ShowTrackingTypes()
           isNotRadio = true,
           func = function()
             if entry.set then
-              Addon.Sets[entry.set] = checked and true or nil
+              Addon.sets[entry.set] = checked and true or nil
             end
 
 						if entry.var then
@@ -169,7 +170,7 @@ function MapFilter:ShowTrackingTypes()
             end
 
             PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-            MapFilter:UpdateFrames()
+            self:UpdateFrames()
           end,
         }
       end

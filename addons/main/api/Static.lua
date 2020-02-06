@@ -15,18 +15,17 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local _, Addon = ...
-local Missing = RED_FONT_COLOR
-local L = Addon.Locals
+local ADDON, Addon = ...
+local Static = Addon:NewModule('Static')
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
 --[[ Constants ]]--
 
-Addon.MaxLevel = 25
-Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
-Addon.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
-
-Addon.SourceIcons = {
+Static.MaxLevel = 25
+Static.MaxQuality = LE_ITEM_QUALITY_RARE + 1
+Static.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
+Static.SourceIcons = {
 	'Interface/WorldMap/TreasureChest_64',
 	'Interface/GossipFrame/AvailableQuestIcon',
 	'Interface/Minimap/Tracking/Banker',
@@ -36,7 +35,7 @@ Addon.SourceIcons = {
 	'Interface/GossipFrame/DailyQuestIcon'
 }
 
-Addon.BreedStats = {
+Static.BreedStats = {
 	[3] = {.5,.5,.5},
 	[4] = {0,2,0},
 	[5] = {0,0,2},
@@ -49,7 +48,7 @@ Addon.BreedStats = {
 	[12] = {.9,.4,.4}
 }
 
-Addon.BreedNames = {
+Static.BreedNames = {
 	[3] = BALANCE,
 	[4] = select(2, GetSpecializationInfoByID(267)),
 	[5] = L.Ninja,
@@ -62,31 +61,31 @@ Addon.BreedNames = {
 	[12] = PET_BATTLE_STAT_HEALTH
 }
 
-Addon.BreedIcons = {
+Static.BreedIcons = {
 	[3] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:0:16|t', 22, 22},
 	[4] = {'|TInterface/WorldStateFrame/CombatSwords:%d:%d:%d:%d:64:64:0:32:0:32|t', 19, 19},
-	[5] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:40:64:22:39|t', 17 * .9, 24 * .9},
-	[6] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:34:64:0:21|t', 21 * .8, 30 * .8},
-	[7] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:2:26:0:17|t', 17, 24},
-	[8] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:2:26:17:34|t', 17, 24},
-	[9] = {'|TInterface/Addons/PetTracker/Art/Breeds:%d:%d:%d:%d:64:64:0:26:34:51|t', 17, 26},
+	[5] = {'|TInterface/Addons/PetTracker/art/breeds:%d:%d:%d:%d:64:64:40:64:22:39|t', 17 * .9, 24 * .9},
+	[6] = {'|TInterface/Addons/PetTracker/art/breeds:%d:%d:%d:%d:64:64:34:64:0:21|t', 21 * .8, 30 * .8},
+	[7] = {'|TInterface/Addons/PetTracker/art/breeds:%d:%d:%d:%d:64:64:2:26:0:17|t', 17, 24},
+	[8] = {'|TInterface/Addons/PetTracker/art/breeds:%d:%d:%d:%d:64:64:2:26:17:34|t', 17, 24},
+	[9] = {'|TInterface/Addons/PetTracker/art/breeds:%d:%d:%d:%d:64:64:0:26:34:51|t', 17, 26},
 	[10] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:0:16|t', 17, 17},
 	[12] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:16:32:16:32|t', 17, 17},
 	[11] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:16:32|t', 17, 17}
 }
 
 
---[[ Static ]]--
+--[[ Values ]]--
 
-function Addon.GetQualityColor(quality)
+function Static:GetQualityColor(quality)
 	if quality > 0 then
 		return GetItemQualityColor(quality - 1)
 	end
 
-	return Missing.r, Missing.g, Missing.b, RED_FONT_COLOR_CODE:sub(3)
+	return RED_FONT_COLOR.r, RED_FONT_COLOR.g, RED_FONT_COLOR.b, RED_FONT_COLOR_CODE:sub(3)
 end
 
-function Addon.GetMapTypeName(type)
+function Static:GetMapTypeName(type)
 	for name, id in pairs(Enum.UIMapType) do
 		if type == id then
 			return name
@@ -94,19 +93,19 @@ function Addon.GetMapTypeName(type)
 	end
 end
 
-function Addon.GetTypeName(type)
+function Static:GetTypeName(type)
 	return _G['BATTLE_PET_NAME_' .. type]
 end
 
-function Addon.GetTypeIcon(type)
+function Static:GetTypeIcon(type)
 	return type and 'Interface/PetBattles/PetIcon-' .. PET_TYPE_SUFFIX[type]
 end
 
-function Addon:GetBreedName(breed)
+function Static:GetBreedName(breed)
 	return breed and self.BreedNames[breed] or ''
 end
 
-function Addon:GetBreedIcon(breed, scale, x, y)
+function Static:GetBreedIcon(breed, scale, x, y)
 	local icon = breed and self.BreedIcons[breed]
 	return icon and icon[1]:format(scale * icon[2], scale * icon[3], x or 0, y or 0) or ''
 end
@@ -114,22 +113,21 @@ end
 
 --[[ Utilities ]]--
 
-function Addon.KeepShort(text)
+function Static:KeepShort(text)
 	if not text:find('|n') and strlen(text) > 100 then
 		return text:sub(0, 97) .. '...'
 	end
-
 	return text
 end
 
-function Addon.UnpackDate(date)
+function Static:UnpackDate(date)
 	local yearDate = date % (31*12)
 	return yearDate % 31 + 1,
 		   floor(yearDate / 31) + 1,
 		   floor(date / 31 / 12) + 2014
 end
 
-function Addon.GetDate()
+function Static:GetDate()
 	local date = C_Calendar.GetDate()
 	return (date.year-2014) * 31*12 + (date.month-1) * 31 + date.monthDay-1
 end

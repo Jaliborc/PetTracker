@@ -1,6 +1,10 @@
-if GetLocale() ~= 'ptBR' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+  Portuguese Localization
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'ptBR')
+if not L then return end
 
 L.AddWaypoint = 'Adicionar Ponto de Destino'
 L.AlertUpgrades = 'Aviso de Melhorias'

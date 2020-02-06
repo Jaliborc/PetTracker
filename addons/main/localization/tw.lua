@@ -1,6 +1,10 @@
-if GetLocale() ~= 'zhTW' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+	Chinese Traditional Localization
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'zhTW')
+if not L then return end
 
 L.AddWaypoint = '新增路徑點'
 L.AlertUpgrades = '升級提醒'

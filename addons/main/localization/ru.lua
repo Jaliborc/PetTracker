@@ -1,6 +1,10 @@
-if GetLocale() ~= 'ruRU' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+	Russian Localization
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'ruRU')
+if not L then return end
 
 L.AddWaypoint = 'Добавить точку'
 L.AlertUpgrades = 'Уведомление для обновлений'

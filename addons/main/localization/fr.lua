@@ -1,6 +1,11 @@
-if GetLocale() ~= 'frFR' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+	French Localization
+--]]
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'frFR')
+if not L then return end
+
 
 L.AddWaypoint = 'Ajouter un repère'
 L.AlertUpgrades = 'Alerter pour les Améliorations'

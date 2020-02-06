@@ -1,6 +1,10 @@
-if GetLocale() ~= 'itIT' then return end
-local _, Addon = ...
-local L = Addon.Locals
+--[[
+	Italian Localization
+]]--
+
+local ADDON = ...
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'itIT')
+if not L then return end
 
 L.AddWaypoint = 'Aggiungi Waypoint'
 L.AlertUpgrades = 'Allarme per Miglioramenti'
