@@ -15,15 +15,30 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local _, Addon = ...
+local ADDON, Addon = ...
 local Predict = Addon:NewModule('Predict')
 
+Predict.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
+Predict.BreedStats = {
+	[3] = {.5,.5,.5},
+	[4] = {0,2,0},
+	[5] = {0,0,2},
+	[6] = {2,0,0},
+	[7] = {.9,.9,0},
+	[8] = {0,.9,.9},
+	[9] = {.9,0,.9},
+	[10] = {.4,.9,.4},
+	[11] = {.4,.4,.9},
+	[12] = {.9,.4,.4}
+}
+
+
+-- [[ API ]]--
 
 function Predict:Breed(specie, level, rarity, health, power, speed)
 	local base, breeds = Addon.Stats[specie], Addon.Breeds[specie]
-
 	if base then
-		local leveled = Addon.QualityScale[rarity] * level
+		local leveled = self.QualityScale[rarity] * level
 
 		health = health / 5 - 20
 		health = min(max(health / leveled - base[1], 0), 2)
@@ -34,7 +49,7 @@ function Predict:Breed(specie, level, rarity, health, power, speed)
 		local chosen = -1
 
 		for i, breed in pairs(breeds) do
-			local buff = Addon.BreedStats[breed]
+			local buff = self.BreedStats[breed]
 			local off = abs(health - buff[1]) + abs(power - buff[2]) + abs(speed - buff[3])
 			if off < best then
 				chosen = breed
@@ -48,10 +63,9 @@ end
 
 function Predict:Stats(specie, level, rarity, breed)
 	local base = Addon.Stats[specie]
-
 	if base then
-		local leveled = Addon.QualityScale[rarity] * level
-		local buff = Addon.BreedStats[breed]
+		local leveled = self.QualityScale[rarity] * level
+		local buff = self.BreedStats[breed]
 
 		return floor((base[1] + buff[1]) * leveled * 5 + 100.5),
 			   floor((base[1] + buff[1]) * leveled + .5),

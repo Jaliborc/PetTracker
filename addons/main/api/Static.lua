@@ -24,7 +24,6 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 Static.MaxLevel = 25
 Static.MaxQuality = LE_ITEM_QUALITY_RARE + 1
-Static.QualityScale = {1,1.1,1.2,1.3,1.4,1.5}
 Static.SourceIcons = {
 	'Interface/WorldMap/TreasureChest_64',
 	'Interface/GossipFrame/AvailableQuestIcon',
@@ -33,19 +32,6 @@ Static.SourceIcons = {
 	'Interface/Icons/Tracking_WildPet',
 	'Interface/AchievementFrame/UI-Achievement-TinyShield',
 	'Interface/GossipFrame/DailyQuestIcon'
-}
-
-Static.BreedStats = {
-	[3] = {.5,.5,.5},
-	[4] = {0,2,0},
-	[5] = {0,0,2},
-	[6] = {2,0,0},
-	[7] = {.9,.9,0},
-	[8] = {0,.9,.9},
-	[9] = {.9,0,.9},
-	[10] = {.4,.9,.4},
-	[11] = {.4,.4,.9},
-	[12] = {.9,.4,.4}
 }
 
 Static.BreedNames = {

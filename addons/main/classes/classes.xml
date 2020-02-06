@@ -1,0 +1,6 @@
+<Ui>
+	<Include file="battle\battle.xml"/>
+  <Include file="journal\journal.xml"/>
+  <Include file="maps\maps.xml"/>
+  <Include file="tracking\tracking.xml"/>
+</Ui>
