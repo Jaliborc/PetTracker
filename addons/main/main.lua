@@ -16,6 +16,8 @@ This file is part of PetTracker.
 --]]
 
 local Addon = LibStub('WildAddon-1.0'):NewAddon(...)
+Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
+Addon.MaxLevel = 25
 
 function Addon:OnEnable()
 	PetTracker_State = PetTracker_State or {}

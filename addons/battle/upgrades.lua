@@ -15,52 +15,33 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local Addon = PetTracker
-local Upgrade = Addon:NewModule('Upgrades', SushiGlowBox(PetBattleFrame))
-local Bangs = {}
-
-local EnemyIcon = PetBattleFrame.ActiveEnemy.Icon
-local L, Battle = Addon.Locals, Addon.Battle
-
-StaticPopupDialogs['PetTracker: Forfeit'] = {
-    text = L.AskForfeit,
-    button1 = QUIT,
-    button2 = NO,
-    OnAccept = C_PetBattles.ForfeitGame,
-    timeout = 0, exclusive = 1,
-    whileDead = false, showAlert = true,
-    hideOnEscape = 1, preferredIndex = 3
-}
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local Upgrade = Addon:NewModule('Upgrades', LibStub('Sushi-3.1').GlowBox(PetBattleFrame))
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
 --[[ Startup ]]--
 
-function Upgrade:Startup()
-	self:SetPoint('TOP', EnemyIcon, 'BOTTOM', 0, -20)
+function Upgrade:OnEnable()
+	self:SetPoint('TOP', PetBattleFrame.ActiveEnemy.Icon, 'BOTTOM', 0, -20)
 	self:SetText(L.UpgradeAlert)
 	self:SetFrameStrata('HIGH')
 	self:SetDirection('TOP')
-	
-	self:RegisterEvent('PET_BATTLE_CLOSE')
-	self:SetScript('OnEvent', self.Reset)
-	self:Reset()
+  self.bangs = {}
 
-	self:SetHook('PetBattleFrame_Display', 'ToggleAll')
-	self:SetHook('PetBattleUnitFrame_UpdateDisplay', 'ToggleBang')
-	self:SetCall('OnClose', function()
-		self.canShow = nil
-	end)
+	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
+	self:SetCall('OnClose', function() self.canShow = nil end)
+  self:Reset()
 
-	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PetsUpdated', 'ToggleAll')
+	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PetsUpdated', 'UpdateAll')
+	hooksecurefunc('PetBattleUnitFrame_UpdateDisplay', function(p) self:UpdateBang(p) end)
+	hooksecurefunc('PetBattleFrame_Display', function() self:UpdateAll() end)
 end
 
-function Upgrade:AddOptions(panel)
-	panel:Create('CheckButton', 'AlertUpgrades')
-	panel:Create('CheckButton', 'PromptForfeit')
-end
-
-function Upgrade:SetHook(target, method)
-	hooksecurefunc(target, self[method])
+function Upgrade:OnOptions(panel)
+	panel:New('Check', 'AlertUpgrades')
+	panel:New('Check', 'PromptForfeit')
 end
 
 function Upgrade:Reset()
@@ -68,38 +49,49 @@ function Upgrade:Reset()
 end
 
 
---[[ Display ]]--
+--[[ Update ]]--
 
-function Upgrade:ToggleAll()
-	local any = Battle:AnyUpgrade()
-	Upgrade:SetShown(any and Upgrade.canShow and Addon.Sets.AlertUpgrades)
-
-	for frame in pairs(Bangs) do
-		PetBattleUnitFrame_UpdateDisplay(frame)
+function Upgrade:UpdateAll()
+	local upgrades = Addon.Battle:AnyUpgrade()
+	for parent in pairs(self.bangs) do
+    self:UpdateBang(parent)
 	end
 
-	if not any and Upgrade.canPopup and Addon.Sets.PromptForfeit and Battle:IsWildBattle() then
-		Upgrade.canPopup = nil
-		StaticPopup_Show('PetTracker: Forfeit')
+	if not upgrades and self.canPopup and Addon.sets.promptForfeit and Addon.Battle:IsWildBattle() then
+		self.canPopup = nil
+		LibStub('Sushi-3.1').Popup {
+        text = L.AskForfeit,
+        button1 = QUIT,
+        button2 = NO,
+        OnAccept = C_PetBattles.ForfeitGame,
+        timeout = 0, exclusive = 1,
+        whileDead = false, showAlert = true,
+        hideOnEscape = 1, preferredIndex = 3
+    }
 	end
+
+  self:SetShown(upgrades and self.canShow and Addon.sets.alertUpgrades)
 end
 
-function Upgrade:ToggleBang()
-	local pet = Battle:Get(self.petOwner, self.petIndex)
-	Upgrade.GetBang(self):SetShown(not pet:IsAlly() and pet:IsUpgrade())
+function Upgrade:UpdateBang(parent)
+	local pet = Addon.Battle(parent.petOwner, parent.petIndex)
+  local bang = self.bangs[parent]
+	if bang then
+    bang:SetShown(not pet:IsAlly() and pet:IsUpgrade())
+  end
 end
 
-function Upgrade:GetBang()
-	return Bangs[self] or Upgrade.CreateBang(self)
+function Upgrade:GetBang(parent)
+	return self.bangs[parent] or self:NewBang(parent)
 end
 
-function Upgrade:CreateBang()
-	local size = max(self.Icon:GetHeight() / 2.5, 18)
-	local bang = self:CreateTexture(nil, 'OVERLAY')
+function Upgrade:NewBang(parent)
+	local size = max(parent.Icon:GetHeight() / 2.5, 18)
+	local bang = parent:CreateTexture(nil, 'OVERLAY')
 	bang:SetTexture('Interface/GossipFrame/AvailableQuestIcon')
-	bang:SetPoint('TOP', self.Icon, 'TOPRIGHT', -2, -10)
+	bang:SetPoint('TOP', parent.Icon, 'TOPRIGHT', -2, -10)
 	bang:SetSize(size, size)
-	
-	Bangs[self] = bang
+
+	self.bangs[parent] = bang
 	return bang
 end

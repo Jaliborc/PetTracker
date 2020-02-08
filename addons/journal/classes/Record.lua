@@ -54,7 +54,7 @@ function Record:Unpack(entry)
 	local winner, date, petData = entry:match('^(%d)(%w%w%w)(.+)$')
 
 	self.won = tonumber(winner) == LE_BATTLE_PET_ALLY
-	self.day, self.month, self.year = Addon.UnpackDate(tonumber(date, 16))
+	self.day, self.month, self.year = self:UnpackDate(date)
 	self.pets = {}
 
 	for health, spell1, spell2, spell3, id in petData:gmatch(PetMatch) do
@@ -64,4 +64,11 @@ function Record:Unpack(entry)
 			spells = {tonumber(spell1, 16), tonumber(spell2, 16), tonumber(spell3, 16)}
 		})
 	end
+end
+
+function Record:UnpackDate(date)
+	local yearDate = tonumber(date, 16) % (31*12)
+	return yearDate % 31 + 1,
+		   floor(yearDate / 31) + 1,
+		   floor(date / 31 / 12) + 2014
 end

@@ -32,9 +32,6 @@ Predict.BreedStats = {
 	[12] = {.9,.4,.4}
 }
 
-
--- [[ API ]]--
-
 function Predict:Breed(specie, level, rarity, health, power, speed)
 	local base, breeds = Addon.Stats[specie], Addon.Breeds[specie]
 	if base then

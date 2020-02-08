@@ -32,11 +32,11 @@ function Progress:OnCreate()
 end
 
 function Progress:CreateBar(i)
-	local r, g, b = Addon.GetQualityColor(i)
+	local r,g,b = Addon.Utils:GetColor(i)
 	local bar = CreateFrame('StatusBar', nil, self)
 	bar:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
 	bar:SetFrameLevel(self:GetFrameLevel() + i)
-	bar:SetStatusBarColor(r, g, b)
+	bar:SetStatusBarColor(r,g,b)
 	bar:SetAllPoints()
 
 	return bar

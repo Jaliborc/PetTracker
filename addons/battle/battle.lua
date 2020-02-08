@@ -15,38 +15,16 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local _, Addon = ...
-local Server, Specie = C_PetBattles, Addon.Specie
-local Battle = Addon:NewModule('Battle')
-
-local ENEMY = LE_BATTLE_PET_ENEMY
-local PET_BATTLE = 5
-
-
---[[ Pets ]]--
-
-function Battle:GetCurrent(owner)
-	local index = Server.GetActivePet(owner)
-	return self:Get(owner, index)
-end
-
-function Battle:Get(owner, index)
-	return setmetatable({
-		owner = owner,
-		index = index
-	}, self)
-end
-
-function Battle:GetNum(owner)
-	return Server.GetNumPets(owner)
-end
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local Battle = Addon.Pet:NewModule('Battle')
 
 
 --[[ Static ]]--
 
 function Battle:AnyUpgrade()
-	for i = 1, self:GetNum(ENEMY) do
-		local pet = self:Get(ENEMY, i)
+	for i = 1, self:GetNumPets(LE_BATTLE_PET_ENEMY) do
+		local pet = self(LE_BATTLE_PET_ENEMY, i)
 		if pet:IsUpgrade() then
 			return true
 		end
@@ -57,9 +35,9 @@ end
 
 function Battle:GetRival()
 	if self:IsPvE() then
-		local specie1 = self:Get(ENEMY, 1):GetSpecie()
-		local specie2 = self:Get(ENEMY, 2):GetSpecie()
-		local specie3 = self:Get(ENEMY, 3):GetSpecie()
+		local specie1 = self(LE_BATTLE_PET_ENEMY, 1):GetSpecie()
+		local specie2 = self(LE_BATTLE_PET_ENEMY, 2):GetSpecie()
+		local specie3 = self(LE_BATTLE_PET_ENEMY, 3):GetSpecie()
 
 		for id, rival in pairs(Addon.RivalInfo) do
 			local first = tonumber(rival:match('^[^:]+:[^:]+:[^:]*:[^:]+:%w%w%w%w(%w%w%w)'), 36)
@@ -71,26 +49,41 @@ function Battle:GetRival()
 end
 
 function Battle:IsPvE()
-	return Server.IsPlayerNPC(ENEMY)
+	return C_PetBattles.IsPlayerNPC(LE_BATTLE_PET_ENEMY)
+end
+
+
+--[[ Construct ]]--
+
+function Battle:NumPets(owner)
+	return C_PetBattles.NumPets(owner)
+end
+
+function Battle:Current(owner)
+	return self:Get(owner, C_PetBattles.GetActivePet(owner))
+end
+
+function Battle:New(owner, index)
+	return self:Bind{owner = owner, index = index}
 end
 
 
 --[[ Status ]]--
 
 function Battle:Swap()
-	if self:IsAlly() and Server.CanPetSwapIn(self.index) then
-		Server.ChangePet(self.index)
+	if self:IsAlly() and C_PetBattles.CanPetSwapIn(self.index) then
+		C_PetBattles.ChangePet(self.index)
 		return true
 	end
 end
 
 function Battle:Exists()
-	return self:GetNum(self.owner) >= self.index
+	return self:NumPets(self.owner) >= self.index
 end
 
 function Battle:IsUpgrade()
 	if self:IsWildBattle() then
-		if self:GetSpecie() and self:GetSource() == PET_BATTLE then
+		if self:GetSpecie() and self:GetSource() == 5 then
 			local pet, quality, level = self:GetBestOwned()
 
 			if self:GetQuality() > quality then
@@ -131,7 +124,7 @@ function Battle:GetAbility(i)
 
 		if i < 4 then
 			local id = casts.id[k] or abilities[i]
-			local cooldown = select(4, Server.GetAbilityInfoByID(id)) or 0
+			local cooldown = select(4, C_PetBattles.GetAbilityInfoByID(id)) or 0
 			local requisite = self:GetLevel() < levels[i] and levels[i]
 			local remaining = casts.turn[k] and (cooldown + casts.turn[k] - Addon.State.Turn) or 0
 
@@ -160,7 +153,7 @@ function Battle:GetStats()
 end
 
 function Battle:IsAlly()
-	return self.owner ~= ENEMY
+	return self.owner ~= LE_BATTLE_PET_ENEMY
 end
 
 function Battle:IsAlive()
@@ -194,8 +187,8 @@ end
 --[[ Metamagic ]]--
 
 setmetatable(Battle, {__index = function(Battle, key)
-	Battle[key] = Server[key] and function(self, ...)
-		return Server[key](self.owner, self.index, ...)
+	Battle[key] = C_PetBattles[key] and function(self, ...)
+		return C_PetBattles[key](self.owner, self.index, ...)
 	end or Specie[key]
 
 	return rawget(Battle, key)

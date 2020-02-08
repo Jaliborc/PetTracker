@@ -1,15 +1,8 @@
 <Ui>
 	<Script file="data.lua"/>
-	<Script file="search.lua"/>
-
-	<Script file="static.lua"/>
+	<Script file="breeds.lua"/>
+	<Script file="maps.lua"/>
 	<Script file="predict.lua"/>
-	<Script file="compare.lua"/>
-
-	<Script file="journal.lua"/>
-	<Script file="specie.lua"/>
-	<Script file="rival.lua"/>
-	<Script file="battle.lua"/>
-
-	<Include file="tests\tests.xml"/>
+	<Script file="search.lua"/>
+	<Script file="utils.lua"/>
 </Ui>

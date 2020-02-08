@@ -39,8 +39,8 @@ function Pin:OnTooltip(tip)
 	tip:AddLine(Addon.Locals.PetBattle)
 
 	for i, pet in ipairs(self.rival) do
-		local r,g,b = Addon.GetQualityColor(pet:GetQuality())
 		local icon = format('|T%s:16:16:-3:0:128:256:60:100:130:170:255:255:255|t', pet:GetTypeIcon())
+		local r,g,b = pet:GetColor()
 
 		tip:AddLine(icon .. pet:GetName() .. ' (' .. pet:GetLevel() .. ')', r,g,b)
 	end

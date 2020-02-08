@@ -59,8 +59,8 @@ end
 function Slot:Display(pet, target)
 	if pet then
 		local specie, icon, type = pet:GetInfo()
-		local r,g,b = Addon.GetQualityColor(pet:GetQuality())
 		local health, power, speed = pet:GetStats()
+		local r,g,b = pet:GetColor()
 		local name = pet:GetName()
 
 		self.Name:SetText(name)

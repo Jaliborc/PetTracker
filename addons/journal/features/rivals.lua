@@ -141,8 +141,8 @@ function Journal.List:update()
 		if rival then
 			button.name:SetText(rival.name)
 			button.model.level:SetText(rival:GetLevel())
+			button.model.quality:SetVertexColor(rival:GetColor())
 			button.petTypeIcon:SetTexture(Addon.GetTypeIcon(rival:GetType()))
-			button.model.quality:SetVertexColor(Addon.GetQualityColor(rival:GetQuality()))
 			button.selectedTexture:SetShown(rival.id == self.selected.id)
 
 			if button.model:GetDisplayInfo() ~= rival.model then

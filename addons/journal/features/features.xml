@@ -1,0 +1,5 @@
+<Ui>
+	<Include file="rivals.xml"/>
+  <Script file="rivals.lua"/>
+  <Script file="trackToggle.lua"/>
+</Ui>

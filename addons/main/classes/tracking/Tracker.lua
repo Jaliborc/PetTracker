@@ -67,7 +67,7 @@ function Tracker:AddSpecie(specie, quality, level)
 	if sourceIcon then
 		local name, icon = Journal:GetInfo(specie)
 		local r,g,b = self:GetColor(quality)
-		
+
 		local line = self:NewLine()
 		line.Text:SetText(name .. (level > 0 and format(' (%s)', level) or ''))
 		line.Text:SetWidth(self.Anchor:GetWidth())
@@ -135,7 +135,7 @@ end
 
 function Tracker:GetColor(quality)
 	if Addon.Sets.CapturedPets then
-		return Addon.GetQualityColor(quality)
+		return Addon.Utils:GetColor(quality)
 	end
 	return 1,1,1, HIGHLIGHT_FONT_COLOR_CODE:sub(3)
 end

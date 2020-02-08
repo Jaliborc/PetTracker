@@ -1,34 +1,35 @@
-local _, Addon = ...
-local Pet = setmetatable(Addon:NewModule('RivalPet'), Addon.Specie)
-local Rival = Addon:NewModule('Rival')
+--[[
+	rival.lua
+		Abstract class that represents a rival NPC
+--]]
 
-Rival.__index = Rival
-Pet.__index = Pet
+local ADDON, Addon = ...
+local Rival = Addon.Entity:NewClass('Rival')
 
 
---[[ Constructors ]]--
+--[[ Construct ]]--
 
-function Rival:Get(id)
+function Rival:New(id)
 	local data = Addon.RivalInfo[id]
 	if data then
 		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
-		local rival = setmetatable({
+		local rival = self:Bind {
 			name = name, items = items, currencies = currencies,
 			gold = tonumber(gold, 36),
 			quest = tonumber(quest, 36),
 			model = tonumber(model, 36),
 			map = tonumber(map, 36),
 			id = id
-		}, self)
+		}
 
 		for name, model, specie, level, quality in pets:gmatch('([^:]+):(%w%w%w%w)(%w%w%w)(%w)(%w)') do
-			tinsert(rival, setmetatable({
-				Name = name,
-				Model = tonumber(model, 36),
-				Specie = tonumber(specie, 36),
-				Level = tonumber(level, 36),
-				Quality = tonumber(quality, 36)
-			}, Pet))
+			tinsert(rival, Addon.Enemy {
+				name = name,
+				id = tonumber(specie, 36),
+				model = tonumber(model, 36),
+				level = tonumber(level, 36),
+				quality = tonumber(quality, 36)
+			})
 		end
 
 		return rival
@@ -36,16 +37,44 @@ function Rival:Get(id)
 end
 
 
---[[ API ]]--
+--[[ Actions ]]--
 
 function Rival:Display()
-	if GetAddOnEnableState(UnitName('player'), 'PetTracker_Journal') >= 2 then
-		CollectionsJournal_LoadUI()
-		HideUIPanel(WorldMapFrame)
-		ShowUIPanel(CollectionsJournal) -- this here causes taint for sure
-		PetTrackerRivalJournal.PanelTab:GetScript('OnClick')(PetTrackerRivalJournal.PanelTab)
-		PetTrackerRivalJournal:SetRival(self)
+	CollectionsJournal_LoadUI()
+	HideUIPanel(WorldMapFrame)
+	ShowUIPanel(CollectionsJournal)
+
+	if LoadAddOn('PetTracker_Journal') then
+		Addon.Rivals.PanelTab:ExecuteScript('OnClick')
+		Addon.Rivals:SetRival(self)
 	end
+end
+
+
+--[[ Status ]]--
+
+function Rival:GetAbstract()
+	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
+
+	for i, pet in ipairs(self) do
+		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
+	end
+
+	for id in self.items:gmatch('(%w%w%w%w)%w') do
+		local name = GetItemInfo(tonumber(id, 36))
+		if name then
+			text = text .. ' ' .. name
+		end
+	end
+
+	for id in self.currencies:gmatch('(%w%w)%w') do
+		local name = GetCurrencyInfo(tonumber(id, 36))
+		if name then
+			text = text .. ' ' .. name
+		end
+	end
+
+	return text
 end
 
 function Rival:GetMapName()
@@ -79,6 +108,9 @@ end
 function Rival:IsCompleted()
 	return IsQuestFlaggedCompleted(self.quest)
 end
+
+
+--[[ Stats ]]--
 
 function Rival:GetType()
 	if #self > 1 then
@@ -123,30 +155,6 @@ function Rival:GetRewards()
 	return rewards
 end
 
-function Rival:GetAbstract()
-	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
-
-	for i, pet in ipairs(self) do
-		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
-	end
-
-	for id in self.items:gmatch('(%w%w%w%w)%w') do
-		local name = GetItemInfo(tonumber(id, 36))
-		if name then
-			text = text .. ' ' .. name
-		end
-	end
-
-	for id in self.currencies:gmatch('(%w%w)%w') do
-		local name = GetCurrencyInfo(tonumber(id, 36))
-		if name then
-			text = text .. ' ' .. name
-		end
-	end
-
-	return text
-end
-
 for _, key in pairs {'Level', 'Quality'} do
 	Rival['Get' .. key] = function(self)
 		local value = 0
@@ -155,33 +163,5 @@ for _, key in pairs {'Level', 'Quality'} do
 		end
 
 		return floor(value / #self + .5)
-	end
-end
-
-
---[[ Pets ]]--
-
-function Pet:GetStats()
-	return Addon.Predict:Stats(self.Specie, self.Level, self.Quality, self:GetBreed())
-end
-
-function Pet:GetBreed()
-	local breeds = Addon.Breeds[self.Specie]
-	return breeds and breeds[1] or 3
-end
-
-function Pet:GetAbility(i)
-	local ids = self:GetAbilities()
-	for _, id in pairs(ids) do
-		i = i - 1
-		if i == 0 then
-			return id, nil, nil, true
-		end
-	end
-end
-
-for _, key in pairs {'Name', 'Specie', 'Model', 'Level', 'Quality'} do
-	Pet['Get' .. key] = function(self)
-		return self[key]
 	end
 end

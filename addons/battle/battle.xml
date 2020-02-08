@@ -1,6 +1,7 @@
 <Ui>
-  <Script file="battleListener.lua"/>
-  <Script file="enemyActions.lua"/>
+  <Script file="battle.lua"/>
+  <Script file="listener.lua"/>
+  <Script file="enemyBar.lua"/>
   <Script file="switcher.lua"/>
   <Script file="upgrades.lua"/>
 </Ui>

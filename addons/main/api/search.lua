@@ -23,8 +23,8 @@ local Filters = {}
 
 --[[ API ]]--
 
-function Addon:Search(target, search)
-	return CustomSearch(target, search, Filters)
+function Addon:Search(entity, search)
+	return CustomSearch(entity, search, Filters)
 end
 
 
@@ -35,8 +35,8 @@ Filters.abstract = {
 		return not operator and search
 	end,
 
-	match = function(self, target, _, search)
-		return CustomSearch:Find(search, target:GetAbstract())
+	match = function(self, entity, _, search)
+		return CustomSearch:Find(search, entity:GetAbstract())
 	end
 }
 
@@ -45,18 +45,18 @@ Filters.level = {
 		return tonumber(search)
 	end,
 
-	match = function(self, target, operator, level)
-		return CustomSearch:Compare(operator, target:GetLevel(), level)
+	match = function(self, entity, operator, level)
+		return CustomSearch:Compare(operator, entity:GetLevel(), level)
 	end
 }
 
 Filters.abilities = {
-	canSearch = function(self, operator, search, target)
-		return not operator and target.GetAbilities and search
+	canSearch = function(self, operator, search, entity)
+		return not operator and entity.GetAbilities and search
 	end,
 
-	match = function(self, target, _, search)
-		for i, id in ipairs(target:GetAbilities()) do
+	match = function(self, entity, _, search)
+		for i, id in ipairs(entity:GetAbilities()) do
 			local _, name = C_PetBattles.GetAbilityInfoByID(id)
 			if CustomSearch:Find(search, name) then
 				return true
@@ -65,8 +65,9 @@ Filters.abilities = {
 	end
 }
 
-local qualities = {[l.Maximized] = 4, [ADDON_MISSING] = 0, [NONE] = 0}
-for i = 1, #ITEM_QUALITY_COLORS-2 do
+local qualities = {[L.Maximized] = 4, [ADDON_MISSING] = 0, [NONE] = 0}
+--for i = 1, #ITEM_QUALITY_COLORS-2 do
+for i = 1, Addon.MaxQuality do
 	qualities[_G['BATTLE_PET_BREED_QUALITY'..i]] = i
 end
 
@@ -79,7 +80,7 @@ Filters.quality = {
 		end
 	end,
 
-	match = function(self, target, operator, quality)
-		return CustomSearch:Compare(operator, target:GetQuality(), quality)
+	match = function(self, entity, operator, quality)
+		return CustomSearch:Compare(operator, entity:GetQuality(), quality)
 	end,
 }
