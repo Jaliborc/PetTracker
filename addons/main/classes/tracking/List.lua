@@ -1,51 +1,37 @@
 --[[
-Copyright 2012-2020 João Cardoso
-PetTracker is distributed under the terms of the GNU General Public License (Version 3).
-As a special exception, the copyright holders of this addon do not give permission to
-redistribute and/or modify it.
-
-This addon is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
-
-This file is part of PetTracker.
+	lists.lua
+		A top-to-bottom array of clickable text lines
 --]]
 
+
 local ADDON, Addon = ...
-local Line = Addon:NewClass('Button', 'Line', ADDON .. 'Line')
-local List = Addon:NewClass('Frame', 'List')
+local List = Addon.Base:NewClass('TextList', 'Frame')
+local Line = Addon.Base:NewClass('TextLine', 'Button', true)
 
-
---[[ Constructor ]]--
-
-function List:OnCreate()
-	self.Lines = {}
+function List:New(...)
+	local f = self:Super(List):New(...)
+	f.Lines = {}
+	return f
 end
 
-
---[[ API ]]--
-
-function List:NewLine()
+function List:Add(text, icon, subicon)
 	local line = Line(self)
 	local last = self:Last() or self.Anchor
-
 	line:SetPoint('TOPLEFT', last, 'BOTTOMLEFT', last.xOff or 0, last.yOff or -4)
+	line.Text:SetText(text)
 	line.Text:SetPoint('Left', line.Icon, 'Right', 8, 0)
+	line.Text:SetWidth(self.Anchor:GetWidth())
+	line.SubIcon:SetTexture(subicon)
+	line.Icon:SetTexture(icon)
 	line.Icon:Show()
-	line:Show()
-	
+
 	tinsert(self.Lines, line)
 	return line
 end
 
-function List:Reset()
+function List:Clear()
 	for i, line in ipairs(self.Lines) do
 		line:Release()
-		line:Hide()
 	end
 	wipe(self.Lines)
 end

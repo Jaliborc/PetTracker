@@ -44,9 +44,9 @@ end
 
 function Addon:PLAYER_ENTERING_WORLD()
 	self:RegisterEvent('PET_JOURNAL_LIST_UPDATE')
-	self:FireSignal('TRACKING_CHANGED')
+	self:FireSignal('PETS_CHANGED')
 end
 
 function Addon:PET_JOURNAL_LIST_UPDATE()
-	self:Delay(2, 'FireSignal', 'TRACKING_CHANGED') -- data on client doesnt update immediately every time
+	self:Delay(2, 'FireSignal', 'PETS_CHANGED') -- data on client doesnt update immediately every time
 end

@@ -1,0 +1,10 @@
+<Ui>
+	<Include file="abilityButton.xml"/>
+	<Script file="abilityButton.lua"/>
+
+	<Include file="statusBar.xml"/>
+	<Include file="slotBorder.xml"/>
+	<Include file="slotHighlight.xml"/>
+	<Include file="slot.xml"/>
+	<Script file="slot.lua"/>
+</Ui>

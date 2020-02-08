@@ -1,53 +1,32 @@
 --[[
-Copyright 2012-2020 João Cardoso
-PetTracker is distributed under the terms of the GNU General Public License (Version 3).
-As a special exception, the copyright holders of this addon do not give permission to
-redistribute and/or modify it.
-
-This addon is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
-
-This file is part of PetTracker.
+	progressBar.lua
+		A status bar that shows progress per quality
 --]]
 
 local ADDON, Addon = ...
-local Progress = Addon:NewClass('Frame', 'ProgressBar', ADDON..'ProgressBar')
-local Format = PLAYERS_FOUND_OUT_OF_MAX
+local Bar = Addon.Base:NewClass('ProgressBar', 'Frame', true)
 
-
---[[ Constructor ]]--
-
-function Progress:OnCreate()
-	self.Overlay:SetFrameLevel(self:GetFrameLevel() + Addon.MaxQuality + 1)
-	self.Bars = {}
+function Bar:New(...)
+	local f = self:Super(Bar):New(...)
+	f.Overlay:SetFrameLevel(f:GetFrameLevel() + Addon.MaxQuality + 1)
+	f.Bars = {}
 
 	for i = 1, Addon.MaxQuality do
-		self.Bars[i] = self:CreateBar(i)
+		local r,g,b = Addon.Utils:GetColor(i)
+		local b = CreateFrame('StatusBar', nil, self)
+		b:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
+		b:SetFrameLevel(self:GetFrameLevel() + i)
+		b:SetStatusBarColor(r,g,b)
+		b:SetAllPoints()
+
+		f.Bars[i] = b
 	end
+
+	return f
 end
 
-function Progress:CreateBar(i)
-	local r,g,b = Addon.Utils:GetColor(i)
-	local bar = CreateFrame('StatusBar', nil, self)
-	bar:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
-	bar:SetFrameLevel(self:GetFrameLevel() + i)
-	bar:SetStatusBarColor(r,g,b)
-	bar:SetAllPoints()
-
-	return bar
-end
-
-
---[[ API ]]--
-
-function Progress:SetProgress(progress)
+function Bar:SetProgress(progress)
 	local owned = 0
-
 	for i = Addon.MaxQuality, 1, -1 do
 		owned = owned + progress[i].total
 
@@ -55,6 +34,6 @@ function Progress:SetProgress(progress)
 		self.Bars[i]:SetValue(owned)
 	end
 
-	self.Overlay.Text:SetFormattedText(Format, owned, progress.total)
+	self.Overlay.Text:SetFormattedText(PLAYERS_FOUND_OUT_OF_MAX, owned, progress.total)
 	self:SetShown(progress.total > 0)
 end

@@ -25,10 +25,3 @@ function Utils:GetColor(quality)
 
 	return RED_FONT_COLOR.r, RED_FONT_COLOR.g, RED_FONT_COLOR.b, RED_FONT_COLOR_CODE:sub(3)
 end
-
-function Utils:KeepShort(text)
-	if not text:find('|n') and strlen(text) > 100 then
-		return text:sub(0, 97) .. '...'
-	end
-	return text
-end
