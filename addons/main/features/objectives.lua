@@ -34,7 +34,8 @@ end
 
 function Objectives:OnEnable()
 	local header = CreateFrame('Button', nil, self, 'ObjectiveTrackerHeaderTemplate')
-	header:SetScript('OnClick', self.ToggleOptions)
+	header:SetScript('OnClick', self.ToggleDropdown)
+	header:RegisterForClicks('anyUp')
 	header:SetPoint('TOPLEFT')
 	header.Text:SetText(PETS)
 	header:Show()

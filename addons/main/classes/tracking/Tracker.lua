@@ -83,30 +83,32 @@ end
 --[[ Dropdown ]]--
 
 function Tracker:ToggleDropdown()
-	--SushiDropFrame:Toggle('TOPLEFT', self, 'BOTTOMLEFT', 5, -12, true, Tracker.ShowOptions)
-
-	self:AddLine {
-		text = 'Battle Pets',
-		isTitle = true,
-		notCheckable = true
-	}
-
-	self:AddLine {
-		text = L.TrackPets,
-		checked = not Addon.sets.hideTracker,
-		func = function() Tracker:Toggle() end,
-		isNotRadio = true
-	}
-
-	self:AddLine {
-		text = L.CapturedPets,
-		checked = Addon.sets.capturedPets,
-		isNotRadio = true,
-		func = function()
-			Addon.sets.capturedPets = not Addon.sets.capturedPets
-			Addon:SendSignal('TRACKING_CHANGED')
-		end
-	}
+	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(self)
+	if drop then
+		drop:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 5, -12)
+		drop:SetChildren {
+			{
+				text = AUCTION_CATEGORY_BATTLE_PETS,
+				isTitle = true,
+				notCheckable = true
+			},
+			{
+				text = L.TrackPets,
+				checked = not Addon.sets.hideTracker,
+				func = function() Tracker:Toggle() end,
+				isNotRadio = true
+			},
+			{
+				text = L.CapturedPets,
+				checked = Addon.sets.capturedPets,
+				isNotRadio = true,
+				func = function()
+					Addon.sets.capturedPets = not Addon.sets.capturedPets
+					Addon:SendSignal('TRACKING_CHANGED')
+				end
+			}
+		}
+	end
 end
 
 function Tracker:Toggle()

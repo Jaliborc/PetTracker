@@ -19,7 +19,13 @@ function Specie:Display()
 	HideUIPanel(WorldMapFrame)
 	ShowUIPanel(CollectionsJournal)
 	CollectionsJournal_SetTab(CollectionsJournal, 2)
-	PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
+
+	local best = self:GetBestOwned()
+	if best then
+		PetJournal_SelectPet(PetJournal, best:GetID())
+	else
+		PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
+	end
 end
 
 function Specie:GetQuality()
@@ -59,7 +65,7 @@ function Specie:GetOwnedText()
 		local text = NORMAL_FONT_COLOR_CODE .. COLLECTED .. ':' .. FONT_COLOR_CODE_CLOSE
 
 		for i, pet in ipairs(owned) do
-			local icon = Addon.Breeds:Icon(pet:GetBreed(), .8, -2)
+			local icon = Addon.Breeds:GetIcon(pet:GetBreed(), .8, -2)
 			local _,_,_, color = pet:GetColor()
 
 			text = text .. format('  %s|c%s%d|r', icon, color, pet:GetLevel())

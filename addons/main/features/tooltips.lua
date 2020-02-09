@@ -38,12 +38,12 @@ function Tooltips:Init(tip)
 
   hooksecurefunc(tip, 'Show', function()
     local data = self.data[tip]
+    local specie = Addon.Specie(data.speciesID)
     local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
-    local _,_,_,_, source = Addon.Journal:GetInfo(data.speciesID)
 
-    tip.Source:SetText(source)
-    tip.Name:SetText((tip.Name:GetText() or '') .. Addon:GetBreedIcon(breed, .8, 5, 0))
-    tip.Owned:SetText(Addon.Journal:GetOwnedText(data.speciesID) or tip.Owned:GetText())
-    tip:SetHeight(tip:GetHeight() + tip.Source:GetHeight() + 4)
+    tip.Source:SetText(select(5, specie:GetInfo()))
+    tip.Owned:SetText(specie:GetOwnedText() or tip.Owned:GetText())
+    tip.Name:SetText((tip.Name:GetText() or '') .. Addon.Breeds:GetIcon(breed, .8, 5, 0))
+    tip:SetHeight(tip:GetHeight() + tip.Source:GetHeight() + (breed == 3 and 10 or 4))
   end)
 end

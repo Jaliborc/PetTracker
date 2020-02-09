@@ -44,11 +44,11 @@ Breeds.Icons = {
 	[11] = {'|TInterface/PetBattles/PetBattle-StatIcons:%d:%d:%d:%d:32:32:0:16:16:32|t', 17, 17}
 }
 
-function Breeds:Name(breed)
+function Breeds:GetName(breed)
 	return breed and self.Names[breed] or ''
 end
 
-function Breeds:Icon(breed, scale, x, y)
+function Breeds:GetIcon(breed, scale, x, y)
 	local icon = breed and self.Icons[breed]
 	return icon and icon[1]:format(scale * icon[2], scale * icon[3], x or 0, y or 0) or ''
 end

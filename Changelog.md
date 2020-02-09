@@ -1,3 +1,6 @@
+#### 8.3.1
+* Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
+
 #### 8.3.0
 * Updated for Visions of N'Zoth.
 * World Map: tracking type dropdown is currently not fully functional.

@@ -112,7 +112,7 @@ function MapCanvas:Draw(frame)
 		local mapID = frame:GetMapID()
 		local index = 1
 
-		if not Addon.sets.HideSpecies then
+		if not Addon.sets.hideSpecies then
 			local species = Addon.Maps:GetSpeciesIn(mapID)
 			for specie, spots in pairs(species) do
 				local specie = Addon.Specie(specie)
@@ -127,7 +127,7 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.sets.HideRivals and GetCVarBool('showTamers') then
+		if not Addon.sets.hideRivals and GetCVarBool('showTamers') then
 			local rivals = Addon.Maps:GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
 					local rival = Addon.Rival(rival)
@@ -138,7 +138,7 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.sets.HideStables then
+		if not Addon.sets.hideStables then
 			local stables = Addon.Maps:GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
 				tinsert(self.Pins[frame], Addon.StablePin(frame, index, x,y))

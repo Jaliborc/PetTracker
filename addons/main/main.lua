@@ -29,10 +29,10 @@ function Addon:OnEnable()
 	self:RegisterEvent('PLAYER_ENTERING_WORLD')
 
 	if self.sets.MainTutorial then
-		--[[for k,v in pairs(self.sets) do
+		for k,v in pairs(CopyTable(self.sets)) do
 			self.sets[k] = nil
 			self.sets[k:gsub('^.', strlower)] = v
-		end]]--
+		end
 	end
 
 	if (self.sets.mainTutorial or 0) < 6 or (self.sets.journalTutorial or 0) < 7 then
