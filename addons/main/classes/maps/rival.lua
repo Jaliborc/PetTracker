@@ -18,19 +18,19 @@ function Pin:New(frame, index, x,y, rival)
 	local b = self:Super(Pin):New(frame, index, x,y)
   SetPortraitTextureFromCreatureDisplayID(b.Background, rival.model)
 	b.Background:SetDesaturated(IsQuestFlaggedCompleted(rival.quest))
-  b.Rival = rival
+  b.rival = rival
 	return b
 end
 
 function Pin:OnClick()
-	self.Rival:Display()
+	self.rival:Display()
 end
 
 function Pin:OnTooltip(tip)
-	tip:AddHeader(self.Rival:GetName())
+	tip:AddHeader(self.rival.name)
 	tip:AddLine(L.PetBattle)
 
-	for i, pet in ipairs(self.Rival) do
+	for i, pet in ipairs(self.rival) do
 		local icon = format('|T%s:16:16:-3:0:128:256:60:100:130:170:255:255:255|t', pet:GetTypeIcon())
 		local r,g,b = pet:GetColor()
 

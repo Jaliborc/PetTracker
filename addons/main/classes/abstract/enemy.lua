@@ -6,12 +6,16 @@
 local ADDON, Addon = ...
 local Enemy = Addon.Pet:NewClass('Enemy')
 
+function Enemy:New(data)
+  return self:Bind(data)
+end
+
 function Enemy:GetStats()
-	return Addon.Predict:Stats(self.id, self.level, self.quality, self:GetBreed())
+	return Addon.Predict:Stats(self.specie, self.level, self.quality, self:GetBreed())
 end
 
 function Enemy:GetBreed()
-	local breeds = Addon.SpecieBreeds[self.id]
+	local breeds = Addon.SpecieBreeds[self.specie]
 	return breeds and breeds[1] or 3
 end
 

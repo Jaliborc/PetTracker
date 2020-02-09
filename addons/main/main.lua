@@ -46,11 +46,11 @@ end
 
 function Addon:PLAYER_ENTERING_WORLD()
 	self:RegisterEvent('PET_JOURNAL_LIST_UPDATE')
-	self:SendSignal('PETS_CHANGED')
+	self:SendSignal('COLLECTION_CHANGED')
 end
 
 function Addon:PET_JOURNAL_LIST_UPDATE()
-	self:Delay(2, 'SendSignal', 'PETS_CHANGED') -- data on client doesnt update immediately every time
+	self:Delay(2, 'SendSignal', 'COLLECTION_CHANGED') -- data on client doesnt update immediately every time
 end
 
 

@@ -30,7 +30,7 @@ do
 end
 
 
---[[ Events ]]--
+--[[ Startup ]]--
 
 function Objectives:OnEnable()
 	local header = CreateFrame('Button', nil, self, 'ObjectiveTrackerHeaderTemplate')
@@ -39,8 +39,6 @@ function Objectives:OnEnable()
 	header.Text:SetText(PETS)
 	header:Show()
 
-	self:RegisterSignal('TRACKING_CHANGED', 'OnEvent')
-	self:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'OnEvent')
 	self.Anchor:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
 	self.Anchor:SetScript('OnMouseDown', self.ToggleOptions)
 	self.Header = header
@@ -51,7 +49,7 @@ function Objectives:OnEnable()
 
 		if availableEntries ~= self.MaxEntries then
 			self.MaxEntries = availableEntries
-			self:OnEvent()
+			self:Update()
 		end
 
 		self:SetPoint('TOPLEFT', Parent, -10, -off)
@@ -64,16 +62,16 @@ function Objectives:OnEnable()
 	end)
 end
 
-function Objectives:OnEvent()
-	self:Update()
+
+--[[ API Override ]]--
+
+function Objectives:Update()
+	self:GetClass().Update(self)
 	self:SetShown(not Addon.sets.hideTracker and self.Anchor:IsShown())
 
 	HeaderButton:SetShown(Parent.currentBlock or self:IsShown())
 	OBJECTIVE_TRACKER_ADDONS[self.Index] = self:IsShown() and self:GetHeight() or 0
 end
-
-
---[[ API Override ]]--
 
 function Objectives:GetUsedHeight()
 	local height = DEFAULT_OBJECTIVE_TRACKER_MODULE.BlocksFrame.contentsHeight or 0

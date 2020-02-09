@@ -25,7 +25,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 function MapSearch:OnEnable()
 	self.frames = {}
 	self.suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
-	self:RegisterSignal('TRACKING_CHANGED', 'UpdateBoxes')
+	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateBoxes')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
@@ -89,17 +89,17 @@ function MapSearch:Init(frame)
 end
 
 function MapSearch:UpdateBox(frame)
-  local text = Addon.sets.mapFilter or ''
+  local text = Addon.sets.mapSearch or ''
   local search = self.frames[frame]
   search.Instructions:SetShown(text == '')
-  search:SetShown(not Addon.sets.HideSpecies)
+  search:SetShown(not Addon.sets.hideSpecies)
   search:SetText(text)
 end
 
 function MapSearch:SetTextFilter(text)
-  if Addon.sets.mapFilter ~= text then
-    Addon.sets.mapFilter = text
-    self:SendSignal('TRACKING_CHANGED')
+  if Addon.sets.mapSearch ~= text then
+    Addon.sets.mapSearch = text
+    Addon:SendSignal('MAP_SEARCH_CHANGED')
   end
 end
 

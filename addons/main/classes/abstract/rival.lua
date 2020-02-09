@@ -25,7 +25,7 @@ function Rival:New(id)
 		for name, model, specie, level, quality in pets:gmatch('([^:]+):(%w%w%w%w)(%w%w%w)(%w)(%w)') do
 			tinsert(rival, Addon.Enemy {
 				name = name,
-				id = tonumber(specie, 36),
+				specie = tonumber(specie, 36),
 				model = tonumber(model, 36),
 				level = tonumber(level, 36),
 				quality = tonumber(quality, 36)

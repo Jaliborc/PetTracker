@@ -18,19 +18,19 @@ end
 function Pin:New(frame, index, x,y, specie, icon)
 	local b = self:Super(Pin):New(frame, index, x,y)
 	b.Icon:SetTexture(icon or specie:GetTypeIcon())
-  b.Specie = specie
+  b.specie = specie
 	return b
 end
 
 function Pin:OnClick(button)
 	if button == 'LeftButton' then
-		self.Specie:Display()
+		self.specie:Display()
 	end
 end
 
 function Pin:OnTooltip(tip)
-	local name, icon, _,_, source = self.Specie:GetInfo()
-	local owned = self.Specie:GetOwnedText()
+	local name, icon, _,_, source = self.specie:GetInfo()
+	local owned = self.specie:GetOwnedText()
 
 	tip:AddHeader(('|T%s:%d:%d:-2:0|t'):format(icon, 20, 20) .. name)
 	tip:AddLine((owned and (owned .. '|n') or '') .. self:KeepShort(source), 1,1,1)

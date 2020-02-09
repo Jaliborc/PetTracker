@@ -5,13 +5,13 @@
 
 
 local ADDON, Addon = ...
-local Tooltip = Addon.Base:NewClass('MapTip', 'GameTooltip', 'GameTooltipTemplate')
+local Tooltip = Addon.Base:NewClass('MapTip', 'GameTooltip', 'GameTooltipTemplate', true)
 
 
 --[[ Construct ]]--
 
-function Tooltip:New(...)
-	local f = self:Super(Tooltip):New(...)
+function Tooltip:Construct()
+	local f = self:Super(Tooltip):Construct()
 	f.Strokes = f.Strokes or {}
 	return f
 end
@@ -33,8 +33,7 @@ function Tooltip:AddHeader(header)
 end
 
 function Tooltip:AddLine(text, r,g,b, isHeader)
-	self:Super(Tooltip):AddLine(
-	text, r,g,b, not isHeader)
+	self:Super(Tooltip):AddLine(text, r,g,b, not isHeader)
 
 	local i = self:NumLines()
 	if i > 1 then
@@ -50,7 +49,7 @@ function Tooltip:AddLine(text, r,g,b, isHeader)
 	end
 end
 
-function Tooltip:Display()
+function Tooltip:Show()
 	self:SetShown(self:NumLines() > 0)
 	if self:IsShown() then
 		local parent = self:GetParent()

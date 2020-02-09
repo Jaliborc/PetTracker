@@ -10,7 +10,7 @@ function Pin:Construct()
 	local b = self:Super(Pin):Construct()
 	b:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
 	b.FrameLevel = 'PIN_FRAME_LEVEL_DIG_SITE'
-	b.Icon = self:CreateTexture(nil, 'ARTWORK')
+	b.Icon = b:CreateTexture(nil, 'ARTWORK')
 	b.Icon:SetPoint('CENTER')
 	return b
 end

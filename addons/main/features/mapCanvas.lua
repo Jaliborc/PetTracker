@@ -22,9 +22,10 @@ local MapCanvas = Addon:NewModule('MapCanvas')
 --[[ Startup ]]--
 
 function MapCanvas:OnEnable()
-	self.tip, self.pins = Addon.MapTip(), {}
-	self.tip:SetScript('OnUpdate', function() self:AnchorTip() end)
-	self:RegisterSignal('TRACKING_CHANGED', 'UpdateAll')
+	self.Tip, self.Pins = Addon.MapTip(UIParent), {}
+	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
+	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
+	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateAll')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
@@ -40,7 +41,7 @@ end
 --[[ Global API ]]--
 
 function MapCanvas:UpdateAll()
-	for frame in pairs(self.pins) do
+	for frame in pairs(self.Pins) do
 		if frame:IsVisible() then
 			self:Redraw(frame)
 		end
@@ -50,22 +51,22 @@ end
 
 function MapCanvas:AnchorTip()
 	if GameTooltip:IsVisible() then
-		self.tip:Hide()
+		self.Tip:Hide()
 	else
-		self.tip:Anchor(UIParent, 'ANCHOR_CURSOR')
+		self.Tip:SetOwner(UIParent, 'ANCHOR_CURSOR')
 
-		for frame, pins in pairs(self.pins) do
+		for frame, pins in pairs(self.Pins) do
 			if frame:IsVisible() then
 				for _, pin in ipairs(pins) do
 					local focus = pin:IsMouseOver()
 					if focus then
-						pin:OnTooltip(self.tip)
+						pin:OnTooltip(self.Tip)
 					end
 				end
 			end
 		end
 
-		self.tip:Display()
+		self.Tip:Show()
 	end
 end
 
@@ -73,10 +74,10 @@ end
 --[[ Frames API ]]--
 
 function MapCanvas:Init(frame)
-	if self.pins[frame] then
+	if self.Pins[frame] then
 		return
 	else
-		self.pins[frame] = {}
+		self.Pins[frame] = {}
 	end
 
 	hooksecurefunc(frame, 'OnCanvasScaleChanged', function(f) self:Scale(f) end)
@@ -92,10 +93,10 @@ function MapCanvas:Redraw(frame)
 end
 
 function MapCanvas:Clear(frame)
-	for _, pin in ipairs(self.pins[frame]) do
+	for _, pin in ipairs(self.Pins[frame]) do
 		pin:Release()
 	end
-	wipe(self.pins[frame])
+	wipe(self.Pins[frame])
 end
 
 function MapCanvas:Validate(frame)
@@ -112,35 +113,35 @@ function MapCanvas:Draw(frame)
 		local index = 1
 
 		if not Addon.sets.HideSpecies then
-			local species = Addon.Journal.GetSpeciesIn(mapID)
+			local species = Addon.Maps:GetSpeciesIn(mapID)
 			for specie, spots in pairs(species) do
-				local specie = Addon.Specie:Get(specie)
+				local specie = Addon.Specie(specie)
 
-				if Addon:Filter(specie, Addon.sets.MapFilter) then
+				if Addon:Search(specie, Addon.sets.mapSearch) then
 					local icon = specie:GetTypeIcon()
 
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-						tinsert(self.pins[frame], Addon.SpeciePin(frame, index, x,y, specie, icon))
+						tinsert(self.Pins[frame], Addon.SpeciePin(frame, index, x,y, specie, icon))
 					end
 				end
 			end
 		end
 
 		if not Addon.sets.HideRivals and GetCVarBool('showTamers') then
-			local rivals = Addon.Journal.GetRivalsIn(mapID)
+			local rivals = Addon.Maps:GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
-					local rival = Addon.Rival:Get(rival)
+					local rival = Addon.Rival(rival)
 					local x, y = spot:match('(%w%w)(%w%w)')
 
 					index = index + 1
-					tinsert(self.pins[frame], Addon.RivalPin(frame, index, x,y, rival))
+					tinsert(self.Pins[frame], Addon.RivalPin(frame, index, x,y, rival))
 			end
 		end
 
 		if not Addon.sets.HideStables then
-			local stables = Addon.Journal.GetStablesIn(mapID)
+			local stables = Addon.Maps:GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
-				tinsert(self.pins[frame], Addon.StablePin(frame, index, x,y))
+				tinsert(self.Pins[frame], Addon.StablePin(frame, index, x,y))
 			end
 		end
 	end
@@ -148,7 +149,7 @@ end
 
 function MapCanvas:Scale(frame)
 	local scale = frame:GetGlobalPinScale() / frame:GetCanvasScale()
-	for _, pin in ipairs(self.pins[frame]) do
-			pin.icon:SetScale(scale)
+	for _, pin in ipairs(self.Pins[frame]) do
+			pin.Icon:SetScale(scale)
 	end
 end
