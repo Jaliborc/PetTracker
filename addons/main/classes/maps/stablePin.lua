@@ -16,33 +16,18 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local Enemy = Addon.Pet:NewClass('Enemy')
+local Pin = Addon.Pin:NewClass('StablePin')
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-function Enemy:New(data)
-  return self:Bind(data)
+function Pin:Construct()
+	local b = self:Super(Pin):Construct()
+	b.Icon:SetTexture('Interface/Minimap/Tracking/StableMaster')
+	b.Icon:SetSize(18, 18)
+	b:SetSize(18, 18)
+	return b
 end
 
-function Enemy:GetStats()
-	return Addon.Predict:Stats(self.specie, self.level, self.quality, self:GetBreed())
-end
-
-function Enemy:GetBreed()
-	local breeds = Addon.SpecieBreeds[self.specie]
-	return breeds and breeds[1] or 3
-end
-
-function Enemy:GetAbility(i)
-	local abilities = self:GetAbilities()
-	for _, id in pairs(abilities) do
-		i = i - 1
-		if i == 0 then
-			return id, nil, nil, true
-		end
-	end
-end
-
-for _, key in pairs {'Name', 'Specie', 'Model', 'Level', 'Quality'} do
-	Enemy['Get' .. key] = function(self)
-		return self[key:lower()]
-	end
+function Pin:OnTooltip(tip)
+	tip:AddHeader(MINIMAP_TRACKING_STABLEMASTER)
+	tip:AddLine(L.StableTip, 1,1,1)
 end

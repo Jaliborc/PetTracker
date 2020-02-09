@@ -22,7 +22,7 @@ local MapCanvas = Addon:NewModule('MapCanvas')
 --[[ Startup ]]--
 
 function MapCanvas:OnEnable()
-	self.Tip, self.Pins = Addon.MapTip(UIParent), {}
+	self.Tip, self.Pins = Addon.MultiTip(UIParent), {}
 	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
 	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
 	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateAll')
@@ -31,10 +31,6 @@ function MapCanvas:OnEnable()
 		self:Init(frame)
 		self:Redraw(frame)
 	end)
-end
-
-function MapCanvas:OnOptions(panel)
-	panel:Create('CheckButton', 'HideRivals')
 end
 
 

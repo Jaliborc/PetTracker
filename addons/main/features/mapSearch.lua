@@ -17,7 +17,6 @@ This file is part of PetTracker.
 
 local ADDON, Addon = ...
 local MapSearch = Addon:NewModule('MapSearch')
-
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
@@ -64,24 +63,14 @@ function MapSearch:Init(frame)
   for i, overlay in ipairs(frame.overlayFrames or {}) do
     if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick and overlay:IsObjectType('Button') then
       local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Search', overlay, 'SearchBoxTemplate')
-      search.Instructions:SetText(L.FilterPets)
-      search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
-      search:SetSize(128, 20)
-      search:SetScript('OnTextChanged', function(search, manual)
-        self:SetTextFilter(search:GetText())
-      end)
+			search.Instructions:SetText(L.FilterPets)
+      search:SetScript('OnTextChanged', function() self:SetTextFilter(search:GetText()) end)
+      search:HookScript('OnEditFocusGained', function() self:ShowSuggestions(search) end)
+  		search:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
+			search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
+			search:SetSize(128, 20)
 
-      search:HookScript('OnEditFocusGained', function()
-        self:ToggleSuggestions(search)
-      end)
-
-      search:HookScript('OnEditFocusLost', function()
-				LibStub('Sushi-3.1').Dropdown:Clear()
-      end)
-
-      overlay:SetScript('OnMouseDown', function()
-        self:ToggleTrackingTypes(overlay)
-      end)
+      overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
 
       self.Frames[frame] = search
       self:UpdateBox(frame)
@@ -107,24 +96,30 @@ end
 
 --[[ Dropdopwns ]]--
 
-function MapSearch:ToggleSuggestions(parent)
-	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(parent)
-	if drop then
-		drop:SetPoint('TOP', parent, 'BOTTOM', 0, -15)
-		drop:SetChildren(function(drop)
-			drop:Add {
-				text = L.CommonSearches,
-				isTitle = true, notCheckable = true
-			}
+function MapSearch:ShowSuggestions(parent)
+	local drop = LibStub('Sushi-3.1').Dropdown(parent, nil, true)
+	drop:SetPoint('TOP', parent, 'BOTTOM', 0, -15)
+	drop:SetChildren(function(drop)
+		drop:Add {
+			text = L.CommonSearches,
+			isTitle = true, notCheckable = true
+		}
 
-			for i, text in ipairs(self.Suggestions) do
-				drop:Add {
-				  func = function() self:SetTextFilter(text) end,
-					text = text, notCheckable = true,
-				}
-			end
-		end)
-  end
+		for i, text in ipairs(self.Suggestions) do
+			drop:Add {
+			  func = function() self:SetTextFilter(text) end,
+				text = text, notCheckable = true,
+			}
+		end
+	end)
+
+	self.SuggestionsDrop = drop
+end
+
+function MapSearch:HideSuggestions(parent)
+	if not MouseIsOver(self.SuggestionsDrop) and self.SuggestionsDrop:IsActive() then
+		self.SuggestionsDrop:Release()
+	end
 end
 
 function MapSearch:ToggleTrackingTypes(parent)

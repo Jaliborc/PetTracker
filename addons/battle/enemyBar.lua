@@ -42,11 +42,11 @@ function Bar:OnEnable()
 	--PetBattlePetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
 end
 
-function Bar:OnOptions(panel)
+--[[function Bar:OnOptions(panel)
 	panel:New('Check', 'UnlockActions'):SetCall('OnInput', function()
 		self:UpdateLock()
 	end)
-end
+end--]]
 
 function Bar:CreateButton(i)
 	local y = floor((i-1) / 3)

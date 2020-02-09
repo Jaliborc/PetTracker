@@ -28,7 +28,7 @@ function Upgrade:OnEnable()
 	self:SetText(L.UpgradeAlert)
 	self:SetFrameStrata('HIGH')
 	self:SetDirection('TOP')
-  self.bangs = {}
+  self.Bangs = {}
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
 	self:SetCall('OnClose', function() self.canShow = nil end)
@@ -37,11 +37,6 @@ function Upgrade:OnEnable()
 	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PetsUpdated', 'UpdateAll')
 	hooksecurefunc('PetBattleUnitFrame_UpdateDisplay', function(p) self:UpdateBang(p) end)
 	hooksecurefunc('PetBattleFrame_Display', function() self:UpdateAll() end)
-end
-
-function Upgrade:OnOptions(panel)
-	panel:New('Check', 'AlertUpgrades')
-	panel:New('Check', 'PromptForfeit')
 end
 
 function Upgrade:Reset()
@@ -53,7 +48,7 @@ end
 
 function Upgrade:UpdateAll()
 	local upgrades = Addon.Battle:AnyUpgrade()
-	for parent in pairs(self.bangs) do
+	for parent in pairs(self.Bangs) do
     self:UpdateBang(parent)
 	end
 
@@ -75,14 +70,14 @@ end
 
 function Upgrade:UpdateBang(parent)
 	local pet = Addon.Battle(parent.petOwner, parent.petIndex)
-  local bang = self.bangs[parent]
+  local bang = self.Bangs[parent]
 	if bang then
     bang:SetShown(not pet:IsAlly() and pet:IsUpgrade())
   end
 end
 
 function Upgrade:GetBang(parent)
-	return self.bangs[parent] or self:NewBang(parent)
+	return self.Bangs[parent] or self:NewBang(parent)
 end
 
 function Upgrade:NewBang(parent)
@@ -92,6 +87,6 @@ function Upgrade:NewBang(parent)
 	bang:SetPoint('TOP', parent.Icon, 'TOPRIGHT', -2, -10)
 	bang:SetSize(size, size)
 
-	self.bangs[parent] = bang
+	self.Bangs[parent] = bang
 	return bang
 end

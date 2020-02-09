@@ -1,7 +1,7 @@
 <Ui>
+	<Script file="multiTip.lua"/>
 	<Script file="pin.lua"/>
-	<Script file="rival.lua"/>
-	<Script file="specie.lua"/>
-	<Script file="stable.lua"/>
-	<Script file="tip.lua"/>
+	<Script file="rivalPin.lua"/>
+	<Script file="speciePin.lua"/>
+	<Script file="stablePin.lua"/>
 </Ui>

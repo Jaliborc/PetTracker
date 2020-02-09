@@ -1,26 +1,37 @@
 --[[
-	tip.lua
-		A tooltip for map canvas pins
+Copyright 2012-2020 João Cardoso
+PetTracker is distributed under the terms of the GNU General Public License (Version 3).
+As a special exception, the copyright holders of this addon do not give permission to
+redistribute and/or modify it.
+
+This addon is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
+
+This file is part of PetTracker.
 --]]
 
-
 local ADDON, Addon = ...
-local Tooltip = Addon.Base:NewClass('MapTip', 'GameTooltip', 'GameTooltipTemplate', true)
+local Tip = Addon.Base:NewClass('MultiTip', 'GameTooltip', 'GameTooltipTemplate', true)
 
 
 --[[ Construct ]]--
 
-function Tooltip:Construct()
-	local f = self:Super(Tooltip):Construct()
+function Tip:Construct()
+	local f = self:Super(Tip):Construct()
 	f.Strokes = f.Strokes or {}
 	return f
 end
 
 
---[[ API ]]--
+--[[ Overrides ]]--
 
-function Tooltip:SetOwner(...)
-	self:Super(Tooltip):SetOwner(...)
+function Tip:SetOwner(...)
+	self:Super(Tip):SetOwner(...)
 	self.NumStrokes = 0
 
 	for i, stroke in pairs(self.Strokes) do
@@ -28,12 +39,12 @@ function Tooltip:SetOwner(...)
 	end
 end
 
-function Tooltip:AddHeader(header)
+function Tip:AddHeader(header)
 	self:AddLine(header, 1,1,1, true)
 end
 
-function Tooltip:AddLine(text, r,g,b, isHeader)
-	self:Super(Tooltip):AddLine(text, r,g,b, not isHeader)
+function Tip:AddLine(text, r,g,b, isHeader)
+	self:Super(Tip):AddLine(text, r,g,b, not isHeader)
 
 	local i = self:NumLines()
 	if i > 1 then
@@ -49,7 +60,7 @@ function Tooltip:AddLine(text, r,g,b, isHeader)
 	end
 end
 
-function Tooltip:Show()
+function Tip:Show()
 	self:SetShown(self:NumLines() > 0)
 	if self:IsShown() then
 		local parent = self:GetParent()
@@ -61,17 +72,17 @@ function Tooltip:Show()
 end
 
 
---[[ Children ]]--
+--[[ Additions ]]--
 
-function Tooltip:GetLine(i)
+function Tip:GetLine(i)
 	return _G[self:GetName() .. 'TextLeft' .. i]
 end
 
-function Tooltip:GetStroke(i)
+function Tip:GetStroke(i)
 	return self.Strokes[i] or self:NewStroke(i)
 end
 
-function Tooltip:NewStroke(i)
+function Tip:NewStroke(i)
 	local line = self:GetLine(i - 1)
 	local stroke = self:CreateTexture()
 	stroke:SetPoint('TOPLEFT', line, 'BOTTOMLEFT', -5, -3)
