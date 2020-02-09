@@ -12,10 +12,10 @@ function Bar:New(...)
 	f.Bars = {}
 
 	for i = 1, Addon.MaxQuality do
-		local r,g,b = Addon.Utils:GetColor(i)
-		local b = CreateFrame('StatusBar', nil, self)
+		local r,g,b = Addon:GetColor(i)
+		local b = CreateFrame('StatusBar', nil, f)
 		b:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
-		b:SetFrameLevel(self:GetFrameLevel() + i)
+		b:SetFrameLevel(f:GetFrameLevel() + i)
 		b:SetStatusBarColor(r,g,b)
 		b:SetAllPoints()
 

@@ -30,6 +30,10 @@ function Specie:GetLevel()
 	return select(3, self:GetBestOwned())
 end
 
+function Specie:GetSpecie()
+	return self.specie
+end
+
 
 --[[ Progress ]]--
 

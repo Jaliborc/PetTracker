@@ -1,0 +1,7 @@
+<Ui>
+	<Include file="abilityButton.xml"/>
+	<Include file="petSlot.xml"/>
+
+	<Script file="abilityButton.lua"/>
+	<Script file="petSlot.lua"/>
+</Ui>

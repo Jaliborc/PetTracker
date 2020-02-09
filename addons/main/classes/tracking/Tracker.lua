@@ -10,13 +10,13 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 --[[ Construct ]]--
 
-function Tracker:New(...)
-	local f = self:Super(Tracker):New(...)
+function Tracker:Construct()
+	local f = self:Super(Tracker):Construct()
 	f:SetScript('OnShow', f.Update)
 	f:SetScript('OnHide', f.Clear)
 	f:SetSize(1,1)
 
-	f.Anchor = Addon.ProgressBar(self)
+	f.Anchor = Addon.ProgressBar(f)
 	f.Anchor.yOff = -10
 	f.MaxEntries = 0
 	return f
@@ -31,7 +31,7 @@ function Tracker:Update()
 end
 
 function Tracker:AddSpecies()
-	local progress = Journal:GetCurrentProgress()
+	local progress = Addon.Maps:GetCurrentProgress()
 
 	for quality = 0, self:MaxQuality() do
 		for level = 0, Addon.MaxLevel do
@@ -51,17 +51,14 @@ end
 
 
 function Tracker:AddSpecie(specie, quality, level)
-	local sourceIcon = Journal:GetSourceIcon(specie)
-	if sourceIcon then
-		local name, icon = Journal:GetInfo(specie)
+	local source = specie:GetSourceIcon()
+	if source then
+		local name, icon = specie:GetInfo()
 		local text = name .. (level > 0 and format(' (%s)', level) or '')
 		local r,g,b = self:GetColor(quality)
 
-		local line = self:Add(text, icon, sourceIcon)
-		line:SetScript('OnClick', function() Journal:Display(specie) end)
-		line:SetScript('OnEnter', function() line.Text:SetTextColor(r,g,b) end)
-		line:SetScript('OnLeave', function() line.Text:SetTextColor(r-.2, g-.2, b-.2) end)
-		line:ExecuteScript('OnLeave')
+		local line = self:Add(text, icon, source, r,g,b)
+		line:SetScript('OnClick', function() specie:Display() end)
 	end
 end
 
@@ -74,7 +71,7 @@ end
 
 function Tracker:GetColor(quality)
 	if Addon.sets.capturedPets then
-		return Addon.Utils:GetColor(quality)
+		return Addon:GetColor(quality)
 	end
 	return 1,1,1, HIGHLIGHT_FONT_COLOR_CODE:sub(3)
 end

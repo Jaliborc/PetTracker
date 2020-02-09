@@ -9,16 +9,4 @@
 ## X-Category: Battle Pets
 ## OptionalDeps: WoWUnit
 
-Libs\Libs.xml
-Localization\Include.xml
-
-PetTracker.lua
-
-Core\Include.xml
-Core\Tests\Include.xml
-
-Components\Maps\Include.xml
-Components\Combat\Include.xml
-Components\Tracking\Include.xml
-
-Features\Include.xml
+addons\main\main.xml

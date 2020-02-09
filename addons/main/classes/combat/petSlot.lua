@@ -15,22 +15,17 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local ADDON, Addon = 'PetTracker', PetTracker
-local Slot = LibStub('Poncho-1.0')('Button')
-
-local Ability, Journal = Addon.AbilityButton, Addon.Journal
-local PetTooltip = PetBattlePrimaryUnitTooltip
-local NumPets = NUM_BATTLE_PETS_IN_BATTLE
-
-BattleSlot = Addon:NewClass(nil, 'BattleSlot', ADDON .. 'BattleSlot', Slot)
-JournalSlot = Addon:NewClass(nil, 'JournalSlot', ADDON .. 'JournalSlot', Slot)
+local ADDON, Addon = ...
+local Slot = Addon.Base:NewClass('PetSlot')
+Slot:NewClass('BattleSlot', 'Frame', true)
+Slot:NewClass('JournalSlot', 'Frame', true)
 
 
---[[ Create ]]--
+--[[ Construct ]]--
 
-function Slot:CreateLine(point, parent, x, y)
+function Slot:NewSet(point, parent, x, y)
 	local slots = {}
-	for i = 1, NumPets do
+	for i = 1, NUM_BATTLE_PETS_IN_BATTLE do
 		slots[i] = self(parent)
 		slots[i]:SetPoint(point, parent, x, y - i*107)
 	end
@@ -38,19 +33,22 @@ function Slot:CreateLine(point, parent, x, y)
 	return slots
 end
 
-function Slot:OnCreate()
-	self.Type:SetScript('OnEnter', Ability.OnEnter)
-	self.Type:SetScript('OnLeave', Ability.OnLeave)
-	self.Ability = {}
+function Slot:Construct()
+	local f = self:Super(Slot):Construct()
+	f.Type:SetScript('OnEnter', Addon.AbilityButton.OnEnter)
+	f.Type:SetScript('OnLeave', Addon.AbilityButton.OnLeave)
+	f.Abilities = {}
 
 	for i = 1, 6 do
-		self.Ability[i] = Ability(self)
-		self.Ability[i]:SetPoint('CENTER', -196 + i * 42, 20)
+		f.Abilities[i] = Addon.AbilityButton(f)
+		f.Abilities[i]:SetPoint('CENTER', -196 + i * 42, 20)
 	end
 
 	for i = 1, 3 do
-		self.Ability[i]:SetPoint('CENTER', -70 + i * 42, -15)
+		f.Abilities[i]:SetPoint('CENTER', -70 + i * 42, -15)
 	end
+
+	return f
 end
 
 
@@ -84,14 +82,14 @@ function Slot:Display(pet, target)
 			local current = pet:GetHealth()
 
 			self.IsDead:SetShown(current == 0)
-			self:UpdateBar('Health', current, health)
-			self:UpdateBar('Xp', pet:GetXP())
+			self:UpdateBar(self.Health, current, health)
+			self:UpdateBar(self.Xp, pet:GetXP())
 		else
 			self.Health:SetText(health)
 		end
 
 		for i = 1, 6 do
-			self.Ability[i]:Display(pet, i, target)
+			self.Abilities[i]:Display(pet, i, target)
 		end
 	end
 
@@ -100,7 +98,6 @@ function Slot:Display(pet, target)
 end
 
 function Slot:UpdateBar(bar, value, max)
-	local bar = self[bar]
 	bar.Text:SetText(format('%d/%d', value, max))
 	bar:SetMinMaxValues(0, max)
 	bar:SetValue(value)

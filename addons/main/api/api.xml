@@ -4,5 +4,4 @@
 	<Script file="maps.lua"/>
 	<Script file="predict.lua"/>
 	<Script file="search.lua"/>
-	<Script file="utils.lua"/>
 </Ui>

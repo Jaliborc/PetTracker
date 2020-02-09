@@ -1,0 +1,8 @@
+<Ui>
+	<Script file="base.lua"/>
+  <Script file="entity.lua"/>
+	<Script file="pet.lua"/>
+  <Script file="enemy.lua"/>
+  <Script file="specie.lua"/>
+  <Script file="rival.lua"/>
+</Ui>

@@ -120,12 +120,7 @@ function MapCanvas:Draw(frame)
 					local icon = specie:GetTypeIcon()
 
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-						local pin = Addon.SpeciePin()
-						pin:PlaceEncoded(frame, index, x, y)
-						pin.icon:SetTexture(icon)
-						pin.specie = specie
-
-						tinsert(self.pins[frame], pin)
+						tinsert(self.pins[frame], Addon.SpeciePin(frame, index, x,y, specie, icon))
 					end
 				end
 			end
@@ -135,19 +130,17 @@ function MapCanvas:Draw(frame)
 			local rivals = Addon.Journal.GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
 					local rival = Addon.Rival:Get(rival)
-					local pin = Addon.RivalPin()
-					pin:PlaceEncoded(frame, index, spot:match('(%w%w)(%w%w)'))
-					pin:Display(rival)
+					local x, y = spot:match('(%w%w)(%w%w)')
 
 					index = index + 1
-					tinsert(self.pins[frame], pin)
+					tinsert(self.pins[frame], Addon.RivalPin(frame, index, x,y, rival))
 			end
 		end
 
 		if not Addon.sets.HideStables then
 			local stables = Addon.Journal.GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
-				tinsert(self.pins[frame], Addon.StablePin():PlaceEncoded(frame, index, x, y))
+				tinsert(self.pins[frame], Addon.StablePin(frame, index, x,y))
 			end
 		end
 	end

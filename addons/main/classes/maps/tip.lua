@@ -5,14 +5,14 @@
 
 
 local ADDON, Addon = ...
-local Tooltip = Addon.Base:NewClass('PinTooltip', 'GameTooltip', 'GameTooltipTemplate')
+local Tooltip = Addon.Base:NewClass('MapTip', 'GameTooltip', 'GameTooltipTemplate')
 
 
 --[[ Construct ]]--
 
 function Tooltip:New(...)
 	local f = self:Super(Tooltip):New(...)
-	f.Strokes = {}
+	f.Strokes = f.Strokes or {}
 	return f
 end
 

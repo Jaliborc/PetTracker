@@ -16,24 +16,20 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local Ability = LibStub('Poncho-1.0')('Button')
-
-local GetInfo, GetModifier = C_PetBattles.GetAbilityInfoByID, C_PetBattles.GetAttackModifier
-local ModifierIcon = 'Interface\\PetBattles\\BattleBar-AbilityBadge-'
-local RequiresLevel = PET_ABILITY_REQUIRES_LEVEL
-local Tooltip = PetBattlePrimaryAbilityTooltip
-
-Addon:NewClass(nil, 'AbilityButton', ADDON..'AbilityButton', Ability)
-Addon:NewClass(nil, 'AbilityAction', 'PetBattleAbilityButtonTemplate', Ability)
+local Ability = Addon.Base:NewClass('AbilityButton')
+Ability:NewClass('AbilityAction', 'Button', 'PetBattleAbilityButtonTemplate')
+Ability:NewClass('AbilityButton', 'Button', true)
 
 
---[[ Startup ]]--
+--[[ Construct ]]--
 
-function Ability:OnCreate()
-	self:SetScript('OnEnter', self.OnEnter)
-	self:SetScript('OnLeave', self.OnLeave)
-	self:SetScript('OnEvent', nil)
-	self:SetScript('OnClick', nil)
+function Ability:Construct()
+	local f = self:Super(Ability):Construct()
+	b:SetScript('OnEnter', f.OnEnter)
+	b:SetScript('OnLeave', f.OnLeave)
+	b:SetScript('OnEvent', nil)
+	b:SetScript('OnClick', nil)
+	return f
 end
 
 function Ability:Display(pet, i, target)
@@ -41,10 +37,10 @@ function Ability:Display(pet, i, target)
 	if id then
 		local unusable = cooldown or requisite
 		local color = (unusable or not certain) and .5 or 1
-		local _, _, icon, _,_,_, type, healing = GetInfo(id)
-		local modifier = not healing and target and GetModifier(type, target) or 1
+		local _, _, icon, _,_,_, type, healing = C_PetBattles.GetAbilityInfoByID(id)
+		local modifier = not healing and target and C_PetBattles.GetAttackModifier(type, target) or 1
 
-		self.BetterIcon:SetTexture(ModifierIcon .. (modifier > 1 and 'Strong' or 'Weak'))
+		self.BetterIcon:SetTexture('Interface/PetBattles/BattleBar-AbilityBadge-' .. (modifier > 1 and 'Strong' or 'Weak'))
 		self.BetterIcon:SetShown(modifier ~= 1)
 
 		self.Icon:SetTexture(icon)
@@ -72,19 +68,19 @@ end
 
 function Ability:OnEnter()
 	if self.pet.owner then
-		PetBattleAbilityTooltip_SetAbilityByID(self.pet.owner, self.pet.index, self.id, self.text and RequiresLevel:format(self.text))
+		PetBattleAbilityTooltip_SetAbilityByID(self.pet:GetOwner(), self.pet:GetID(), self.id, self.text and PET_ABILITY_REQUIRES_LEVEL:format(self.text))
 		PetBattleAbilityTooltip_Show('BOTTOM', self, 'TOP')
 	else
-		local tip = FloatingPetBattleAbilityTooltip
-		FloatingPetBattleAbilityTooltip = Tooltip
+		local real = FloatingPetBattleAbilityTooltip
+		FloatingPetBattleAbilityTooltip = PetBattlePrimaryAbilityTooltip
 
 		FloatingPetBattleAbility_Show(self.id, self.pet:GetStats())
 		FloatingPetBattleAbilityTooltip:ClearAllPoints()
 		FloatingPetBattleAbilityTooltip:SetPoint('TOPLEFT', self, 'TOPRIGHT', 5, 0)
-		FloatingPetBattleAbilityTooltip = tip
+		FloatingPetBattleAbilityTooltip = real
 	end
 end
 
 function Ability:OnLeave()
-	Tooltip:Hide()
+	PetBattlePrimaryAbilityTooltip:Hide()
 end

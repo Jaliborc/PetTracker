@@ -21,12 +21,12 @@ function Pet:GetAbstract()
 	return strjoin(' ', name, family, source, description)
 end
 
-function Display:GetAvailableBreeds()
-  local breeds = Addon.Breeds[self:GetSpecie()] or {}
+function Pet:GetAvailableBreeds()
+  local breeds = Addon.SpecieBreeds[self:GetSpecie()] or {}
   if #breeds > 0 then
   	local text =  ''
   	for i, breed in ipairs(breeds) do
-  		text = text .. Addon.Display:BreedIcon(breed, .75) .. ' '
+  		text = text .. Addon.Breeds:Icon(breed, .75) .. ' '
   	end
 
   	return text

@@ -49,8 +49,8 @@ function Objectives:OnEnable()
 		local off = self:GetUsedHeight()
 		local availableEntries = floor(((Parent.maxHeight or 0) - off - 45) / 20)
 
-		if availableEntries ~= self.maxEntries then
-			self.maxEntries = availableEntries
+		if availableEntries ~= self.MaxEntries then
+			self.MaxEntries = availableEntries
 			self:OnEvent()
 		end
 

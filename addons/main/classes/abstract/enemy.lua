@@ -11,7 +11,7 @@ function Enemy:GetStats()
 end
 
 function Enemy:GetBreed()
-	local breeds = Addon.Breeds[self.id]
+	local breeds = Addon.SpecieBreeds[self.id]
 	return breeds and breeds[1] or 3
 end
 

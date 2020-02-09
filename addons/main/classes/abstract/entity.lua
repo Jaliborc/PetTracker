@@ -29,5 +29,5 @@ function Entity:GetSourceIcon()
 end
 
 function Entity:GetColor()
-	return Addon.Utils:GetColor(self:GetQuality())
+	return Addon:GetColor(self:GetQuality())
 end

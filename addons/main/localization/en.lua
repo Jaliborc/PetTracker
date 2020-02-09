@@ -109,5 +109,3 @@ L.JournalTutorial = {
 • |cffffd200> 20|r for rivals over level 20.]],
 [[PetTracker records the fights you have with each rival. Select a fight and click on |cffffd200Load Team|r to quickly reload the pets you used then.]]
 }
-
-Addon.Locals = L
