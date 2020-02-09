@@ -25,7 +25,7 @@
 	</Button>
 
 	<!-- Frame -->
-	<Frame name="PetTrackerRivalJournal" parent="CollectionsJournal" inherits="ButtonFrameTemplate" setAllPoints="true" hidden="true">
+	<Frame name="PetTrackerRivalsJournal" parent="CollectionsJournal" inherits="ButtonFrameTemplate" setAllPoints="true" hidden="true">
 		<Frames>
 			<Frame parentKey="Count" inherits="InsetFrameTemplate3">
 				<Size x="130" y="20"/>

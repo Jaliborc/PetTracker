@@ -1,9 +1,0 @@
-<Ui>
-	<Include file="Reward.xml"/>
-	<Include file="Portrait.xml"/>
-	<Include file="DarkButton.xml"/>
-	<Include file="ModelEntry.xml"/>
-
-	<Include file="Record.xml"/>
-	<Script file="Record.lua"/>
-</Ui>

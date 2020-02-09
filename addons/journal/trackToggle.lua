@@ -15,16 +15,23 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local ADDON, Addon = 'PetTracker', PetTracker
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Toggle = Addon:NewModule('TrackToggle', CreateFrame('CheckButton', ADDON .. 'TrackToggle', PetJournal, 'InterfaceOptionsCheckButtonTemplate'))
-local Anchor = CollectMeOpen2Button or PetJournalFindBattle
 
-Toggle.Text:SetText(Addon.Locals.ZoneTracker)
-Toggle:SetPoint('RIGHT', Anchor, 'LEFT', -Toggle.Text:GetWidth() - 15, -2)
-Toggle.TrackingChanged = function()
-	Toggle:SetChecked(not PetTracker.Sets.HideTracker)
+function Toggle:OnEnable()
+	self:SetPoint('RIGHT', CollectMeOpen2Button or PetJournalFindBattle, 'LEFT', -self.Text:GetWidth() - 15, -2)
+	self.Text:SetText(LibStub('AceLocale-3.0'):GetLocale(ADDON).ZoneTracker)
+	self:RegisterSignal('TRACKING_CHANGED', 'Update')
+	self:SetScript('OnClick', self.OnClick)
+	self:Update()
 end
 
-Toggle:SetScript('OnClick', function()
-	Addon.Tracker:Toggle()
-end)
+function Toggle:OnClick()
+	Addon.sets.hideTracker = not self:GetChecked()
+	Addon:SendSignal('TRACKING_CHANGED')
+end
+
+function Toggle:Update()
+	self:SetChecked(not Addon.sets.hideTracker)
+end

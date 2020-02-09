@@ -15,24 +15,31 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local Addon, ADDON = PetTracker, 'PetTracker'
-local Journal = PetTrackerRivalJournal
-local L = Addon.Locals
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local Journal = Addon:NewModule('RivalsJournal', _G[ADDON .. 'RivalsJournal'])
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
 --[[ Startup ]]--
 
-function Journal:Startup()
+function Journal:OnEnable()
+	self.PanelTab = LibStub('SecureTabs-2.0'):Add(CollectionsJournal, self, L.Rivals)
+	self.PanelTab.OnSelect = function() self:OnSelect() end
+end
+
+function Journal:OnSelect()
+	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, ADDON..'RivalEntry', 44, 0)
 	SetPortraitToTexture(self.portrait, 'Interface/Icons/PetJournalPortrait')
 
 	self.Inset:Hide()
-	self.Startup = function() end
+	self.OnSelect = function() end
 	self.TitleText:SetText(L.Rivals)
 	self.List.scrollBar.doNotHide = true
 	self.Count.Label:SetText(L.TotalRivals)
 	self.Count.Number:SetText(#Addon.RivalOrder)
-	self.SearchBox:SetText(Addon.Sets.RivalSearch or '')
+	self.SearchBox:SetText(Addon.sets.rivalSearch or '')
 	self.SearchBox:SetScript('OnTextChanged', self.Search)
 
 	self.Tab1.tip = TEAM
@@ -50,7 +57,7 @@ function Journal:Startup()
 	self.Tab3.Icon:SetPoint('BOTTOM', 1, 2)
 	self.Tab3.Icon:SetSize(25, 25)
 
-	self.Slots = Addon.JournalSlot:CreateLine('TOP', self.Team, 0, 104)
+	self.Slots = Addon.PetSlot:NewSet('TOP', self.Team, 0, 104)
 	self.Team.Border.Text:SetText(L.EnemyTeam)
 	self.History.LoadButton:SetText(L.LoadTeam)
 	self.History.Empty:SetText(L.NoHistory)
@@ -59,7 +66,6 @@ function Journal:Startup()
 	self.Map.BorderFrame:SetFrameLevel(self.Map:GetPinFrameLevelsManager():GetValidFrameLevel('PIN_FRAME_LEVEL_TOPMOST')+1)
 	self.Map:AddDataProvider(CreateFromMixins(MapExplorationDataProviderMixin))
 	self.Map:AddDataProvider(CreateFromMixins(GroupMembersDataProviderMixin))
-	self.Map.Destination = Addon.RivalPin()
 
 	for i = 1, 4 do
 		local loot = CreateFrame('ItemButton', '$parentLoot' .. i, self.Card, ADDON..'Reward')
@@ -70,14 +76,14 @@ function Journal:Startup()
 	end
 
 	for i = 1, 9 do
-		local record = Addon.Record(self.History)
+		local record = Addon.BattleRecord(self.History)
 		record:SetPoint('TOP', 0, 40-55*i)
 		record:SetID(i)
 
 		self.History[i] = record
 	end
 
-	self:SetRival(Addon.Rival:Get(Addon.RivalOrder[1]))
+	self:SetRival(Addon.Rival(Addon.RivalOrder[1]))
 	self:SetTab(1)
 end
 
@@ -85,7 +91,7 @@ end
 --[[ Events ]]--
 
 function Journal:Search()
-	Addon.Sets.RivalSearch = self:GetText()
+	Addon.sets.rivalSearch = self:GetText()
 	self.Instructions:SetShown(self:GetText() == '')
 	self:GetParent().List:update()
 end
@@ -129,8 +135,8 @@ function Journal.List:update()
 	local rivals = {}
 
 	for i, id in pairs(Addon.RivalOrder) do
-		local rival = Addon.Rival:Get(id)
-		if Addon:Filter(rival, Addon.Sets.RivalSearch) then
+		local rival = Addon.Rival(id)
+		if Addon:Filter(rival, Addon.sets.rivalSearch) then
 			tinsert(rivals, rival)
 		end
 	end
@@ -141,8 +147,8 @@ function Journal.List:update()
 		if rival then
 			button.name:SetText(rival.name)
 			button.model.level:SetText(rival:GetLevel())
+			button.petTypeIcon:SetTexture(rival:GetTypeIcon())
 			button.model.quality:SetVertexColor(rival:GetColor())
-			button.petTypeIcon:SetTexture(Addon.GetTypeIcon(rival:GetType()))
 			button.selectedTexture:SetShown(rival.id == self.selected.id)
 
 			if button.model:GetDisplayInfo() ~= rival.model then
@@ -239,17 +245,15 @@ function Journal.Map:Display(rival)
 		scroll:SetZoomTarget(scale)
 		scroll:SetPanTarget(Clamp(x, minX, maxX), Clamp(y, minY, maxY))
 
-		self.Destination:Place(self, 1, x, y)
-		self.Destination:Display(rival)
-
-		Addon.MapCanvas.pins[self] = {self.Destination}
+		self.Destination = Addon.RivalPin(self, 1, x,y, rival)
+		Addon.MapCanvas.pins[self] = {self.Destination} -- very hooked, want clean solution
 	else
-		self.Destination:Hide()
+		self.Destination:Release()
 	end
 end
 
 function Journal.History:Display(rival)
-	local entries = Addon.Sets.RivalHistory[rival.id] or {}
+	local entries = Addon.sets.rivalHistory[rival.id] or {}
 	self.Empty:SetShown(#entries == 0)
 	self:SetSelected(nil)
 
@@ -285,13 +289,4 @@ function Journal.History:LoadTeam()
 			C_PetJournal.SetAbility(i, k, spell)
 		end
 	end
-end
-
-
---[[ Make a Tab ]]--
-
-Journal.PanelTab = LibStub('SecureTabs-2.0'):Add(CollectionsJournal, Journal, L.Rivals)
-Journal.PanelTab.OnSelect = function()
-	Journal:Startup()
-	PetJournalTutorialButton:Hide()
 end

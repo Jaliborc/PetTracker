@@ -15,13 +15,14 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local Addon = PetTracker
-local Record = Addon:NewClass('Button', 'Record', 'PetTrackerRecord')
-local L = Addon.Locals
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local Record = Addon.Base:NewClass('BattleRecord', 'Button', true)
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-local IdMatch = strrep('%w', 12)
-local SpellsMatch = strrep('(%w%w%w)', 3)
-local PetMatch = '(%w)' .. SpellsMatch .. '(' .. IdMatch .. ')'
+local ID_MATCH = strrep('%w', 12)
+local SPELLS_MATCH = strrep('(%w%w%w)', 3)
+local PET_MATCH = '(%w)' .. SPELLS_MATCH .. '(' .. ID_MATCH .. ')'
 
 function Record:Display(entry)
 	self:Unpack(entry)
@@ -57,7 +58,7 @@ function Record:Unpack(entry)
 	self.day, self.month, self.year = self:UnpackDate(date)
 	self.pets = {}
 
-	for health, spell1, spell2, spell3, id in petData:gmatch(PetMatch) do
+	for health, spell1, spell2, spell3, id in petData:gmatch(PET_MATCH) do
 		tinsert(self.pets, {
 			id = 'BattlePet-0-' .. id,
 			health = tonumber(health, 16) / 15,

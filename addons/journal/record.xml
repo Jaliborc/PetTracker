@@ -1,5 +1,5 @@
 <Ui>
-	<Button name="PetTrackerRecord" inherits="PetTrackerDarkButton" virtual="true">
+	<Button name="PetTrackerBattleRecord" inherits="PetTrackerDarkButton" virtual="true">
 		<Size x="390" y="40"/>
 		<ButtonText>
    			<Anchors>
