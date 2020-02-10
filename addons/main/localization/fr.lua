@@ -6,12 +6,11 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'frFR')
 if not L then return end
 
-
 L.AddWaypoint = 'Ajouter un repère'
 L.AlertUpgrades = 'Alerter pour les Améliorations'
 L.AlertUpgradesTip = 'Si desactivé, l\'alerte des améliorations sauvages ne sera pas affichée en combat, mais celles-ci seront toujours marquées avec un symbole (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Aucune amélioration n\'est disponible. Quitter le combat?'
-L.AvailableBreeds = '\nRaces disponibles:'
+L.AvailableBreeds = 'Races disponibles'
 L.PromptForfeit = 'Déclarer forfait'
 L.PromptForfeitTip = 'Si activé, Il vous sera proposé de déclarer forfait en combat si aucunes améliorations n\'est disponibles.'
 L.Breed = 'Races'

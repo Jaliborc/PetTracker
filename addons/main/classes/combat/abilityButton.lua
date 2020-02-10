@@ -12,57 +12,53 @@ Ability:NewClass('AbilityButton', 'Button', true)
 --[[ Construct ]]--
 
 function Ability:Construct()
-	local f = self:Super(Ability):Construct()
-	b:SetScript('OnEnter', f.OnEnter)
-	b:SetScript('OnLeave', f.OnLeave)
+	local b = self:Super(Ability):Construct()
+	b:SetScript('OnEnter', b.OnEnter)
+	b:SetScript('OnLeave', b.OnLeave)
 	b:SetScript('OnEvent', nil)
 	b:SetScript('OnClick', nil)
-	return f
+	return b
 end
 
-function Ability:Display(pet, i, target)
-	local id, cooldown, requisite, certain = pet:GetAbility(i)
-	if id then
-		local unusable = cooldown or requisite
-		local color = (unusable or not certain) and .5 or 1
-		local _, _, icon, _,_,_, type, healing = C_PetBattles.GetAbilityInfoByID(id)
-		local modifier = not healing and target and C_PetBattles.GetAttackModifier(type, target) or 1
+function Ability:Display(ability, target)
+	if ability then
+		local unusable = ability.cooldown or ability.requisite
+		local color = (unusable or not ability.certain) and .5 or 1
+		local modifier = ability:GetModifier(target)
 
 		self.BetterIcon:SetTexture('Interface/PetBattles/BattleBar-AbilityBadge-' .. (modifier > 1 and 'Strong' or 'Weak'))
 		self.BetterIcon:SetShown(modifier ~= 1)
 
-		self.Icon:SetTexture(icon)
-		self.Icon:SetDesaturated(unusable)
+		self.Icon:SetTexture(select(3, ability:GetInfo()))
 		self.Icon:SetVertexColor(color, color, color)
+		self.Icon:SetDesaturated(unusable)
 		self.Lock:SetShown(requisite)
 
-		self.Cooldown:SetText(cooldown or "")
+		self.Cooldown:SetText(cooldown or '')
 		self.CooldownShadow:SetShown(cooldown)
 		self.Cooldown:SetShown(cooldown)
 
 		if self.Type then
-			self.Type:SetTexture(Addon.GetTypeIcon(type))
+			self.Type:SetTexture(ability:GetTypeIcon())
 		end
-
-		self.pet, self.id = pet, id
-		self.text = requisite
 	end
 
-	self:SetShown(id)
+	self.ability = ability
+	self:SetShown(ability)
 end
 
 
 --[[ Tooltips ]]--
 
 function Ability:OnEnter()
-	if self.pet.owner then
-		PetBattleAbilityTooltip_SetAbilityByID(self.pet:GetOwner(), self.pet:GetID(), self.id, self.text and PET_ABILITY_REQUIRES_LEVEL:format(self.text))
+	local pet = self.ability.pet
+	if pet.owner then
+		PetBattleAbilityTooltip_SetAbilityByID(pet.owner, pet.index, self.ability.id, self.ability.requisite and PET_ABILITY_REQUIRES_LEVEL:format(self.ability.requisite))
 		PetBattleAbilityTooltip_Show('BOTTOM', self, 'TOP')
 	else
 		local real = FloatingPetBattleAbilityTooltip
 		FloatingPetBattleAbilityTooltip = PetBattlePrimaryAbilityTooltip
-
-		FloatingPetBattleAbility_Show(self.id, self.pet:GetStats())
+		FloatingPetBattleAbility_Show(self.ability.id, pet:GetStats())
 		FloatingPetBattleAbilityTooltip:ClearAllPoints()
 		FloatingPetBattleAbilityTooltip:SetPoint('TOPLEFT', self, 'TOPRIGHT', 5, 0)
 		FloatingPetBattleAbilityTooltip = real

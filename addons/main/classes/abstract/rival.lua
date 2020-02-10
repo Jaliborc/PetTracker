@@ -57,8 +57,7 @@ function Rival:Display()
 	ShowUIPanel(CollectionsJournal)
 
 	if LoadAddOn('PetTracker_Journal') then
-		Addon.Rivals.PanelTab:ExecuteScript('OnClick')
-		Addon.Rivals:SetRival(self)
+		Addon.RivalsJournal:SetRival(self)
 	end
 end
 

@@ -3,10 +3,10 @@
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
 ## Version: 8.3.0
+## X-Category: Battle Pets
 
 ## SavedVariables: PetTracker_Sets
 ## SavedVariablesPerCharacter: PetTracker_State
-## X-Category: Battle Pets
 ## OptionalDeps: WoWUnit
 
 addons\main\main.xml

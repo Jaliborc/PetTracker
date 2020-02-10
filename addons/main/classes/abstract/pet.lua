@@ -65,7 +65,7 @@ end
 --[[ Basic Info ]]--
 
 function Pet:GetAbility(i)
-	return self:GetAbilities()[i]
+	return Addon.Ability(self:GetAbilities()[i], self)
 end
 
 function Pet:GetAbilities()

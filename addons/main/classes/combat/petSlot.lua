@@ -41,13 +41,7 @@ function Slot:Construct()
 
 	for i = 1, 6 do
 		f.Abilities[i] = Addon.AbilityButton(f)
-		f.Abilities[i]:SetPoint('CENTER', -196 + i * 42, 20)
 	end
-
-	for i = 1, 3 do
-		f.Abilities[i]:SetPoint('CENTER', -70 + i * 42, -15)
-	end
-
 	return f
 end
 
@@ -71,9 +65,8 @@ function Slot:Display(pet, target)
 		self.Power:SetText(power)
 		self.Speed:SetText(speed)
 
-		self.Type.Icon:SetTexture(Addon.GetTypeIcon(type))
-		self.Type.id = PET_BATTLE_PET_TYPE_PASSIVES[type]
-		self.Type.pet = pet
+		self.Type.Icon:SetTexture(pet:GetTypeIcon())
+		self.Type.ability = Addon.Ability(PET_BATTLE_PET_TYPE_PASSIVES[type], pet)
 
 		self.Model:SetDisplayInfo(pet:GetModel())
 		self.Level:SetText(pet:GetLevel())
@@ -88,8 +81,17 @@ function Slot:Display(pet, target)
 			self.Health:SetText(health)
 		end
 
-		for i = 1, 6 do
-			self.Abilities[i]:Display(pet, i, target)
+		local doubled
+		for i, button in pairs(self.Abilities) do
+			button:Display(pet:GetAbility(i), target)
+			doubled = doubled or (i > 3 and button:IsShown())
+		end
+
+		for i, button in pairs(self.Abilities) do
+			local x = -75 + (((i-1) % 3) + 1) * 42
+			local y = (i > 3 and 20 or -15) - (not self.Xp and doubled and 15 or 0)
+
+			button:SetPoint('CENTER', x, y)
 		end
 	end
 

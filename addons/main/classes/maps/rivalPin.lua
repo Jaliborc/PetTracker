@@ -16,13 +16,15 @@ This file is part of PetTracker.
 --]]
 
 local ADDON, Addon = ...
-local Pin = Addon.Pin:NewClass('RivalPin', nil, 'EncounterJournalPinTemplate')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+local Pin = Addon.Pin:NewClass('RivalPin', nil, 'EncounterJournalPinTemplate')
+Pin.FrameLevel = 'PIN_FRAME_LEVEL_ENCOUNTER'
 
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
+	b.DefeatedOverlay:Hide()
 	b:SetScript('OnClick', b:GetClass().OnClick)
-	b.FrameLevel = 'PIN_FRAME_LEVEL_ENCOUNTER'
+	b:Show()
 	return b
 end
 

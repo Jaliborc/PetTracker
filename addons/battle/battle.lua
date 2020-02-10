@@ -113,22 +113,22 @@ function Battle:GetAbility(i)
 			local requisite = not (cooldown or usable) and levels[i]
 			local id = self:GetAbilityInfo(i) or abilities[i]
 
-			return id, cooldown ~= 0 and cooldown, requisite, true
+			return Addon.Ability(id, self, cooldown, requisite, true)
 		end
 	else
 		local k = i % 3
-		local casts = Addon.State.Casts[self.index]
+		local casts = Addon.state.casts[self.index]
 		if not casts.id[k] and self:GetLevel() >= max(levels[i], levels[i+3] or 0) then
-			return abilities[i]
+			return Addon.Ability(abilities[i], self)
 		end
 
 		if i < 4 then
 			local id = casts.id[k] or abilities[i]
 			local cooldown = select(4, C_PetBattles.GetAbilityInfoByID(id)) or 0
 			local requisite = self:GetLevel() < levels[i] and levels[i]
-			local remaining = casts.turn[k] and (cooldown + casts.turn[k] - Addon.State.Turn) or 0
+			local remaining = casts.turn[k] and (cooldown + casts.turn[k] - Addon.state.Turn) or 0
 
-			return id, remaining > 0 and remaining, requisite, true
+			return Addon.Ability(id, self, remaining, requisite, true)
 		end
 	end
 end

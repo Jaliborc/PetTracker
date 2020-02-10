@@ -20,11 +20,11 @@ local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Toggle = Addon:NewModule('TrackToggle', CreateFrame('CheckButton', ADDON .. 'TrackToggle', PetJournal, 'InterfaceOptionsCheckButtonTemplate'))
 
 function Toggle:OnEnable()
-	self:SetPoint('RIGHT', CollectMeOpen2Button or PetJournalFindBattle, 'LEFT', -self.Text:GetWidth() - 15, -2)
-	self.Text:SetText(LibStub('AceLocale-3.0'):GetLocale(ADDON).ZoneTracker)
-	self:RegisterSignal('TRACKING_CHANGED', 'Update')
-	self:SetScript('OnClick', self.OnClick)
 	self:Update()
+	self:SetScript('OnClick', self.OnClick)
+	self:RegisterSignal('TRACKING_CHANGED', 'Update')
+	self.Text:SetText(LibStub('AceLocale-3.0'):GetLocale(ADDON).ZoneTracker)
+	self:SetPoint('RIGHT', CollectMeOpen2Button or PetJournalFindBattle, 'LEFT', -self.Text:GetWidth() - 15, -1)
 end
 
 function Toggle:OnClick()

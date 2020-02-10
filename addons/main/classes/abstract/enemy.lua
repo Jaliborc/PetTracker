@@ -36,7 +36,7 @@ function Enemy:GetAbility(i)
 	for _, id in pairs(abilities) do
 		i = i - 1
 		if i == 0 then
-			return id, nil, nil, true
+			return Addon.Ability(id, self, nil, nil, true)
 		end
 	end
 end

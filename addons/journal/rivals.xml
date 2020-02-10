@@ -4,7 +4,7 @@
 		<Scripts>
 			<OnClick>
 				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-				PetTrackerRivalJournal:SetRival(self.rival)
+				PetTrackerRivalsJournal:SetRival(self.rival)
 			</OnClick>
 		</Scripts>
 	</Button>
@@ -19,7 +19,7 @@
 			</OnEnter>
 			<OnClick>
 				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-				PetTrackerRivalJournal:SetTab(self:GetID())
+				PetTrackerRivalsJournal:SetTab(self:GetID())
 			</OnClick>
 		</Scripts>
 	</Button>
@@ -354,7 +354,7 @@
 					<Button parentKey="LoadButton" name="$parentLoadButton" inherits="MagicButtonTemplate">
 						<Size x="140" y="22"/>
 						<Anchors>
-							<Anchor point="BOTTOMRIGHT" relativeTo="PetTrackerRivalJournal"/>
+							<Anchor point="BOTTOMRIGHT" relativeTo="PetTrackerRivalsJournal"/>
 						</Anchors>
 						<Scripts>
 							<OnClick>

@@ -24,12 +24,9 @@ Addon.MaxLevel = 25
 --[[ Events ]]--
 
 function Addon:OnEnable()
-	PetTracker_State = PetTracker_State or {}
-	PetTracker_Sets = PetTracker_Sets or {}
+	PetTracker_Sets, PetTracker_State = PetTracker_Sets or {}, PetTracker_State or {}
 
 	self.sets, self.state = PetTracker_Sets, PetTracker_State
-	self:RegisterEvent('PLAYER_ENTERING_WORLD')
-
 	if self.sets.MainTutorial then
 		for k,v in pairs(CopyTable(self.sets)) do
 			self.sets[k] = nil
@@ -44,15 +41,12 @@ function Addon:OnEnable()
 			LoadAddOn('PetTracker_Config')
 		end)
 	end
+
+	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
 end
 
-function Addon:PLAYER_ENTERING_WORLD()
-	self:RegisterEvent('PET_JOURNAL_LIST_UPDATE')
-	self:SendSignal('COLLECTION_CHANGED')
-end
-
-function Addon:PET_JOURNAL_LIST_UPDATE()
-	self:Delay(2, 'SendSignal', 'COLLECTION_CHANGED') -- data on client doesnt update immediately every time
+function Addon:OnPetsChanged()
+	self:Delay(.1, 'SendSignal', 'COLLECTION_CHANGED') -- library sometimes fires callback multiple times
 end
 
 

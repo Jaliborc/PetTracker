@@ -27,11 +27,12 @@ Bar:SetMovable(true)
 function Bar:OnEnable()
 	self.buttons = {}
 	for i = 1,6 do
-		self.buttons[i] = self:CreateButton(i)
+		self.buttons[i] = self:NewButton(i)
 	end
 
 	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
+	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateLock')
 	self:SetScript('OnShow', self.Update)
 	self:SetSize(175, 55)
 	self:SetScale(.8)
@@ -42,13 +43,7 @@ function Bar:OnEnable()
 	--PetBattlePetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
 end
 
---[[function Bar:OnOptions(panel)
-	panel:New('Check', 'UnlockActions'):SetCall('OnInput', function()
-		self:UpdateLock()
-	end)
-end--]]
-
-function Bar:CreateButton(i)
+function Bar:NewButton(i)
 	local y = floor((i-1) / 3)
 	local x = (i-1) % 3
 
@@ -69,10 +64,10 @@ end
 
 function Bar:Update()
 	local enemy = Addon.Battle:GetCurrent(LE_BATTLE_PET_ENEMY)
-	local targetType = Addon.Battle:GetCurrent(LE_BATTLE_PET_ALLY):GetType()
+	local target = Addon.Battle:GetCurrent(LE_BATTLE_PET_ALLY)
 
 	for i, b in ipairs(self.buttons) do
-		b:Display(enemy, i, targetType)
+		b:Display(enemy:GetAbility(i), target)
 	end
 end
 

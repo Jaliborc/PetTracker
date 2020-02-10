@@ -19,25 +19,20 @@ local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Swap = Addon:NewModule('Switcher', CreateFrame('Frame', ADDON .. 'Switcher', PetBattleFrame, 'ButtonFrameTemplate'))
 
-local Enemy = LE_BATTLE_PET_ENEMY
-local Player = LE_BATTLE_PET_ALLY
-
 
 --[[ Startup ]]--
 
 function Swap:OnEnable()
-	self:Hide()
-	self:SetSize(840, 424)
+	self:RegisterEvent('PET_BATTLE_ACTION_SELECTED', 'Hide')
+	self:NewColumn(LE_BATTLE_PET_ENEMY, 'TOPRIGHT', -10)
+	self:NewColumn(LE_BATTLE_PET_ALLY, 'TOPLEFT', 10)
 	self:SetPoint('CENTER')
-	self:NewColumn(Enemy, 'TOPRIGHT', -10)
-	self:NewColumn(Player, 'TOPLEFT', 10)
-	self.TitleText:SetText(SWITCH_PET)
-	self:RegisterEvent('PET_BATTLE_ACTION_SELECTED', function()
-		self:Hide()
-	end)
+	self:SetSize(840, 424)
+	self:Hide()
 
 	SetPortraitToTexture(self.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
 	self.Close = _G[self:GetName() .. 'CloseButton']
+	self.TitleText:SetText(SWITCH_PET)
 
 	local oShow = PetBattlePetSelectionFrame_Show
 	function PetBattlePetSelectionFrame_Show()
@@ -61,44 +56,38 @@ function Swap:OnEnable()
 	end
 end
 
-function Swap:NewColumn(owner, ...)
+function Swap:NewColumn(owner, point, off)
 	for i = 1, NUM_BATTLE_PETS_IN_BATTLE do
-		self[owner..i] = self:NewSlot(i, ...)
+		local slot = Addon.BattleSlot(self.Inset)
+		slot:SetPoint(point, off, 101 - 108 * i)
+		slot:SetScript('OnClick', function()
+			if slot.pet:Swap() then
+				self:Hide()
+			end
+		end)
+
+		self[owner..i] = slot
 	end
 
 	local border = CreateFrame('Frame', nil, self, ADDON..'SlotBorder')
 	border:SetPoint('TOP', self[owner..1], 0, 2)
 end
 
-function Swap:NewSlot(i, point, off)
-	local f = Addon.PetSlot(self.Inset)
-	f:SetPoint(point, off, 101 - 108 * i)
-	f:SetScript('OnClick', function()
-		if f.pet:Swap() then
-			self:Hide()
-		end
-	end)
-
-	return f
-end
-
 
 --[[ Update ]]--
 
 function Swap:Update()
-	self:UpdateFor(Player, Enemy)
-	self:UpdateFor(Enemy, Player)
-	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle:GetCurrent(Player):IsAlive())
+	self:UpdateFor(LE_BATTLE_PET_ALLY, LE_BATTLE_PET_ENEMY)
+	self:UpdateFor(LE_BATTLE_PET_ENEMY, LE_BATTLE_PET_ALLY)
+	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle:GetCurrent(LE_BATTLE_PET_ALLY):IsAlive())
 end
 
-function Swap:UpdateFor(owner, target)
-	local targetType = Addon.Battle:GetCurrent(target):GetType()
-
+function Swap:UpdateFor(owner, adversary)
 	for i = 1, NUM_BATTLE_PETS_IN_BATTLE do
 		local pet = Addon.Battle(owner, i)
 		local slot = self[owner .. i]
 
-		slot:Display(pet:Exists() and pet, targetType)
+		slot:Display(pet:Exists() and pet, Addon.Battle:GetCurrent(adversary))
 		slot.pet = pet
 	end
 end

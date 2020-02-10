@@ -27,6 +27,11 @@ function Tip:Construct()
 	return f
 end
 
+function Tip:Release()
+	self:Super(Tip):Release()
+	self:Hide()
+end
+
 
 --[[ Overrides ]]--
 

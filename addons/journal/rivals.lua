@@ -25,22 +25,22 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Journal:OnEnable()
 	self.PanelTab = LibStub('SecureTabs-2.0'):Add(CollectionsJournal, self, L.Rivals)
-	self.PanelTab.OnSelect = function() self:OnSelect() end
+	self:SetScript('OnShow', self.OnShow)
 end
 
-function Journal:OnSelect()
+function Journal:OnShow()
 	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, ADDON..'RivalEntry', 44, 0)
 	SetPortraitToTexture(self.portrait, 'Interface/Icons/PetJournalPortrait')
 
 	self.Inset:Hide()
-	self.OnSelect = function() end
+	self:SetScript('OnShow', nil)
 	self.TitleText:SetText(L.Rivals)
 	self.List.scrollBar.doNotHide = true
 	self.Count.Label:SetText(L.TotalRivals)
 	self.Count.Number:SetText(#Addon.RivalOrder)
 	self.SearchBox:SetText(Addon.sets.rivalSearch or '')
-	self.SearchBox:SetScript('OnTextChanged', self.Search)
+	self.SearchBox:SetScript('OnTextChanged', function() self:Search(self.SearchBox:GetText()) end)
 
 	self.Tab1.tip = TEAM
 	self.Tab1.Icon:SetTexture('Interface/Icons/ability_hunter_pet_goto')
@@ -57,11 +57,12 @@ function Journal:OnSelect()
 	self.Tab3.Icon:SetPoint('BOTTOM', 1, 2)
 	self.Tab3.Icon:SetSize(25, 25)
 
-	self.Slots = Addon.PetSlot:NewSet('TOP', self.Team, 0, 104)
+	self.Slots = Addon.JournalSlot:NewSet('TOP', self.Team, 0, 104)
 	self.Team.Border.Text:SetText(L.EnemyTeam)
 	self.History.LoadButton:SetText(L.LoadTeam)
 	self.History.Empty:SetText(L.NoHistory)
 
+	self.Map:SetMapID(2)
 	self.Map.BorderFrame.Bg:Hide()
 	self.Map.BorderFrame:SetFrameLevel(self.Map:GetPinFrameLevelsManager():GetValidFrameLevel('PIN_FRAME_LEVEL_TOPMOST')+1)
 	self.Map:AddDataProvider(CreateFromMixins(MapExplorationDataProviderMixin))
@@ -77,8 +78,8 @@ function Journal:OnSelect()
 
 	for i = 1, 9 do
 		local record = Addon.BattleRecord(self.History)
+		record:HookScript('OnClick', function() self.History:SetSelected(i) end)
 		record:SetPoint('TOP', 0, 40-55*i)
-		record:SetID(i)
 
 		self.History[i] = record
 	end
@@ -88,12 +89,22 @@ function Journal:OnSelect()
 end
 
 
---[[ Events ]]--
+--[[ Actions ]]--
 
-function Journal:Search()
-	Addon.sets.rivalSearch = self:GetText()
-	self.Instructions:SetShown(self:GetText() == '')
-	self:GetParent().List:update()
+function Journal:SetRival(rival)
+	self:Open()
+	self.List.selected = rival
+	self.List:update()
+	self:Update()
+end
+
+function Journal:Search(text)
+	Addon.sets.rivalSearch = text
+
+	self:Open()
+	self.SearchBox:SetText(text)
+	self.SearchBox.Instructions:SetShown(text == '')
+	self.List:update()
 end
 
 function Journal:SetTab(tab)
@@ -114,16 +125,8 @@ function Journal:SetTab(tab)
 	self:Update()
 end
 
-function Journal:SetRival(rival)
-	self:Startup()
-	self.List.selected = rival
-	self.List:update()
-	self:Update()
-end
-
-function Journal:SetRecord(record)
-	self.History.selected = record
-	self.History:Update()
+function Journal:Open()
+	LibStub('SecureTabs-2.0'):Update(CollectionsJournal, self.PanelTab)
 end
 
 
@@ -136,7 +139,7 @@ function Journal.List:update()
 
 	for i, id in pairs(Addon.RivalOrder) do
 		local rival = Addon.Rival(id)
-		if Addon:Filter(rival, Addon.sets.rivalSearch) then
+		if Addon:Search(rival, Addon.sets.rivalSearch) then
 			tinsert(rivals, rival)
 		end
 	end
@@ -237,6 +240,10 @@ function Journal.Map:Display(rival)
 		self:ResetZoom()
 	end
 
+	if self.Destination then
+		self.Destination:Release()
+	end
+
 	local x, y = rival:GetLocation()
 	if x and y then
 		local scale = scroll.zoomLevels[#scroll.zoomLevels].scale
@@ -246,14 +253,12 @@ function Journal.Map:Display(rival)
 		scroll:SetPanTarget(Clamp(x, minX, maxX), Clamp(y, minY, maxY))
 
 		self.Destination = Addon.RivalPin(self, 1, x,y, rival)
-		Addon.MapCanvas.pins[self] = {self.Destination} -- very hooked, want clean solution
-	else
-		self.Destination:Release()
+		Addon.MapCanvas.Pins[self] = {self.Destination} -- very hooked, want clean solution
 	end
 end
 
 function Journal.History:Display(rival)
-	local entries = Addon.sets.rivalHistory[rival.id] or {}
+	local entries = Addon.sets.rivalHistory and Addon.sets.rivalHistory[rival.id] or {}
 	self.Empty:SetShown(#entries == 0)
 	self:SetSelected(nil)
 

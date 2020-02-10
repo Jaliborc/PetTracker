@@ -31,10 +31,10 @@ function Upgrade:OnEnable()
   self.Bangs = {}
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
+	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
 	self:SetCall('OnClose', function() self.canShow = nil end)
   self:Reset()
 
-	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PetsUpdated', 'UpdateAll')
 	hooksecurefunc('PetBattleUnitFrame_UpdateDisplay', function(p) self:UpdateBang(p) end)
 	hooksecurefunc('PetBattleFrame_Display', function() self:UpdateAll() end)
 end
