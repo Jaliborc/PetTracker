@@ -253,7 +253,6 @@ function Journal.Map:Display(rival)
 		scroll:SetPanTarget(Clamp(x, minX, maxX), Clamp(y, minY, maxY))
 
 		self.Destination = Addon.RivalPin(self, 1, x,y, rival)
-		Addon.MapCanvas.Pins[self] = {self.Destination} -- very hooked, want clean solution
 	end
 end
 
@@ -290,8 +289,8 @@ function Journal.History:LoadTeam()
 	for i, pet in ipairs(record.pets) do
 		C_PetJournal.SetPetLoadOutInfo(i, pet.id)
 
-		for k, spell in ipairs(pet.spells) do
-			C_PetJournal.SetAbility(i, k, spell)
+		for k, ability in ipairs(pet.abilities) do
+			C_PetJournal.SetAbility(i, k, ability)
 		end
 	end
 end

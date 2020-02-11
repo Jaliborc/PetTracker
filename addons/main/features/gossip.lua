@@ -44,7 +44,7 @@ function Gossip:OnEnable()
 	hooksecurefunc('SelectGossipOption', function(index)
 		local button = _G['GossipTitleButton' .. index]
 		if button and button.type == ADDON then
-			Addon.Rival:Get(GossipFrame.tamer):Display()
+			Addon.Rival(GossipFrame.tamer):Display()
 		end
 	end)
 end

@@ -1,5 +1,18 @@
 #### 8.3.1
-* Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
+* Massive Internal Rewrite.
+* Visible Changes:
+  * Fixed the World Map hourglass button.
+  * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
+  * Objectives pet list should now update faster on login.
+  * _PetTracker_Switcher_, _PetTracker_Upgrades_ and _PetTracker_Breeds_ have been made part of the main addon and can now be toggled on/off in the settings.
+  * _PetTracker_Journal_ and _PetTracker_Battle_ now contain all the load on demand content, relative to the pet journal and battles respectively.
+* Internal Changes:
+  * Rearranged entire mod using the WildAddon-1.0 module based architecture.
+  * Rewrote a cleaner internal API, both for static and object-oriented methods.
+  * Object oriented programming now implemented using Poncho-2.0.
+  * Dropdowns, popups and settings panel now implemented using Sushi-3.1.
+  * Timers now implemented using DelayMutex-1.0.
+  * Definitively a lot more we forgot by now.
 
 #### 8.3.0
 * Updated for Visions of N'Zoth.

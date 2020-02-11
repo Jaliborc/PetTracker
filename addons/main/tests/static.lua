@@ -20,9 +20,9 @@ function Tests:GetTypeIcon()
 end
 
 function Tests:GetBreedIcon()
-	AreEqual(Addon.Breeds:GetIcon(nil, 1), '')
-	AreEqual(Addon.Breeds:GetIcon(1, .8), '')
-	AreEqual(Addon.Breeds:GetIcon(3, 1), '|TInterface\\PetBattles\\PetBattle-StatIcons:22:22:0:0:32:32:16:32:0:16|t')
+	AreEqual(Addon.Breeds:Icon(nil, 1), '')
+	AreEqual(Addon.Breeds:Icon(1, .8), '')
+	AreEqual(Addon.Breeds:Icon(3, 1), '|TInterface\\PetBattles\\PetBattle-StatIcons:22:22:0:0:32:32:16:32:0:16|t')
 end
 
 

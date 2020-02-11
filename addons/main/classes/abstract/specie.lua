@@ -76,10 +76,7 @@ function Specie:GetOwnedText()
 		local text = NORMAL_FONT_COLOR_CODE .. COLLECTED .. ':' .. FONT_COLOR_CODE_CLOSE
 
 		for i, pet in ipairs(owned) do
-			local icon = Addon.Breeds:GetIcon(pet:GetBreed(), .8, -2)
-			local _,_,_, color = pet:GetColor()
-
-			text = text .. format('  %s|c%s%d|r', icon, color, pet:GetLevel())
+			text = text .. format('  %s|c%s%d|r', pet:GetBreedIcon(.8, -2,0), select(4, pet:GetColor()), pet:GetLevel())
 		end
 
 		return text

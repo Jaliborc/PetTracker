@@ -43,7 +43,7 @@ function Tooltips:Init(tip)
 
     tip.Source:SetText(select(5, specie:GetInfo()))
     tip.Owned:SetText(specie:GetOwnedText() or tip.Owned:GetText())
-    tip.Name:SetText((tip.Name:GetText() or '') .. Addon.Breeds:GetIcon(breed, .8, 5, 0))
+    tip.Name:SetText((tip.Name:GetText() or '') .. Addon.Breeds:Icon(breed, .8, 5,0))
     tip:SetHeight(tip:GetHeight() + tip.Source:GetHeight() + (breed == 3 and 10 or 4))
   end)
 end

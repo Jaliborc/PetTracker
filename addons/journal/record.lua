@@ -62,7 +62,7 @@ function Record:Unpack(entry)
 		tinsert(self.pets, {
 			id = 'BattlePet-0-' .. id,
 			health = tonumber(health, 16) / 15,
-			spells = {tonumber(spell1, 16), tonumber(spell2, 16), tonumber(spell3, 16)}
+			abilities = {tonumber(spell1, 16), tonumber(spell2, 16), tonumber(spell3, 16)}
 		})
 	end
 end

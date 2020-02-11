@@ -31,25 +31,21 @@ function Mods:OnEnable()
 end
 
 function Mods:ModifyCard(card)
+  local pet = Addon.Pet(card.petID)
+  local breeds = pet:GetAvailableBreeds()
+  if breeds then
+    card.PetInfo.sourceText = format('%s\n%s%s:%s %s', card.PetInfo.sourceText, NORMAL_FONT_COLOR_CODE, L.AvailableBreeds, FONT_COLOR_CODE_CLOSE, breeds)
+  end
+
   local footer = card.QualityFrame
   if footer:IsShown() then
-    local pet = Addon.Pet(card.petID)
-    local breed = pet:GetBreed()
-
-    local string = footer.quality
-    string:SetText(Addon.Breeds:GetIcon(breed, .75, -3, -1) .. string:GetText() .. ' ' .. Addon.Breeds:GetName(breed))
-    string:SetPoint('LEFT', 4, 0)
-
+    footer:SetWidth(150)
+    footer:GetRegions():Hide()
     footer:SetScript('OnEnter', function() self:OnEnter(footer) end)
     footer:SetScript('OnLeave', function() self:OnLeave(footer) end)
-    footer:GetRegions():Hide()
-    footer:SetWidth(150)
-    footer.breed = breed
-
-    local breeds = pet:GetAvailableBreeds()
-    if breeds then
-      card.PetInfo.sourceText = format('%s\n%s%s:%s %s', card.PetInfo.sourceText, NORMAL_FONT_COLOR_CODE, L.AvailableBreeds, FONT_COLOR_CODE_CLOSE, breeds)
-    end
+    footer.quality:SetText(pet:GetBreedIcon(.75, -3,-1) .. footer.quality:GetText() .. ' ' .. pet:GetBreedName())
+    footer.quality:SetPoint('LEFT', 4, 0)
+    footer.pet = pet
   end
 end
 
@@ -57,10 +53,7 @@ function Mods:ModifyLoadOut()
   for i = 1, NUM_BATTLE_PETS_IN_BATTLE do
     local slot = PetJournal.Loadout['Pet'..i]
     if slot.petID then
-      local breed = Addon.Pet(slot.petID):GetBreed()
-      local string = slot.name
-
-      string:SetText((string:GetText() or '') .. Addon.Breeds:GetIcon(breed, .75, 3, -1))
+      slot.name:SetText((slot.name:GetText() or '') .. Addon.Pet(slot.petID):GetBreedIcon(.75, 3,-1))
     end
   end
 end
@@ -76,10 +69,11 @@ function Mods:OnEnter(frame)
   tip:AddHeader(L.Breed)
   tip:AddLine(L.BreedExplanation)
 
-  if frame.breed then
-    tip:AddLine('\n' .. Addon.Breeds:GetName(frame.breed), 1,1,1)
+  local breed = frame.pet:GetBreed()
+  if breed then
+    tip:AddLine('\n' .. Addon.Breeds:Name(breed), 1,1,1)
 
-    for stat, bonus in ipairs(Addon.Predict.BreedStats[frame.breed] or {}) do
+    for stat, bonus in ipairs(Addon.Predict.BreedStats[breed] or {}) do
       if bonus > 0 then
         tip:AddLine(format('+ %d%% %s', bonus*50, STAT_NAMES[stat]))
       end

@@ -41,6 +41,7 @@ function Bar:OnEnable()
 	hooksecurefunc('PetBattlePetSelectionFrame_Hide', function() self:Show() end)
 	hooksecurefunc('PetBattlePetSelectionFrame_Show', function() self:Hide() end)
 	--PetBattlePetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
+	--PetBattlePetSelectionFrame:HookScript('OnHide', function() self:Show() end)
 end
 
 function Bar:NewButton(i)

@@ -38,7 +38,7 @@ function Pet:GetAvailableBreeds()
   if #breeds > 0 then
   	local text =  ''
   	for i, breed in ipairs(breeds) do
-  		text = text .. Addon.Breeds:GetIcon(breed, .75) .. ' '
+  		text = text .. Addon.Breeds:Icon(breed, .75) .. ' '
   	end
 
   	return text

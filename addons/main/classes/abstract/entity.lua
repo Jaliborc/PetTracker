@@ -40,6 +40,14 @@ function Entity:GetSourceIcon()
 	return self.SourceIcons[self:GetSource()]
 end
 
+function Entity:GetBreedName()
+	return Addon.Breeds:Name(self:GetBreed())
+end
+
+function Entity:GetBreedIcon(...)
+	return Addon.Breeds:Icon(self:GetBreed(), ...)
+end
+
 function Entity:GetColor()
 	return Addon:GetColor(self:GetQuality())
 end
