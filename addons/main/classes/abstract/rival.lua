@@ -48,45 +48,16 @@ function Rival:New(id)
 	end
 end
 
-
---[[ Actions ]]--
-
 function Rival:Display()
-	CollectionsJournal_LoadUI()
-	HideUIPanel(WorldMapFrame)
-	ShowUIPanel(CollectionsJournal)
+	self:Super(Rivel):Display()
 
-	if LoadAddOn('PetTracker_Journal') then
+	if Addon.RivalsJournal then
 		Addon.RivalsJournal:SetRival(self)
 	end
 end
 
 
---[[ Status ]]--
-
-function Rival:GetAbstract()
-	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
-
-	for i, pet in ipairs(self) do
-		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
-	end
-
-	for id in self.items:gmatch('(%w%w%w%w)%w') do
-		local name = GetItemInfo(tonumber(id, 36))
-		if name then
-			text = text .. ' ' .. name
-		end
-	end
-
-	for id in self.currencies:gmatch('(%w%w)%w') do
-		local name = GetCurrencyInfo(tonumber(id, 36))
-		if name then
-			text = text .. ' ' .. name
-		end
-	end
-
-	return text
-end
+--[[ Location ]]--
 
 function Rival:GetMapName()
 	local map = self:GetMap()
@@ -112,31 +83,15 @@ function Rival:GetMap()
 	return self.map > 0 and self.map
 end
 
+
+--[[ Quest ]]--
+
 function Rival:GetCompleteState()
 	return self.quest ~= 0 and (self:IsCompleted() and COMPLETE or AVAILABLE) or ''
 end
 
 function Rival:IsCompleted()
 	return IsQuestFlaggedCompleted(self.quest)
-end
-
-
---[[ Stats ]]--
-
-function Rival:GetType()
-	if #self > 1 then
-		local list = {}
-		for i, pet in ipairs(self) do
-			local family = pet:GetType()
-			if list[family] then
-				return family
-			elseif family then
-				list[family] = true
-			end
-		end
-	else
-		return self[1]:GetType()
-	end
 end
 
 function Rival:GetRewards()
@@ -164,6 +119,49 @@ function Rival:GetRewards()
 	end
 
 	return rewards
+end
+
+
+--[[ Overrides ]]--
+
+function Rival:GetAbstract()
+	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
+
+	for i, pet in ipairs(self) do
+		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
+	end
+
+	for id in self.items:gmatch('(%w%w%w%w)%w') do
+		local name = GetItemInfo(tonumber(id, 36))
+		if name then
+			text = text .. ' ' .. name
+		end
+	end
+
+	for id in self.currencies:gmatch('(%w%w)%w') do
+		local name = GetCurrencyInfo(tonumber(id, 36))
+		if name then
+			text = text .. ' ' .. name
+		end
+	end
+
+	return text
+end
+
+function Rival:GetType()
+	if #self > 1 then
+		local list = {}
+		for i, pet in ipairs(self) do
+			local family = pet:GetType()
+			if list[family] then
+				return family
+			elseif family then
+				list[family] = true
+			end
+		end
+	else
+		return self[1]:GetType()
+	end
 end
 
 for _, key in pairs {'Level', 'Quality'} do

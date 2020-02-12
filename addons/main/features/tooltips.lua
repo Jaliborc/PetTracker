@@ -19,14 +19,14 @@ local ADDON, Addon = ...
 local Tooltips = Addon:NewModule('Tooltips')
 
 function Tooltips:OnEnable()
-  self.data = {}
+  self.Data = {}
 
   hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tip, data)
     if data.speciesID and not tip.Source then
       self:Init(tip)
     end
 
-    self.data[tip] = data
+    self.Data[tip] = data
   end)
 end
 
@@ -37,7 +37,7 @@ function Tooltips:Init(tip)
   tip.Source = source
 
   hooksecurefunc(tip, 'Show', function()
-    local data = self.data[tip]
+    local data = self.Data[tip]
     local specie = Addon.Specie(data.speciesID)
     local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
 

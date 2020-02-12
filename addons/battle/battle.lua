@@ -62,7 +62,7 @@ end
 --[[ Instance ]]--
 
 function Battle:IsUpgrade()
-	if self:IsWildBattle() then
+	if self:IsWildBattle() and not self:IsAlly() then
 		if self:GetSpecie() and self:GetSource() == 5 then
 			local _, quality, level = self:GetBestOwned()
 
@@ -149,10 +149,6 @@ function Battle:GetStats()
 			   floor(self:GetPower() * powerNerf + .5),
 			   floor(self:GetSpeed() * speedScale + .5)
 	end
-end
-
-function Battle:GetBreed()
-	return Addon.Predict:Breed(self:GetSpecie(), self:GetLevel(), self:GetQuality(), self:GetStats())
 end
 
 function Battle:GetSpecie()

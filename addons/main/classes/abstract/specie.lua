@@ -18,25 +18,20 @@ This file is part of PetTracker.
 local ADDON, Addon = ...
 local Specie = Addon.Pet:NewClass('Specie')
 
-
---[[ Overrides ]]--
-
 function Specie:New(specie)
 	return self:Bind{specie = specie}
 end
 
 function Specie:Display()
-	CollectionsJournal_LoadUI()
-	HideUIPanel(WorldMapFrame)
-	ShowUIPanel(CollectionsJournal)
-	CollectionsJournal_SetTab(CollectionsJournal, 2)
-
-	local best = self:GetBestOwned()
-	if best then
-		PetJournal_SelectPet(PetJournal, best:GetID())
-	else
+  self:Super(Specie):Display()
+	
+	if not self:GetID() then
 		PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
 	end
+end
+
+function Specie:GetID()
+	return self:GetBestOwned()
 end
 
 function Specie:GetQuality()
@@ -49,47 +44,4 @@ end
 
 function Specie:GetSpecie()
 	return self.specie
-end
-
-
---[[ Progress ]]--
-
-function Specie:GetBestOwned()
-	local quality, level, best = 0, 0
-
-	for i, pet in pairs(self:GetOwned()) do
-		local q = pet:GetQuality()
-		local l = pet:GetLevel()
-
-		if q > quality or (q == quality and l > level) then
-			quality, level = q, l
-			best = pet
-		end
-	end
-
-	return best, quality, level
-end
-
-function Specie:GetOwnedText()
-	local owned = self:GetOwned()
-	if #owned > 0 then
-		local text = NORMAL_FONT_COLOR_CODE .. COLLECTED .. ':' .. FONT_COLOR_CODE_CLOSE
-
-		for i, pet in ipairs(owned) do
-			text = text .. format('  %s|c%s%d|r', pet:GetBreedIcon(.8, -2,0), select(4, pet:GetColor()), pet:GetLevel())
-		end
-
-		return text
-	end
-end
-
-function Specie:GetOwned()
-	local owned = {}
-	for _, pet in LibStub('LibPetJournal-2.0'):IteratePetIDs() do
-		if C_PetJournal.GetPetInfoByPetID(pet) == self:GetSpecie() then
-			tinsert(owned, Addon.Pet(pet))
-		end
-	end
-
-	return owned
 end

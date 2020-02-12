@@ -30,8 +30,8 @@ function Bar:OnEnable()
 		self.buttons[i] = self:NewButton(i)
 	end
 
-	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
+	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateLock')
 	self:SetScript('OnShow', self.Update)
 	self:SetSize(110, 30)

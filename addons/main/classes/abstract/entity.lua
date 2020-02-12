@@ -28,6 +28,12 @@ Entity.SourceIcons = {
 	'Interface/GossipFrame/DailyQuestIcon'
 }
 
+function Entity:Display()
+	CollectionsJournal_LoadUI()
+	HideUIPanel(WorldMapFrame)
+	ShowUIPanel(CollectionsJournal)
+end
+
 function Entity:GetTypeName()
 	return _G['BATTLE_PET_NAME_' .. self:GetType()]
 end

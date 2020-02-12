@@ -20,11 +20,67 @@ local Pet = Addon.Entity:NewClass('Pet')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
---[[ Derivative Info ]]--
+--[[ Construct ]]--
 
 function Pet:New(id)
   return self:Bind{id = id}
 end
+
+function Pet:Display()
+  self:Super(Pet):Display()
+	CollectionsJournal_SetTab(CollectionsJournal, 2)
+  PetJournal_SelectPet(PetJournal, self:GetID())
+  --[[if self:GetID() then
+    PetJournal_SelectPet(PetJournal, self:GetID())
+  else
+    PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
+  end--]]
+end
+
+
+--[[ Progress ]]--
+
+function Pet:GetBestOwned()
+	local quality, level, best = 0, 0
+
+	for i, pet in pairs(self:GetOwned()) do
+		local q = pet:GetQuality()
+		local l = pet:GetLevel()
+
+		if q > quality or (q == quality and l > level) then
+			quality, level = q, l
+			best = pet
+		end
+	end
+
+	return best, quality, level
+end
+
+function Pet:GetOwnedText()
+	local owned = self:GetOwned()
+	if #owned > 0 then
+		local text = NORMAL_FONT_COLOR_CODE .. COLLECTED .. ':' .. FONT_COLOR_CODE_CLOSE
+		for i, pet in ipairs(owned) do
+			text = text .. format('  %s|c%s%d|r', pet:GetBreedIcon(.8, -2,0), select(4, pet:GetColor()), pet:GetLevel())
+		end
+
+		return text
+	end
+end
+
+function Pet:GetOwned()
+	local owned = {}
+	for _, pet in LibStub('LibPetJournal-2.0'):IteratePetIDs() do
+		if C_PetJournal.GetPetInfoByPetID(pet) == self:GetSpecie() then
+			tinsert(owned, Pet(pet))
+		end
+	end
+
+	return owned
+end
+
+
+--[[ Display Text ]]--
 
 function Pet:GetAbstract()
 	local name, _,_,_, source, description = self:GetInfo()
