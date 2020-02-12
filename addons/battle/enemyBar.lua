@@ -34,14 +34,12 @@ function Bar:OnEnable()
 	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateLock')
 	self:SetScript('OnShow', self.Update)
-	self:SetSize(175, 55)
-	self:SetScale(.8)
+	self:SetSize(110, 30)
 	self:UpdateLock()
+	self:Update()
 
-	hooksecurefunc('PetBattlePetSelectionFrame_Hide', function() self:Show() end)
-	hooksecurefunc('PetBattlePetSelectionFrame_Show', function() self:Hide() end)
-	--PetBattlePetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
-	--PetBattlePetSelectionFrame:HookScript('OnHide', function() self:Show() end)
+	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
+	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnHide', function() self:Show() end)
 end
 
 function Bar:NewButton(i)
@@ -64,8 +62,8 @@ end
 --[[ Update ]]--
 
 function Bar:Update()
-	local enemy = Addon.Battle:GetCurrent(LE_BATTLE_PET_ENEMY)
-	local target = Addon.Battle:GetCurrent(LE_BATTLE_PET_ALLY)
+	local enemy = Addon.Battle(LE_BATTLE_PET_ENEMY)
+	local target = Addon.Battle(LE_BATTLE_PET_ALLY)
 
 	for i, b in ipairs(self.buttons) do
 		b:Display(enemy:GetAbility(i), target)

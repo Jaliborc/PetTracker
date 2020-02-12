@@ -23,11 +23,11 @@ function Enemy:New(data)
 end
 
 function Enemy:GetStats()
-	return Addon.Predict:Stats(self.specie, self.level, self.quality, self:GetBreed())
+	return Addon.Predict:Stats(self:GetSpecie(), self:GetLevel(), self:GetQuality(), self:GetBreed())
 end
 
 function Enemy:GetBreed()
-	local breeds = Addon.SpecieBreeds[self.specie]
+	local breeds = Addon.SpecieBreeds[self:GetSpecie()]
 	return breeds and breeds[1] or 3
 end
 

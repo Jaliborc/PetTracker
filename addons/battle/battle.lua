@@ -17,20 +17,18 @@ This file is part of PetTracker.
 
 local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Battle = Addon.Pet:NewModule('Battle')
+local Battle = Addon.Pet:NewClass('Battle')
 
 
 --[[ Static ]]--
 
 function Battle:AnyUpgrade()
-	for i = 1, self:GetNumPets(LE_BATTLE_PET_ENEMY) do
+	for i = 1, self:NumPets(LE_BATTLE_PET_ENEMY) do
 		local pet = self(LE_BATTLE_PET_ENEMY, i)
 		if pet:IsUpgrade() then
 			return true
 		end
 	end
-
-	return false
 end
 
 function Battle:GetRival()
@@ -52,39 +50,21 @@ function Battle:IsPvE()
 	return C_PetBattles.IsPlayerNPC(LE_BATTLE_PET_ENEMY)
 end
 
-
---[[ Construct ]]--
-
 function Battle:NumPets(owner)
-	return C_PetBattles.NumPets(owner)
-end
-
-function Battle:Current(owner)
-	return self:Get(owner, C_PetBattles.GetActivePet(owner))
+	return C_PetBattles.GetNumPets(owner)
 end
 
 function Battle:New(owner, index)
-	return self:Bind{owner = owner, index = index}
+	return self:Bind{owner = owner, index = index or C_PetBattles.GetActivePet(owner)}
 end
 
 
---[[ Status ]]--
-
-function Battle:Swap()
-	if self:IsAlly() and C_PetBattles.CanPetSwapIn(self.index) then
-		C_PetBattles.ChangePet(self.index)
-		return true
-	end
-end
-
-function Battle:Exists()
-	return self:NumPets(self.owner) >= self.index
-end
+--[[ Instance ]]--
 
 function Battle:IsUpgrade()
 	if self:IsWildBattle() then
 		if self:GetSpecie() and self:GetSource() == 5 then
-			local pet, quality, level = self:GetBestOwned()
+			local _, quality, level = self:GetBestOwned()
 
 			if self:GetQuality() > quality then
 				return true
@@ -103,6 +83,25 @@ function Battle:IsUpgrade()
 
 	return false
 end
+
+function Battle:CanSwap()
+	return self:IsAlly() and C_PetBattles.CanPetSwapIn(self.index)
+end
+
+function Battle:IsAlly()
+	return self.owner ~= LE_BATTLE_PET_ENEMY
+end
+
+function Battle:IsAlive()
+	return self:GetHealth() > 0
+end
+
+function Battle:Exists()
+	return self:NumPets(self.owner) >= self.index
+end
+
+
+--[[ Overrides ]]--
 
 function Battle:GetAbility(i)
 	local abilities, levels = self:GetAbilities()
@@ -152,17 +151,6 @@ function Battle:GetStats()
 	end
 end
 
-function Battle:IsAlly()
-	return self.owner ~= LE_BATTLE_PET_ENEMY
-end
-
-function Battle:IsAlive()
-	return self:GetHealth() > 0
-end
-
-
---[[ General ]]--
-
 function Battle:GetBreed()
 	return Addon.Predict:Breed(self:GetSpecie(), self:GetLevel(), self:GetQuality(), self:GetStats())
 end
@@ -183,13 +171,6 @@ function Battle:GetType()
 	return self:GetPetType()
 end
 
-
---[[ Metamagic ]]--
-
-setmetatable(Battle, {__index = function(Battle, key)
-	Battle[key] = C_PetBattles[key] and function(self, ...)
-		return C_PetBattles[key](self.owner, self.index, ...)
-	end or Specie[key]
-
-	return rawget(Battle, key)
-end}).__index = Battle
+for k,v in pairs(C_PetBattles) do
+	Battle[k] = rawget(Battle, k) or function(self, ...) return C_PetBattles[k](self.owner, self.index, ...) end
+end

@@ -47,7 +47,7 @@ function Listener:OnMessage(message)
 		local isTargetEnemy = message:find(ENEMY)
 
 		if (isHeal and isTargetEnemy) or not (isHeal or isTargetEnemy) then
-			local pet = Addon.Battle:GetCurrent(LE_BATTLE_PET_ENEMY)
+			local pet = Addon.Battle(LE_BATTLE_PET_ENEMY)
 			local casts = Addon.state.casts[pet.index]
 
 			for i, ability in ipairs(pet:GetAbilities()) do

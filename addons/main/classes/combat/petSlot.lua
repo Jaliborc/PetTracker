@@ -17,7 +17,7 @@ This file is part of PetTracker.
 
 local ADDON, Addon = ...
 local Slot = Addon.Base:NewClass('PetSlot')
-Slot:NewClass('BattleSlot', 'Frame', true)
+Slot:NewClass('BattleSlot', 'Button', true)
 Slot:NewClass('JournalSlot', 'Frame', true)
 
 
@@ -72,10 +72,8 @@ function Slot:Display(pet, target)
 		self.Level:SetText(pet:GetLevel())
 
 		if self.Xp then
-			local current = pet:GetHealth()
-
-			self.IsDead:SetShown(current == 0)
-			self:UpdateBar(self.Health, current, health)
+			self.IsDead:SetShown(pet:GetHealth() == 0)
+			self:UpdateBar(self.Health, pet:GetHealth(), health)
 			self:UpdateBar(self.Xp, pet:GetXP())
 		else
 			self.Health:SetText(health)

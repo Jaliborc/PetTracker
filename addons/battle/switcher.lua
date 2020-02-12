@@ -35,24 +35,24 @@ function Swap:OnEnable()
 	self.TitleText:SetText(SWITCH_PET)
 
 	local oShow = PetBattlePetSelectionFrame_Show
-	function PetBattlePetSelectionFrame_Show()
+	function PetBattlePetSelectionFrame_Show(...)
 		if Addon.sets.switcher then
 			self:Update()
 			self:Show()
 		else
-			oShow()
+			oShow(...)
 		end
 	end
 
 	local oHide = PetBattlePetSelectionFrame_Hide
-	function PetBattlePetSelectionFrame_Hide()
+	function PetBattlePetSelectionFrame_Hide(...)
 		self:Hide()
-		oHide()
+		oHide(...)
 	end
 
 	local oFrame = PetBattleFrame.BottomFrame.PetSelectionFrame
-	function oFrame:IsShown()
-		return Addon.sets.switcher and self:IsShown() or self.IsShown(oFrame)
+	function oFrame.IsShown(f)
+		return Addon.sets.switcher and self:IsShown() or self.IsShown(f)
 	end
 end
 
@@ -61,8 +61,8 @@ function Swap:NewColumn(owner, point, off)
 		local slot = Addon.BattleSlot(self.Inset)
 		slot:SetPoint(point, off, 101 - 108 * i)
 		slot:SetScript('OnClick', function()
-			if slot.pet:Swap() then
-				self:Hide()
+			if slot.pet:CanSwap() then
+				C_PetBattles.ChangePet(slot.pet.index)
 			end
 		end)
 
@@ -79,7 +79,7 @@ end
 function Swap:Update()
 	self:UpdateFor(LE_BATTLE_PET_ALLY, LE_BATTLE_PET_ENEMY)
 	self:UpdateFor(LE_BATTLE_PET_ENEMY, LE_BATTLE_PET_ALLY)
-	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle:GetCurrent(LE_BATTLE_PET_ALLY):IsAlive())
+	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle(LE_BATTLE_PET_ALLY):IsAlive())
 end
 
 function Swap:UpdateFor(owner, adversary)
@@ -87,7 +87,7 @@ function Swap:UpdateFor(owner, adversary)
 		local pet = Addon.Battle(owner, i)
 		local slot = self[owner .. i]
 
-		slot:Display(pet:Exists() and pet, Addon.Battle:GetCurrent(adversary))
+		slot:Display(pet:Exists() and pet, Addon.Battle(adversary))
 		slot.pet = pet
 	end
 end

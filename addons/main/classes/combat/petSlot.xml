@@ -261,7 +261,7 @@
 		</Scripts>
 	</StatusBar>
 
-	<Button name="PetTrackerSlot" virtual="true">
+	<Frame name="PetTrackerSlot" virtual="true">
 		<Size x="399" y="106"/>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -436,9 +436,9 @@
 				</Layers>
 			</Frame>
 		</Frames>
-	</Button>
+	</Frame>
 
-	<Button name="PetTrackerJournalSlot" inherits="PetTrackerSlot" virtual="true">
+	<Frame name="PetTrackerJournalSlot" inherits="PetTrackerSlot" virtual="true">
 		<Layers>
 			<Layer level="ARTWORK">
 				<Texture parentKey="HealthIcon" inherits="PetTrackerStatIcon">
@@ -455,7 +455,7 @@
 				</FontString>
 			</Layer>
 		</Layers>
-	</Button>
+	</Frame>
 
 	<Button name="PetTrackerBattleSlot" inherits="PetTrackerSlot" virtual="true">
 		<Frames>
@@ -483,7 +483,7 @@
 				self:RegisterForClicks("LeftButtonDown", "LeftButtonUp")
 			</OnLoad>
 			<OnEnter>
-				self.Highlight:Show()
+				self.Highlight:SetShown(self.pet:CanSwap())
 			</OnEnter>
 			<OnLeave>
 				self.Highlight:Hide()

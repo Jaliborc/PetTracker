@@ -14,10 +14,10 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 
 This file is part of PetTracker.
 --]]
-
+if true then return end
 local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Upgrade = Addon:NewModule('Upgrades', LibStub('Sushi-3.1').GlowBox(PetBattleFrame))
+local Upgrade = Addon:NewModule('Upgrades', LibStub('Sushi-3.1').Glowbox(PetBattleFrame))
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
@@ -56,12 +56,10 @@ function Upgrade:UpdateAll()
 		self.canPopup = nil
 		LibStub('Sushi-3.1').Popup {
         text = L.AskForfeit,
-        button1 = QUIT,
-        button2 = NO,
+        button1 = QUIT, button2 = NO,
         OnAccept = C_PetBattles.ForfeitGame,
-        timeout = 0, exclusive = 1,
+        timeout = 0, exclusive = 1, hideOnEscape = 1,
         whileDead = false, showAlert = true,
-        hideOnEscape = 1, preferredIndex = 3
     }
 	end
 

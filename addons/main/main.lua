@@ -34,19 +34,22 @@ function Addon:OnEnable()
 		end
 	end
 
-	if (self.sets.mainTutorial or 0) < 6 or (self.sets.journalTutorial or 0) < 7 then
-		LoadAddOn('PetTracker_Config')
+	if self.sets.mainTutorial == 6 and self.sets.journalTutorial == 7 then
+		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function() LoadAddOn(ADDON .. '_Config') end)
 	else
-		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function()
-			LoadAddOn('PetTracker_Config')
-		end)
+		LoadAddOn(ADDON .. '_Config')
 	end
 
 	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
+	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
 end
 
 function Addon:OnPetsChanged()
-	self:Delay(.1, 'SendSignal', 'COLLECTION_CHANGED') -- library sometimes fires callback multiple times
+	self:Delay(.1, 'SendSignal', 'COLLECTION_CHANGED')
+end
+
+function Addon:OnBattle()
+	LoadAddOn(ADDON .. '_Battle')
 end
 
 

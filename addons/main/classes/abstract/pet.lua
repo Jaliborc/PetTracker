@@ -55,12 +55,6 @@ function Pet:GetSource()
 	end
 end
 
-function Pet:GetBreed()
-	local specie, _, level = C_PetJournal.GetPetInfoByPetID(self:GetID())
-	local _, health, power, speed, quality = C_PetJournal.GetPetStats(self:GetID())
-	return Addon.Predict:Breed(specie, level, quality, health, power, speed)
-end
-
 
 --[[ Basic Info ]]--
 
@@ -72,8 +66,20 @@ function Pet:GetAbilities()
 	return C_PetJournal.GetPetAbilityList(self:GetSpecie())
 end
 
+function Pet:GetBreed()
+	return Addon.Predict:Breed(self:GetSpecie(), self:GetLevel(), self:GetQuality(), self:GetStats())
+end
+
 function Pet:GetType()
 	return select(3, self:GetInfo())
+end
+
+function Pet:GetInfo()
+	return C_PetJournal.GetPetInfoBySpeciesID(self:GetSpecie())
+end
+
+function Pet:GetStats()
+  return select(2, C_PetJournal.GetPetStats(self:GetID()))
 end
 
 function Pet:GetQuality()
@@ -82,10 +88,6 @@ end
 
 function Pet:GetLevel()
 	return select(3, C_PetJournal.GetPetInfoByPetID(self:GetID()))
-end
-
-function Pet:GetInfo()
-	return C_PetJournal.GetPetInfoBySpeciesID(self:GetSpecie())
 end
 
 function Pet:GetSpecie()

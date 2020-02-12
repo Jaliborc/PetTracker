@@ -32,10 +32,10 @@ Predict.BreedStats = {
 	[12] = {.9,.4,.4}
 }
 
-function Predict:Breed(specie, level, rarity, health, power, speed)
+function Predict:Breed(specie, level, quality, health, power, speed)
 	local base, breeds = Addon.SpecieStats[specie], Addon.SpecieBreeds[specie]
 	if base then
-		local leveled = self.QualityScale[rarity] * level
+		local leveled = self.QualityScale[quality] * level
 		local best = 100
 		local chosen = -1
 
@@ -56,10 +56,10 @@ function Predict:Breed(specie, level, rarity, health, power, speed)
 	end
 end
 
-function Predict:Stats(specie, level, rarity, breed)
+function Predict:Stats(specie, level, quality, breed)
 	local base = Addon.SpecieStats[specie]
 	if base then
-		local leveled = self.QualityScale[rarity] * level
+		local leveled = self.QualityScale[quality] * level
 		local buff = self.BreedStats[breed]
 
 		return floor((base[1] + buff[1]) * leveled * 5 + 100.5),
