@@ -32,7 +32,6 @@ function Listener:Startup()
 end
 
 function Listener:Reset()
-	Addon.sets.rivalHistory = Addon.sets.rivalHistory or {}
 	Addon.state.casts = {{id = {}, turn = {}}, {id = {}, turn = {}}, {id = {}, turn = {}}}
 	Addon.state.turn = 0
 end

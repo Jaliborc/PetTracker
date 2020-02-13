@@ -38,23 +38,17 @@ L.Victory = 'Vittoria'
 L.Defeat = 'Sconfitta'
 
 L.FAQ = {
-	'Come posso mostrare/nascondere tutti le Mascotte sulla mappa?',
-	'Clicca sul bottone con lente di ingrandimento in alto a destra della mappa. Clicca su Mostra Mascotte da Battaglia.',
+('Come posso mostrare/nascondere tutti le Mascotte sulla mappa?',
+('Clicca sul bottone con lente di ingrandimento in alto a destra della mappa. Clicca su "%s".'):format(L.ShowPets),
 
-	'Come posso mostrare sulla mappa specifiche Mascotte?',
-	'È presente un box filtro ina alto a destra della mappa del mondo. Guarda il tutorial per alcuni esempi comuni.',
+('Come posso mostrare sulla mappa specifiche Mascotte?',
+('È presente un box filtro ina alto a destra della mappa del mondo. Guarda il tutorial per alcuni esempi comuni.',
 
-	'Come posso far mostrare la Zone Tracker di nuovo?',
-	'Apri il Giornale delle Mascotte e clicca Zone Tracker in basso a destra.',
+('Come posso far mostrare la %s di nuovo?'):format(L.ZoneTracker),
+('Apri il Giornale delle Mascotte e clicca "%s" in basso a destra.'):format(L.ZoneTracker),
 
-	'Come posso mostrare le Mascotte che ho catturato nello Zone Tracker?',
-	'clicca su Mascotte da Battaglia nel tracker e abilita Mascotte catturate',
-
-	'Come posso disabilitare tutti gli allarmi miglioramenti?',
-	'Vai nel Menu Principale, apri la lista degli addon e disabilita Miglioramenti PetTracker.',
-
-	'Come posso vedere di nuovo il Tutorial?',
-	'Clicca sul bottone alla tua destra.'
+('Come posso mostrare le Mascotte che ho catturato nello %s?'):format(L.ZoneTracker),
+('clicca su "%s" nel tracker e abilita "%"'):format(PETS, L.CapturedPets),
 }
 
 L.Tutorial = {

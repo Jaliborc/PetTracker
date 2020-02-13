@@ -24,7 +24,11 @@ Addon.MaxLevel = 25
 --[[ Events ]]--
 
 function Addon:OnEnable()
-	PetTracker_Sets, PetTracker_State = PetTracker_Sets or {}, PetTracker_State or {}
+	PetTracker_State = PetTracker_State or {}
+	PetTracker_Sets = setmetatable(PetTracker_Sets or {}, {__index = {
+		breeds = true, switcher = true, forfeit = true, alertUpgrades = true,
+		rivalHistory = {},
+	}})
 
 	self.sets, self.state = PetTracker_Sets, PetTracker_State
 	if self.sets.MainTutorial then
@@ -49,7 +53,9 @@ function Addon:OnPetsChanged()
 end
 
 function Addon:OnBattle()
-	LoadAddOn(ADDON .. '_Battle')
+	if LoadAddOn(ADDON .. '_Battle') then
+		self:SendSignal('BATTLE_STARTED')
+	end
 end
 
 

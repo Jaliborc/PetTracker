@@ -45,11 +45,5 @@ L.FAQ = {
 	'Abra o Diário de Mascotes e clique em Rastreador de Zona no canto inferior direito.',
 
 	'Como mostro as mascotes que já capturei no Rastreador de Zona?',
-	'Clique em Mascotes no Rastreador e ligue a opção Mostrar Capturados',
-
-	'Como desligo todos os avisos de melhorias?',
-	'Vá ao MAIN MENU, abra a lista de addons e desligue PetTracker Upgrades.',
-
-	'Como posso ver o tutorial de novo?',
-	'Clique no botão à sua direita.'
+	'Clique em Mascotes no Rastreador e ligue a opção Mostrar Capturados'
 }

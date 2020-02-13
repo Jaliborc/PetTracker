@@ -48,20 +48,17 @@ for i = 1, C_PetJournal.GetNumPetSources() do
 end
 
 L.FAQ = {
-	'Wie kann ich alle Haustiere auf der Karte ein- und ausblenden?',
-	'Klicke auf die Lupe in der oberen rechten Ecke der Karte. Klicke auf "' .. L.ShowPets .. '".',
+	('Wie kann ich alle Haustiere auf der Karte ein- und ausblenden?'),
+	('Klicke auf die Lupe in der oberen rechten Ecke der Karte. Klicke auf "%s".'):format(L.ShowPets),
 
-	'Wie zeige ich nur bestimmte Haustiere auf der Karte?',
-	'In der rechten oberen Ecke der Karte befindet sich eine Filterbox. Im Tutorial finden sich Suchbeispiele.',
+	('Wie zeige ich nur bestimmte Haustiere auf der Karte?'),
+	('In der rechten oberen Ecke der Karte befindet sich eine Filterbox. Im Tutorial finden sich Suchbeispiele.'),
 
-	'Wie kann ich den Zonen-Tracker wieder anzeigen?',
-	'Öffne den Wildtierführer und klicke in der rechten unteren Ecke auf "' .. L.ZoneTracker .. '".',
+	('Wie kann ich den %s wieder anzeigen?'):format(L.ZoneTracker),
+	('Öffne den Wildtierführer und klicke in der rechten unteren Ecke auf "%s".'):format(L.ZoneTracker),
 
-	'Wie kann ich die Haustiere, die ich im Zonen-Tracker erfasst habe, anzeigen lassen?',
-	'Klicke auf "Begleiter" im Tracker und aktiviere "' .. L.CapturedPets .. '".',
-
-	'Wie kann ich alle Upgrade-Hinweise deaktivieren?',
-	'Gehe ins Hauptmenü, öffne die Liste der Addons und deaktiviere unter PetTracker "' .. L.AlertUpgrades .. '."'
+	('Wie kann ich die Haustiere, die ich im %s erfasst habe, anzeigen lassen?'):format(L.ZoneTracker),
+	('Klicke auf "%s" im Tracker und aktiviere "%s".'):format(PETS, L.CapturedPets),
 }
 
 L.Tutorial = {

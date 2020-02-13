@@ -17,29 +17,30 @@ This file is part of PetTracker.
 
 local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Bar = Addon:NewModule('EnemyBar', CreateFrame('CheckButton', ADDON .. 'EnemyBar', PetBattleFrame.BottomFrame))
-Bar:SetPoint('BOTTOM', PetBattleFrame.BottomFrame, 'TOP', 0, 30)
-Bar:SetMovable(true)
+local Bar = Addon:NewModule('EnemyBar', CreateFrame('Frame', nil, PetBattleFrame.BottomFrame))
 
 
 --[[ Startup ]]--
 
 function Bar:OnEnable()
-	self.buttons = {}
+	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
+	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnHide', function() self:Show() end)
+
+	self.Buttons = {}
 	for i = 1,6 do
-		self.buttons[i] = self:NewButton(i)
+		self.Buttons[i] = self:NewButton(i)
 	end
 
-	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
-	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateLock')
+	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
+	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
+	self:SetPoint('BOTTOM', self:GetParent(), 'TOP', Addon.sets.enemyBarX or 0, Addon.sets.enemyBarY or 30)
 	self:SetScript('OnShow', self.Update)
+	self:SetClampedToScreen(true)
+	self:SetMovable(true)
 	self:SetSize(110, 30)
 	self:UpdateLock()
 	self:Update()
-
-	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
-	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnHide', function() self:Show() end)
 end
 
 function Bar:NewButton(i)
@@ -48,8 +49,9 @@ function Bar:NewButton(i)
 
 	local b = Addon.AbilityButton(self)
 	b:SetPoint('BOTTOMLEFT', (b:GetWidth() + 10) * x, y * b:GetHeight())
-	b:SetScript('OnDragStop', function() self:StopMovingOrSizing() end)
-	b:SetScript('OnDragStart', function() self:StartMoving() end)
+	b:SetScript('OnDragStop', function() self:DragStop() end)
+	b:SetScript('OnDragStart', function() self:DragStart() end)
+	b:RegisterForDrag('LeftButton')
 	b:SetHighlightTexture(nil)
 	b:SetPushedTexture(nil)
 	b:UnregisterAllEvents()
@@ -59,19 +61,26 @@ function Bar:NewButton(i)
 end
 
 
---[[ Update ]]--
+--[[ API ]]--
 
 function Bar:Update()
 	local enemy = Addon.Battle(LE_BATTLE_PET_ENEMY)
 	local target = Addon.Battle(LE_BATTLE_PET_ALLY)
 
-	for i, b in ipairs(self.buttons) do
+	for i, b in ipairs(self.Buttons) do
 		b:Display(enemy:GetAbility(i), target)
 	end
 end
 
-function Bar:UpdateLock()
-	for i, b in ipairs(self.buttons) do
-		b:RegisterForDrag(Addon.sets.unlockActions and 'LeftButton' or nil)
+function Bar:DragStart()
+	if IsShiftKeyDown() then
+		self:StartMoving()
 	end
+end
+
+function Bar:DragStop()
+	Addon.sets.enemyBarX = self:GetCenter() - self:GetParent():GetCenter()
+	Addon.sets.enemyBarY =	self:GetBottom() - self:GetParent():GetTop()
+
+	self:StopMovingOrSizing()
 end

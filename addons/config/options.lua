@@ -14,6 +14,7 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 
 This file is part of PetTracker.
 --]]
+if true then return end
 
 local ADDON, Addon = 'PetTracker', PetTracker
 local Config = Addon:NewModule('Config')
