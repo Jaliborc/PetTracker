@@ -74,7 +74,7 @@ A lot has changed since Pandaria, so this will help you to quickly get started. 
 
 The |cffffd200Zone Tracker|r displays which pets you are missing, their origin, and the rarity of the ones you have captured.]],
 
-[[Click on |cffffd200Battle Pets|r to toggle the tracker or additional options.]],
+[[Click on |cffffd200Pets|r to toggle the tracker or additional options.]],
 
 [[Open the |cffffd200World Map|r to see what PetTracker can do for your exploration.]],
 
@@ -88,10 +88,8 @@ To hide these locations, open the tracking menu and disable |cffffd200Show Battl
 • |cffffd200Missing|r for species you do not own.
 • |cffffd200Aquatic|r for aquatic species.
 • |cffffd200Quest|r for species obtainable through questing.
-• |cffffd200Forest|r for species that inhabit forests.]]
-}
+• |cffffd200Forest|r for species that inhabit forests.]],
 
-L.JournalTutorial = {
 [[Open the |cffffd200Pet Journal|r to see what PetTracker can do for your browsing.]],
 [[This checkbox allows you to toggle the |cffffd200Zone Tracker|r. It is especially useful if you have hidden the tracker previously.]],
 [[Open the |cffffd200Rivals|r tab to learn more about it.]],

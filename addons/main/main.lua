@@ -38,7 +38,7 @@ function Addon:OnEnable()
 		end
 	end
 
-	if self.sets.mainTutorial == 6 and self.sets.journalTutorial == 7 then
+	if self.sets.tutorial == 13 then
 		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function() LoadAddOn(ADDON .. '_Config') end)
 	else
 		LoadAddOn(ADDON .. '_Config')
