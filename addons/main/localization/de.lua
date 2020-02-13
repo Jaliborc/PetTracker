@@ -48,17 +48,17 @@ for i = 1, C_PetJournal.GetNumPetSources() do
 end
 
 L.FAQ = {
-	('Wie kann ich alle Haustiere auf der Karte ein- und ausblenden?'),
-	('Klicke auf die Lupe in der oberen rechten Ecke der Karte. Klicke auf "%s".'):format(L.ShowPets),
+	'Wie kann ich alle Haustiere auf der Karte ein- und ausblenden?',
+	'Klicke auf die Lupe in der oberen rechten Ecke der Karte. Klicke auf "Kampfhaustiere anzeigen".',
 
-	('Wie zeige ich nur bestimmte Haustiere auf der Karte?'),
-	('In der rechten oberen Ecke der Karte befindet sich eine Filterbox. Im Tutorial finden sich Suchbeispiele.'),
+	'Wie zeige ich nur bestimmte Haustiere auf der Karte?',
+	'In der rechten oberen Ecke der Karte befindet sich eine Filterbox. Im Tutorial finden sich Suchbeispiele.',
 
-	('Wie kann ich den %s wieder anzeigen?'):format(L.ZoneTracker),
-	('Öffne den Wildtierführer und klicke in der rechten unteren Ecke auf "%s".'):format(L.ZoneTracker),
+	'Wie kann ich den Zonen-Tracker wieder anzeigen?',
+	'Öffne den Wildtierführer und klicke in der rechten unteren Ecke auf "Zonen-Tracker".',
 
-	('Wie kann ich die Haustiere, die ich im %s erfasst habe, anzeigen lassen?'):format(L.ZoneTracker),
-	('Klicke auf "%s" im Tracker und aktiviere "%s".'):format(PETS, L.CapturedPets),
+	'Wie kann ich die Haustiere, die ich im Zonen-Tracker erfasst habe, anzeigen lassen?',
+	('Klicke auf "%s" im Tracker und aktiviere "Zeige gefangene Haustiere".'):format(PETS),
 }
 
 L.Tutorial = {

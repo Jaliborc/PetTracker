@@ -37,17 +37,17 @@ L.Victory = 'Victoire'
 L.Defeat = 'Défaite'
 
 L.FAQ = {
-	('Comment puis-je afficher/masquer toutes les mascotte sur la carte?'),
-	('Cliquez sur le bouton dans l\'angle en haut à droite de la carte. Cliquez sur %s.'):format(L.ShowPets),
+	'Comment puis-je afficher/masquer toutes les mascotte sur la carte?',
+	'Cliquez sur le bouton dans l\'angle en haut à droite de la carte. Cliquez sur "Afficher Mascottes".',
 
-	('Comment puis-je afficher sur la carte des mascottes particulières uniquement?'),
-	('Il y a un champs pour filtrer une recherche dans l\'angle en haut à droite de la carte du monde. Consultez le tutoriel pour afficher des exemples de recherches.'),
+	'Comment puis-je afficher sur la carte des mascottes particulières uniquement?',
+	'Il y a un champs pour filtrer une recherche dans l\'angle en haut à droite de la carte du monde. Consultez le tutoriel pour afficher des exemples de recherches.',
 
-	('Comment puis-je de nouveau afficher la %s?'):format(L.ZoneTracker),
-	('Ouvrez le Codex des mascottes et cliquez sur la "%s" en bas à droite.'):format(L.ZoneTracker),
+	'Comment puis-je de nouveau afficher la Zone de Pistage?',
+	'Ouvrez le Codex des mascottes et cliquez sur la "Zone de Pistage" en bas à droite.',
 
-	('Comment puis-je afficher dans la %s les mascottes que je viens de capturer?'):format(L.ZoneTracker),
-	('Cliquez sur "%s" dans le suivi des objectifs et activez "%s"'):format(PETS, L.CapturedPets),
+	'Comment puis-je afficher dans la Zone de Pistage les mascottes que je viens de capturer?',
+	('Cliquez sur "%s" dans le suivi des objectifs et activez "Afficher les capturées"'):format(PETS),
 }
 
 L.Tutorial = {

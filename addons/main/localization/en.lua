@@ -49,20 +49,20 @@ for i = 1, C_PetJournal.GetNumPetSources() do
 end
 
 L.FAQ = {
-	('How do I show/hide all pets on the map?'),
-	('Click on the magnifying glass button at the top right corner of the map. Click on "%s".'):format(L.ShowPets),
+	'How do I show/hide all pets on the map?',
+	'Click on the magnifying glass button at the top right corner of the map. Click on "Show Battle Pets".',
 
-	('How do I make the map display specific pets only?'),
-	('There is a filter box at the top right corner of the world map. See the tutorial for common search examples.'),
+	'How do I make the map display specific pets only?',
+	'There is a filter box at the top right corner of the world map. See the tutorial for common search examples.',
 
-	('How do I show the %s again?'):format(L.ZoneTracker),
-	('Open the Pet Journal and click "%s" at the bottom right corner.'):format(L.ZoneTracker),
+	'How do I show the Zone Tracker again?',
+	'Open the Pet Journal and click "Zone Tracker" at the bottom right corner.',
 
-	('How do I display the pets I have captured in the %s?'):format(L.ZoneTracker),
-	('Click on the "%s" header of the tracker and enable "%s".'):format(PETS, L.CapturedPets),
+	'How do I display the pets I have captured in the Zone Tracker?',
+	('Click on the "%s" header of the tracker and enable "Show Captured".'):format(PETS),
 
-	('How do I move the enemy action bar?'),
-	('Hold the shift key and drag the bar.'),
+	'How do I move the enemy action bar?',
+	'Hold the shift key and drag the bar.',
 }
 
 L.Tutorial = {
