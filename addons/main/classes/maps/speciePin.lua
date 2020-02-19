@@ -29,7 +29,7 @@ end
 
 function Pin:New(frame, index, x,y, specie, icon)
 	local b = self:Super(Pin):New(frame, index, x,y)
-	b.Icon:SetTexture(icon or specie:GetTypeIcon())
+	b.Icon:SetTexture(icon or specie:GetTypeIcon()) -- TODO: make it specie icon instead
   b.specie = specie
 	return b
 end

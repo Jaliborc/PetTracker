@@ -6,9 +6,8 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'zhCN')
 if not L then return end
 
+-- main
 L.AddWaypoint = '添加路径点'
-L.AlertUpgrades = '升级提醒'
-L.AlertUpgradesTip = '如禁用，战斗中野生宠物战斗升级提醒框将不再显示，但升级将以一个标记显示。位置：（|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t）。'
 L.AskForfeit = '没有可供升级，退出战斗？'
 L.AvailableBreeds = '可用种属'
 L.Battles = '对战'
@@ -26,8 +25,6 @@ L.Ninja = '乱入者'
 L.NoHistory = 'PetTracker 从没见\n你与其对战过'
 L.NoneCollected = '未收集'
 L.PetBattle = '宠物对战'
-L.PromptForfeit = '提示损耗'
-L.PromptForfeitTip = '如启用，宠物战斗中将在没有升级可用的情况下提示损耗。'
 L.Rivals = '对手'
 L.ShowJournal = '在日志中显示'
 L.ShowPets = '显示战斗宠物'
@@ -36,12 +33,16 @@ L.Species = '种类'
 L.StableTip = '|cffffd200到此治疗|n宠物，些许花费。|r'
 L.TrackPets = '追踪宠物'
 L.TellMore = '告诉我更多你的细节。'
-L.UnlockActions = '解锁敌对动作'
-L.UnlockActionsTip = '如启用，敌对动作条可以被拖动到屏幕的任意位置。'
 L.UpgradeAlert = '野生宠物出现！'
 L.TotalRivals = '全部对手'
 L.Victory = '胜利'
 L.ZoneTracker = '区域追踪'
+
+-- options
+L.AlertUpgrades = '升级提醒'
+L.AlertUpgradesTip = '如禁用，战斗中野生宠物战斗升级提醒框将不再显示，但升级将以一个标记显示。位置：（|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t）。'
+L.Forfeit = '提示损耗'
+L.ForfeitTip = '如启用，宠物战斗中将在没有升级可用的情况下提示损耗。'
 
 L.FAQ = {
 	'如何在地图上显示/隐藏全部宠物？',

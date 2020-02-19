@@ -5,9 +5,8 @@
 local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'enUS', true)
 
+-- main
 L.AddWaypoint = 'Add Waypoint'
-L.AlertUpgrades = 'Alert for Upgrades'
-L.AlertUpgradesTip = 'If disabled, the wild upgrades alert box will not be shown in combat, but upgrades will still be marked with a symbol (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'No upgrades are available. Quit battle?'
 L.AvailableBreeds = 'Available Breeds'
 L.Battles = 'Battles'
@@ -17,18 +16,13 @@ L.CapturedPets = 'Show Captured'
 L.CommonSearches = 'Common Searches'
 L.Defeat = 'Defeat'
 L.EnemyTeam = 'Enemy Team'
-L.FAQDescription = 'These are the most frequently asked questions. To see the tutorials again, reset the addon settings using the "Defaults" button at the lower left corner.'
 L.FilterPets = 'Filter Pets'
-L.HideRivals = 'Hide Rival Portraits'
-L.HideRivalsTip = 'If enabled, rival portraits will not be shown in the world map, battle map or any other map.'
 L.LoadTeam = 'Load Team'
 L.Maximized = 'Maximized'
 L.Ninja = 'Ninja'
 L.NoHistory = 'PetTracker has never seen you\nfight this adversary'
 L.NoneCollected = 'None Collected'
 L.PetBattle = 'Pet Battle'
-L.PromptForfeit = 'Prompt for Forfeit'
-L.PromptForfeitTip = 'If enabled, you will be prompted to forfeit a battle when no upgrades are available.'
 L.Rivals = 'Rivals'
 L.ShowJournal = 'Show in Journal'
 L.ShowPets = 'Show Battle Pets'
@@ -37,8 +31,6 @@ L.Species = 'Species'
 L.StableTip = '|cffffd200Come here to heal your|npets for a small fee.|r'
 L.TrackPets = 'Track Pets'
 L.TellMore = 'Tell me more about yourself.'
-L.UnlockActions = 'Unlock Enemy Actions'
-L.UnlockActionsTip = 'If enabled, the enemy actions bar can be dragged to anywhere on the screen.'
 L.UpgradeAlert = 'Wild upgrades have appeared!'
 L.TotalRivals = 'Total Rivals'
 L.Victory = 'Victory'
@@ -47,6 +39,19 @@ L.ZoneTracker = 'Zone Tracker'
 for i = 1, C_PetJournal.GetNumPetSources() do
 	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i] -- do not translate. Automatic for most locales
 end
+
+-- options
+L.AlertUpgrades = 'Alert for Upgrades'
+L.AlertUpgradesTip = 'If disabled, an upgrades alert box will not be shown in combat, but upgrades will still be marked with a symbol (|TInterface/GossipFrame/AvailableQuestIcon:0:0:-1:-2|t).'
+L.Switcher = 'Switcher'
+L.SwitcherTip = 'If enabled, PetTracker will replace the default UI for switching pets in combat.'
+L.RivalPortraits = 'Rival Portraits'
+L.RivalPortraitsTip = 'If enabled, rivals will be marked by their portraits when shown in the world and battle map.'
+L.FAQDescription = 'These are the most frequently asked questions. To see the tutorials again, reset the addon settings using the "Defaults" button at the lower left corner.'
+L.Forfeit = 'Automatic Forfeit'
+L.ForfeitTip = 'Defines whether to forfeit a wild battle when no upgrades are available.'
+L.OptionsDescription = 'These options allow you to toggle PetTracker features on and off.'
+L.ZoneTrackerTip = 'Bananas'
 
 L.FAQ = {
 	'How do I show/hide all pets on the map?',

@@ -6,13 +6,10 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'itIT')
 if not L then return end
 
+-- main
 L.AddWaypoint = 'Aggiungi Waypoint'
-L.AlertUpgrades = 'Allarme per Miglioramenti'
-L.AlertUpgradesTip = 'Se disabilitato, il box di allarme per un miglioramento selvatico non verrà mostrato in combattimento, ma i miglioramenti verranno comunque contrassegnati da un simbolo (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Nessun miglioramento disponibile. Abbandona il match?'
 L.AvailableBreeds = 'Available Breeds'
-L.PromptForfeit = 'Chiedi per Abbandono'
-L.PromptForfeitTip = 'Se abilitato, ti verrà chiesto se vuoi abbandonare il match se non sono presenti miglioramenti.'
 L.Breed = 'Breed'
 L.BreedExplanation = 'Determina come sono distribuite le statistiche guadagnate ogni livello.'
 L.CapturedPets = 'Mostra i Catturati'
@@ -30,11 +27,15 @@ L.ShowStables = 'Mostra Stalle'
 L.StableTip = '|cffffd200Vieni qui per curare le tue|nmascotte ad un piccolo costo.|r'
 L.TrackPets = 'Rintraccia Mascotte'
 L.TellMore = 'Parlami di più di Te.'
-L.UnlockActions = 'Sblocca Azioni Nemiche'
-L.UnlockActionsTip = 'Se abilitato, la barra delle aziojni nemiche può essere trasportata ovunque nello schermo.'
 L.UpgradeAlert = 'Sono apparsi Miglioramenti selvatici!'
 L.Victory = 'Vittoria'
 L.Defeat = 'Sconfitta'
+
+-- options
+L.AlertUpgrades = 'Allarme per Miglioramenti'
+L.AlertUpgradesTip = 'Se disabilitato, il box di allarme per un miglioramento selvatico non verrà mostrato in combattimento, ma i miglioramenti verranno comunque contrassegnati da un simbolo (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
+L.Forfeit = 'Chiedi per Abbandono'
+L.ForfeitTip = 'Se abilitato, ti verrà chiesto se vuoi abbandonare il match se non sono presenti miglioramenti.'
 
 L.FAQ = {
   'Come posso mostrare/nascondere tutti le Mascotte sulla mappa?',

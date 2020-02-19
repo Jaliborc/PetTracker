@@ -14,7 +14,7 @@ function Tracker:Construct()
 	local f = self:Super(Tracker):Construct()
 	f:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'Update')
 	f:RegisterSignal('COLLECTION_CHANGED', 'Update')
-	f:RegisterSignal('TRACKING_CHANGED', 'Update')
+	f:RegisterSignal('OPTIONS_CHANGED', 'Update')
 	f:SetScript('OnShow', f.Update)
 	f:SetScript('OnHide', f.Clear)
 	f:SetSize(1,1)
@@ -89,29 +89,30 @@ function Tracker:ToggleDropdown()
 		drop:SetChildren {
 			{
 				text = AUCTION_CATEGORY_BATTLE_PETS,
-				isTitle = true,
-				notCheckable = true
+				isTitle = true, notCheckable = true
 			},
 			{
 				text = L.TrackPets,
-				checked = not Addon.sets.hideTracker,
-				func = function() Tracker:Toggle() end,
-				isNotRadio = true
+				checked = Addon.sets.zoneTracker,
+				func = Tracker.Toggle,
+				isNotRadio = true,
 			},
 			{
 				text = L.CapturedPets,
 				checked = Addon.sets.capturedPets,
+				func = Tracker.ToggleCaptured,
 				isNotRadio = true,
-				func = function()
-					Addon.sets.capturedPets = not Addon.sets.capturedPets
-					Addon:SendSignal('TRACKING_CHANGED')
-				end
 			}
 		}
 	end
 end
 
 function Tracker:Toggle()
-	Addon.sets.hideTracker = not Addon.sets.hideTracker
-	Addon:SendSignal('TRACKING_CHANGED')
+	Addon.sets.zoneTracker = not Addon.sets.zoneTracker
+	Addon:SendSignal('OPTIONS_CHANGED')
+end
+
+function Tracker:ToggleCaptured()
+	Addon.sets.capturedPets = not Addon.sets.capturedPets
+	Addon:SendSignal('OPTIONS_CHANGED')
 end

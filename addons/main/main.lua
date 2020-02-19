@@ -26,7 +26,8 @@ Addon.MaxLevel = 25
 function Addon:OnEnable()
 	PetTracker_State = PetTracker_State or {}
 	PetTracker_Sets = setmetatable(PetTracker_Sets or {}, {__index = {
-		breeds = true, switcher = true, forfeit = true, alertUpgrades = true,
+		zoneTracker = true, rivalPortraits = true,
+		switcher = true, alertUpgrades = true, forfeit = 'ask',
 		rivalHistory = {},
 	}})
 

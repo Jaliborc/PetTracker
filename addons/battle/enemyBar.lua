@@ -31,7 +31,6 @@ function Bar:OnEnable()
 		self.Buttons[i] = self:NewButton(i)
 	end
 
-	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateLock')
 	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
 	self:SetPoint('BOTTOM', self:GetParent(), 'TOP', Addon.sets.enemyBarX or 0, Addon.sets.enemyBarY or 30)
@@ -39,7 +38,6 @@ function Bar:OnEnable()
 	self:SetClampedToScreen(true)
 	self:SetMovable(true)
 	self:SetSize(110, 30)
-	self:UpdateLock()
 	self:Update()
 end
 

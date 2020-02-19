@@ -6,13 +6,10 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'ruRU')
 if not L then return end
 
+-- main
 L.AddWaypoint = 'Добавить точку'
-L.AlertUpgrades = 'Уведомление для обновлений'
-L.AlertUpgradesTip = 'Если отключить, окно уведомлений диких, то не будет показан в бою, но уведомления будут по-прежнему иметь маркировку с символом (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Новых обновлений нет. Покинуть бой?'
 L.AvailableBreeds = 'Доступные Породы'
-L.PromptForfeit = 'Запрос на неустойки'
-L.PromptForfeitTip = 'Если включено, вам будет предложено покинуть бой при отсутствии обновления.'
 L.Breed = 'Порода'
 L.BreedExplanation = 'Определяет статистику распределения полученния на каждом уровне .'
 L.CapturedPets = 'Захваченные питомцы'
@@ -28,6 +25,8 @@ L.Rivals = 'Соперники'
 L.ShowPets = 'Показать боевых питомцев'
 L.ShowStables = 'Показать смотрителей'
 L.StableTip = '|cffffd200Приезжайте сюда, чтобы исцелить ваших питомцев за небольшую плату.|r'
+L.Source1 = 'Источник'
+L.Source5 = 'Битвы питомцев'
 L.TrackPets = 'Отслеживание Питомцев'
 L.TellMore = 'Расскажите подробнее о себе.'
 L.UnlockActions = 'Разблокировать действий противника'
@@ -37,8 +36,11 @@ L.ZoneTracker = 'Мониторинг зоны'
 L.Victory = 'победа'
 L.Defeat = 'поражение'
 
-L.Source1 = 'Источник'
-L.Source5 = 'Битвы питомцев'
+-- options
+L.AlertUpgrades = 'Уведомление для обновлений'
+L.AlertUpgradesTip = 'Если отключить, окно уведомлений диких, то не будет показан в бою, но уведомления будут по-прежнему иметь маркировку с символом (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
+L.Forfeit = 'Запрос на неустойки'
+L.ForfeitTip = 'Если включено, вам будет предложено покинуть бой при отсутствии обновления.'
 
 L.FAQ = {
 	'Как показать/скрыть всех питомцев на карте?',

@@ -68,7 +68,7 @@ end
 
 function Objectives:Update()
 	self:GetClass().Update(self)
-	self:SetShown(not Addon.sets.hideTracker and self.Anchor:IsShown())
+	self:SetShown(Addon.sets.zoneTracker and self.Anchor:IsShown())
 
 	HeaderButton:SetShown(Parent.currentBlock or self:IsShown())
 	OBJECTIVE_TRACKER_ADDONS[self.Index] = self:IsShown() and self:GetHeight() or 0

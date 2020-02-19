@@ -6,13 +6,10 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'frFR')
 if not L then return end
 
+-- main
 L.AddWaypoint = 'Ajouter un repère'
-L.AlertUpgrades = 'Alerter pour les Améliorations'
-L.AlertUpgradesTip = 'Si desactivé, l\'alerte des améliorations sauvages ne sera pas affichée en combat, mais celles-ci seront toujours marquées avec un symbole (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Aucune amélioration n\'est disponible. Quitter le combat?'
 L.AvailableBreeds = 'Races disponibles'
-L.PromptForfeit = 'Déclarer forfait'
-L.PromptForfeitTip = 'Si activé, Il vous sera proposé de déclarer forfait en combat si aucunes améliorations n\'est disponibles.'
 L.Breed = 'Races'
 L.BreedExplanation = 'Determine comment les stats gagnées à chaque niveau sont attibuées.'
 L.CapturedPets = 'Afficher les capturées'
@@ -29,12 +26,16 @@ L.ShowStables = 'Afficher Écurie'
 L.StableTip = '|cffffd200Venez ici pour soigner vos|nmascotte pour un faible prix.|r'
 L.TrackPets = 'Pister mascottes'
 L.TellMore = 'Dîtes moi en plus à propos de vous.'
-L.UnlockActions = 'Dévérrouiller les actions ennemies'
-L.UnlockActionsTip = 'Si activé, la barre d\'action ennemie pourra être déplacée n\'importe où à l\'écran.'
 L.UpgradeAlert = 'Des améliorations sauvages sont apparues!'
 L.ZoneTracker = 'Zone de Pistage'
 L.Victory = 'Victoire'
 L.Defeat = 'Défaite'
+
+-- options
+L.AlertUpgrades = 'Alerter pour les Améliorations'
+L.AlertUpgradesTip = 'Si desactivé, l\'alerte des améliorations sauvages ne sera pas affichée en combat, mais celles-ci seront toujours marquées avec un symbole (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
+L.Forfeit = 'Déclarer forfait'
+L.ForfeitTip = 'Si activé, Il vous sera proposé de déclarer forfait en combat si aucunes améliorations n\'est disponibles.'
 
 L.FAQ = {
 	'Comment puis-je afficher/masquer toutes les mascotte sur la carte?',

@@ -22,16 +22,16 @@ local Toggle = Addon:NewModule('TrackToggle', CreateFrame('CheckButton', ADDON .
 function Toggle:OnEnable()
 	self:Update()
 	self:SetScript('OnClick', self.OnClick)
-	self:RegisterSignal('TRACKING_CHANGED', 'Update')
+	self:RegisterSignal('OPTIONS_CHANGED', 'Update')
 	self.Text:SetText(LibStub('AceLocale-3.0'):GetLocale(ADDON).ZoneTracker)
 	self:SetPoint('RIGHT', CollectMeOpen2Button or PetJournalFindBattle, 'LEFT', -self.Text:GetWidth() - 15, -1)
 end
 
 function Toggle:OnClick()
-	Addon.sets.hideTracker = not self:GetChecked()
-	Addon:SendSignal('TRACKING_CHANGED')
+	Addon.sets.zoneTracker = self:GetChecked()
+	Addon:SendSignal('OPTIONS_CHANGED')
 end
 
 function Toggle:Update()
-	self:SetChecked(not Addon.sets.hideTracker)
+	self:SetChecked(Addon.sets.zoneTracker)
 end

@@ -6,13 +6,10 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'ptBR')
 if not L then return end
 
+-- main
 L.AddWaypoint = 'Adicionar Ponto de Destino'
-L.AlertUpgrades = 'Aviso de Melhorias'
-L.AlertUpgradesTip = 'Se desligado, a caixa de aviso de melhorias não aparecerá em combate, mas mascotes serão ainda assim marcadas com o símbolo (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Não apareceram melhorias. Desistir do combate?'
 L.AvailableBreeds = 'Raças Disponíveis'
-L.PromptForfeit = 'Sugerir Desistir'
-L.PromptForfeitTip = 'Se ligado, será sugerido desistir do combate quando não existirem melhorias.'
 L.Breed = 'Raça'
 L.BreedExplanation = 'Determina como os atributos ganhos em cada nível são distribuídos.'
 L.CapturedPets = 'Mostrar Capturados'
@@ -33,6 +30,12 @@ L.UpgradeAlert = 'Apareceram melhorias!'
 L.ZoneTracker = 'Rastreador de Zona'
 L.Victory = 'Vitória'
 L.Defeat = 'Derrota'
+
+-- options
+L.AlertUpgrades = 'Aviso de Melhorias'
+L.AlertUpgradesTip = 'Se desligado, a caixa de aviso de melhorias não aparecerá em combate, mas mascotes serão ainda assim marcadas com o símbolo (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
+L.Forfeit = 'Sugerir Desistir'
+L.ForfeitTip = 'Se ligado, será sugerido desistir do combate quando não existirem melhorias.'
 
 L.FAQ = {
 	'Como escondo/mostro todas as mascotes no mapa?',

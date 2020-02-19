@@ -14,53 +14,77 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 
 This file is part of PetTracker.
 --]]
-if true then return end
 
-local ADDON, Addon = 'PetTracker', PetTracker
-local Config = Addon:NewModule('Config')
-local L = Addon.Locals
+local Sushi = LibStub('Sushi-3.1')
+local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup('PetTracker |TInterface/Garrison/MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t'))
+local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
-local PAW_ICON = '|TInterface\\Garrison\\MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t '
-local HELP_ICON = '|TInterface\\HelpFrame\\HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t '
 local PATRONS = {{title='Jenkins',people={'Gnare','ProfessahX','Zaneius Valentine'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia F','Peggy Webb','Lolari','Craig Falb','Mary Barrentine','Patryk Kalis','Lifeprayer','Steve Lund','Grimmcanuck','Donna Wasson'}}} -- generated patron list
-local FAQ = L.FAQ
+local HELP_ICON = ' |TInterface/HelpFrame/HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t'
+local FOOTER = 'Copyright 2012-2020 João Cardoso'
 
-function Config:Startup()
-	local options = self:CreatePanel(SushiMagicGroup, nil, PAW_ICON .. ADDON)
-	options:SetChildren(function(self)
-		Addon:ForAllModules('AddOptions', self)
-	end)
 
-	local faq = self:CreatePanel(SushiMagicGroup, options:GetTitle(), HELP_ICON .. HELP_LABEL)
+--[[ Startup ]]--
+
+function Options:OnEnable()
+	local faq = Sushi.OptionsGroup(self, HELP_LABEL .. HELP_ICON)
 	faq:SetSubtitle(L.FAQDescription)
-	faq:SetChildren(function(self)
-		for i = 1, #FAQ, 2 do
-			self:CreateHeader(FAQ[i], 'GameFontHighlight', true)
-			self:CreateHeader(FAQ[i+1], 'GameFontDisable').bottom = 15
-		end
+	faq:SetChildren(self.OnFAQ)
+	faq:SetFooter(FOOTER)
+
+	local credits = Sushi.CreditsGroup(self, PATRONS)
+	credits:SetSubtitle(nil, 'http://www.patreon.com/jaliborc')
+	credits:SetFooter(FOOTER)
+
+	self:SetCall('OnDefaults', self.OnDefaults)
+	self:SetCall('OnChildren', self.OnMain)
+	self:SetSubtitle(L.OptionsDescription)
+	self:SetFooter(FOOTER)
+end
+
+function Options:OnDefaults()
+	--wipe(PetTracker.sets)
+	--PetTracker:SendSignal('OPTIONS_CHANGED')
+end
+
+function Options:OnMain()
+	self:Add('Header', TRACKING, GameFontHighlight, true)
+	self:AddCheck('ZoneTracker')
+	self:AddCheck('RivalPortraits')
+
+	self:Add('Header', BATTLE_PET_SOURCE_5, GameFontHighlight, true)
+	self:AddCheck('Switcher')
+	self:AddCheck('AlertUpgrades')
+	self:AddSetting('DropChoice', 'Forfeit'):AddChoices {
+		{text = ALWAYS, key = 'auto'},
+		{text = 'Prompt', key = 'ask'},
+		{text = NEVER, key = false},
+	}
+end
+
+function Options:OnFAQ()
+	for i = 1, #L.FAQ, 2 do
+		self:Add('Header', L.FAQ[i], GameFontHighlight, true)
+		self:Add('Header', L.FAQ[i+1], GameFontDisable).bottom = 15
+	end
+end
+
+
+--[[ API ]]--
+
+function Options:AddCheck(id)
+	return self:AddSetting('Check', id)
+end
+
+function Options:AddSetting(class, id)
+	local arg = id:gsub('^.', strlower)
+	local b = self:Add(class, L[id])
+	b:SetTip(L[id], L[id .. 'Tip'])
+	b:SetValue(PetTracker.sets[arg])
+	b:SetCall('OnInput', function(b, v)
+		PetTracker.sets[arg] = v
+		PetTracker:SendSignal('OPTIONS_CHANGED')
 	end)
 
-	local credits = self:CreatePanel(SushiCreditsGroup, options:GetTitle())
-	credits:SetWebsite('http://www.patreon.com/jaliborc')
-	credits:SetPeople(PATRONS)
+	return b
 end
-
-function Config:CreatePanel(class, ...)
-	local group = class:CreateOptionsCategory(...)
-	group:SetAddon(ADDON)
-	group:SetFooter('Copyright 2012-2020 João Cardoso')
-	group.Category.default = function()
-		for k, v in pairs(Addon.Sets) do
-			if type(v) ~= 'table' then
-				Addon.Sets[k] = nil
-			end
-		end
-
-		Addon.Tutorial:Restart()
-		group:Update()
-	end
-
-	return group
-end
-
-Config:Startup()

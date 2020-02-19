@@ -34,14 +34,18 @@ end
 function Alerts:Update()
 	local upgrades = Addon.Battle:AnyUpgrade()
 	if not upgrades and Addon.Battle:IsWildBattle() and not self.popped and Addon.sets.forfeit then
-		self.popped = true
+		if Addon.sets.forfeit == 'ask' then
+			self.popped = true
 
-		LibStub('Sushi-3.1').Popup {
-				id = ADDON .. 'Alerts',
-        text = L.AskForfeit, button1 = QUIT, button2 = NO,
-        OnAccept = C_PetBattles.ForfeitGame,
-        hideOnEscape = 1,
-    }
+			LibStub('Sushi-3.1').Popup {
+					id = ADDON .. 'Alerts',
+	        text = L.AskForfeit, button1 = QUIT, button2 = NO,
+	        OnAccept = C_PetBattles.ForfeitGame,
+	        hideOnEscape = 1,
+	    }
+		else
+			C_PetBattles.ForfeitGame() -- TODO: not working
+		end
 	end
 
   self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)

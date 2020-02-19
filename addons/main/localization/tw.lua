@@ -6,9 +6,8 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'zhTW')
 if not L then return end
 
+-- main
 L.AddWaypoint = '新增路徑點'
-L.AlertUpgrades = '升級提醒'
-L.AlertUpgradesTip = '如停用，戰鬥中野生寵物戰鬥升級提醒框將不再顯示，但升級將以一個標記顯示。位置：（|TInterface\GossipFrame\AvailableQuestIcon:0:0👎-2|t）。'
 L.AskForfeit = '沒有可供升級，退出戰鬥？'
 L.AvailableBreeds = '可用品種'
 L.Battles = '戰鬥'
@@ -32,14 +31,16 @@ L.Species = '寵物種類'
 L.StableTip = '|cffffd200以些許花費到此|n治療寵物。|r'
 L.TrackPets = '追踪寵物'
 L.TellMore = '告訴我更多你的細節。'
-L.PromptForfeit = '提示損耗'
-L.PromptForfeitTip = '如啟用，寵物戰鬥中將在沒有升級可用的情況下提示損耗。'
-L.UnlockActions = '解鎖敵對動作'
-L.UnlockActionsTip = '如啟用，敵對動作條可以被拖動到螢幕的任意位置。'
 L.UpgradeAlert = '野生寵物出現！'
 L.TotalTamers = '總競爭對手'
 L.Victory = '勝利'
 L.ZoneTracker = '區域追踪'
+
+-- options
+L.AlertUpgrades = '升級提醒'
+L.AlertUpgradesTip = '如停用，戰鬥中野生寵物戰鬥升級提醒框將不再顯示，但升級將以一個標記顯示。位置：（|TInterface\GossipFrame\AvailableQuestIcon:0:0👎-2|t）。'
+L.Forfeit = '提示損耗'
+L.ForfeitTip = '如啟用，寵物戰鬥中將在沒有升級可用的情況下提示損耗。'
 
 L.FAQ = {
 '如何在地圖上顯示/隱藏全部寵物？',

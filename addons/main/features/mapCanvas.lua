@@ -26,6 +26,7 @@ function MapCanvas:OnEnable()
 	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
 	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
 	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateAll')
+	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateAll')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
@@ -123,7 +124,7 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.sets.hideRivals and GetCVarBool('showTamers') then
+		if Addon.sets.rivalPortraits and GetCVarBool('showTamers') then
 			local rivals = Addon.Maps:GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
 					local rival = Addon.Rival(rival)

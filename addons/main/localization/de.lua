@@ -6,9 +6,8 @@ local ADDON = ...
 local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'deDE')
 if not L then return end
 
+-- main
 L.AddWaypoint = 'Wegpunkt hinzuf\195\188gen'
-L.AlertUpgrades = 'Hinweis bei Upgrades'
-L.AlertUpgradesTip = 'Wenn deaktiviert, wird die Upgrade-Hinweismeldung nicht im Kampf gezeigt, aber Upgrades werden immer noch mit einem Symbol gekennzeichnet (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
 L.AskForfeit = 'Keine Upgrades verf\195\188gbar. Kampf beenden?'
 L.AvailableBreeds = 'Verf\195\188gbare Z\195\188chtungen'
 L.Battles = 'K\195\164mpfe'
@@ -26,8 +25,6 @@ L.Ninja = 'Ninja'
 L.NoHistory = 'PetTracker hat dich noch nie gegen diesen Rivalen k\195\164mpfen sehen'
 L.NoneCollected = 'Nicht gesammelt'
 L.PetBattle = 'Haustierkampf'
-L.PromptForfeit = 'Aufforderung zum Aufgeben'
-L.PromptForfeitTip = 'Wenn aktiviert, wirst Du aufgefordert, einen Kampf aufzugeben, wenn keine Upgrades verf\195\188gbar sind.'
 L.Rivals = 'Rivalen'
 L.ShowJournal = 'Im Wildtierf\195\188hrer anzeigen'
 L.ShowPets = 'Kampfhaustiere anzeigen'
@@ -36,16 +33,16 @@ L.Species = 'Art'
 L.StableTip = '|cffffd200Hier k\195\182nnen Haustiere gegen eine|nkleine Geb\195\188hr geheilt werden.|r'
 L.TrackPets = 'Haustiere verfolgen'
 L.TellMore = 'Erz\195\164hle mir mehr über unsere Vergangenheit.'
-L.UnlockActions = 'Entsperre gegnerische F\195\164higkeitsleiste'
-L.UnlockActionsTip = 'Wenn aktiviert, kann die gegnerische F\195\164higkeitsleiste an eine beliebige Stelle auf dem Bildschirm gezogen werden.'
 L.UpgradeAlert = 'Besseres Kampfhaustier entdeckt!'
 L.TotalRivals = 'Alle Rivalen'
 L.Victory = 'Sieg'
 L.ZoneTracker = 'Zonen-Tracker'
 
-for i = 1, C_PetJournal.GetNumPetSources() do
-	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i] -- do not translate. Automatic for most locales
-end
+-- options
+L.AlertUpgrades = 'Hinweis bei Upgrades'
+L.AlertUpgradesTip = 'Wenn deaktiviert, wird die Upgrade-Hinweismeldung nicht im Kampf gezeigt, aber Upgrades werden immer noch mit einem Symbol gekennzeichnet (|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t).'
+L.Forfeit = 'Aufforderung zum Aufgeben'
+L.ForfeitTip = 'Wenn aktiviert, wirst Du aufgefordert, einen Kampf aufzugeben, wenn keine Upgrades verf\195\188gbar sind.'
 
 L.FAQ = {
 	'Wie kann ich alle Haustiere auf der Karte ein- und ausblenden?',
