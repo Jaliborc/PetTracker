@@ -1,11 +1,16 @@
 #### 8.3.1
-* Massive Internal Rewrite.
-* Visible Changes:
-  * Fixed the World Map hourglass button.
-  * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
-  * Objectives pet list should now update faster on login.
+* Massive Addon Rewrite.
+* Installation Changes:
   * _PetTracker_Switcher_, _PetTracker_Upgrades_ and _PetTracker_Breeds_ have been made part of the main addon and can now be toggled on/off in the settings.
   * _PetTracker_Journal_ and _PetTracker_Battle_ now contain all the load on demand content, relative to the pet journal and battles respectively.
+* Visible Changes:
+  * Fixed the World Map hourglass button.
+  * Maps now show pet specie icons at their spawn locations instead of only the specie types.
+  * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
+  * New automatic forfeit option: always forfeit when no upgrades are available in wild battle without prompt.
+  * Redesigned interface options panel and its options to fit the installation changes (see above).
+  * Objectives pet list now updates faster on login.
+  * Improved localization in some situations.
 * Internal Changes:
   * Rearranged entire mod using the WildAddon-1.0 module based architecture.
   * Rewrote a cleaner internal API, both for static and object-oriented methods.

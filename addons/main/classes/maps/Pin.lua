@@ -22,8 +22,6 @@ Pin.FrameLevel = 'PIN_FRAME_LEVEL_DIG_SITE'
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
 	b:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
-	b.Icon = b:CreateTexture(nil, 'ARTWORK')
-	b.Icon:SetPoint('CENTER')
 	return b
 end
 
@@ -31,9 +29,15 @@ function Pin:New(frame, index, x,y)
 	local canvas = frame:GetCanvas()
 	local levelmanager = frame:GetPinFrameLevelsManager()
 	local b = self:Super(Pin):New(canvas)
-	b:SetPoint('CENTER', canvas, 'TOPLEFT', canvas:GetWidth() * self:ToNumber(x), -canvas:GetHeight() * self:ToNumber(y))
-	b:SetFrameLevel(levelmanager:GetValidFrameLevel(self.FrameLevel)+index)
+	b:SetFrameLevel(levelmanager:GetValidFrameLevel(self.FrameLevel) + index)
+	b.y = -canvas:GetHeight() * self:ToNumber(y)
+	b.x = canvas:GetWidth() * self:ToNumber(x)
 	return b
+end
+
+function Pin:SetCanvasScale(scale)
+	self:SetPoint('CENTER', self:GetParent(), 'TOPLEFT', self.x / scale, self.y / scale)
+	self:SetScale(scale)
 end
 
 function Pin:ToNumber(value)

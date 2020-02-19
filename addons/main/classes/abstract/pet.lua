@@ -29,12 +29,12 @@ end
 function Pet:Display()
   self:Super(Pet):Display()
 	CollectionsJournal_SetTab(CollectionsJournal, 2)
-  PetJournal_SelectPet(PetJournal, self:GetID())
-  --[[if self:GetID() then
+
+  if self:GetID() then
     PetJournal_SelectPet(PetJournal, self:GetID())
-  else
+  elseif self:GetSpecie() then
     PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
-  end--]]
+  end
 end
 
 

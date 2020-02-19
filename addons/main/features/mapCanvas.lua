@@ -146,6 +146,6 @@ end
 function MapCanvas:Scale(frame)
 	local scale = frame:GetGlobalPinScale() / frame:GetCanvasScale()
 	for _, pin in ipairs(self.Pins[frame]) do
-			--pin.Icon:SetScale(scale)
+		pin:SetCanvasScale(scale)
 	end
 end

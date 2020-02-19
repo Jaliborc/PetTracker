@@ -22,14 +22,6 @@ function Specie:New(specie)
 	return self:Bind{specie = specie}
 end
 
-function Specie:Display()
-  self:Super(Specie):Display()
-	
-	if not self:GetID() then
-		PetJournal_SelectSpecies(PetJournal, self:GetSpecie())
-	end
-end
-
 function Specie:GetID()
 	return self:GetBestOwned()
 end

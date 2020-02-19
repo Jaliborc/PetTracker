@@ -49,7 +49,7 @@ function Rival:New(id)
 end
 
 function Rival:Display()
-	self:Super(Rivel):Display()
+	self:Super(Rival):Display()
 
 	if Addon.RivalsJournal then
 		Addon.RivalsJournal:SetRival(self)
