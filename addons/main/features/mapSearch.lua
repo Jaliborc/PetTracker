@@ -128,11 +128,12 @@ function MapSearch:ToggleTrackingTypes(parent)
 		drop:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 0, -15)
 		drop:SetChildren(function(drop)
 	    local map = WorldMapFrame:GetMapID()
-	    local bounties = map and MapUtil.MapHasUnlockedBounties(map)
+	    local bounties = map and MapUtil.MapHasEmissaries(map)
 	    local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
 	    local types = {
 	      {SHOW, true, title = true},
 	      {SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, true, var = 'questPOI'},
+				{SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT, true, var = 'showDungeonEntrancesOnMap'},
 	      {ARCHAEOLOGY_SHOW_DIG_SITES, arch, var = 'digSites'},
 	      {SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, bounties and (prof1 or prof2), var = 'primaryProfessionsFilter'},
 	      {SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, bounties and (fish or cook or firstAid), var = 'secondaryProfessionsFilter'},
@@ -148,6 +149,7 @@ function MapSearch:ToggleTrackingTypes(parent)
 	      {WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, bounties, var = 'worldQuestFilterProfessionMaterials'},
 	      {WORLD_QUEST_REWARD_FILTERS_GOLD, bounties, var = 'worldQuestFilterGold'},
 	      {WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, bounties, var = 'worldQuestFilterEquipment'},
+				{WORLD_QUEST_REWARD_FILTERS_REPUTATION, bounties, var = 'worldQuestFilterReputation'},
 	    }
 
 	    for i, entry in ipairs(types) do
