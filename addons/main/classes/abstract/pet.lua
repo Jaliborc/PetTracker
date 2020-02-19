@@ -130,6 +130,10 @@ function Pet:GetType()
 	return select(3, self:GetInfo())
 end
 
+function Pet:GetIcon()
+	return select(2, self:GetInfo())
+end
+
 function Pet:GetInfo()
 	return C_PetJournal.GetPetInfoBySpeciesID(self:GetSpecie())
 end

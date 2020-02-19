@@ -10,7 +10,6 @@ if not L then return end
 L.AddWaypoint = '新增路徑點'
 L.AskForfeit = '沒有可供升級，退出戰鬥？'
 L.AvailableBreeds = '可用品種'
-L.Battles = '戰鬥'
 L.Breed = '品種'
 L.BreedExplanation = '決定如何分派每一級獲得的狀態提升。'
 L.CapturedPets = '已捕獲寵物'

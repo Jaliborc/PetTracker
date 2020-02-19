@@ -139,7 +139,7 @@ function MapSearch:ToggleTrackingTypes(parent)
 
 	      {PETS, true, title = true},
 	      {L.Species, true, set = 'hideSpecies'},
-				{L.Battles, true, var = 'showTamers'},
+				{L.Rivals, true, var = 'showTamers'},
 				{STABLES, true, set = 'hideStables'},
 
 	      {WORLD_QUEST_REWARD_FILTERS_TITLE, bounties, title = true},

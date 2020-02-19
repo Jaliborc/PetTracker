@@ -115,23 +115,11 @@ function MapCanvas:Draw(frame)
 				local specie = Addon.Specie(specie)
 
 				if Addon:Search(specie, Addon.sets.mapSearch) then
-					local icon = specie:GetTypeIcon()
-
 					for x, y in gmatch(spots, '(%w%w)(%w%w)') do
-						tinsert(self.Pins[frame], Addon.SpeciePin(frame, index, x,y, specie, icon))
+						tinsert(self.Pins[frame], Addon.SpeciePin(frame, index, x,y, specie))
+						index = index + 1
 					end
 				end
-			end
-		end
-
-		if Addon.sets.rivalPortraits and GetCVarBool('showTamers') then
-			local rivals = Addon.Maps:GetRivalsIn(mapID)
-			for rival, spot in pairs(rivals) do
-					local rival = Addon.Rival(rival)
-					local x, y = spot:match('(%w%w)(%w%w)')
-
-					index = index + 1
-					tinsert(self.Pins[frame], Addon.RivalPin(frame, index, x,y, rival))
 			end
 		end
 
@@ -141,12 +129,23 @@ function MapCanvas:Draw(frame)
 				tinsert(self.Pins[frame], Addon.StablePin(frame, index, x,y))
 			end
 		end
+
+		if Addon.sets.rivalPortraits and GetCVarBool('showTamers') then
+			local rivals = Addon.Maps:GetRivalsIn(mapID)
+			for rival, spot in pairs(rivals) do
+					local rival = Addon.Rival(rival)
+					local x, y = spot:match('(%w%w)(%w%w)')
+
+					tinsert(self.Pins[frame], Addon.RivalPin(frame, index, x,y, rival))
+					index = index + 1
+			end
+		end
 	end
 end
 
 function MapCanvas:Scale(frame)
 	local scale = frame:GetGlobalPinScale() / frame:GetCanvasScale()
 	for _, pin in ipairs(self.Pins[frame]) do
-			pin.Icon:SetScale(scale)
+			--pin.Icon:SetScale(scale)
 	end
 end

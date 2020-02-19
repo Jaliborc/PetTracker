@@ -20,16 +20,22 @@ local Pin = Addon.Pin:NewClass('SpeciePin')
 
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
-	b.Icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
+	b.Border = b:CreateTexture(nil, 'OVERLAY')
+	b.Border:SetPoint('TOPLEFT', b.Icon, -6, 6)
+	b.Border:SetPoint('BOTTOMRIGHT', b.Icon, 6, -6)
+	b.Border:SetAtlas('Neutraltrait-border-selected')
+
 	b.Icon:SetSize(16, 16)
+	b.Icon:SetMask('Interface/CHARACTERFRAME/TempPortraitAlphaMask')
+
 	b:SetScript('OnClick', b.OnClick)
 	b:SetSize(16, 16)
 	return b
 end
 
-function Pin:New(frame, index, x,y, specie, icon)
+function Pin:New(frame, index, x,y, specie)
 	local b = self:Super(Pin):New(frame, index, x,y)
-	b.Icon:SetTexture(icon or specie:GetTypeIcon()) -- TODO: make it specie icon instead
+	b.Icon:SetTexture(specie:GetIcon())
   b.specie = specie
 	return b
 end
