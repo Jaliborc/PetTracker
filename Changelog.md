@@ -7,7 +7,6 @@
   * Fixed the World Map hourglass button.
   * Maps now show pet specie icons at their spawn locations instead of only the specie types.
   * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
-  * New automatic forfeit option: always forfeit when no upgrades are available in wild battle without prompt.
   * Redesigned interface options panel and its options to fit the installation changes (see above).
   * Objectives pet list now updates faster on login.
   * Improved localization in some situations.

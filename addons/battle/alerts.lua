@@ -21,9 +21,9 @@ local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.1').Glowbox(PetBattleF
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Alerts:OnEnable()
-	self:RegisterSignal('BATTLE_STARTED', 'Update')
-	self:RegisterSignal('COLLECTION_CHANGED', 'Update')
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
+	self:RegisterSignal('BATTLE_STARTED', 'Verify')
+	self:RegisterSignal('COLLECTION_CHANGED', 'Verify')
 	self:SetPoint('TOP', PetBattleFrame.ActiveEnemy.Icon, 'BOTTOM', 0, -20)
 	self:SetCall('OnClose', function() self.shown = true end)
 	self:SetText(L.UpgradeAlert)
@@ -31,21 +31,17 @@ function Alerts:OnEnable()
 	self:SetDirection('TOP')
 end
 
-function Alerts:Update()
+function Alerts:Verify()
 	local upgrades = Addon.Battle:AnyUpgrade()
 	if not upgrades and Addon.Battle:IsWildBattle() and not self.popped and Addon.sets.forfeit then
-		if Addon.sets.forfeit == 'ask' then
-			self.popped = true
+		self.popped = true
 
-			LibStub('Sushi-3.1').Popup {
-					id = ADDON .. 'Alerts',
-	        text = L.AskForfeit, button1 = QUIT, button2 = NO,
-	        OnAccept = C_PetBattles.ForfeitGame,
-	        hideOnEscape = 1,
-	    }
-		else
-			C_PetBattles.ForfeitGame() -- TODO: not working
-		end
+		LibStub('Sushi-3.1').Popup {
+				id = ADDON .. 'Alerts',
+        text = L.AskForfeit, button1 = QUIT, button2 = NO,
+        OnAccept = C_PetBattles.ForfeitGame,
+				hideOnEscape = 1,
+    }
 	end
 
   self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)

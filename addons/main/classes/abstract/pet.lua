@@ -41,7 +41,7 @@ end
 --[[ Progress ]]--
 
 function Pet:GetBestOwned()
-	local quality, level, best = 0, 0
+	local quality, level, best = 0,0
 
 	for i, pet in pairs(self:GetOwned()) do
 		local q = pet:GetQuality()

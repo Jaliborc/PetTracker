@@ -55,11 +55,7 @@ function Options:OnMain()
 	self:Add('Header', BATTLE_PET_SOURCE_5, GameFontHighlight, true)
 	self:AddCheck('Switcher')
 	self:AddCheck('AlertUpgrades')
-	self:AddSetting('DropChoice', 'Forfeit'):AddChoices {
-		{text = ALWAYS, key = 'auto'},
-		{text = 'Prompt', key = 'ask'},
-		{text = NEVER, key = false},
-	}
+	self:AddCheck('Forfeit')
 end
 
 function Options:OnFAQ()
