@@ -93,7 +93,7 @@ function Tracker:ToggleDropdown()
 			},
 			{
 				text = L.TrackPets,
-				checked = Addon.sets.zoneTracker,
+				checked = Addon.sets.trackPets,
 				func = Tracker.Toggle,
 				isNotRadio = true,
 			},
@@ -108,7 +108,7 @@ function Tracker:ToggleDropdown()
 end
 
 function Tracker:Toggle()
-	Addon.sets.zoneTracker = not Addon.sets.zoneTracker
+	Addon.sets.trackPets = not Addon.sets.trackPets
 	Addon:SendSignal('OPTIONS_CHANGED')
 end
 

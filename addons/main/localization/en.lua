@@ -13,11 +13,8 @@ L.Breed = 'Breed'
 L.BreedExplanation = 'Determines how stats gained at each level are distributed.'
 L.CapturedPets = 'Show Captured'
 L.CommonSearches = 'Common Searches'
-L.Defeat = 'Defeat'
-L.EnemyTeam = 'Enemy Team'
 L.FilterPets = 'Filter Pets'
 L.LoadTeam = 'Load Team'
-L.Maximized = 'Maximized'
 L.Ninja = 'Ninja'
 L.NoHistory = 'PetTracker has never seen you\nfight this adversary'
 L.NoneCollected = 'None Collected'
@@ -27,15 +24,19 @@ L.ShowPets = 'Show Battle Pets'
 L.ShowStables = 'Show Stables'
 L.Species = 'Species'
 L.StableTip = '|cffffd200Come here to heal your|npets for a small fee.|r'
-L.TrackPets = 'Track Pets'
 L.TellMore = 'Tell me more about yourself.'
 L.UpgradeAlert = 'Wild upgrades have appeared!'
 L.TotalRivals = 'Total Rivals'
-L.Victory = 'Victory'
-L.ZoneTracker = 'Zone Tracker'
+
+-- automatic. do not translate unless necessary
+L.TrackPets = GetSpellInfo(122026)
+L.Maximized = WINDOWED_MAXIMIZED
+L.Defeat = PVP_MATCH_DEFEAT:lower():gsub('^.', strupper)
+L.Victory = PVP_MATCH_VICTORY:lower():gsub('^.', strupper)
+L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
 
 for i = 1, C_PetJournal.GetNumPetSources() do
-	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i] -- do not translate. Automatic for most locales
+	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
 end
 
 -- options
@@ -48,20 +49,20 @@ L.RivalPortraitsTip = 'If enabled, rivals will be marked by their portraits when
 L.FAQDescription = 'These are the most frequently asked questions. To see the tutorials again, reset the addon settings using the "Defaults" button at the lower left corner.'
 L.Forfeit = 'Prompt for Forfeit'
 L.ForfeitTip = 'If enabled, will ask whether to forfeit a wild battle when no upgrades are available.'
-L.OptionsDescription = 'These options allow you to toggle PetTracker features on and off.'
-L.ZoneTrackerTip = 'If enabled, a list of pet capture progress in the current zone will be displayed next to the quest objectives.'
+L.OptionsDescription = 'These options allow you to toggle PetTracker general features on and off. Gotta catch them all!'
+L.TrackPetsTip = 'If enabled, a list of pet capture progress in the current zone will be displayed next to the quest objectives.'
 
 L.FAQ = {
 	'How do I show/hide all pets on the map?',
-	'Click on the magnifying glass button at the top right corner of the map. Click on "Show Battle Pets".',
+	'Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".',
 
 	'How do I make the map display specific pets only?',
 	'There is a filter box at the top right corner of the world map. See the tutorial for common search examples.',
 
-	'How do I show the Zone Tracker again?',
-	'Open the Pet Journal and click "Zone Tracker" at the bottom right corner.',
+	'How do I show my capture progress on the objectives again?',
+	'Open the Pet Journal and click "Track Pets" at the bottom right corner.',
 
-	'How do I display the pets I have captured in the Zone Tracker?',
+	'How do I display the pets I have captured in the zone objectives?',
 	('Click on the "%s" header of the tracker and enable "Show Captured".'):format(PETS),
 
 	'How do I move the enemy action bar?',

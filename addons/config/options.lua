@@ -49,10 +49,10 @@ end
 
 function Options:OnMain()
 	self:Add('Header', TRACKING, GameFontHighlight, true)
-	self:AddCheck('ZoneTracker')
+	self:AddCheck('TrackPets')
 	self:AddCheck('RivalPortraits')
 
-	self:Add('Header', BATTLE_PET_SOURCE_5, GameFontHighlight, true)
+	self:Add('Header', L.Source5, GameFontHighlight, true)
 	self:AddCheck('Switcher')
 	self:AddCheck('AlertUpgrades')
 	self:AddCheck('Forfeit')

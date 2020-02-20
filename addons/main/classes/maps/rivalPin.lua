@@ -42,7 +42,7 @@ end
 
 function Pin:OnTooltip(tip)
 	tip:AddHeader(self.rival.name)
-	tip:AddLine(BATTLE_PET_SOURCE_5)
+	tip:AddLine(L.Source5)
 
 	for i, pet in ipairs(self.rival) do
 		local icon = format('|T%s:16:16:-3:0:128:256:60:100:130:170:255:255:255|t', pet:GetTypeIcon())
