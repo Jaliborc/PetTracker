@@ -25,7 +25,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 function MapSearch:OnEnable()
 	self.Frames = {}
 	self.Suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
-	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateBoxes')
+	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateBoxes')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
@@ -56,8 +56,6 @@ end
 function MapSearch:Init(frame)
   if self.Frames[frame] then
     return
-  else
-    self.Frames[frame] = 1
   end
 
   for i, overlay in ipairs(frame.overlayFrames or {}) do
@@ -89,7 +87,7 @@ end
 function MapSearch:SetTextFilter(text)
   if Addon.sets.mapSearch ~= text then
     Addon.sets.mapSearch = text
-    Addon:SendSignal('MAP_SEARCH_CHANGED')
+    Addon:SendSignal('OPTIONS_CHANGED')
   end
 end
 

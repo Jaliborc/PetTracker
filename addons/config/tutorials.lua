@@ -20,10 +20,20 @@ local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Tutorials = PetTracker:NewModule('Tutorials', 'CustomTutorials-2.1')
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
+
+--[[ Startup ]]--
+
 function Tutorials:OnEnable()
 	self:Load()
-	self:TriggerTutorial(12)
+	self:Start()
+
+	self:HookShown(WorldMapFrame, 'Load')
 	self:RegisterEvent('ADDON_LOADED', 'Load')
+	self:RegisterSignal('OPTIONS_RESET', 'Start')
+end
+
+function Tutorials:Start()
+	self:TriggerTutorial(4)
 end
 
 function Tutorials:Load()
@@ -31,9 +41,8 @@ function Tutorials:Load()
 	local mapTrackingType = mapSearchBox and mapSearchBox:GetParent()
 
 	self:RegisterTutorials {
-		key = 'tutorial',
-		title = ADDON, savedvariable = Addon.sets,
-		onShow = function() self:Load() end,
+		title = ADDON,
+		savedvariable = Addon.sets, key = 'tutorial',
 
 		{
 			text = L.Tutorial[1],
@@ -102,21 +111,22 @@ function Tutorials:Load()
 		{
 			text = L.Tutorial[9],
 			point = 'BOTTOMLEFT', relPoint = 'TOPRIGHT',
-			anchor = Addon.RivalJournals and Addon.RivalJournals.Tab,
-			shine = Addon.RivalJournals and Addon.RivalJournals.Tab,
+			anchor = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
+			shine = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
 			shineTop = 8,
 			x = 20
 		},
 		{
 			text = L.Tutorial[10],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
+			anchor = Addon.RivalsJournal,
 			x = 20
 		},
 		{
 			text = L.Tutorial[11],
 			point = 'TOPLEFT', relPoint = 'BOTTOMRIGHT',
-			anchor = Addon.RivalJournals and Addon.RivalJournals.SearchBox,
-			shine = Addon.RivalJournals and Addon.RivalJournals.SearchBox,
+			anchor = Addon.RivalsJournal and Addon.RivalsJournal.SearchBox,
+			shine = Addon.RivalsJournal and Addon.RivalsJournal.SearchBox,
 			shineTop = 6, shineBottom = -6,
 			shineRight = 6, shineLeft = -12,
 			x = 15
@@ -125,10 +135,35 @@ function Tutorials:Load()
 			text = L.Tutorial[12],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
 			anchor = CollectionsJournal,
-			shine = Addon.RivalJournals and Addon.RivalJournals.Tab3,
+			shine = Addon.RivalsJournal and Addon.RivalsJournal.Tab3,
 			shineLeft = -3, shineRight = 5,
 			shineBottom = -5, shineTop = 3,
 			x = 20
 		},
 	}
+
+	self:TriggerOn(mapSearchBox, 7)
+	self:TriggerOn(Addon.TrackToggle, 9)
+	self:TriggerOn(Addon.RivalsJournal, 12)
+end
+
+
+--[[ API ]]--
+
+function Tutorials:TriggerOn(frame, ...)
+	self:HookShown(frame, 'TriggerTutorial', ...)
+end
+
+function Tutorials:HookShown(frame, call, arg1, arg2)
+	if frame and not self[frame] then
+		if frame:IsVisible() then
+			self[call](self, arg1, arg2)
+		else
+			frame:HookScript('OnShow', function()
+				self[call](self, arg1, arg2)
+			end)
+		end
+
+		self[frame] = true
+	end
 end

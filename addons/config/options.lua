@@ -15,11 +15,14 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local Sushi = LibStub('Sushi-3.1')
-local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup('PetTracker |TInterface/Garrison/MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t'))
-local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
+local MODULE =  ...
+local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 
-local PATRONS = {{title='Jenkins',people={'Gnare','ProfessahX','Zaneius Valentine'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia F','Peggy Webb','Lolari','Craig Falb','Mary Barrentine','Patryk Kalis','Lifeprayer','Steve Lund','Grimmcanuck','Donna Wasson'}}} -- generated patron list
+local Sushi = LibStub('Sushi-3.1')
+local Options = Addon:NewModule('Options', Sushi.OptionsGroup(ADDON .. ' |TInterface/Garrison/MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t'))
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+
+local PATRONS = {{title='Jenkins',people={'Gnare','ProfessahX','Zaneius Valentine','Gloria Horton-Young'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia F','Peggy Webb','Lolari','Craig Falb','Mary Barrentine','Patryk Kalis','Lifeprayer','Steve Lund','Grimmcanuck','Donna Wasson','Mónica Sanchez Calzado','Jack Glazko'}}} -- generated patron list
 local HELP_ICON = ' |TInterface/HelpFrame/HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2020 João Cardoso'
 
@@ -43,8 +46,11 @@ function Options:OnEnable()
 end
 
 function Options:OnDefaults()
-	--wipe(PetTracker.sets)
-	--PetTracker:SendSignal('OPTIONS_CHANGED')
+	wipe(Addon.sets)
+	wipe(Addon.state)
+
+	Addon:SendSignal('OPTIONS_CHANGED')
+	Addon:SendSignal('OPTIONS_RESET')
 end
 
 function Options:OnMain()
@@ -76,10 +82,10 @@ function Options:AddSetting(class, id)
 	local arg = id:gsub('^.', strlower)
 	local b = self:Add(class, L[id])
 	b:SetTip(L[id], L[id .. 'Tip'])
-	b:SetValue(PetTracker.sets[arg])
+	b:SetValue(Addon.sets[arg])
 	b:SetCall('OnInput', function(b, v)
-		PetTracker.sets[arg] = v
-		PetTracker:SendSignal('OPTIONS_CHANGED')
+		Addon.sets[arg] = v
+		Addon:SendSignal('OPTIONS_CHANGED')
 	end)
 
 	return b

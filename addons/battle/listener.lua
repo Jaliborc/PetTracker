@@ -22,16 +22,18 @@ local Listener = Addon:NewModule('BattleListener')
 
 --[[ Startup ]]--
 
-function Listener:Startup()
+function Listener:OnEnable()
 	if not Addon.state.casts then
 		self:Reset()
 	end
 
+	self:RegisterSignal('OPTIONS_RESET', 'Reset')
 	self:RegisterEvent('PET_BATTLE_FINAL_ROUND', 'OnWinner')
 	self:RegisterEvent('CHAT_MSG_PET_BATTLE_COMBAT_LOG', 'OnMessage')
 end
 
 function Listener:Reset()
+	Addon.sets.rivalHistory = Addon.sets.rivalHistory or {}
 	Addon.state.casts = {{id = {}, turn = {}}, {id = {}, turn = {}}, {id = {}, turn = {}}}
 	Addon.state.turn = 0
 end

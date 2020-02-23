@@ -8,8 +8,10 @@
   * Maps now show pet specie icons at their spawn locations instead of only the specie types.
   * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
   * Redesigned interface options panel and its options to fit the installation changes (see above).
+  * Settings can now be fully reset at the interface options panel.
   * Objectives pet list now updates faster on login.
-  * Improved localization in some situations.
+  * Improved and partially automated localization.
+  * Streamlined tutorial.
 * Internal Changes:
   * Rearranged entire mod using the WildAddon-1.0 module based architecture.
   * Rewrote a cleaner internal API, both for static and object-oriented methods.

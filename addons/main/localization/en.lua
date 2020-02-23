@@ -72,7 +72,7 @@ L.FAQ = {
 L.Tutorial = {
 [[Welcome! You are now using |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
 
-A lot has changed since Pandaria, so this will help you to quickly get started. Then you can get back to do what is truly important: to catch... ahem... capture them all!]],
+This tutorial will help you to quickly get started. Then you can get back to do what is truly important: to catch... ahem... capture them all!]],
 
 [[PetTracker will help you to monitor your progress in the zone you are in.
 
@@ -109,5 +109,5 @@ To hide these locations, open the tracking menu and disable |cffffd200Show Battl
 • |cffffd200Draenor|r for rivals located on Draenor.
 • |cffffd200Epic|r for rivals with epic rarity teams.
 • |cffffd200> 20|r for rivals over level 20.]],
-[[PetTracker records the fights you have with each rival. Select a fight and click on |cffffd200Load Team|r to quickly reload the pets you used then.]]
+[[PetTracker records the fights you have with each rival. Select a fight and click on |cffffd200Load Team|r to quickly reload the pets you used against them.]]
 }

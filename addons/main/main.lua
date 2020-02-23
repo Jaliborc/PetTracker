@@ -28,7 +28,6 @@ function Addon:OnEnable()
 	PetTracker_Sets = setmetatable(PetTracker_Sets or {}, {__index = {
 		trackPets = true, capturedPets = true, rivalPortraits = true,
 		switcher = true, alertUpgrades = true, forfeit = true,
-		rivalHistory = {},
 	}})
 
 	self.sets, self.state = PetTracker_Sets, PetTracker_State
@@ -39,7 +38,7 @@ function Addon:OnEnable()
 		end
 	end
 
-	if self.sets.tutorial == 13 then
+	if self.sets.tutorial == 12 then
 		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function() LoadAddOn(ADDON .. '_Config') end)
 	else
 		LoadAddOn(ADDON .. '_Config')

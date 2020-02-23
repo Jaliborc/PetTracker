@@ -25,7 +25,6 @@ function MapCanvas:OnEnable()
 	self.Tip, self.Pins = Addon.MultiTip(UIParent), {}
 	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
 	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
-	self:RegisterSignal('MAP_SEARCH_CHANGED', 'UpdateAll')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateAll')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)

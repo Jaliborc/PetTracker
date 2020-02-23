@@ -31,13 +31,14 @@ function Bar:OnEnable()
 		self.Buttons[i] = self:NewButton(i)
 	end
 
+	self:RegisterSignal('OPTIONS_RESET', 'Reposition')
 	self:RegisterEvent('PET_BATTLE_PET_CHANGED', 'Update')
 	self:RegisterEvent('PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE', 'Update')
-	self:SetPoint('BOTTOM', self:GetParent(), 'TOP', Addon.sets.enemyBarX or 0, Addon.sets.enemyBarY or 30)
 	self:SetScript('OnShow', self.Update)
 	self:SetClampedToScreen(true)
 	self:SetMovable(true)
 	self:SetSize(110, 30)
+	self:Reposition()
 	self:Update()
 end
 
@@ -68,6 +69,10 @@ function Bar:Update()
 	for i, b in ipairs(self.Buttons) do
 		b:Display(enemy:GetAbility(i), target)
 	end
+end
+
+function Bar:Reposition()
+	self:SetPoint('BOTTOM', self:GetParent(), 'TOP', Addon.sets.enemyBarX or 0, Addon.sets.enemyBarY or 30)
 end
 
 function Bar:DragStart()
