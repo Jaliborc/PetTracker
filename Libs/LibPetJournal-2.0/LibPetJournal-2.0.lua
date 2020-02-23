@@ -320,8 +320,7 @@ local function doLoadPets()
     lib:LoadPets()
 end
 
-local function restoreAndRetryLater()
-    lib:RestoreFilters()
+local function retryLater()
     lib._running = false
     C_Timer.After(0.1, doLoadPets)
 end
@@ -331,7 +330,7 @@ function lib:_LoadPets()
 
     local total, owned = C_PetJournal.GetNumPets()
     if total == 0 and owned == 0 then
-        restoreAndRetryLater()
+        retryLater()
         return false
     end
     lib._last_total = total
@@ -347,7 +346,7 @@ function lib:_LoadPets()
             local _, _, _, _, _, _, _, name = C_PetJournal.GetPetInfoByPetID(petID)
 
             if not name then
-                restoreAndRetryLater()
+                retryLater()
                 return false
             end
         end
