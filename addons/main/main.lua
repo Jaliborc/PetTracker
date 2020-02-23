@@ -36,6 +36,8 @@ function Addon:OnEnable()
 			self.sets[k] = nil
 			self.sets[k:gsub('^.', strlower)] = v
 		end
+
+		self.sets.tutorial = 12
 	end
 
 	if self.sets.tutorial == 12 then

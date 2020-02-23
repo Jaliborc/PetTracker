@@ -31,21 +31,23 @@ function Mods:OnEnable()
 end
 
 function Mods:ModifyCard(card)
-  local pet = Addon.Pet(card.petID)
-  local breeds = pet:GetAvailableBreeds()
-  if breeds then
-    card.PetInfo.sourceText = format('%s\n%s%s:%s %s', card.PetInfo.sourceText, NORMAL_FONT_COLOR_CODE, L.AvailableBreeds, FONT_COLOR_CODE_CLOSE, breeds)
-  end
+  if card.petID then
+    local pet = Addon.Pet(card.petID)
+    local breeds = pet:GetAvailableBreeds()
+    if breeds then
+      card.PetInfo.sourceText = format('%s\n%s%s:%s %s', card.PetInfo.sourceText, NORMAL_FONT_COLOR_CODE, L.AvailableBreeds, FONT_COLOR_CODE_CLOSE, breeds)
+    end
 
-  local footer = card.QualityFrame
-  if footer:IsShown() then
-    footer:SetWidth(150)
-    footer:GetRegions():Hide()
-    footer:SetScript('OnEnter', function() self:OnEnter(footer) end)
-    footer:SetScript('OnLeave', function() self:OnLeave(footer) end)
-    footer.quality:SetText(pet:GetBreedIcon(.75, -3,-1) .. footer.quality:GetText() .. ' ' .. pet:GetBreedName())
-    footer.quality:SetPoint('LEFT', 4, 0)
-    footer.pet = pet
+    local footer = card.QualityFrame
+    if footer:IsShown() then
+      footer:SetWidth(150)
+      footer:GetRegions():Hide()
+      footer:SetScript('OnEnter', function() self:OnEnter(footer) end)
+      footer:SetScript('OnLeave', function() self:OnLeave(footer) end)
+      footer.quality:SetText(pet:GetBreedIcon(.75, -3,-1) .. footer.quality:GetText() .. ' ' .. pet:GetBreedName())
+      footer.quality:SetPoint('LEFT', 4, 0)
+      footer.pet = pet
+    end
   end
 end
 
