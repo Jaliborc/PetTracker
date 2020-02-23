@@ -1,3 +1,7 @@
+#### 8.3.2
+* Journal: fixed issue with pet card.
+* Map: added option to mark pet types instead of pet species (the old style).
+
 #### 8.3.1
 * Massive Addon Rewrite.
 * Installation Changes:

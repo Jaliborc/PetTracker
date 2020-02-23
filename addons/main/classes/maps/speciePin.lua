@@ -23,6 +23,11 @@ function Pin:Construct()
 	b:SetScript('OnClick', b.OnClick)
 	b:SetSize(16, 16)
 
+	b.Type = b:CreateTexture(nil, 'ARTWORK')
+	b.Type:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
+	b.Type:SetPoint('CENTER')
+	b.Type:SetSize(13, 13)
+
 	b.Icon = b:CreateTexture(nil, 'ARTWORK')
 	b.Icon:SetMask('Interface/CHARACTERFRAME/TempPortraitAlphaMask')
 	b.Icon:SetPoint('CENTER')
@@ -32,13 +37,22 @@ function Pin:Construct()
 	b.Border:SetAtlas('Neutraltrait-border-selected')
 	b.Border:SetPoint('CENTER')
 	b.Border:SetSize(22, 22)
+
 	return b
 end
 
 function Pin:New(frame, index, x,y, specie)
 	local b = self:Super(Pin):New(frame, index, x,y)
-	b.Icon:SetTexture(specie:GetIcon())
+	b.Type:SetShown(not Addon.sets.specieIcons)
+	b.Icon:SetShown(Addon.sets.specieIcons)
   b.specie = specie
+
+	if Addon.sets.specieIcons then
+		b.Icon:SetTexture(specie:GetIcon())
+	else
+		b.Type:SetTexture(specie:GetTypeIcon())
+	end
+
 	return b
 end
 

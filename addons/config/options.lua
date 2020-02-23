@@ -15,7 +15,7 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local MODULE =  ...
+local MODULE = ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 
 local Sushi = LibStub('Sushi-3.1')
@@ -56,6 +56,7 @@ end
 function Options:OnMain()
 	self:Add('Header', TRACKING, GameFontHighlight, true)
 	self:AddCheck('TrackPets')
+	self:AddCheck('SpecieIcons')
 	self:AddCheck('RivalPortraits')
 
 	self:Add('Header', L.Source5, GameFontHighlight, true)

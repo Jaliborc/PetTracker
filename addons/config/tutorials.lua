@@ -15,7 +15,7 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of PetTracker.
 --]]
 
-local MODULE =  ...
+local MODULE = ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Tutorials = PetTracker:NewModule('Tutorials', 'CustomTutorials-2.1')
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
