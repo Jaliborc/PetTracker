@@ -1,6 +1,3 @@
 <Ui>
-	<Script file="battle.lua"/>
-	<Script file="journal.lua"/>
 	<Script file="search.lua"/>
-	<Script file="static.lua"/>
 </Ui>

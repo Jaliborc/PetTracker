@@ -1,3 +1,6 @@
+#### 8.3.3
+* Rivals: fixed issue with searching by quality.
+
 #### 8.3.2
 * Journal: fixed issue with pet card.
 * Map: added option to mark pet types instead of pet species (the old style).

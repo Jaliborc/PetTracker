@@ -17,7 +17,7 @@ This file is part of PetTracker.
 
 local ADDON, Addon = ...
 local Addon = LibStub('WildAddon-1.0'):NewAddon(ADDON, Addon, 'MutexDelay-1.0')
-Addon.MaxQuality = LE_ITEM_QUALITY_RARE + 1
+Addon.MaxQuality = 6
 Addon.MaxLevel = 25
 
 
