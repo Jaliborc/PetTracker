@@ -1,3 +1,4 @@
 <Ui>
+	<Script file="maps.lua"/>
 	<Script file="search.lua"/>
 </Ui>
