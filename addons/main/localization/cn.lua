@@ -31,23 +31,32 @@ L.TotalRivals = '全部对手'
 
 -- options
 L.AlertUpgrades = '升级提醒'
-L.AlertUpgradesTip = '如禁用，战斗中野生宠物战斗升级提醒框将不再显示，但升级将以一个标记显示。位置：（|TInterface\\GossipFrame\\AvailableQuestIcon:0:0:-1:-2|t）。'
+L.AlertUpgradesTip = '如禁用，战斗中野生宠物战斗升级提醒框将不再显示，但升级将以一个标记显示。位置：（|TInterface/GossipFrame/AvailableQuestIcon:0:0:-1:-2|t）。'
+L.Switcher = '切换器'
+L.SwitcherTip = '如启用，宠物战斗切换默认用户界面将被替换为一个进阶级别的。'
+L.RivalPortraits = '对手头像'
+L.RivalPortraitsTip = '如启用，世界和战斗地图上显示对手将以他们的头像标记。'
+L.FAQDescription = '这些是最常见的问题。要再次查看教程，请使用左下角的“默认”按钮重置插件设置。'
 L.Forfeit = '提示损耗'
 L.ForfeitTip = '如启用，宠物战斗中将在没有升级可用的情况下提示损耗。'
-L.FAQDescription = '这些是最常见的问题。要再次查看教程，请使用左下角的“默认”按钮重置插件设置。'
+L.OptionsDescription = '此选项允许切换 PetTracker 常用功能开关。把他们一网打尽！'
+L.TrackPetsTip = '如启用，当前区域宠物捕获进度列表将被显示在任务目标旁边。'
 
 L.FAQ = {
 	'如何在地图上显示/隐藏全部宠物？',
-	'点击地图右上角落的放大镜按钮。点击显示战斗宠物。',
+	'点击地图右上角落的放大镜按钮。点击“宠物”下的“种属”。',
 
 	'如何只在地图上显示特定的宠物？',
 	'在世界地图右上角有个过滤框。参见教程获得更多的信息和常见的举例。',
 
-	'如何再次显示区域追踪？',
-	'打开宠物日志界面并点击右下方的区域追踪。',
+	'如何再次在目标显示捕获进度？',
+	'打开宠物日志界面并点击右下方的“追踪宠物”。',
 
 	'如何在区域追踪中显示已捕获的宠物？',
-	'点击宠物对战追踪并启用已捕获宠物。',
+	（'点击跟踪器的“%s”标题，然后启用“显示已捕获”。'）：格式（宠物）,
+
+	'如何移动敌人动作条？',
+	'按住 Shift 键并拖动动作条。',
 }
 
 L.Tutorial = {
@@ -74,9 +83,7 @@ L.Tutorial = {
 • |cffffd200水栖（Aquatic）|r代表水栖类。
 • |cffffd200任务（Quest）|r代表从任务获取的宠物。
 • |cffffd200森林（Forest）|r代表栖息在森林。]],
-}
 
-L.JournalTutorial = {
 [[打开|cffffd200宠物日志|r 来查看 PetTracker 能为你的历险做些什么。]],
 [[此选择框可以切换|cffffd200区域追踪|r。这是一个特别有用的追踪加入你没有用过追踪的话。]],
 [[打开|cffffd200对手|r栏来了解关于他们更多。]],
@@ -92,5 +99,5 @@ L.JournalTutorial = {
 • |cffffd200德拉诺（Draenor）|r为德拉诺的对手。
 • |cffffd200史诗（Epic）|r为对手使用史诗队伍。
 • |cffffd200> 20|r为等级大于20的对手。]],
-[[PetTracker 记录每个与之对战的对手。选择战斗并点击|cffffd200加载队伍|r来快速加载你所选择的宠物。]]
+[[PetTracker 记录每个与之对战的对手。选择战斗并点击|cffffd200加载队伍|r来快速加载你所选择的宠物来对付他们。]]
 }
