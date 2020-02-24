@@ -1,4 +1,60 @@
-#### 8.0.6
+#### 8.3.2
+* Journal: fixed issue with pet card.
+* Map: added option to mark pet types instead of pet species (the old style).
+
+#### 8.3.1
+* Massive Addon Rewrite.
+* Installation Changes:
+  * _PetTracker_Switcher_, _PetTracker_Upgrades_ and _PetTracker_Breeds_ have been made part of the main addon and can now be toggled on/off in the settings.
+  * _PetTracker_Journal_ and _PetTracker_Battle_ now contain all the load on demand content, relative to the pet journal and battles respectively.
+* Visible Changes:
+  * Fixed the World Map hourglass button.
+  * Maps now show pet specie icons at their spawn locations instead of only the specie types.
+  * Clicking a specie on tracker or map now will show you a pet on the journal if you own any of that specie.
+  * Redesigned interface options panel and its options to fit the installation changes (see above).
+  * Settings can now be fully reset at the interface options panel.
+  * Objectives pet list now updates faster on login.
+  * Improved and partially automated localization.
+  * Streamlined tutorial.
+* Internal Changes:
+  * Rearranged entire mod using the WildAddon-1.0 module based architecture.
+  * Rewrote a cleaner internal API, both for static and object-oriented methods.
+  * Object oriented programming now implemented using Poncho-2.0.
+  * Dropdowns, popups and settings panel now implemented using Sushi-3.1.
+  * Timers now implemented using DelayMutex-1.0.
+  * Definitively a lot more we forgot by now.
+
+#### 8.3.0
+* Updated for Visions of N'Zoth.
+* World Map: tracking type dropdown is currently not fully functional.
+
+##### 8.2.2
+* Now shows specie source in all pet tooltips.
+* Fixed bug in rival journal.
+
+##### 8.2.1
+* Fixed issue with Mechagon Island and Nazjatar preventing pet species from appearing.
+
+##### 8.2.0
+* Updated for World of Warcraft patch 8.2.
+* Updated species and rival database.
+
+##### 8.1.2
+* Updated for World of Warcraft patch 8.1.5.
+
+##### 8.1.1
+* General:
+  * Fixed settings starting up issue causing many different bugs.
+* World Map:
+  * Added option to hide rival portraits in the interface options.
+
+##### 8.1.0
+* General:
+  * Updated for Tides of Vengeance.
+* World Map:
+  * Updated points of interest.
+
+##### 8.0.6
 * World Map:
   * Added points of interest (pets, stables and rivals) to the two new continents.
 * Journal:
@@ -13,18 +69,18 @@
   * Framework reconstructions in the configuration code to support the patrons list.
 
 
-#### 8.0.5
+##### 8.0.5
 * Fixed issue with pet related world quest pins.
 * Hopefully fixed Twitch packaging issue.
 
-#### 8.0.4
+##### 8.0.4
 * World Map:
   * Fixed 2 minor bugs.
 * Rivals:
   * Fixed error at the end of a rival battle.
   * Fixed issue with battle history display.
 
-#### 8.0.3
+##### 8.0.3
 * World Map:
   * Now shows rival locations and their portraits everywhere.
   * Fixed Dalaran, Nagrand (Draenor) and Shadowmoon Valley (Draenor).
@@ -34,7 +90,7 @@
   * Nicer pin location button on the map.
   * Removed some wrongly classified elite pets belonging to tamers from the list.
 
-#### 8.0.2
+##### 8.0.2
 * World Map:
   * Filter box now hides when pets are not being tracked.
   * Fixed start error message.
@@ -49,7 +105,7 @@
   * Zone Map doesn't update yet when filters are changed.
   * 99% appears functional as intended, so tagging release.
 
-#### 8.0.1 (barebones)
+##### 8.0.1 (barebones)
 * This is a **barebones release**!
   * All of the submodules are back: Journal, Upgrades, Breeds and Config.
   * Yet, not all of the features are currently running.

@@ -1,0 +1,9 @@
+<Ui>
+  <Script file="battle.lua"/>
+
+  <Script file="alerts.lua"/>
+  <Script file="listener.lua"/>
+  <Script file="enemyBar.lua"/>
+  <Script file="switcher.lua"/>
+  <Script file="units.lua"/>
+</Ui>

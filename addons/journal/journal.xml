@@ -1,0 +1,12 @@
+<Ui>
+	<Include file="..\..\libs\journal.xml"/>
+
+	<Include file="templates.xml"/>
+	<Include file="record.xml"/>
+	<Include file="rivals.xml"/>
+
+	<Script file="mods.lua"/>
+	<Script file="record.lua"/>
+	<Script file="rivals.lua"/>
+	<Script file="trackToggle.lua"/>
+</Ui>

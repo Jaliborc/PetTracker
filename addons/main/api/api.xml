@@ -1,0 +1,7 @@
+<Ui>
+	<Script file="data.lua"/>
+	<Script file="breeds.lua"/>
+	<Script file="maps.lua"/>
+	<Script file="predict.lua"/>
+	<Script file="search.lua"/>
+</Ui>

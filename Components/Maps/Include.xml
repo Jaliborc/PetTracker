@@ -1,7 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="Pin.lua"/>
-	<Script file="RivalPin.lua"/>
-	<Script file="SpeciePin.lua"/>
-	<Script file="StablePin.lua"/>
-	<Script file="Tooltip.lua"/>
-</Ui>

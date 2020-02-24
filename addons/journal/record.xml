@@ -1,0 +1,69 @@
+<Ui>
+	<Button name="PetTrackerBattleRecord" inherits="PetTrackerDarkButton" virtual="true">
+		<Size x="390" y="40"/>
+		<ButtonText>
+   			<Anchors>
+	 			<Anchor point="LEFT" x="15"/>
+	 		</Anchors>
+	 	</ButtonText>
+
+		<Frames>
+			<Frame parentKey="Content">
+				<Anchors>
+	 				<Anchor point="TOPLEFT"/>
+	 				<Anchor point="BOTTOMRIGHT"/>
+	 			</Anchors>
+
+				<Frames>
+					<Button parentKey="Pet3" inherits="PetTrackerPortrait">
+						<Anchors>
+							<Anchor point="RIGHT" x="-22" y="-14"/>
+						</Anchors>
+					</Button>
+					<Button parentKey="Pet2" inherits="PetTrackerPortrait">
+						<Anchors>
+							<Anchor point="RIGHT" relativeKey="$parent.Pet3" relativePoint="LEFT" x="-13"/>
+						</Anchors>
+					</Button>
+					<Button parentKey="Pet1" inherits="PetTrackerPortrait">
+						<Anchors>
+							<Anchor point="RIGHT" relativeKey="$parent.Pet2" relativePoint="LEFT" x="-13"/>
+						</Anchors>
+					</Button>
+				</Frames>
+
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString parentKey="When" inherits="GameFontWhiteSmall">
+							<Anchors>
+								<Anchor point="RIGHT" relativeKey="$parent.Pet1" relativePoint="LEFT" x="-13" y="9"/>
+							</Anchors>
+							<Color r="0.7" g="0.7" b="0.7"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				self.Content.Pet3:SetScale(0.8)
+				self.Content.Pet2:SetScale(0.8)
+				self.Content.Pet1:SetScale(0.8)
+			</OnLoad>
+			<OnClick>
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+			</OnClick>
+			<OnMouseDown>
+				if self:IsEnabled() then
+					self.Content:SetPoint('TOPLEFT', 1, -1)
+					self.Content:SetPoint('BOTTOMRIGHT', 1, -1)
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				self.Content:SetPoint('TOPLEFT')
+				self.Content:SetPoint('BOTTOMRIGHT')
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+</Ui>

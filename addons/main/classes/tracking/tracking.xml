@@ -1,0 +1,9 @@
+<Ui>
+	<Include file="progressBar.xml"/>
+	<Include file="textLine.xml"/>
+
+	<Script file="progressBar.lua"/>
+	<Script file="textLine.lua"/>
+	<Script file="textList.lua"/>
+	<Script file="tracker.lua"/>
+</Ui>

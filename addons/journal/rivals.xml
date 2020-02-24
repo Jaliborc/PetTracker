@@ -1,0 +1,369 @@
+<Ui>
+	<!-- Button Templates -->
+	<Button name="PetTrackerRivalEntry" inherits="PetTrackerModelEntry" virtual="true">
+		<Scripts>
+			<OnClick>
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+				PetTrackerRivalsJournal:SetRival(self.rival)
+			</OnClick>
+		</Scripts>
+	</Button>
+	<Button name="PetTrackerRivalTab" inherits="PaperDollSidebarTabTemplate" virtual="true">
+		<Scripts>
+			<OnLoad>
+				self.Icon:SetTexCoord(0.109375, 0.890625, 0.09375, 0.90625)
+			</OnLoad>
+			<OnEnter>
+				GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
+				GameTooltip:SetText(self.tip, 1, 1, 1)
+			</OnEnter>
+			<OnClick>
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+				PetTrackerRivalsJournal:SetTab(self:GetID())
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<!-- Frame -->
+	<Frame name="PetTrackerRivalsJournal" parent="CollectionsJournal" inherits="ButtonFrameTemplate" setAllPoints="true" hidden="true">
+		<Frames>
+			<Frame parentKey="Count" inherits="InsetFrameTemplate3">
+				<Size x="130" y="20"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="70" y="-35"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString parentKey="Number" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+							<Anchors>
+								<Anchor point="RIGHT" x="-10" y="0"/>
+							</Anchors>
+						</FontString>
+						<FontString parentKey="Label" inherits="GameFontNormalSmall" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="LEFT" x="10" y="0"/>
+								<Anchor point="RIGHT" relativeKey="$parent.Number" relativePoint="LEFT" x="-3" y="0"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame parentKey="ListInset" inherits="InsetFrameTemplate">
+				<Size x="260" y="496"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="4" y="-60" />
+					<Anchor point="BOTTOMLEFT" x="4" y="26" />
+				</Anchors>
+			</Frame>
+			<EditBox parentKey="SearchBox" inherits="SearchBoxTemplate" letters="50">
+				<Size x="237" y="20"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.ListInset" x="15" y="-9"/>
+				</Anchors>
+			</EditBox>
+			<ScrollFrame parentKey="List" name="$parentList" inherits="HybridScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.ListInset" x="3" y="-36"/>
+					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.ListInset" x="-2" y="5"/>
+				</Anchors>
+				<Frames>
+					<Slider parentKey="scrollBar" name="$parentScrollBar" inherits="HybridScrollBarTrimTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="4" y="20"/>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="4" y="11"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self.trackBG:Show();
+								self.trackBG:SetVertexColor(0, 0, 0, 0.75);
+							</OnLoad>
+						</Scripts>
+					</Slider>
+				</Frames>
+			</ScrollFrame>
+			<Frame parentKey="Card" inherits="InsetFrameTemplate">
+				<Size x="411" y="171"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-6" y="-60" />
+				</Anchors>
+
+				<Frames>
+					<PlayerModel parentKey="model" name="$parentModel" inherits="ModelTemplate" useParentLevel="true">
+						<Size x="95" y="150"/>
+						<Anchors>
+							<Anchor point="TOPLEFT" x="90" y="-20"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad function="Model_OnLoad"/>
+							<OnEvent function="Model_OnEvent"/>
+						</Scripts>
+					</PlayerModel>
+					<Frame parentKey="quest">
+						<Size x="100" y="30"/>
+						<Anchors>
+							<Anchor point="TOPRIGHT" x="-10" y="-10"/>
+						</Anchors>
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture parentKey="ring" file="Interface\TalentFrame\talent-main">
+									<Size x="27" y="27"/>
+									<Anchors>
+										<Anchor point="TOPRIGHT"/>
+									</Anchors>
+									<TexCoords left="0.50000000" right="0.91796875" top="0.00195313" bottom="0.21093750"/>
+								</Texture>
+								<Texture parentKey="icon" file="Interface/GossipFrame/DailyQuestIcon">
+									<Size x="16" y="16"/>
+									<Anchors>
+										<Anchor point="CENTER" relativeKey="$parent.ring" x="-0.5"/>
+									</Anchors>
+								</Texture>
+								<FontString parentKey="status" inherits="GameFontHighlight" justifyH="RIGHT">
+									<Anchors>
+										<Anchor point="RIGHT" relativeKey="$parent.ring" relativePoint="LEFT"/>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer level="BACKGROUND">
+								<Texture parentKey="bg" file="Interface/Glues/Models/UI_Tauren/BlackGlow01">
+									<Size x="40" y="40"/>
+									<Anchors>
+										<Anchor point="CENTER" relativeKey="$parent.ring"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>
+								GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT')
+								GameTooltip:SetHyperlink('quest:' .. tostring(self.id) .. ':-1')
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Frame>
+				</Frames>
+
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBG" file="Interface\PetBattles\PetJournal">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="3" y="-3"/>
+							</Anchors>
+							<Size x="405" y="166"/>
+							<TexCoords left="0.00195313" right="0.79882813" top="0.59277344" bottom="0.75976563"/>
+						</Texture>
+					</Layer>
+					<Layer level="BORDER">
+						<Texture name="$parentShadow" file="Interface\PetBattles\PetJournal">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="35" y="-85"/>
+							</Anchors>
+							<Size x="207" y="108"/>
+							<TexCoords left="0.52734375" right="0.79687500" top="0.02246094" bottom="0.09277344"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString parentKey="name" inherits="GameFontNormal" justifyH="LEFT" justifyV="BOTTOM">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="10" y="-10"/>
+							</Anchors>
+						</FontString>
+						<FontString  parentKey="zone" inherits="GameFontHighlightSmall" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeKey="$parent.name" x="0" y="-2"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Button parentKey="Tab3" inherits="PetTrackerRivalTab" id="3">
+				<Anchors>
+					<Anchor relativeKey="$parent.Card" point="BOTTOM" relativePoint="TOPRIGHT" x="-40" y="-1"/>
+				</Anchors>
+			</Button>
+			<Button parentKey="Tab2" inherits="PetTrackerRivalTab" id="2">
+				<Anchors>
+					<Anchor point="RIGHT" relativeKey="$parent.Tab3" relativePoint="LEFT" x="-4"/>
+				</Anchors>
+			</Button>
+			<Button parentKey="Tab1" inherits="PetTrackerRivalTab" id="1">
+				<Anchors>
+					<Anchor point="RIGHT" relativeKey="$parent.Tab2" relativePoint="LEFT" x="-4"/>
+				</Anchors>
+			</Button>
+
+			<Frame parentKey="Team" inherits="InsetFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-6" y="-252"/>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.ListInset" relativePoint="BOTTOMRIGHT" x="20" y="0"/>
+				</Anchors>
+
+				<Frames>
+					<Frame parentKey="Border" inherits="PetTrackerTitledSlotBorder">
+						<Anchors>
+							<Anchor point="TOP"/>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame parentKey="Map" mixin="MapCanvasMixin">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeKey="$parent.Card" relativePoint="BOTTOMRIGHT" x="-4" y="-4"/>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.ListInset" relativePoint="BOTTOMRIGHT" x="24" y="2"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="PaperBg" file="Interface\QuestionFrame\question-background" vertTile="true" horizTile="true" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame parentKey="BorderFrame" inherits="InsetFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT" x="4" y="0"/>
+							<Anchor point="BOTTOMLEFT" x="-3" y="-2"/>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture parentKey="BottomLeftCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="209" y="158"/>
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" x="-8" y="-12"/>
+									</Anchors>
+									<TexCoords left="0.00195313" right="0.41015625" top="0.30468750" bottom="0.61328125"/>
+								</Texture>
+								<Texture parentKey="BottomRightCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="209" y="158"/>
+									<Anchors>
+										<Anchor point="BOTTOMRIGHT" x="6" y="-12"/>
+									</Anchors>
+									<TexCoords left="0.41406250" right="0.82226563" top="0.30468750" bottom="0.61328125"/>
+								</Texture>
+								<Texture parentKey="TopLeftCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="209" y="158"/>
+									<Anchors>
+										<Anchor point="TOPLEFT" x="-8" y="10"/>
+									</Anchors>
+									<TexCoords left="0.00195313" right="0.41015625" top="0.61328125" bottom="0.30468750"/>
+								</Texture>
+								<Texture parentKey="TopRightCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="209" y="158"/>
+									<Anchors>
+										<Anchor point="TOPRIGHT" x="6" y="10"/>
+									</Anchors>
+									<TexCoords left="0.41406250" right="0.82226563" top="0.61328125" bottom="0.30468750"/>
+								</Texture>
+							</Layer>
+							<Layer level="BACKGROUND" textureSubLevel="-1">
+								<Texture parentKey="BottomBorder" file="Interface\QuestionFrame\Question-HTile" horizTile="true" >
+									<Size x="256" y="86"/>
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativeKey="$parent.BottomLeftCorner" relativePoint="BOTTOMRIGHT" y="2"/>
+										<Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRightCorner" relativePoint="BOTTOMLEFT" y="2"/>
+									</Anchors>
+									<TexCoords left="0.00000000" right="1.00000000" top="0.17187500" bottom="0.33984375"/>
+								</Texture>
+								<Texture parentKey="LeftBorder" file="Interface\QuestionFrame\Question-VTile" vertTile="true" >
+									<Size x="93" y="256"/>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativeKey="$parent.TopLeftCorner" relativePoint="BOTTOMLEFT" x="2"/>
+										<Anchor point="BOTTOMLEFT" relativeKey="$parent.BottomLeftCorner" relativePoint="TOPLEFT" x="2"/>
+									</Anchors>
+									<TexCoords left="0.00390625" right="0.36718750" top="0.00000000" bottom="1.00000000"/>
+								</Texture>
+								<Texture parentKey="RightBorder" file="Interface\QuestionFrame\Question-VTile" vertTile="true" >
+									<Size x="94" y="256"/>
+									<Anchors>
+										<Anchor point="TOPRIGHT" relativeKey="$parent.TopRightCorner" relativePoint="BOTTOMRIGHT"/>
+										<Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRightCorner" relativePoint="TOPRIGHT"/>
+									</Anchors>
+									<TexCoords left="0.37500000" right="0.74218750" top="0.00000000" bottom="1.00000000"/>
+								</Texture>
+							</Layer>
+							<Layer level="BORDER">
+								<Texture parentKey="TopLeftPaperCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="209" y="158"/>
+									<Anchors>
+										<Anchor point="TOPLEFT" x="-8" y="10"/>
+									</Anchors>
+									<TexCoords left="0.00195313" right="0.41015625" top="0.61718750" bottom="0.92578125"/>
+								</Texture>
+								<Texture parentKey="TopRightPaperCorner" file="Interface\QuestionFrame\Question-Main">
+									<Size x="208" y="158"/>
+									<Anchors>
+										<Anchor point="TOPRIGHT" x="5" y="10"/>
+									</Anchors>
+									<TexCoords left="0.41406250" right="0.82031250" top="0.61718750" bottom="0.92578125"/>
+								</Texture>
+							</Layer>
+							<Layer level="BORDER" textureSubLevel="-1">
+								<Texture parentKey="TopBorder" file="Interface\QuestionFrame\Question-HTile" horizTile="true" >
+									<Size x="256" y="91"/>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativeKey="$parent.TopLeftPaperCorner" relativePoint="TOPRIGHT" y="-1"/>
+										<Anchor point="TOPRIGHT" relativeKey="$parent.TopRightPaperCorner" relativePoint="TOPLEFT" y="-1"/>
+									</Anchors>
+									<TexCoords left="0.00000000" right="1.00000000" top="0.34375000" bottom="0.52148438"/>
+								</Texture>
+							</Layer>
+						</Layers>
+					</Frame>
+					<ScrollFrame parentKey="ScrollContainer" inherits="MapCanvasFrameScrollContainerTemplate" setAllPoints="true"/>
+				</Frames>
+				<Scripts>
+					<OnLoad method="OnLoad"/>
+					<OnUpdate method="OnUpdate"/>
+					<OnShow method="OnShow"/>
+					<OnEvent method="OnEvent"/>
+					<OnHide method="OnHide"/>
+				</Scripts>
+			</Frame>
+			<Frame parentKey="History" inherits="InsetFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-6" y="-60"/>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.ListInset" relativePoint="BOTTOMRIGHT" x="20" y="0"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\PetBattles\MountJournal-BG" setAllPoints="true">
+							<TexCoords left="0" right="0.78515625" top="0" bottom="1"/>
+							<Anchors>
+								<Anchor point="TOPLEFT"  x="3" y="-3"/>
+								<Anchor point="BOTTOMRIGHT" x="-3" y="3"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString parentKey="Empty" inherits="GameFontHighlightLarge" JustifyH="CENTER">
+							<Size x="280" y="80"/>
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame inherits="ShadowOverlayTemplate" useParentLevel="true" setAllPoints="true">
+						<Anchors>
+							<Anchor point="TOPLEFT"  x="3" y="-3"/>
+							<Anchor point="BOTTOMRIGHT" x="-3" y="3"/>
+						</Anchors>
+					</Frame>
+					<Button parentKey="LoadButton" name="$parentLoadButton" inherits="MagicButtonTemplate">
+						<Size x="140" y="22"/>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="PetTrackerRivalsJournal"/>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								self:GetParent():LoadTeam()
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

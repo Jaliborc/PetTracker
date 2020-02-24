@@ -1,0 +1,7 @@
+<Ui>
+	<Script file="gossip.lua"/>
+  <Script file="mapCanvas.lua"/>
+  <Script file="mapSearch.lua"/>
+  <Script file="objectives.lua"/>
+  <Script file="tooltips.lua"/>
+</Ui>
