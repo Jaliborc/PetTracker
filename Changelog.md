@@ -1,3 +1,8 @@
+#### 8.3.4
+* Battle: fixed bug preventing game from keeping track of battle status (and thus no cooldown predictions).
+* World Map: made rival pins 20% smaller.
+* Updated dataset.
+
 #### 8.3.3
 * Rivals: fixed issue with searching by quality.
 

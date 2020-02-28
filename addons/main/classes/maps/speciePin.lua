@@ -18,6 +18,9 @@ This file is part of PetTracker.
 local ADDON, Addon = ...
 local Pin = Addon.Pin:NewClass('SpeciePin')
 
+
+--[[ Overrides ]]--
+
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
 	b:SetScript('OnClick', b.OnClick)
@@ -55,6 +58,9 @@ function Pin:New(frame, index, x,y, specie)
 
 	return b
 end
+
+
+--[[ Interaction ]]--
 
 function Pin:OnClick(button)
 	if button == 'LeftButton' then
