@@ -35,12 +35,12 @@ end
 
 function Slot:Construct()
 	local f = self:Super(Slot):Construct()
-	f.Type:SetScript('OnEnter', Addon.AbilityButton.OnEnter)
-	f.Type:SetScript('OnLeave', Addon.AbilityButton.OnLeave)
+	f.Type:SetScript('OnEnter', Addon.AbilityDisplay.OnEnter)
+	f.Type:SetScript('OnLeave', Addon.AbilityDisplay.OnLeave)
 	f.Abilities = {}
 
 	for i = 1, 6 do
-		f.Abilities[i] = Addon.AbilityButton(f)
+		f.Abilities[i] = Addon.AbilityDisplay(f)
 	end
 	return f
 end

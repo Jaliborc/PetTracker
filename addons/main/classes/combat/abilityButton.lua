@@ -6,7 +6,7 @@
 local ADDON, Addon = ...
 local Ability = Addon.Base:NewClass('AbilityButton')
 Ability:NewClass('AbilityAction', 'Button', 'PetBattleAbilityButtonTemplate')
-Ability:NewClass('AbilityButton', 'Button', true)
+Ability:NewClass('AbilityDisplay', 'Button', true)
 
 
 --[[ Construct ]]--
@@ -31,12 +31,12 @@ function Ability:Display(ability, target)
 
 		self.Icon:SetTexture(select(3, ability:GetInfo()))
 		self.Icon:SetVertexColor(color, color, color)
+		self.Lock:SetShown(ability.requisite)
 		self.Icon:SetDesaturated(unusable)
-		self.Lock:SetShown(requisite)
 
-		self.Cooldown:SetText(cooldown or '')
-		self.CooldownShadow:SetShown(cooldown)
-		self.Cooldown:SetShown(cooldown)
+		self.Cooldown:SetText(ability.cooldown or '')
+		self.CooldownShadow:SetShown(ability.cooldown)
+		self.Cooldown:SetShown(ability.cooldown)
 
 		if self.Type then
 			self.Type:SetTexture(ability:GetTypeIcon())
