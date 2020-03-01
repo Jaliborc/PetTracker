@@ -69,10 +69,8 @@ Per nascondere questi luoghi, apri il menu di tracking e disabilita |cffffd200Mo
 • |cffffd200mancante|r per specie che non hai.
 • |cffffd200Acquatico|r per specie acquatiche.
 • |cffffd200Missioni|r per specie ottenibili attraverso le missioni.
-• |cffffd200Foresta|r per specie che abitano nelle foreste.]]
-}
+• |cffffd200Foresta|r per specie che abitano nelle foreste.]],
 
-L.JournalTutorial = {
 [[Apri il |cffffd200Giornale delle Mascotte|r per vedere cosa può fare PetTracker per la tua ricerca.]],
 [[Questo checkbox ti permette di attivare lo |cffffd200Zone Tracker|r. È utile specialmene se hai disattivato il tracker precedentemente.]],
 [[Apri il tab |cffffd200Rivali|r per impare di più sul loro riguardo.]],

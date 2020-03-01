@@ -1,8 +1,10 @@
+#### 8.3.6
+* Fixed implementation issues with a couple of localizations.
+
 #### 8.3.5
 * Fixed issue with enemy bar size (size change was unintentional).
 * Fixed issue preventing enemy bar from displaying cooldowns.
 * Chinese localizations update (by Adavak).
-
 
 #### 8.3.4
 * Battle: fixed bug preventing game from keeping track of battle status (and thus no cooldown predictions).

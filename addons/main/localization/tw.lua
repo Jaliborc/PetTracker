@@ -80,9 +80,7 @@ L.Tutorial = {
 • |cffffd200水棲（Aquatic）|r代表水棲類。
 • |cffffd200任務（Quest）|r代表從任務獲取的寵物。
 • |cffffd200森林（Forest）|r代表棲息在森林。]],
-}
 
-L.JournalTutorial = {
 [[打開|cffffd200寵物日誌|r 來查看 PetTracker 能為你的歷險做些什麼。]],
 [[此選擇框可以切換|cffffd200區域追踪|r。這是一個特別有用的追踪加入你沒有用過追踪的話。]],
 [[打開|cffffd200對手|r欄來了解關於他們更多。]],
