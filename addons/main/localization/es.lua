@@ -43,7 +43,7 @@ end
 -- options
 L.AlertUpgrades = 'Aviso de Mejoras'
 L.AlertUpgradesTip = 'Si está desactivado, el mensaje de alerta de mejoras no se mostrará, pero seguirán estando marcadas con una exclamación (|TInterface/GossipFrame/AvailableQuestIcon:0:0:-1:-2|t).'
-L.FAQDescription = 'Estas son las preguntas que más veces se hacen. Para ver de nuevo los tutoriales, reinicializa las opciones del addon clickando el botón "Defaults" en la esquina inferior izquierda.'
+L.FAQDescription = 'Estas son las preguntas que más veces se hacen. Para ver de nuevo los tutoriales, reinicializa las opciones del addon clickando el botón "Predeterminado" en la esquina inferior izquierda.'
 L.Forfeit = 'Preguntar por la Rendición'
 L.ForfeitTip = 'Si está activado, se preguntará por la rendición cuando no hayan mejoras disponibles en un combate salvaje de mascotas.'
 L.OptionsDescription = 'Estas opciones te permiten activar o desactivar las características generales de PetTracker. ¡Hazte con todas!'
