@@ -56,20 +56,20 @@ L.SwitcherTip = 'Si está activado, la interfaz por defecto para intercambiar ma
 L.TrackPetsTip = 'Si está activado, se mostrará una lista del progreso de mascotas capturadas en la zona actual junto a los objetivos de las misiones.'
 
 L.FAQ = {
-	'How do I show/hide all pets on the map?',
-	'Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".',
+	'¿Cómo puedo mostrar o esconder todas las mascotas en el mapa?',
+	'Haz click en el botón de la lupa en la esquina superior derecha del mapa. Click en "Especies" en la opción "Mascotas".',
 
-	'How do I make the map display specific pets only?',
-	'There is a filter box at the top right corner of the world map. See the tutorial for common search examples.',
+	'¿Cómo puedo hacer que el mapa muestre sólo unas mascotas específicas',
+	'Hay un caja de filtros en la esquina superior derecha del mapa del mundo. Mira el tutorial para ejemplos comunes de búsqueda.',
 
-	'How do I show my capture progress on the objectives again?',
-	'Open the Pet Journal and click "Track Pets" at the bottom right corner.',
+	'¿Cómo puedo mostrar mi progreso de capturas en los objetivos de nuevo?',
+	'Abre el Diario de Mascotas y haz click en "Rastrear Mascotas" en la esquina inferior derecha.',
 
-	'How do I display the pets I have captured in the zone objectives?',
-	('Click on the "%s" header of the tracker and enable "Show Captured".'):format(PETS),
+	'¿Cómo puedo mostrar las mascotas que he capturado en los objetivos de la zona?',
+	('Click on the "%s" header of the tracker y activa "Mostrar Capturadas".'):format(PETS),
 
-	'How do I move the enemy action bar?',
-	'Hold the shift key and drag the bar.',
+	'¿Cómo puedo mover la barra de acción del enemigo?',
+	'Mante pulsada la tecla mayúsculas y arrastra la barra.',
 }
 
 L.Tutorial = {
