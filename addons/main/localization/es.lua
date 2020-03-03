@@ -66,7 +66,7 @@ L.FAQ = {
 	'Abre el Diario de Mascotas y haz click en "Rastrear Mascotas" en la esquina inferior derecha.',
 
 	'¿Cómo puedo mostrar las mascotas que he capturado en los objetivos de la zona?',
-	('Haz click en el título "%s" del rastreador y activa "Mostrar Capturadas".'):format(PETS),
+	'Haz click en el título "Mascotas" del rastreador y activa "Mostrar Capturadas".',
 
 	'¿Cómo puedo mover la barra de acción del enemigo?',
 	'Mantén pulsada la tecla mayúsculas y arrastra la barra.',
