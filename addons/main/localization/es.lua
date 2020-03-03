@@ -57,19 +57,19 @@ L.TrackPetsTip = 'Si está activado, se mostrará una lista del progreso de masc
 
 L.FAQ = {
 	'¿Cómo puedo mostrar o esconder todas las mascotas en el mapa?',
-	'Haz click en el botón de la lupa en la esquina superior derecha del mapa. Click en "Especies" en la opción "Mascotas".',
+	'Haz click en el botón de la lupa en la esquina superior derecha del mapa. Click en "Especies" en la sección "Mascotas".',
 
 	'¿Cómo puedo hacer que el mapa muestre sólo unas mascotas específicas',
 	'Hay un caja de filtros en la esquina superior derecha del mapa del mundo. Mira el tutorial para ejemplos comunes de búsqueda.',
 
-	'¿Cómo puedo mostrar mi progreso de capturas en los objetivos de nuevo?',
+	'¿Cómo puedo mostrar mi progreso de capturas para los objetivos nuevos?',
 	'Abre el Diario de Mascotas y haz click en "Rastrear Mascotas" en la esquina inferior derecha.',
 
 	'¿Cómo puedo mostrar las mascotas que he capturado en los objetivos de la zona?',
-	('Click on the "%s" header of the tracker y activa "Mostrar Capturadas".'):format(PETS),
+	('Haz click en el título "%s" del rastreador y activa "Mostrar Capturadas".'):format(PETS),
 
 	'¿Cómo puedo mover la barra de acción del enemigo?',
-	'Mante pulsada la tecla mayúsculas y arrastra la barra.',
+	'Mantén pulsada la tecla mayúsculas y arrastra la barra.',
 }
 
 L.Tutorial = {
