@@ -73,25 +73,25 @@ L.FAQ = {
 }
 
 L.Tutorial = {
-[[Welcome! You are now using |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
-This tutorial will help you to quickly get started. Then you can get back to do what is truly important: to catch... ahem... capture them all!]],
+[[¡Bienvenido! Estás usando |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
+Este tutorial te ayudará rápidamente a comenzar. Después, podrás volver a hacer lo que es realmente importante: atrapar... ejem... ¡hazte con todas!]],
 
-[[PetTracker will help you to monitor your progress in the zone you are in.
-The |cffffd200Zone Tracker|r displays which pets you are missing, their origin, and the rarity of the ones you have captured.]],
+[[PetTracker te ayudará monitorizando tu progreso en la zona que estés.
+El |cffffd200Rastreador de Zona|r te mostrará que mascotas te estás dejando, su origen, y la rareza de las que hayas capturado.]],
 
-[[Click on |cffffd200Pets|r to toggle the tracker or additional options.]],
+[[Haz click en |cffffd200Mascotas|r para activar o desactivar el rastreador o sus opciones adicionales.]],
 
-[[Open the |cffffd200World Map|r to see what PetTracker can do for your exploration.]],
+[[Abre el |cffffd200Mapa del Mundo|r para ver en lo que te puede ayudar PetTracker en tu exploración.]],
 
-[[PetTracker displays the possible sources of pets on the world map, from spawn points to vendors. It also displays stables and extra information about tamers.
-To hide these locations, open the tracking menu and disable |cffffd200Show Battle Pets|r.]],
+[[PetTracker muestra los posibles orígenes de las mascotas en el mapa del mundo, desde lugares de aparición a vendedores. También muestra los establos e información extra sobre los Rivales.
+Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd200Mostrar Combates de Mascotas|r.]],
 
-[[You can also filter which pets are displayed by typing on the search box. Here are some examples:
-• |cffffd200Cat|r for cats.
-• |cffffd200Missing|r for species you do not own.
-• |cffffd200Aquatic|r for aquatic species.
-• |cffffd200Quest|r for species obtainable through questing.
-• |cffffd200Forest|r for species that inhabit forests.]],
+[[También puedes filtrar que mascotas se muestran tecleando en la caja de búsqueda. Algunos ejemplos:
+• |cffffd200Gato|r para buscar gatos.
+• |cffffd200Falta|r para especies que no tienes.
+• |cffffd200Agua|r para especies de agua.
+• |cffffd200Misión|r para especies que se consiguen haciendo misiones.
+• |cffffd200Bosque|r para especies que habitan en bosques.]],
 
 [[Open the |cffffd200Pet Journal|r to see what PetTracker can do for your browsing.]],
 [[This checkbox allows you to toggle the |cffffd200Zone Tracker|r. It is especially useful if you have hidden the tracker previously.]],
