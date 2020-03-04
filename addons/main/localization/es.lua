@@ -93,18 +93,18 @@ Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd2
 • |cffffd200Misión|r para especies que se consiguen haciendo misiones.
 • |cffffd200Bosque|r para especies que habitan en bosques.]],
 
-[[Open the |cffffd200Pet Journal|r to see what PetTracker can do for your browsing.]],
-[[This checkbox allows you to toggle the |cffffd200Zone Tracker|r. It is especially useful if you have hidden the tracker previously.]],
-[[Open the |cffffd200Rivals|r tab to learn more about it.]],
-[[The |cffffd200Rivals|r tab provides information about existing battle pet encounters, such as:
-• Enemy pets and their abilities.
-• Daily quests and rewards.
-• Encounter location.]],
-[[You can also filter which pets are displayed by typing on the search box. Here are some examples:
-• |cffffd200Aki|r for Aki the Chosen.
-• |cffffd200Valor|r for rivals that award valor.
-• |cffffd200Draenor|r for rivals located on Draenor.
-• |cffffd200Epic|r for rivals with epic rarity teams.
-• |cffffd200> 20|r for rivals over level 20.]],
-[[PetTracker records the fights you have with each rival. Select a fight and click on |cffffd200Load Team|r to quickly reload the pets you used against them.]]
+[[Abre el |cffffd200Diario de Mascotas|r para ver lo que PetTracker puede hacer por ti mientras lo examinas.]],
+[[Esta casilla te permite activar o desactivar el |cffffd200Rastreador de Zona|r. Es especialmente útil si ocultastes el rastreador alguna vez.]],
+[[Abre la pestaña |cffffd200Rivales|r para aprender más sobre ellos.]],
+[[La pestaña |cffffd200Rivales|r proporciona información sobre los encuentros de combates de mascotas existentes, como:
+• Las mascotas del Rival y sus habilidades.
+• Misiones diarias y recompensas.
+• Localización del encuentro.]],
+[[También puedes filtrar que mascotas son mostradas escribiendo en el cajón de búsqueda. Algunos ejemplos:
+• |cffffd200Aki|r para Aki la Elegida.
+• |cffffd200Talismán|r para rivales que otorgan Talismanes de recompensa.
+• |cffffd200Draenor|r para rivales localizados en Draenor.
+• |cffffd200Épico|r para rivales con equipos de rareza épica.
+• |cffffd200> 20|r para rivales de nivel superior a 20.]],
+[[PetTracker graba los combates que has tenido con cada rival. Selecciona una lucha y haz click en |cffffd200Cargar Equipo|r para recargar rápidamente las mascotas que usastes contra ellos.]]
 }
