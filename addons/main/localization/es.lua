@@ -1,5 +1,5 @@
 --[[
-	Spanish Localization
+	Spanish Localization by (EU) Krovikan-Minahonda
 --]]
 
 local ADDON = ...
