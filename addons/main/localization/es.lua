@@ -74,9 +74,11 @@ L.FAQ = {
 
 L.Tutorial = {
 [[¡Bienvenido! Estás usando |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
+	
 Este tutorial te ayudará rápidamente a comenzar. Después, podrás volver a hacer lo que es realmente importante: atrapar... ejem... ¡hazte con todas!]],
 
 [[PetTracker te ayudará monitorizando tu progreso en la zona que estés.
+
 El |cffffd200Rastreador de Zona|r te mostrará que mascotas te estás dejando, su origen, y la rareza de las que hayas capturado.]],
 
 [[Haz click en |cffffd200Mascotas|r para activar o desactivar el rastreador o sus opciones adicionales.]],
@@ -84,9 +86,11 @@ El |cffffd200Rastreador de Zona|r te mostrará que mascotas te estás dejando, s
 [[Abre el |cffffd200Mapa del Mundo|r para ver en lo que te puede ayudar PetTracker en tu exploración.]],
 
 [[PetTracker muestra los posibles orígenes de las mascotas en el mapa del mundo, desde lugares de aparición a vendedores. También muestra los establos e información extra sobre los Rivales.
+
 Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd200Mostrar Combates de Mascotas|r.]],
 
 [[También puedes filtrar que mascotas se muestran tecleando en la caja de búsqueda. Algunos ejemplos:
+
 • |cffffd200Gato|r para buscar gatos.
 • |cffffd200Falta|r para especies que no tienes.
 • |cffffd200Agua|r para especies de agua.
@@ -97,10 +101,12 @@ Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd2
 [[Esta casilla te permite activar o desactivar el |cffffd200Rastreador de Zona|r. Es especialmente útil si ocultastes el rastreador alguna vez.]],
 [[Abre la pestaña |cffffd200Rivales|r para aprender más sobre ellos.]],
 [[La pestaña |cffffd200Rivales|r proporciona información sobre los encuentros de combates de mascotas existentes, como:
+
 • Las mascotas del Rival y sus habilidades.
 • Misiones diarias y recompensas.
 • Localización del encuentro.]],
 [[También puedes filtrar que mascotas son mostradas escribiendo en el cajón de búsqueda. Algunos ejemplos:
+
 • |cffffd200Aki|r para Aki la Elegida.
 • |cffffd200Talismán|r para rivales que otorgan Talismanes de recompensa.
 • |cffffd200Draenor|r para rivales localizados en Draenor.
