@@ -18,8 +18,8 @@ This file is part of PetTracker.
 local ADDON, Addon = ...
 local List = Addon.Base:NewClass('TextList', 'Frame')
 
-function List:New(parent)
-	local f = self:Super(List):New(parent)
+function List:Construct(parent)
+	local f = self:Super(List):Construct(parent)
 	f.Lines = {}
 	return f
 end

@@ -1,3 +1,6 @@
+#### 8.3.7
+* Fixed small bug with text lists.
+
 #### 8.3.6
 * Fixed implementation issues with a couple of localizations.
 
