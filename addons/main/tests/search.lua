@@ -1,15 +1,19 @@
-local Tests = WoWUnit and WoWUnit('PetTracker.Filters')
+local ADDON, Addon = ...
+local Tests = WoWUnit and WoWUnit(ADDON .. '.Search')
 if not Tests then return end
 
-local ADDON, Addon = ...
-local IsTrue, IsFalse, Replace = WoWUnit.IsTrue, WoWUnit.IsFalse, WoWUnit.Replace
 
-local Ram = Addon.Specie:Get(374)
-local Rabbit = Addon.Specie:Get(378)
-local Robot = Addon.Specie:Get(254)
+--[[ Locals ]]--
 
-local Aki = Addon.Rival:Get(66741)
-local Zunta = Addon.Rival:Get(66126)
+local IsTrue, IsFalse = WoWUnit.IsTrue, WoWUnit.IsFalse
+local Replace = WoWUnit.Replace
+
+local Ram = Addon.Specie(374)
+local Rabbit = Addon.Specie(378)
+local Robot = Addon.Specie(254)
+
+local Aki = Addon.Rival(66741)
+local Zunta = Addon.Rival(66126)
 
 
 --[[ Tests ]]--
@@ -45,8 +49,8 @@ function Tests:Location()
 end
 
 function Tests:Quality()
-	Replace(Addon.Journal, 'GetBestOwned', function(self, specie)
-		return nil, specie == 378 and 1 or specie == 374 and 4 or 0, 1
+	Replace(Addon.Pet, 'GetBestOwned', function(self)
+		return nil, self:GetSpecie() == 378 and 1 or self:GetSpecie() == 374 and 4 or 0, 1
 	end)
 
 	IsTrue(Addon:Search(Rabbit, 'Poor'))

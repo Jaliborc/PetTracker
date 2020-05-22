@@ -66,7 +66,6 @@ Filters.abilities = {
 }
 
 local qualities = {[L.Maximized] = 4, [ADDON_MISSING] = 0, [NONE] = 0}
---for i = 1, #ITEM_QUALITY_COLORS-2 do
 for i = 1, Addon.MaxQuality do
 	qualities[_G['BATTLE_PET_BREED_QUALITY'..i]] = i
 end
@@ -75,7 +74,7 @@ Filters.quality = {
 	canSearch = function(self, _, search)
 		for name, i in pairs(qualities) do
 		  if CustomSearch:Find(search, name) then
-			return i
+				return i
 		  end
 		end
 	end,

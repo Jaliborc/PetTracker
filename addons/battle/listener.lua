@@ -41,7 +41,7 @@ end
 
 --[[ Events ]]--
 
-function Listener:OnMessage(message)
+function Listener:OnMessage(_, message)
 	local id = tonumber(message:match('^|T.-|t|cff......|HbattlePetAbil:(%d+)'))
 	if id then
 		local isHeal = message:find(ACTION_SPELL_HEAL)
@@ -68,7 +68,7 @@ function Listener:OnMessage(message)
 	end
 end
 
-function Listener:OnWinner(winner)
+function Listener:OnWinner(_, winner)
 	local rival = Addon.Battle:GetRival()
 	if rival then
 		local history = Addon.sets.rivalHistory[rival] or {}

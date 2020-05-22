@@ -47,7 +47,7 @@ L.FAQ = {
 	'Öffne den Wildtierführer und klicke in der rechten unteren Ecke auf "Zonen-Tracker".',
 
 	'Wie kann ich die Haustiere, die ich im Zonen-Tracker erfasst habe, anzeigen lassen?',
-	('Klicke auf "%s" im Tracker und aktiviere "Zeige gefangene Haustiere".'):format(PETS),
+	'Klicke auf "Haustiere" im Tracker und aktiviere "Zeige gefangene Haustiere".',
 }
 
 L.Tutorial = {
@@ -55,17 +55,17 @@ L.Tutorial = {
 
 Seit Pandaria hat sich viel verändert. Dieses Tutorial hilft dir loszulegen, damit du dich schnell wieder dem wirklich Wichtigen widmen kannst: Sie dir alle zu schnappen... ähm... alle Haustiere einzufangen!]],
 
-string.format([[PetTracker hilft dir, deinen Fortschritt in der Zone, in der du dich befindest, zu überwachen.
+[[PetTracker hilft dir, deinen Fortschritt in der Zone, in der du dich befindest, zu überwachen.
 
-Der |cffffd200%s|r zeigt dir noch fehlende Haustiere sowie ihren Ursprung an, dazu die Seltenheit derjenigen, die du gefangen hast.]], L.ZoneTracker),
+Der |cffffd200Zonen-Tracker|r zeigt dir noch fehlende Haustiere sowie ihren Ursprung an, dazu die Seltenheit derjenigen, die du gefangen hast.]],
 
 [[Klicke auf |cffffd200Begleiter|r, um den Tracker zu deaktivieren oder um zusätzliche Optionen zu aktivieren.]],
 
 [[Öffne die |cffffd200Weltkarte|r, um zu sehen, wie dir PetTracker beim Sammeln helfen kann.]],
 
-string.format([[PetTracker zeigt möglichen Quellen von Haustieren auf der Weltkarte an, vom Spawnpunkt bis zum Händler. Es zeigt auch Stallmeister und zusätzliche Informationen über Zähmer an.
+[[PetTracker zeigt möglichen Quellen von Haustieren auf der Weltkarte an, vom Spawnpunkt bis zum Händler. Es zeigt auch Stallmeister und zusätzliche Informationen über Zähmer an.
 
-Um diese Orte auszublenden, öffne das Tracking-Menü und deaktiviere |cffffd200%s|r.']], L.ShowPets),
+Um diese Orte auszublenden, öffne das Tracking-Menü und deaktiviere |cffffd200Kampfhaustiere anzeigen|r.']],
 
 [[Durch Eingabe im Suchfeld wird gefiltert, welche Haustiere angezeigt werden. Hier sind einige Beispiele:
 
@@ -73,23 +73,21 @@ Um diese Orte auszublenden, öffne das Tracking-Menü und deaktiviere |cffffd200
 • |cffffd200Fehlt|r für nicht gesammelte Arten.
 • |cffffd200Aquatisch|r für aquatische Arten.
 • |cffffd200Quest|r für Arten, die als Questbelohnung erhalten werden.
-• |cffffd200Wald|r für Arten, die Wälder bewohnen.]]
-}
+• |cffffd200Wald|r für Arten, die Wälder bewohnen.]],
 
-L.JournalTutorial = {
 [[Öffne den |cffffd200Wildtierführer|r, um zu sehen, wie PetTracker dir in deiner Sammlung hilft.]],
-string.format([[Dieses Kästchen ermöglicht es, den |cffffd200%s|r zu aktivieren. Besonders nützlich, wenn er zuvor versteckt wurde.]], L.ZoneTracker),
-string.format([[Öffne den |cffffd200%s|r-Reiter, um mehr darüber zu erfahren.]], L.Rivals),
-string.format([[Der |cffffd200%s|r-Reiter liefert Informationen über vorhandene Haustierkampfbegegnungen, wie z.B.:
+[[Dieses Kästchen ermöglicht es, den |cffffd200Zonen-Tracker|r zu aktivieren. Besonders nützlich, wenn er zuvor versteckt wurde.]],
+[[Öffne den |cffffd200Rivalen|r-Reiter, um mehr darüber zu erfahren.]],
+[[Der |cffffd200Rivalen|r-Reiter liefert Informationen über vorhandene Haustierkampfbegegnungen, wie z.B.:
 
 • Gegnerische Haustiere und ihre Fähigkeiten.
 • Tägliche Quests und ihre Belohnungen.
-• Den jeweiligen Ort.]], L.Rivals),
+• Den jeweiligen Ort.]],
 [[Durch Eingabe im Suchfeld wird gefiltert, welche Haustiere angezeigt werden. Hier sind einige Beispiele:
 
 • |cffffd200Aki|r für Aki the Chosen.
 • |cffffd200Draenor|r für Rivalen in Draenor.
 • |cffffd200Episch|r für Rivalen mit Teams von epischer Qualität.
 • |cffffd200> 20|r für Rivalen über Level 20.]],
-string.format([[PetTracker zeichnet alle Kämpfe mit Rivalen auf. Wähle einen Kampf und klicke auf |cffffd200%s|r, um die Haustiere, die du damals benutzt hast, zu laden.]], L.LoadTeam),
+[[PetTracker zeichnet alle Kämpfe mit Rivalen auf. Wähle einen Kampf und klicke auf |cffffd200Team laden|r, um die Haustiere, die du damals benutzt hast, zu laden.]],
 }

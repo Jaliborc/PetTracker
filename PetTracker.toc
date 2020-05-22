@@ -2,7 +2,7 @@
 ## Title: |cff2020ffPetTracker|r
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
-## Version: 8.3.1
+## Version: 8.3.7
 ## X-Category: Battle Pets
 
 ## SavedVariables: PetTracker_Sets

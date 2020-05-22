@@ -65,7 +65,7 @@ L.FAQ = {
 	'Open the Pet Journal and click "Track Pets" at the bottom right corner.',
 
 	'How do I display the pets I have captured in the zone objectives?',
-	('Click on the "%s" header of the tracker and enable "Show Captured".'):format(PETS),
+	'Click on the "Pets" header of the tracker and enable "Show Captured".',
 
 	'How do I move the enemy action bar?',
 	'Hold the shift key and drag the bar.',

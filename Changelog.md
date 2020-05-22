@@ -1,3 +1,22 @@
+#### 8.3.7
+* Fixed small bug with text lists.
+
+#### 8.3.6
+* Fixed implementation issues with a couple of localizations.
+
+#### 8.3.5
+* Fixed issue with enemy bar size (size change was unintentional).
+* Fixed issue preventing enemy bar from displaying cooldowns.
+* Chinese localizations update (by Adavak).
+
+#### 8.3.4
+* Battle: fixed bug preventing game from keeping track of battle status (and thus no cooldown predictions).
+* World Map: made rival pins 20% smaller.
+* Updated dataset.
+
+#### 8.3.3
+* Rivals: fixed issue with searching by quality.
+
 #### 8.3.2
 * Journal: fixed issue with pet card.
 * Map: added option to mark pet types instead of pet species (the old style).

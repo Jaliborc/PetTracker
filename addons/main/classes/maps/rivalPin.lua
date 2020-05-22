@@ -20,6 +20,9 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 local Pin = Addon.Pin:NewClass('RivalPin', nil, 'EncounterJournalPinTemplate')
 Pin.FrameLevel = 'PIN_FRAME_LEVEL_ENCOUNTER'
 
+
+--[[ Overrides ]]--
+
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
 	b.DefeatedOverlay:Hide()
@@ -35,6 +38,13 @@ function Pin:New(frame, index, x,y, rival)
   b.rival = rival
 	return b
 end
+
+function Pin:SetCanvasScale(scale)
+	self:Super(Pin):SetCanvasScale(scale * 0.8)
+end
+
+
+--[[ Interaction ]]--
 
 function Pin:OnClick()
 	self.rival:Display()

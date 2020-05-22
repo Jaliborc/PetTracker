@@ -43,7 +43,7 @@ L.FAQ = {
 	'Ouvrez le Codex des mascottes et cliquez sur la "Zone de Pistage" en bas à droite.',
 
 	'Comment puis-je afficher dans la Zone de Pistage les mascottes que je viens de capturer?',
-	('Cliquez sur "%s" dans le suivi des objectifs et activez "Afficher les capturées"'):format(PETS),
+	'Cliquez sur "Animaux" dans le suivi des objectifs et activez "Afficher les capturées"',
 }
 
 L.Tutorial = {
@@ -69,10 +69,8 @@ Pour masquer ces lieux, ouvrez le menu de suivi et desactivez |cffffd200Afficher
 • |cffffd200Manquant|r pour ceux que vous ne possédez pas.
 • |cffffd200Aquatique|r pour les aquatiques.
 • |cffffd200Quête|r pour celles obtenables par des quêtes.
-• |cffffd200Forêt|r pour ceux que habite dans la forêt.]]
-}
+• |cffffd200Forêt|r pour ceux que habite dans la forêt.]],
 
-L.JournalTutorial = {
 [[Ouvrez le |cffffd200Codex des mascottes|r pour voir ce que PetTracker peut faire pour votre recherche.]],
 [[Cette case à cocher vous permet d'afficher la |cffffd200Zone de Pistage|r. Celà est particulièrement utile si vous avez masqué le suivi précédemment.]],
 [[Ouvrez l'onglet des |cffffd200Dresseurs|r pour en apprendre plus sur eux.]],
