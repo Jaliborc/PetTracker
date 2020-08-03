@@ -32,7 +32,7 @@ end
 
 function Tooltips:Init(tip)
   local source = tip:CreateFontString(nil, 'ARTWORK', 'GameFontHighlightLeft')
-  source:SetPoint('TOPLEFT', tip.Owned, 'BOTTOMLEFT', 0,-2)
+  source:SetPoint('BOTTOMLEFT', tip, 'BOTTOMLEFT', 11, 8)
   source:SetSize(tip:GetWidth(), 0)
   tip.Source = source
 
