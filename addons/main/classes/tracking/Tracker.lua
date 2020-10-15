@@ -41,8 +41,10 @@ end
 --[[ Update ]]--
 
 function Tracker:Update()
-	self:Clear()
-	self:AddSpecies()
+	if self:IsVisible() then
+		self:Clear()
+		self:AddSpecies()
+	end
 end
 
 function Tracker:AddSpecies()
