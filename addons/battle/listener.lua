@@ -98,7 +98,7 @@ end
 --[[ API ]]--
 
 function Listener:GetDate()
-	local date = C_Calendar.GetDate()
+	local date = C_DateAndTime.GetCurrentCalendarTime()
 	return (date.year-2014) * 31*12 + (date.month-1) * 31 + date.monthDay-1
 end
 

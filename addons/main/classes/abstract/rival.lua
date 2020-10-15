@@ -91,7 +91,7 @@ function Rival:GetCompleteState()
 end
 
 function Rival:IsCompleted()
-	return C_QuestLog.IsComplete(self.quest)
+	return C_QuestLog.IsQuestFlaggedCompleted(self.quest)
 end
 
 function Rival:GetRewards()
