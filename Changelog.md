@@ -1,3 +1,6 @@
+##### 9.0.1
+* Fixed multiple issues with Rivals Journal, World Map and Gossip Window.
+
 #### 9.0.0
 * Updated for Shadowlands.
 
