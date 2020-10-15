@@ -112,8 +112,8 @@ function Rival:GetRewards()
 		count = tonumber(count, 36)
 
 		tinsert(rewards, {
-			link = GetCurrencyLink(id, count),
-			icon = select(3, GetCurrencyInfo(id)),
+			link = C_CurrencyInfo.GetCurrencyLink(id, count),
+			icon = C_CurrencyInfo.GetCurrencyInfo(id).iconFileID,
 			count = count
 		})
 	end
@@ -139,9 +139,9 @@ function Rival:GetAbstract()
 	end
 
 	for id in self.currencies:gmatch('(%w%w)%w') do
-		local name = GetCurrencyInfo(tonumber(id, 36))
-		if name then
-			text = text .. ' ' .. name
+		local currency = C_CurrencyInfo.GetCurrencyInfo(tonumber(id, 36))
+		if currency.name then
+			text = text .. ' ' .. currency.name
 		end
 	end
 

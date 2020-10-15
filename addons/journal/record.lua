@@ -68,7 +68,8 @@ function Record:Unpack(entry)
 end
 
 function Record:UnpackDate(date)
-	local yearDate = tonumber(date, 16) % (31*12)
+	local date = tonumber(date, 16)
+	local yearDate = date % (31*12)
 	return yearDate % 31 + 1,
 		   floor(yearDate / 31) + 1,
 		   floor(date / 31 / 12) + 2014

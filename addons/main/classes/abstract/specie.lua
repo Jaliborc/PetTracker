@@ -23,7 +23,8 @@ function Specie:New(specie)
 end
 
 function Specie:GetID()
-	return self:GetBestOwned():GetID()
+	local best = self:GetBestOwned()
+	return best and best:GetID()
 end
 
 function Specie:GetQuality()
