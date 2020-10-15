@@ -1,3 +1,10 @@
+#### 9.0.0
+* Updated for Shadowlands.
+
+#### 8.3.8
+* Fixed bug with battle listener (by Rodrigo Antonioli).
+* Updated spanish locale (by Krovikan).
+
 #### 8.3.7
 * Fixed small bug with text lists.
 

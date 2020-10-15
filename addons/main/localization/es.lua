@@ -3,7 +3,7 @@
 --]]
 
 local ADDON = ...
-local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'esES', true) or LibStub('AceLocale-3.0'):NewLocale(ADDON, 'esMX')
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'esES') or LibStub('AceLocale-3.0'):NewLocale(ADDON, 'esMX')
 if not L then return end
 
 -- main
@@ -28,17 +28,6 @@ L.StableTip = '|cffffd200Venir aquí parar curar tus|nmascotas por un pequeño p
 L.TellMore = 'Cuéntame algo más sobre ti.'
 L.UpgradeAlert = '¡Aparecieron mejoras salvajes!'
 L.TotalRivals = 'Rivales Totales'
-
--- automatic. do not translate unless necessary
-L.TrackPets = GetSpellInfo(122026)
-L.Maximized = WINDOWED_MAXIMIZED
-L.Defeat = PVP_MATCH_DEFEAT:lower():gsub('^.', strupper)
-L.Victory = PVP_MATCH_VICTORY:lower():gsub('^.', strupper)
-L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
-
-for i = 1, C_PetJournal.GetNumPetSources() do
-	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
-end
 
 -- options
 L.AlertUpgrades = 'Aviso de Mejoras'
@@ -74,7 +63,7 @@ L.FAQ = {
 
 L.Tutorial = {
 [[¡Bienvenido! Estás usando |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
-	
+
 Este tutorial te ayudará rápidamente a comenzar. Después, podrás volver a hacer lo que es realmente importante: atrapar... ejem... ¡hazte con todas!]],
 
 [[PetTracker te ayudará monitorizando tu progreso en la zona que estés.

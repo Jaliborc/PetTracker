@@ -59,19 +59,21 @@ function MapSearch:Init(frame)
   end
 
   for i, overlay in ipairs(frame.overlayFrames or {}) do
-    if overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick and overlay:IsObjectType('Button') then
-      local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Search', overlay, 'SearchBoxTemplate')
-			search.Instructions:SetText(L.FilterPets)
-      search:SetScript('OnTextChanged', function() self:SetTextFilter(search:GetText()) end)
-      search:HookScript('OnEditFocusGained', function() self:ShowSuggestions(search) end)
-  		search:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
-			search:SetPoint('RIGHT', overlay, 'LEFT', 0, 1)
-			search:SetSize(128, 20)
+		if overlay:IsObjectType('Button') then
+			if overlay.OnClick == WorldMapTrackingPinButtonMixin.OnClick then
+				local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Search', overlay, 'SearchBoxTemplate')
+				search.Instructions:SetText(L.FilterPets)
+				search:SetScript('OnTextChanged', function() self:SetTextFilter(search:GetText()) end)
+				search:HookScript('OnEditFocusGained', function() self:ShowSuggestions(search) end)
+				search:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
+				search:SetPoint('RIGHT', overlay, 'LEFT', -5, 1)
+				search:SetSize(128, 20)
 
-      overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
-
-      self.Frames[frame] = search
-      self:UpdateBox(frame)
+				self.Frames[frame] = search
+				self:UpdateBox(frame)
+			elseif overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
+      	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
+			end
     end
   end
 end

@@ -253,6 +253,7 @@ function Journal.Map:Display(rival)
 		scroll:SetPanTarget(Clamp(x, minX, maxX), Clamp(y, minY, maxY))
 
 		self.Destination = Addon.RivalPin(self, 1, x,y, rival)
+		self.Destination:SetCanvasScale(scale)
 	end
 end
 
