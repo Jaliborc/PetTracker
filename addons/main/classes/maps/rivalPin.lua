@@ -34,7 +34,7 @@ end
 function Pin:New(frame, index, x,y, rival)
 	local b = self:Super(Pin):New(frame, index, x,y)
   SetPortraitTextureFromCreatureDisplayID(b.Background, rival.model)
-	b.Background:SetDesaturated(IsQuestFlaggedCompleted(rival.quest))
+	b.Background:SetDesaturated(rival:IsCompleted())
   b.rival = rival
 	return b
 end

@@ -25,26 +25,20 @@ function Gossip:OnEnable()
 		local id = unit and tonumber(select(6, strsplit('-', unit)), nil)
 
 		if Addon.RivalInfo[id] then
-			local index = GossipFrame.buttonIndex
-			local button = _G['GossipTitleButton' .. index]
-			button:SetText(L.TellMore)
+			local button = GossipFrame.titleButtonPool:Acquire()
+			button:SetOption(L.TellMore, 'Gossip')
 			button.type = ADDON
-			button:SetID(index)
+			button.tamer = id
 			button:Show()
 
-			local icon = _G[button:GetName() .. 'GossipIcon']
-			icon:SetTexture('Interface/GossipFrame/GossipGossipIcon')
-
-			GossipResize(button)
-			GossipFrame.buttonIndex = index + 1
-			GossipFrame.tamer = id
+			tinsert(GossipFrame.buttons, button)
 		end
 	end)
 
-	hooksecurefunc('SelectGossipOption', function(index)
-		local button = _G['GossipTitleButton' .. index]
+	hooksecurefunc(C_GossipInfo, 'SelectOption', function(index)
+		local button = GossipFrame.buttons[index]
 		if button and button.type == ADDON then
-			Addon.Rival(GossipFrame.tamer):Display()
+			Addon.Rival(button.tamer):Display()
 		end
 	end)
 end

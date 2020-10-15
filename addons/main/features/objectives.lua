@@ -75,7 +75,7 @@ function Objectives:Update()
 end
 
 function Objectives:GetUsedHeight()
-	local height = DEFAULT_OBJECTIVE_TRACKER_MODULE.BlocksFrame.contentsHeight or 0
+	local height = Parent.contentsHeight or 0
 	for i = 1, self.Index-1 do
 		height = height + OBJECTIVE_TRACKER_ADDONS[i]
 	end
