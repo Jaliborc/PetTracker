@@ -172,7 +172,7 @@ function MapSearch:ShowSuggestions(parent)
 end
 
 function MapSearch:HideSuggestions(parent)
-	if not MouseIsOver(self.SuggestionsDrop) and self.SuggestionsDrop:IsActive() then
+	if not self.SuggestionsDrop:IsMouseOver() and self.SuggestionsDrop:IsActive() then
 		self.SuggestionsDrop:Release()
 	end
 end
