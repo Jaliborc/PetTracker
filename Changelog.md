@@ -1,3 +1,6 @@
+##### 9.0.2 (beta)
+* Map: species search filter now located in the tracking dropdown.
+
 ##### 9.0.1
 * Fixed multiple issues with Rivals Journal, World Map and Gossip Window.
 

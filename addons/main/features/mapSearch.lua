@@ -24,7 +24,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function MapSearch:OnEnable()
 	local box = CreateFrame('EditBox', ADDON .. 'MapSearchBox', UIParent, 'SearchBoxTemplate')
-	box.Instructions:SetText('Filter Species')
+	box.Instructions:SetText(L.FilterSpecies)
 	box:SetScript('OnTextChanged', function() self:SetText(box:GetText()) end)
 	box:HookScript('OnEditFocusGained', function() self:ShowSuggestions(box) end)
 	box:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
