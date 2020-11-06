@@ -23,13 +23,34 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 --[[ Startup ]]--
 
 function MapSearch:OnEnable()
+	local box = CreateFrame('EditBox', ADDON .. 'MapSearchBox', UIParent, 'SearchBoxTemplate')
+	box.Instructions:SetText('Filter Species')
+	box:SetScript('OnTextChanged', function() self:SetText(box:GetText()) end)
+	box:HookScript('OnEditFocusGained', function() self:ShowSuggestions(box) end)
+	box:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
+	box.top, box.bottom, box.left, box.right = 2, 6, 20, 15
+	box:SetSize(128, 20)
+
 	self.Frames = {}
+	self.Editbox = box
 	self.Suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
-	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateBoxes')
+	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateEditbox')
+	self:UpdateEditbox()
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
 	end)
+end
+
+function MapSearch:Init(frame)
+  if not self.Frames[frame] then
+	  for i, overlay in ipairs(frame.overlayFrames or {}) do
+			if overlay:IsObjectType('Button') and overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
+	    	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
+				self.Frames[frame] = true
+	    end
+	  end
+	 end
 end
 
 function MapSearch:UpdateFrames()
@@ -38,63 +59,99 @@ function MapSearch:UpdateFrames()
     	frame:OnMapChanged()
 		end
   end
-
-  self:UpdateBoxes()
 end
 
-function MapSearch:UpdateBoxes()
-  for frame, search in pairs(self.Frames) do
-    if search ~= 1 then
-      self:UpdateBox(frame)
-    end
-  end
+
+--[[ Tracking Dropdown ]]--
+
+function MapSearch:ToggleTrackingTypes(parent)
+	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(parent)
+	if drop then
+		drop:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 0, -15)
+		drop:SetChildren(function(drop)
+			local map = WorldMapFrame:GetMapID()
+			local bounties = map and MapUtil.MapHasEmissaries(map)
+			local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
+
+			local function addLine(info)
+				info.checked = info.set and not Addon.sets[info.set] or info.var and GetCVarBool(info.var)
+				info.keepShownOnClick, info.isNotRadio = true, true
+				info.notCheckable = info.isTitle
+				info.func = self.OnLineClick
+				drop:Add(info)
+			end
+
+			addLine {text = SHOW, isTitle = true}
+			addLine {text = SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, var = 'questPOI'}
+			addLine {text = SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT, var = 'showDungeonEntrancesOnMap'}
+
+			if arch then
+				addLine {text = ARCHAEOLOGY_SHOW_DIG_SITES, var = 'digSites'}
+			end
+
+			if bounties then
+				if prof1 or prof2 then
+					addLine {text = SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, var = 'primaryProfessionsFilter'}
+				end
+
+				if fish or cook or firstAid then
+					addLine {text = SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, var = 'secondaryProfessionsFilter'}
+				end
+			end
+
+			addLine {text = PETS, isTitle = true}
+			addLine {text = L.Species, set = 'hideSpecies'}
+
+			self.Editbox:SetShown(not Addon.sets.hideSpecies)
+			if not Addon.sets.hideSpecies then
+				drop:Add(self.Editbox)
+			end
+
+			addLine {text = L.Rivals, var = 'showTamers'}
+			addLine {text = STABLES, set = 'hideStables'}
+
+			if bounties then
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_TITLE, isTitle = true}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_RESOURCES, var = 'worldQuestFilterResources'}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, var = 'worldQuestFilterArtifactPower'}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, var = 'worldQuestFilterProfessionMaterials'}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_GOLD, var = 'worldQuestFilterGold'}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, var = 'worldQuestFilterEquipment'}
+				addLine {text = WORLD_QUEST_REWARD_FILTERS_REPUTATION, var = 'worldQuestFilterReputation'}
+			end
+		end)
+	end
+end
+
+function MapSearch.OnLineClick(info)
+	if info.set then
+		Addon.sets[info.set] = not info.checked or nil
+	end
+	if info.var then
+		SetCVar(info.var, info.checked and '1' or '0')
+	end
+
+	MapSearch:UpdateFrames()
 end
 
 
 --[[ Search Box ]]--
 
-function MapSearch:Init(frame)
-  if self.Frames[frame] then
-    return
-  end
-
-  for i, overlay in ipairs(frame.overlayFrames or {}) do
-		if overlay:IsObjectType('Button') then
-			if overlay.OnClick == WorldMapTrackingPinButtonMixin.OnClick then
-				local search = CreateFrame('EditBox', '$parent'.. ADDON .. 'Search', overlay, 'SearchBoxTemplate')
-				search.Instructions:SetText(L.FilterPets)
-				search:SetScript('OnTextChanged', function() self:SetTextFilter(search:GetText()) end)
-				search:HookScript('OnEditFocusGained', function() self:ShowSuggestions(search) end)
-				search:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
-				search:SetPoint('RIGHT', overlay, 'LEFT', -5, 1)
-				search:SetSize(128, 20)
-
-				self.Frames[frame] = search
-				self:UpdateBox(frame)
-			elseif overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
-      	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
-			end
-    end
-  end
-end
-
-function MapSearch:UpdateBox(frame)
-  local text = Addon.sets.mapSearch or ''
-  local search = self.Frames[frame]
-  search.Instructions:SetShown(text == '')
-  search:SetShown(not Addon.sets.hideSpecies)
-  search:SetText(text)
-end
-
-function MapSearch:SetTextFilter(text)
+function MapSearch:SetText(text)
   if Addon.sets.mapSearch ~= text then
     Addon.sets.mapSearch = text
     Addon:SendSignal('OPTIONS_CHANGED')
   end
 end
 
+function MapSearch:UpdateEditbox()
+  local text = Addon.sets.mapSearch or ''
+  self.Editbox.Instructions:SetShown(text == '')
+  self.Editbox:SetText(text)
+end
 
---[[ Dropdopwns ]]--
+
+--[[ Search Suggestions ]]--
 
 function MapSearch:ShowSuggestions(parent)
 	local drop = LibStub('Sushi-3.1').Dropdown(parent, nil, true)
@@ -102,14 +159,12 @@ function MapSearch:ShowSuggestions(parent)
 	drop:SetChildren(function(drop)
 		drop:Add {
 			text = L.CommonSearches,
-			isTitle = true, notCheckable = true
-		}
+			isTitle = true, notCheckable = true}
 
 		for i, text in ipairs(self.Suggestions) do
 			drop:Add {
-			  func = function() self:SetTextFilter(text) end,
-				text = text, notCheckable = true,
-			}
+			  func = function() self:SetText(text) end,
+				text = text, notCheckable = true}
 		end
 	end)
 
@@ -119,64 +174,5 @@ end
 function MapSearch:HideSuggestions(parent)
 	if not MouseIsOver(self.SuggestionsDrop) and self.SuggestionsDrop:IsActive() then
 		self.SuggestionsDrop:Release()
-	end
-end
-
-function MapSearch:ToggleTrackingTypes(parent)
-	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(parent)
-	if drop then
-		drop:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 0, -15)
-		drop:SetChildren(function(drop)
-	    local map = WorldMapFrame:GetMapID()
-	    local bounties = map and MapUtil.MapHasEmissaries(map)
-	    local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
-	    local types = {
-	      {SHOW, true, title = true},
-	      {SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, true, var = 'questPOI'},
-				{SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT, true, var = 'showDungeonEntrancesOnMap'},
-	      {ARCHAEOLOGY_SHOW_DIG_SITES, arch, var = 'digSites'},
-	      {SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, bounties and (prof1 or prof2), var = 'primaryProfessionsFilter'},
-	      {SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, bounties and (fish or cook or firstAid), var = 'secondaryProfessionsFilter'},
-
-	      {PETS, true, title = true},
-	      {L.Species, true, set = 'hideSpecies'},
-				{L.Rivals, true, var = 'showTamers'},
-				{STABLES, true, set = 'hideStables'},
-
-	      {WORLD_QUEST_REWARD_FILTERS_TITLE, bounties, title = true},
-	      {WORLD_QUEST_REWARD_FILTERS_RESOURCES, bounties, var = 'worldQuestFilterResources'},
-	      {WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, bounties, var = 'worldQuestFilterArtifactPower'},
-	      {WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, bounties, var = 'worldQuestFilterProfessionMaterials'},
-	      {WORLD_QUEST_REWARD_FILTERS_GOLD, bounties, var = 'worldQuestFilterGold'},
-	      {WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, bounties, var = 'worldQuestFilterEquipment'},
-				{WORLD_QUEST_REWARD_FILTERS_REPUTATION, bounties, var = 'worldQuestFilterReputation'},
-	    }
-
-	    for i, entry in ipairs(types) do
-	      local text, shown = entry[1], entry[2]
-	      if shown then
-	        local checked = entry.set and not Addon.sets[entry.set] or entry.var and GetCVarBool(entry.var)
-
-	        drop:Add {
-	          text = text,
-						checked = checked,
-	          isTitle = entry.title, notCheckable = entry.title,
-	          keepShownOnClick = true, isNotRadio = true,
-	          func = function()
-	            if entry.set then
-	              Addon.sets[entry.set] = checked and true or nil
-	            end
-
-							if entry.var then
-	              SetCVar(entry.var, checked and '0' or '1')
-	            end
-
-	            PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-	            self:UpdateFrames()
-	          end,
-	        }
-	      end
-	    end
-		end)
 	end
 end
