@@ -13,7 +13,7 @@ L.Breed = 'Breed'
 L.BreedExplanation = 'Determines how stats gained at each level are distributed.'
 L.CapturedPets = 'Show Captured'
 L.CommonSearches = 'Common Searches'
-L.FilterPets = 'Filter Pets'
+L.FilterSpecies = 'Filter Species'
 L.LoadTeam = 'Load Team'
 L.Ninja = 'Ninja'
 L.NoHistory = 'PetTracker has never seen you\nfight this adversary'
@@ -86,9 +86,9 @@ The |cffffd200Zone Tracker|r displays which pets you are missing, their origin, 
 
 [[PetTracker displays the possible sources of pets on the world map, from spawn points to vendors. It also displays stables and extra information about tamers.
 
-To hide these locations, open the tracking menu and disable |cffffd200Show Battle Pets|r.]],
+To hide these locations, open the tracking menu and disable |cffffd200Species|r, under the |cffffd200Pets|r category.]],
 
-[[You can also filter which pets are displayed by typing on the search box. Here are some examples:
+[[You can filter which pets are displayed by typing on the search box. Here are some examples:
 
 • |cffffd200Cat|r for cats.
 • |cffffd200Missing|r for species you do not own.
@@ -104,7 +104,7 @@ To hide these locations, open the tracking menu and disable |cffffd200Show Battl
 • Enemy pets and their abilities.
 • Daily quests and rewards.
 • Encounter location.]],
-[[You can also filter which pets are displayed by typing on the search box. Here are some examples:
+[[You can filter which pets are displayed by typing on the search box. Here are some examples:
 
 • |cffffd200Aki|r for Aki the Chosen.
 • |cffffd200Valor|r for rivals that award valor.
