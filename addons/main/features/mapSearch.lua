@@ -30,6 +30,7 @@ function MapSearch:OnEnable()
 	box:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
 	box.top, box.bottom, box.left, box.right = 2, 6, 20, 15
 	box:SetSize(128, 20)
+	box:Hide()
 
 	self.Frames = {}
 	self.Editbox = box
@@ -47,7 +48,7 @@ function MapSearch:Init(frame)
 	  for i, overlay in ipairs(frame.overlayFrames or {}) do
 			if overlay:IsObjectType('Button') and overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
 	    	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
-				self.Frames[frame] = true
+				self.Frames[frame] = overlay
 	    end
 	  end
 	 end
