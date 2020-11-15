@@ -46,7 +46,7 @@ end
 function MapSearch:Init(frame)
   if not self.Frames[frame] then
 	  for i, overlay in ipairs(frame.overlayFrames or {}) do
-			if overlay:IsObjectType('Button') and overlay.OnClick == WorldMapTrackingOptionsButtonMixin.OnClick then
+			if overlay:IsObjectType('Button') and overlay:GetScript('OnMouseDown') == WorldMapTrackingOptionsButtonMixin.OnClick then
 	    	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
 				self.Frames[frame] = overlay
 	    end
@@ -119,6 +119,10 @@ function MapSearch:ToggleTrackingTypes(parent)
 				addLine {text = WORLD_QUEST_REWARD_FILTERS_GOLD, var = 'worldQuestFilterGold'}
 				addLine {text = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, var = 'worldQuestFilterEquipment'}
 				addLine {text = WORLD_QUEST_REWARD_FILTERS_REPUTATION, var = 'worldQuestFilterReputation'}
+			end
+
+			for i, addon in pairs(WORLDMAP_TRACKING_BUTTON_ADDONS or {}) do
+				addon(drop)
 			end
 		end)
 	end
