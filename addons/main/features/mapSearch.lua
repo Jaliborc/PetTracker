@@ -46,8 +46,14 @@ end
 function MapSearch:Init(frame)
   if not self.Frames[frame] then
 	  for i, overlay in ipairs(frame.overlayFrames or {}) do
-			if overlay:IsObjectType('Button') and overlay:GetScript('OnMouseDown') == WorldMapTrackingOptionsButtonMixin.OnClick then
-	    	overlay:SetScript('OnMouseDown', function() self:ToggleTrackingTypes(overlay) end)
+			if overlay.Icon and overlay.Icon.GetTexture and overlay.Icon:GetTexture() == 'Interface\\Minimap\\Tracking\\None' then
+	    	overlay:SetScript('OnMouseDown', function()
+					overlay.Icon:SetPoint('TOPLEFT', 8, -8)
+					overlay.IconOverlay:Show()
+
+					PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+					self:ToggleTrackingTypes(overlay)
+				end)
 				self.Frames[frame] = overlay
 	    end
 	  end

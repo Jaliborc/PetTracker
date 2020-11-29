@@ -1,3 +1,14 @@
+##### 9.0.5
+* Map: updated specie locations with Shadowlands zones.
+* Map: changed how map filter button is detected.
+
+##### 9.0.4 (beta)
+* Hotfix problem in previous build.
+* Map: map filter button now visually reacts to clicks as intended.
+
+##### 9.0.3 (beta)
+* Tutorials: updated for previous update.
+
 ##### 9.0.2 (beta)
 * Map: species search filter now located in the tracking dropdown.
 
