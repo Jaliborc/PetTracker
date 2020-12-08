@@ -20,7 +20,7 @@ if IsAddOnLoaded('Carbonite.Quests') then
 end
 
 local ADDON, Addon = ...
-local Parent, HeaderButton = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.HeaderMenu
+local Parent, Minimize = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.HeaderMenu
 local Objectives = Addon:NewModule('Objectives', Addon.Tracker(Parent))
 
 do
@@ -37,8 +37,9 @@ function Objectives:OnEnable()
 	header:SetScript('OnClick', self.ToggleDropdown)
 	header:RegisterForClicks('anyUp')
 	header:SetPoint('TOPLEFT')
-	header.Text:SetText(PETS)
 	header:Show()
+	header.Text:SetText(PETS)
+	header.MinimizeButton:Hide()
 
 	self.Anchor:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
 	self.Anchor:SetScript('OnMouseDown', self.ToggleOptions)
@@ -51,15 +52,11 @@ function Objectives:OnEnable()
 		if availableEntries ~= self.MaxEntries then
 			self.MaxEntries = availableEntries
 			self:Update()
+		else
+			self:UpdateMinimize()
 		end
 
 		self:SetPoint('TOPLEFT', Parent, -10, -off)
-	end)
-
-	HeaderButton:HookScript('OnHide', function()
-		if self:IsShown() then
-			HeaderButton:Show()
-		end
 	end)
 end
 
@@ -68,10 +65,18 @@ end
 
 function Objectives:Update()
 	self:GetClass().Update(self)
-	self:SetShown(Addon.sets.trackPets and self.Anchor:IsShown())
+	self:SetShown(Addon.sets.trackPets)
+	self:UpdateMinimize()
 
-	HeaderButton:SetShown(Parent.currentBlock or self:IsShown())
 	OBJECTIVE_TRACKER_ADDONS[self.Index] = self:IsShown() and self:GetHeight() or 0
+end
+
+function Objectives:UpdateMinimize()
+	if self:IsShown() and not Minimize:IsShown() then
+		Minimize:SetFrameLevel(max(Minimize:GetFrameLevel(), self.Header:GetFrameLevel()+2))
+		Minimize:SetPoint('RIGHT', self.Header, 'RIGHT')
+		Minimize:Show()
+	end
 end
 
 function Objectives:GetUsedHeight()

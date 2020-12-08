@@ -1,3 +1,7 @@
+##### 9.0.6
+* Zone Tracker: fixed issue displaying species.
+* Zone Tracker: fixed issue updating minimize button.
+
 ##### 9.0.5
 * Map: updated specie locations with Shadowlands zones.
 * Map: changed how map filter button is detected.
