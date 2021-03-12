@@ -1,4 +1,4 @@
-## Interface: 90002
+## Interface: 90005
 ## Title: |cff2020ffPetTracker|r
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
