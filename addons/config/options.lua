@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2020 João Cardoso
+Copyright 2012-2021 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -22,9 +22,9 @@ local Sushi = LibStub('Sushi-3.1')
 local Options = Addon:NewModule('Options', Sushi.OptionsGroup(ADDON .. ' |TInterface/Garrison/MobileAppIcons:13:13:0:0:1024:1024:261:389:261:389|t'))
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-local PATRONS = {{title='Jenkins',people={'Gnare ','Justin Rusbatch'}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia F','Lolari ','Craig Falb','Mónica Sanchez Calzado','Dr Jebus','Denny Hyde','David LaSelle'}}} -- generated patron list
+local PATRONS = {{title='Jenkins',people={'Gnare ','Justin Rusbatch','Redd Mikkelsen','DREWSKY '}},{},{title='Ambassador',people={'Fernando Bandeira','Michael Irving','Julia F','Lolari ','Craig Falb','Mónica Sanchez Calzado','Denny Hyde','Amanda Chesher','Lynx','Owen Pitcairn','Robert Cohen ','Louise McWilliams'}}} -- generated patron list
 local HELP_ICON = ' |TInterface/HelpFrame/HelpIcon-KnowledgeBase:13:13:0:0:64:64:14:50:14:50|t'
-local FOOTER = 'Copyright 2012-2020 João Cardoso'
+local FOOTER = 'Copyright 2012-2021 João Cardoso'
 
 
 --[[ Startup ]]--

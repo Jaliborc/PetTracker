@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2020 João Cardoso
+Copyright 2012-2021 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -41,8 +41,8 @@ function Objectives:OnEnable()
 	header.Text:SetText(PETS)
 	header.MinimizeButton:Hide()
 
-	self.Anchor:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
-	self.Anchor:SetScript('OnMouseDown', self.ToggleOptions)
+	self.Bar:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
+	self.Bar:SetScript('OnMouseDown', self.ToggleOptions)
 	self.Header = header
 
 	hooksecurefunc('ObjectiveTracker_Update', function()
@@ -64,8 +64,9 @@ end
 --[[ API Override ]]--
 
 function Objectives:Update()
-	self:GetClass().Update(self)
 	self:SetShown(Addon.sets.trackPets)
+	self:GetClass().Update(self)
+	self:SetShown(self:IsShown() and not self.Bar:IsMaximized())
 	self:UpdateMinimize()
 
 	OBJECTIVE_TRACKER_ADDONS[self.Index] = self:IsShown() and self:GetHeight() or 0

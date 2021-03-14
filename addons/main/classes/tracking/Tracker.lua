@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2020 João Cardoso
+Copyright 2012-2021 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -31,7 +31,8 @@ function Tracker:Construct()
 	f:SetScript('OnHide', f.Clear)
 	f:SetSize(1,1)
 
-	f.Anchor = Addon.ProgressBar(f)
+	f.Bar = Addon.ProgressBar(f)
+	f.Anchor = f.Bar
 	f.Anchor.yOff = -10
 	f.MaxEntries = 0
 	return f
@@ -62,7 +63,7 @@ function Tracker:AddSpecies()
 		end
 	end
 
-	self.Anchor:SetProgress(progress)
+	self.Bar:SetProgress(progress)
 	self:SetHeight(self:Count() * 20 + 65)
 end
 

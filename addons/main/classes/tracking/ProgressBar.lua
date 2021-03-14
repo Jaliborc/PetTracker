@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2020 João Cardoso
+Copyright 2012-2021 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -48,4 +48,9 @@ function Bar:SetProgress(progress)
 
 	self.Overlay.Text:SetFormattedText(PLAYERS_FOUND_OUT_OF_MAX, owned, progress.total)
 	self:SetShown(progress.total > 0)
+end
+
+function Bar:IsMaximized()
+	local max = self.Bars[Addon.MaxQuality]
+	return max:GetValue() == select(2, max:GetMinMaxValues())
 end

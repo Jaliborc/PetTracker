@@ -1,3 +1,10 @@
+##### 9.0.8
+* Updated for 9.0.5.
+* Map: fixed uncommon bug with species search filter.
+
+##### 9.0.7
+* Zone Tracker: now hides when no species are available in zone.
+
 ##### 9.0.6
 * Zone Tracker: fixed issue displaying species.
 * Zone Tracker: fixed issue updating minimize button.

@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2020 João Cardoso
+Copyright 2012-2021 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -28,7 +28,7 @@ function MapSearch:OnEnable()
 	box:SetScript('OnTextChanged', function() self:SetText(box:GetText()) end)
 	box:HookScript('OnEditFocusGained', function() self:ShowSuggestions(box) end)
 	box:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
-	box.top, box.bottom, box.left, box.right = 2, 6, 20, 15
+	box.top, box.bottom, box.left, box.right, box.Release = 2, 6, 20, 15, false
 	box:SetSize(128, 20)
 	box:Hide()
 
@@ -75,6 +75,7 @@ function MapSearch:ToggleTrackingTypes(parent)
 	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(parent)
 	if drop then
 		drop:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 0, -15)
+		drop:SetCall('OnReset', function() self.Editbox:Hide() end)
 		drop:SetChildren(function(drop)
 			local map = WorldMapFrame:GetMapID()
 			local bounties = map and MapUtil.MapHasEmissaries(map)
