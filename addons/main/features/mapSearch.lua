@@ -159,7 +159,9 @@ end
 function MapSearch:UpdateEditbox()
   local text = Addon.sets.mapSearch or ''
   self.Editbox.Instructions:SetShown(text == '')
-  self.Editbox:SetText(text)
+  if self.EditBox:GetText() ~= text then
+  	self.Editbox:SetText(text)
+  end
 end
 
 
