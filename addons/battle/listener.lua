@@ -48,7 +48,7 @@ function Listener:OnMessage(_, message)
 		local isTargetEnemy = message:find(ENEMY)
 
 		if (isHeal and isTargetEnemy) or not (isHeal or isTargetEnemy) then
-			local pet = Addon.Battle(LE_BATTLE_PET_ENEMY)
+			local pet = Addon.Battle(Enum.BattlePetOwner.Enemy)
 			local casts = Addon.state.casts[pet.index]
 
 			for i, ability in ipairs(pet:GetAbilities()) do
@@ -77,7 +77,7 @@ function Listener:OnWinner(_, winner)
 		for i = 1,3 do
 			local id, spell1, spell2, spell3 = C_PetJournal.GetPetLoadOutInfo(i)
 			if id then
-				entry = entry .. format('%01x', ceil(self:GetHealthPercentage(LE_BATTLE_PET_ALLY, i) * 15))
+				entry = entry .. format('%01x', ceil(self:GetHealthPercentage(Enum.BattlePetOwner.Ally, i) * 15))
 							  			.. format('%03x', spell1) .. format('%03x', spell2) .. format('%03x', spell3)
 							  			.. id:sub(13)
 			end

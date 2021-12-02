@@ -23,8 +23,8 @@ local Battle = Addon.Pet:NewClass('Battle')
 --[[ Static ]]--
 
 function Battle:AnyUpgrade()
-	for i = 1, self:NumPets(LE_BATTLE_PET_ENEMY) do
-		local pet = self(LE_BATTLE_PET_ENEMY, i)
+	for i = 1, self:NumPets(Enum.BattlePetOwner.Enemy) do
+		local pet = self(Enum.BattlePetOwner.Enemy, i)
 		if pet:IsUpgrade() then
 			return true
 		end
@@ -33,9 +33,9 @@ end
 
 function Battle:GetRival()
 	if self:IsPvE() then
-		local specie1 = self(LE_BATTLE_PET_ENEMY, 1):GetSpecie()
-		local specie2 = self(LE_BATTLE_PET_ENEMY, 2):GetSpecie()
-		local specie3 = self(LE_BATTLE_PET_ENEMY, 3):GetSpecie()
+		local specie1 = self(Enum.BattlePetOwner.Enemy, 1):GetSpecie()
+		local specie2 = self(Enum.BattlePetOwner.Enemy, 2):GetSpecie()
+		local specie3 = self(Enum.BattlePetOwner.Enemy, 3):GetSpecie()
 
 		for id, rival in pairs(Addon.RivalInfo) do
 			local first = tonumber(rival:match('^[^:]+:[^:]+:[^:]*:[^:]+:%w%w%w%w(%w%w%w)'), 36)
@@ -47,7 +47,7 @@ function Battle:GetRival()
 end
 
 function Battle:IsPvE()
-	return C_PetBattles.IsPlayerNPC(LE_BATTLE_PET_ENEMY)
+	return C_PetBattles.IsPlayerNPC(Enum.BattlePetOwner.Enemy)
 end
 
 function Battle:NumPets(owner)
@@ -89,7 +89,7 @@ function Battle:CanSwap()
 end
 
 function Battle:IsAlly()
-	return self.owner ~= LE_BATTLE_PET_ENEMY
+	return self.owner ~= Enum.BattlePetOwner.Enemy
 end
 
 function Battle:IsAlive()

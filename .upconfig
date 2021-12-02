@@ -6,6 +6,7 @@
   PetTracker_Journal
 [incompatible]
   1.x.x
+  2.x.x
 [ignore]
   addons/main/tests/
   libs/Sushi-3.1/tests/

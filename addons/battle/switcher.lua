@@ -24,8 +24,8 @@ local Swap = Addon:NewModule('Switcher', CreateFrame('Frame', ADDON .. 'Switcher
 
 function Swap:OnEnable()
 	self:RegisterEvent('PET_BATTLE_ACTION_SELECTED', 'Hide')
-	self:NewColumn(LE_BATTLE_PET_ENEMY, 'TOPRIGHT', -10)
-	self:NewColumn(LE_BATTLE_PET_ALLY, 'TOPLEFT', 10)
+	self:NewColumn(Enum.BattlePetOwner.Enemy, 'TOPRIGHT', -10)
+	self:NewColumn(Enum.BattlePetOwner.Ally, 'TOPLEFT', 10)
 	self:SetPoint('CENTER')
 	self:SetSize(840, 424)
 	self:Hide()
@@ -77,9 +77,9 @@ end
 --[[ Update ]]--
 
 function Swap:Update()
-	self:UpdateFor(LE_BATTLE_PET_ALLY, LE_BATTLE_PET_ENEMY)
-	self:UpdateFor(LE_BATTLE_PET_ENEMY, LE_BATTLE_PET_ALLY)
-	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle(LE_BATTLE_PET_ALLY):IsAlive())
+	self:UpdateFor(Enum.BattlePetOwner.Ally, Enum.BattlePetOwner.Enemy)
+	self:UpdateFor(Enum.BattlePetOwner.Enemy, Enum.BattlePetOwner.Ally)
+	self.Close:SetEnabled(Addon.Battle:IsPvE() and Addon.Battle(Enum.BattlePetOwner.Ally):IsAlive())
 end
 
 function Swap:UpdateFor(owner, adversary)

@@ -54,7 +54,7 @@ end
 function Record:Unpack(entry)
 	local winner, date, petData = entry:match('^(%d)(%w%w%w)(.+)$')
 
-	self.won = tonumber(winner) == LE_BATTLE_PET_ALLY
+	self.won = tonumber(winner) == Enum.BattlePetOwner.Ally
 	self.day, self.month, self.year = self:UnpackDate(date)
 	self.pets = {}
 

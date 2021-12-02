@@ -63,8 +63,8 @@ end
 --[[ API ]]--
 
 function Bar:Update()
-	local enemy = Addon.Battle(LE_BATTLE_PET_ENEMY)
-	local target = Addon.Battle(LE_BATTLE_PET_ALLY)
+	local enemy = Addon.Battle(Enum.BattlePetOwner.Enemy)
+	local target = Addon.Battle(Enum.BattlePetOwner.Ally)
 
 	for i, b in ipairs(self.Buttons) do
 		b:Display(enemy:GetAbility(i), target)

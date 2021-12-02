@@ -1,3 +1,10 @@
+#### 9.1.1
+* Updated TOC for Shadowlands 9.1.5.
+* Replaced deprecated client APIs.
+
+#### 9.1.0
+* Updated for Chains of Domination.
+
 ##### 9.0.8
 * Updated for 9.0.5.
 * Map: fixed uncommon bug with species search filter.
