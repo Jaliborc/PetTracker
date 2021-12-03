@@ -1,4 +1,7 @@
-#### 9.1.1
+##### 9.1.2
+* Fixed issue that caused the world map search filter button to not be detected by PetTracker.
+
+##### 9.1.1
 * Updated TOC for Shadowlands 9.1.5.
 * Replaced deprecated client APIs.
 
