@@ -1,5 +1,8 @@
+##### 9.1.3
+* Map: fixed issue with typing non latin characters in some locales (thanks to comiluv).
+
 ##### 9.1.2
-* Fixed issue that caused the world map search filter button to not be detected by PetTracker.
+* Map: fixed issue that caused the filter button to not be detected.
 
 ##### 9.1.1
 * Updated TOC for Shadowlands 9.1.5.
