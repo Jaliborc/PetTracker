@@ -32,19 +32,31 @@ function Alerts:OnEnable()
 end
 
 function Alerts:Verify()
+	local rareUpgrades = Addon.Battle:AnyRareUpgrade()
+	if not rareUpgrades and Addon.Battle:IsWildBattle() and not self.popped and Addon.sets.forfeitNoRareUpgrades then
+		self.popped = true
+
+		LibStub('Sushi-3.1').Popup {
+			id = ADDON .. 'Alerts',
+        		text = L.AskForfeit, button1 = "Quit, No Rare Upgrades", button2 = "Stay",
+			OnAccept = C_PetBattles.ForfeitGame,
+			hideOnEscape = 1,
+	    	}
+	end
+	
 	local upgrades = Addon.Battle:AnyUpgrade()
 	if not upgrades and Addon.Battle:IsWildBattle() and not self.popped and Addon.sets.forfeit then
 		self.popped = true
 
 		LibStub('Sushi-3.1').Popup {
-				id = ADDON .. 'Alerts',
-        text = L.AskForfeit, button1 = QUIT, button2 = NO,
-        OnAccept = C_PetBattles.ForfeitGame,
-				hideOnEscape = 1,
-    }
+			id = ADDON .. 'Alerts',
+        		text = L.AskForfeit, button1 = "Quit, No Upgrades", button2 = "Stay",
+        		OnAccept = C_PetBattles.ForfeitGame,
+			hideOnEscape = 1,
+    		}
 	end
 
-  self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)
+	self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)
 end
 
 function Alerts:Reset()
