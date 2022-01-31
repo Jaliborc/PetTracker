@@ -63,6 +63,7 @@ function Options:OnMain()
 	self:AddCheck('Switcher')
 	self:AddCheck('AlertUpgrades')
 	self:AddCheck('Forfeit')
+	self:AddCheck('ForfeitNoRareUpgrades')
 end
 
 function Options:OnFAQ()
