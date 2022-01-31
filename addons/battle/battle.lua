@@ -31,6 +31,15 @@ function Battle:AnyUpgrade()
 	end
 end
 
+function Battle:AnyRareUpgrade()
+	for i = 1, self:NumPets(Enum.BattlePetOwner.Enemy) do
+		local pet = self(Enum.BattlePetOwner.Enemy, i)
+		if pet:IsUpgradeAndRare() then
+			return true
+		end
+	end
+end
+
 function Battle:GetRival()
 	if self:IsPvE() then
 		local specie1 = self(Enum.BattlePetOwner.Enemy, 1):GetSpecie()
@@ -77,6 +86,24 @@ function Battle:IsUpgrade()
 				end
 
 				return self:GetLevel() > level
+			end
+		end
+	end
+
+	return false
+end
+
+function Battle:IsUpgradeAndRare()
+	if self:IsWildBattle() and not self:IsAlly() then
+		if self:GetSpecie() and self:GetSource() == 5 then
+			local _, quality = self:GetBestOwned()
+			
+			if quality > 3 then -- Player's best pet is rare, so it can never be an upgrade
+				return false
+			end
+			
+			if self:GetQuality() > 3 then -- The wild pet is rare (and ours is not), so it is an upgrade
+				return true
 			end
 		end
 	end
