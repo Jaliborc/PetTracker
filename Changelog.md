@@ -1,3 +1,6 @@
+#### 9.2.0
+* Updated for Eternity's End.
+
 ##### 9.1.3
 * Map: fixed issue with typing non latin characters in some locales (thanks to comiluv).
 

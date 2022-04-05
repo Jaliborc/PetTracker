@@ -1,8 +1,8 @@
-## Interface: 90105
+## Interface: 90200
 ## Title: |cff2020ffPetTracker|r
 ## Notes: Tracking pets in and out of combat since 2012.
 ## Author: Jaliborc (João Cardoso)
-## Version: 9.1.2
+## Version: 9.2.0
 ## X-Category: Battle Pets
 
 ## SavedVariables: PetTracker_Sets
