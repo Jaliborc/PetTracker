@@ -1,3 +1,7 @@
+##### 9.2.1
+* Map: fixed issue with tooltip sizes.
+* Updated used libraries.
+
 #### 9.2.0
 * Updated for Eternity's End.
 

@@ -68,10 +68,7 @@ end
 function Tip:Show()
 	self:SetShown(self:NumLines() > 0)
 	if self:IsShown() then
-		local parent = self:GetParent()
-
 		self:SetHeight(self:GetHeight() + self.NumStrokes * 8)
-		self:SetScale(parent and (1 / parent:GetScale()) or UIParent:GetScale())
 		self:SetFrameStrata('FULLSCREEN_DIALOG')
 	end
 end
