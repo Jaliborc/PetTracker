@@ -31,11 +31,11 @@ end
 function Journal:OnShow()
 	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, ADDON..'RivalEntry', 44, 0)
-	SetPortraitToTexture(self.portrait, 'Interface/Icons/PetJournalPortrait')
+	SetPortraitToTexture(self.PortraitContainer.portrait, 'Interface/Icons/PetJournalPortrait')
 
 	self.Inset:Hide()
 	self:SetScript('OnShow', nil)
-	self.TitleText:SetText(L.Rivals)
+	self.TitleContainer.TitleText:SetText(L.Rivals)
 	self.List.scrollBar.doNotHide = true
 	self.Count.Label:SetText(L.TotalRivals)
 	self.Count.Number:SetText(#Addon.RivalOrder)
@@ -151,7 +151,8 @@ function Journal.List:update()
 			button.name:SetText(rival.name)
 			button.model.level:SetText(rival:GetLevel())
 			button.petTypeIcon:SetTexture(rival:GetTypeIcon())
-			button.model.quality:SetVertexColor(rival:GetColor())
+			local r,g,b = rival:GetColor()
+			button.model.quality:SetVertexColor(r, g, b)
 			button.selectedTexture:SetShown(rival.id == self.selected.id)
 
 			if button.model:GetDisplayInfo() ~= rival.model then
