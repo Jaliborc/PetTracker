@@ -20,7 +20,7 @@ local Gossip = Addon:NewModule('Gossip')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Gossip:OnEnable()
-	hooksecurefunc('GossipFrameUpdate', function()
+	hooksecurefunc(GossipFrame, 'Update', function()
 		local unit = UnitGUID('npc')
 		local id = unit and tonumber(select(6, strsplit('-', unit)), nil)
 

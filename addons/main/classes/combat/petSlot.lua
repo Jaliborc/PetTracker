@@ -56,7 +56,7 @@ function Slot:Display(pet, target)
 		local name = pet:GetName()
 
 		self.Name:SetText(name)
-		self.SubName:SetText(specie ~= name and specie)
+		self.SubName:SetText((specie ~= name) and specie or "")
 
 		self.Name:SetTextColor(r, g, b)
 		self.Quality:SetVertexColor(r, g, b)

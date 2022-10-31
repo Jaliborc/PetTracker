@@ -29,10 +29,10 @@ function Swap:OnEnable()
 	self:SetPoint('CENTER')
 	self:SetSize(840, 424)
 	self:Hide()
-
-	SetPortraitToTexture(self.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
+	
+	SetPortraitToTexture(self.PortraitContainer.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
 	self.Close = _G[self:GetName() .. 'CloseButton']
-	self.TitleText:SetText(SWITCH_PET)
+	self.TitleContainer.TitleText:SetText(SWITCH_PET)
 
 	local oShow = PetBattlePetSelectionFrame_Show
 	function PetBattlePetSelectionFrame_Show(...)
