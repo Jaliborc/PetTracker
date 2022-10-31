@@ -1,3 +1,6 @@
+#### 10.0
+* Essentials updated for Dragonflight Pre-Patch (with contributions by Akkua)
+
 ##### 9.2.1
 * Map: fixed issue with tooltip sizes.
 * Updated used libraries.

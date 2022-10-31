@@ -19,10 +19,10 @@ local MODULE = ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 
 local Sushi = LibStub('Sushi-3.1')
-local Options = Addon:NewModule('Options', ADDON ..' '..  Sushi.OptionsGroup(CreateAtlasMarkup('Mobile-Pets', 14,14))
+local Options = Addon:NewModule('Options', Sushi.OptionsGroup(ADDON ..' '.. CreateAtlasMarkup('Mobile-Pets', 14,14)))
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-local PATRONS = {{title='Jenkins',people={'Gnare'}},{},{title='Ambassador',people={'Fernando Bandeira','Julia F','Lolari ','Owen Pitcairn','Rafael Lins','Mediocre Monk','Joanie Nelson','David A. Smith','Nitro '}}} -- generated patron list
+local PATRONS = {{title='Jenkins',people={'Gnare'}},{},{title='Ambassador',people={'Fernando Bandeira','Julia F','Lolari ','Owen Pitcairn','Rafael Lins','Mediocre Monk','Joanie Nelson','Nitro ','Guidez ','Christopher Rhea'}}} -- generated patron list
 local HELP_ICON = ' |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2022 João Cardoso'
 
@@ -35,8 +35,8 @@ function Options:OnEnable()
 	faq:SetChildren(self.OnFAQ)
 	faq:SetFooter(FOOTER)
 
-	local credits = Sushi.CreditsGroup(self, PATRONS)
-	credits:SetSubtitle(nil, 'http://www.patreon.com/jaliborc')
+	local credits = Sushi.CreditsGroup(self, PATRONS, 'Patrons |TInterface/Addons/PetTracker/Art/Patreon:12:12|t')
+	credits:SetSubtitle(ADDON .. ' is distributed for free and supported trough donations. These are the people currently supporting development. Become a patron too |cFFF96854@patreon/jaliborc|r.', 'http://www.patreon.com/jaliborc')
 	credits:SetFooter(FOOTER)
 
 	self:SetCall('OnDefaults', self.OnDefaults)

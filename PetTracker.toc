@@ -1,9 +1,9 @@
 ## Interface: 90207
 ## Title: |cff2020ffPetTracker|r
-## Notes: Tracking pets in and out of combat since 2012.
+## Notes: Displays species in the world map and objective tracker. Shows|nbreeds, quality and owned pets everywhere. Rivals|ncatalog. Pet battle enhancements.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/PetTracker/Art/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/PetTracker/Art/Patreon:12:12:0:-4|t |cff82c5ffpatreon.com/jaliborc|r
 ## Author: Jaliborc (João Cardoso)
-## Version: 9.2.1
 ## X-Category: Battle Pets
+## Version: 10.0
 
 ## SavedVariables: PetTracker_Sets
 ## SavedVariablesPerCharacter: PetTracker_State
