@@ -19,31 +19,17 @@ local ADDON, Addon = ...
 local Tooltips = Addon:NewModule('Tooltips')
 
 function Tooltips:OnEnable()
-  self.Data = {}
-
-  hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tip, data)
-    if data.speciesID and not tip.Source then
-      self:Init(tip)
+    hooksecurefunc (_G, "BattlePetToolTip_Show",
+    function(speciesID, ...)
+      Tooltips.ModifyPetTip(speciesID)
     end
-
-    self.Data[tip] = data
-  end)
+  )
 end
 
-function Tooltips:Init(tip)
-  local source = tip:CreateFontString(nil, 'ARTWORK', 'GameFontHighlightLeft')
-  source:SetPoint('BOTTOMLEFT', tip, 'BOTTOMLEFT', 11, 8)
-  source:SetSize(tip:GetWidth(), 0)
-  tip.Source = source
+function Tooltips.ModifyPetTip(speciesID)
+  BattlePetTooltip:AddLine(" ")
 
-  hooksecurefunc(tip, 'Show', function()
-    local data = self.Data[tip]
-    local specie = Addon.Specie(data.speciesID)
-    local breed = Addon.Predict:Breed(data.speciesID, data.level, data.breedQuality + 1, data.maxHealth, data.power, data.speed)
+  local petInfo = {C_PetJournal.GetPetInfoBySpeciesID(speciesID)}
 
-    tip.Source:SetText(select(5, specie:GetInfo()))
-    tip.Owned:SetText(specie:GetOwnedText() or tip.Owned:GetText())
-    tip.Name:SetText((tip.Name:GetText() or '') .. Addon.Breeds:Icon(breed, .8, 5,0))
-    tip:SetHeight(tip:GetHeight() + tip.Source:GetHeight() + (breed == 3 and 10 or 4))
-  end)
+  BattlePetTooltip:AddLine(petInfo[5], 1, 1, 1, true)
 end
