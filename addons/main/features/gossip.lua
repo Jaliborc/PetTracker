@@ -25,7 +25,7 @@ function Gossip:OnEnable()
 		local id = unit and tonumber(select(6, strsplit('-', unit)), nil)
 
 		if Addon.RivalInfo[id] then
-			local i = GossipFrame_GetTitleButtonCount()
+			local i = GossipFrame:GetTitleButtonCount()
 			local button = GossipFrame.titleButtonPool:Acquire()
 			button:SetPoint('TOPLEFT', i > 0 and GossipFrame.buttons[i] or GossipGreetingText, 'BOTTOMLEFT', i > 0 and 0 or -10, i > 0 and ((GossipFrame.insertSeparator and -19 or 0) - 3) or -20)
 			button:SetOption(L.TellMore, 'Gossip')
