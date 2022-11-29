@@ -33,7 +33,7 @@ end
 --[[ Startup ]]--
 
 function Objectives:OnEnable()
-	local header = CreateFrame('Button', nil, self, 'ObjectiveTrackerHeaderTemplate')
+	local header = CreateFrame('Button', 'PetTrackerObjectiveTrackerHeader', self, 'ObjectiveTrackerHeaderTemplate')
 	header:SetScript('OnClick', self.ToggleDropdown)
 	header:RegisterForClicks('anyUp')
 	header:SetPoint('TOPLEFT')
