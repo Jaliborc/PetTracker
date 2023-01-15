@@ -56,7 +56,7 @@ function Pin:OnTooltip(tip)
 
 	for i, pet in ipairs(self.rival) do
 		local icon = format('|T%s:16:16:-3:0:128:256:60:100:130:170:255:255:255|t', pet:GetTypeIcon())
-		local r,g,b = pet:GetColor()
+		local r,g,b = pet:GetColor():GetRGB()
 
 		tip:AddLine(icon .. pet:GetName() .. ' (' .. pet:GetLevel() .. ')', r,g,b)
 	end

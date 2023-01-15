@@ -21,13 +21,15 @@ local Tooltips = Addon:NewModule('Tooltips')
 function Tooltips:OnEnable()
   self.Data = {}
 
-  hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tip, data)
+  TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.BattlePet, function() print('BattlePet!') end)
+  TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function() print('Unit') end)
+  --[[hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', function(tip, data)
     if data.speciesID and not tip.Source then
       self:Init(tip)
     end
 
     self.Data[tip] = data
-  end)
+  end)]]--
 end
 
 function Tooltips:Init(tip)

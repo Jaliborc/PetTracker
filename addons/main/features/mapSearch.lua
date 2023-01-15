@@ -48,74 +48,11 @@ function MapSearch:OnEnable()
 	end)
 end
 
-local Timers = {}
-local Callbacks = {}
-local Always = function() return true end
-
-local function SetGlobalMouse(parent)
-	parent.HandlesGlobalMouseEvent = parent.HandlesGlobalMouseEvent or Always
-
-	for _, child in pairs{parent:GetChildren()} do
-		SetGlobalMouse(child)
-	end
-end
-
-local function ExtendDrop(owner, callback)
-	if not Callbacks[owner] then
-		Callbacks[owner] = {}
-
-		hooksecurefunc(owner, 'initialize', function(owner, level, ...)
-			local list = _G['DropDownList' .. level]
-			local start = list:GetHeight() - 15
-			local extensions = {}
-
-			for _, call in ipairs(Callbacks[owner]) do
-				local frame = call(level, ...)
-				if frame then
-					frame:SetParent(list)
-					tinsert(extensions, frame)
-				end
-			end
-
-			if Timers[list] then
-				Timers[list]:Cancel()
-			end
-
-			Timers[list] = C_Timer.NewTicker(0.05, function()
-				if list:IsVisible() then
-					local offset = start
-					for _, frame in ipairs(extensions) do
-						frame:SetPoint('TOPLEFT', 0, -offset)
-						offset = offset + frame:GetHeight()
-						SetGlobalMouse(frame)
-					end
-
-					_G['DropDownList' .. level .. 'MenuBackdrop']:SetPoint('BOTTOM', 0,start-offset)
-					_G['DropDownList' .. level .. 'Backdrop']:SetPoint('BOTTOM', 0,start-offset)
-				else
-					Timers[list]:Cancel()
-				end
-			end)
-		end)
-	end
-
-	tinsert(Callbacks[owner], callback)
-end
-
-hooksecurefunc('UIDropDownMenu_Initialize', function(owner)
-	if not Callbacks[owner] then
-		for level = 1, UIDROPDOWNMENU_MAXLEVELS do
-			_G['DropDownList' .. level .. 'MenuBackdrop']:SetPoint('BOTTOM')
-			_G['DropDownList' .. level .. 'Backdrop']:SetPoint('BOTTOM')
-		end
-	end
-end)
-
 function MapSearch:Init(frame)
   if not self.Frames[frame] then
-	  for i, button in ipairs(frame.overlayFrames or {}) do
+	for i, button in ipairs(frame.overlayFrames or {}) do
 			if button.Icon and button.Icon.GetTexture and button.Icon:GetTexture() == GetFileIDFromPath('Interface/Minimap/Tracking/None') then
-				ExtendDrop(button.DropDown, function(level)
+				LibStub('DropExtend-1.0'):Add(button.DropDown, function(level)
 					if level == 1 then
 						self.Dropdown:Show()
 						return self.Dropdown
@@ -125,16 +62,16 @@ function MapSearch:Init(frame)
 				end)
 
 				self.Frames[frame] = true
-	    end
-	  end
-	 end
+			end
+		end
+	end
 end
 
 function MapSearch:UpdateFrames()
   for frame in pairs(self.Frames) do
-		if frame:IsVisible() then
-    	frame:OnMapChanged()
-		end
+	if frame:IsVisible() then
+		frame:OnMapChanged()
+	end
   end
 end
 
@@ -150,7 +87,7 @@ function MapSearch:TrackingExtras(drop)
 		drop:Add(info)
 	end
 
-	addLine {text = PETS, isTitle = true}
+	addLine {text = PETS..':', isTitle = true}
 	addLine {text = L.Species, set = 'hideSpecies'}
 
 	self.Editbox:SetShown(not Addon.sets.hideSpecies)
@@ -177,18 +114,18 @@ end
 --[[ Search Box ]]--
 
 function MapSearch:SetText(text)
-  if Addon.sets.mapSearch ~= text then
-    Addon.sets.mapSearch = text
-    Addon:SendSignal('OPTIONS_CHANGED')
-  end
+	if Addon.sets.mapSearch ~= text then
+		Addon.sets.mapSearch = text
+		Addon:SendSignal('OPTIONS_CHANGED')
+	end
 end
 
 function MapSearch:UpdateEditbox()
-  local text = Addon.sets.mapSearch or ''
-  if self.Editbox:GetText() ~= text then
+	local text = Addon.sets.mapSearch or ''
+	if self.Editbox:GetText() ~= text then
 		self.Editbox.Instructions:SetShown(text == '')
-  	self.Editbox:SetText(text)
-  end
+		self.Editbox:SetText(text)
+	end
 end
 
 

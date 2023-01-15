@@ -64,9 +64,5 @@ end
 --[[ Utility ]]--
 
 function Addon:GetColor(quality)
-	if quality > 0 then
-		return GetItemQualityColor(quality - 1)
-	end
-
-	return RED_FONT_COLOR.r, RED_FONT_COLOR.g, RED_FONT_COLOR.b, RED_FONT_COLOR_CODE:sub(3)
+	return quality > 0 and ITEM_QUALITY_COLORS[quality - 1].color or RED_FONT_COLOR
 end
