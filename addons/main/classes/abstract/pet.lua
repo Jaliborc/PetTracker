@@ -59,9 +59,9 @@ end
 function Pet:GetOwnedText()
 	local owned = self:GetOwned()
 	if #owned > 0 then
-		local text = NORMAL_FONT_COLOR_CODE .. COLLECTED .. ':' .. FONT_COLOR_CODE_CLOSE
+		local text = COLLECTED .. ':'
 		for i, pet in ipairs(owned) do
-			text = text .. format('  %s|c%s%d|r', pet:GetBreedIcon(.8, -2,0), spet:GetColor():GenerateHexColorMarkup(), pet:GetLevel())
+			text = text .. format('  %s%s%d|r', pet:GetBreedIcon(.8, -2,0), pet:GetColor():GenerateHexColorMarkup(), pet:GetLevel())
 		end
 
 		return text
