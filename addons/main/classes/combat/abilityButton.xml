@@ -52,6 +52,6 @@
 				</Texture>
 			</Layer>
 		</Layers>
-		<HighlightTexture name="$parentHighlight" file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
 	</Button>
 </Ui>

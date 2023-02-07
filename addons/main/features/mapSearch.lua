@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -52,16 +52,11 @@ function MapSearch:Init(frame)
   if not self.Frames[frame] then
 	for i, button in ipairs(frame.overlayFrames or {}) do
 			if button.Icon and button.Icon.GetTexture and button.Icon:GetTexture() == GetFileIDFromPath('Interface/Minimap/Tracking/None') then
-				LibStub('DropExtend-1.0'):Add(button.DropDown, function(level)
-					if level == 1 then
-						self.Dropdown:Show()
-						return self.Dropdown
-					else
-						self.Dropdown:Hide()
-					end
+				LibStub('DropExtend-1.0'):Hook(button.DropDown, function(level)
+					return level == 1 and self.Dropdown
 				end)
 
-				self.Frames[frame] = true
+				self.Frames[frame] = button
 			end
 		end
 	end

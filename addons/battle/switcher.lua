@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -30,9 +30,9 @@ function Swap:OnEnable()
 	self:SetSize(840, 424)
 	self:Hide()
 
-	SetPortraitToTexture(self.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
+	SetPortraitToTexture(self.PortraitContainer.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
+	self.TitleContainer.TitleText:SetText(SWITCH_PET)
 	self.Close = _G[self:GetName() .. 'CloseButton']
-	self.TitleText:SetText(SWITCH_PET)
 
 	local oShow = PetBattlePetSelectionFrame_Show
 	function PetBattlePetSelectionFrame_Show(...)

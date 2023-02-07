@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -51,8 +51,6 @@ function Bar:NewButton(i)
 	b:SetScript('OnDragStart', function() self:DragStart() end)
 	b:SetScript('OnDragStop', function() self:DragStop() end)
 	b:RegisterForDrag('LeftButton')
-	b:SetHighlightTexture(nil)
-	b:SetPushedTexture(nil)
 	b:UnregisterAllEvents()
 	b:SetFrameLevel(8-y)
 	b:Enable()

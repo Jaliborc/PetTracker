@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -24,7 +24,7 @@ function Tooltips:OnEnable()
 end
 
 function Tooltips.OnUnit(tip)
-  local specie = tip:GetOwner() ~= 'ANCHOR_NONE' and C_PetJournal.FindPetIDByName(TooltipUtil.GetDisplayedUnit(tip))
+  local specie = C_PetJournal.FindPetIDByName(TooltipUtil.GetDisplayedUnit(tip))
   if specie then
     local owned = Addon.Specie(specie):GetOwnedText()
     if owned then

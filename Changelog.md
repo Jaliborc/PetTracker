@@ -1,3 +1,10 @@
+#### 10
+* Dragonlfight release!
+* Tooltip: Now shows collected pets (level, quality and breed) of a specie when mousing over a capturable critter in the world.
+* Map: Fixed issue making some native map filters not appear.
+* Tutorials: Multiple bug fixes.
+* Note: Custom tamer gossip interactions not yet implemented for Dragonflight.
+
 ##### 9.2.1
 * Map: fixed issue with tooltip sizes.
 * Updated used libraries.
