@@ -24,7 +24,8 @@ function Tooltips:OnEnable()
 end
 
 function Tooltips.OnUnit(tip)
-  local specie = C_PetJournal.FindPetIDByName(TooltipUtil.GetDisplayedUnit(tip))
+  local name = TooltipUtil.GetDisplayedUnit(tip)
+  local specie = name and C_PetJournal.FindPetIDByName(name)
   if specie then
     local owned = Addon.Specie(specie):GetOwnedText()
     if owned then
