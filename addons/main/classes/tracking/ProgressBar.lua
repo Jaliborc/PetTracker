@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -24,7 +24,7 @@ function Bar:New(...)
 	f.Bars = {}
 
 	for i = 1, Addon.MaxQuality do
-		local r,g,b = Addon:GetColor(i)
+		local r,g,b = Addon:GetColor(i):GetRGB()
 		local bar = CreateFrame('StatusBar', nil, f)
 		bar:SetStatusBarTexture('Interface/TargetingFrame/UI-StatusBar')
 		bar:SetFrameLevel(f:GetFrameLevel() + i)

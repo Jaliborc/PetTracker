@@ -38,7 +38,7 @@ function Units:UpdateTip(tip)
 	icon:SetPoint('CENTER', tip.Icon, 'TOPLEFT', 3, -2)
 	icon:SetText(pet:GetBreedIcon(.9))
 
-	tip.CollectedText:SetText(pet:GetOwnedText() or NORMAL_FONT_COLOR_CODE .. L.NoneCollected .. FONT_COLOR_CODE_CLOSE)
+	tip.CollectedText:SetText(NORMAL_FONT_COLOR:WrapTextInColorCode(pet:GetOwnedText() or L.NoneCollected))
 	self.BreedIcons[tip] = icon
 end
 

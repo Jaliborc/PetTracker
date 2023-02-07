@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -23,17 +23,22 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 --[[ Startup ]]--
 
 function MapSearch:OnEnable()
+	local drop = LibStub('Sushi-3.1').Dropdown(UIParent)
+	drop:Hide()
+	drop:SetChildren(function() self:TrackingExtras(drop) end)
+	drop:SetBackdrop('NONE')
+
 	local box = CreateFrame('EditBox', ADDON .. 'MapSearchBox', UIParent, 'SearchBoxTemplate')
 	box.Instructions:SetText(L.FilterSpecies)
 	box:SetScript('OnTextChanged', function() self:SetText(box:GetText()) end)
 	box:HookScript('OnEditFocusGained', function() self:ShowSuggestions(box) end)
 	box:HookScript('OnEditFocusLost', function() self:HideSuggestions() end)
-	box.top, box.bottom, box.left, box.right, box.Release = 2, 6, 20, 15, false
+	box.top, box.bottom, box.left, box.right = 2, 6, 20, 15
 	box:SetSize(128, 20)
 	box:Hide()
 
 	self.Frames = {}
-	self.Editbox = box
+	self.Dropdown, self.Editbox = drop, box
 	self.Suggestions = {LibStub('CustomSearch-1.0').NOT .. ' ' .. L.Maximized, '< ' .. BATTLE_PET_BREED_QUALITY3, ADDON_MISSING}
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateEditbox')
 	self:UpdateEditbox()
@@ -45,94 +50,48 @@ end
 
 function MapSearch:Init(frame)
   if not self.Frames[frame] then
-	  for i, overlay in ipairs(frame.overlayFrames or {}) do
-			if overlay.Icon and overlay.Icon.GetTexture and overlay.Icon:GetTexture() == GetFileIDFromPath('Interface/Minimap/Tracking/None') then
-	    	overlay:SetScript('OnMouseDown', function()
-					overlay.Icon:SetPoint('TOPLEFT', 8, -8)
-					overlay.IconOverlay:Show()
-
-					PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-					self:ToggleTrackingTypes(overlay)
+	for i, button in ipairs(frame.overlayFrames or {}) do
+			if button.Icon and button.Icon.GetTexture and button.Icon:GetTexture() == GetFileIDFromPath('Interface/Minimap/Tracking/None') then
+				LibStub('DropExtend-1.0'):Hook(button.DropDown, function(level)
+					return level == 1 and self.Dropdown
 				end)
-				self.Frames[frame] = overlay
-	    end
-	  end
-	 end
+
+				self.Frames[frame] = button
+			end
+		end
+	end
 end
 
 function MapSearch:UpdateFrames()
   for frame in pairs(self.Frames) do
-		if frame:IsVisible() then
-    	frame:OnMapChanged()
-		end
+	if frame:IsVisible() then
+		frame:OnMapChanged()
+	end
   end
 end
 
 
---[[ Tracking Dropdown ]]--
+--[[ Tracking Extras ]]--
 
-function MapSearch:ToggleTrackingTypes(parent)
-	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(parent)
-	if drop then
-		drop:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 0, -15)
-		drop:SetCall('OnReset', function() self.Editbox:Hide() end)
-		drop:SetChildren(function(drop)
-			local map = WorldMapFrame:GetMapID()
-			local bounties = map and MapUtil.MapHasEmissaries(map)
-			local prof1, prof2, arch, fish, cook, firstAid = GetProfessions()
-
-			local function addLine(info)
-				info.checked = info.set and not Addon.sets[info.set] or info.var and GetCVarBool(info.var)
-				info.keepShownOnClick, info.isNotRadio = true, true
-				info.notCheckable = info.isTitle
-				info.func = self.OnLineClick
-				drop:Add(info)
-			end
-
-			addLine {text = SHOW, isTitle = true}
-			addLine {text = SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, var = 'questPOI'}
-			addLine {text = SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT, var = 'showDungeonEntrancesOnMap'}
-
-			if arch then
-				addLine {text = ARCHAEOLOGY_SHOW_DIG_SITES, var = 'digSites'}
-			end
-
-			if bounties then
-				if prof1 or prof2 then
-					addLine {text = SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT, var = 'primaryProfessionsFilter'}
-				end
-
-				if fish or cook or firstAid then
-					addLine {text = SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT, var = 'secondaryProfessionsFilter'}
-				end
-			end
-
-			addLine {text = PETS, isTitle = true}
-			addLine {text = L.Species, set = 'hideSpecies'}
-
-			self.Editbox:SetShown(not Addon.sets.hideSpecies)
-			if not Addon.sets.hideSpecies then
-				drop:Add(self.Editbox)
-			end
-
-			addLine {text = L.Rivals, var = 'showTamers'}
-			addLine {text = STABLES, set = 'hideStables'}
-
-			if bounties then
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_TITLE, isTitle = true}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_RESOURCES, var = 'worldQuestFilterResources'}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER, var = 'worldQuestFilterArtifactPower'}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS, var = 'worldQuestFilterProfessionMaterials'}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_GOLD, var = 'worldQuestFilterGold'}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT, var = 'worldQuestFilterEquipment'}
-				addLine {text = WORLD_QUEST_REWARD_FILTERS_REPUTATION, var = 'worldQuestFilterReputation'}
-			end
-
-			for i, addon in pairs(WORLDMAP_TRACKING_BUTTON_ADDONS or {}) do
-				addon(drop)
-			end
-		end)
+function MapSearch:TrackingExtras(drop)
+	local function addLine(info)
+		info.checked = info.set and not Addon.sets[info.set] or info.var and GetCVarBool(info.var)
+		info.keepShownOnClick, info.isNotRadio = true, true
+		info.notCheckable = info.isTitle
+		info.func = self.OnLineClick
+		drop:Add(info)
 	end
+
+	addLine {text = PETS..':', isTitle = true}
+	addLine {text = L.Species, set = 'hideSpecies'}
+
+	self.Editbox:SetShown(not Addon.sets.hideSpecies)
+	if not Addon.sets.hideSpecies then
+		drop:Add(self.Editbox)
+	end
+
+	addLine {text = L.Rivals, var = 'showTamers'}
+	addLine {text = STABLES, set = 'hideStables'}
 end
 
 function MapSearch.OnLineClick(info)
@@ -150,18 +109,18 @@ end
 --[[ Search Box ]]--
 
 function MapSearch:SetText(text)
-  if Addon.sets.mapSearch ~= text then
-    Addon.sets.mapSearch = text
-    Addon:SendSignal('OPTIONS_CHANGED')
-  end
+	if Addon.sets.mapSearch ~= text then
+		Addon.sets.mapSearch = text
+		Addon:SendSignal('OPTIONS_CHANGED')
+	end
 end
 
 function MapSearch:UpdateEditbox()
-  local text = Addon.sets.mapSearch or ''
-  if self.Editbox:GetText() ~= text then
+	local text = Addon.sets.mapSearch or ''
+	if self.Editbox:GetText() ~= text then
 		self.Editbox.Instructions:SetShown(text == '')
-  	self.Editbox:SetText(text)
-  end
+		self.Editbox:SetText(text)
+	end
 end
 
 

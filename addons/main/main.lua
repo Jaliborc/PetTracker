@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -41,7 +41,9 @@ function Addon:OnEnable()
 	end
 
 	if self.sets.tutorial == 12 then
-		CreateFrame('Frame', nil, InterfaceOptionsFrame):SetScript('OnShow', function() LoadAddOn(ADDON .. '_Config') end)
+		CreateFrame('Frame', nil, InterfaceOptionsFrame or SettingsPanel):SetScript('OnShow', function()
+			LoadAddOn(ADDON .. '_Config')
+		end)
 	else
 		LoadAddOn(ADDON .. '_Config')
 	end
@@ -64,9 +66,5 @@ end
 --[[ Utility ]]--
 
 function Addon:GetColor(quality)
-	if quality > 0 then
-		return GetItemQualityColor(quality - 1)
-	end
-
-	return RED_FONT_COLOR.r, RED_FONT_COLOR.g, RED_FONT_COLOR.b, RED_FONT_COLOR_CODE:sub(3)
+	return quality > 0 and ITEM_QUALITY_COLORS[quality - 1].color or RED_FONT_COLOR
 end

@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -73,7 +73,7 @@ function Pin:OnTooltip(tip)
 	local owned = self.specie:GetOwnedText()
 
 	tip:AddHeader(('|T%s:%d:%d:-2:0|t'):format(icon, 20, 20) .. name)
-	tip:AddLine((owned and (owned .. '|n') or '') .. self:KeepShort(source), 1,1,1)
+	tip:AddLine((owned and NORMAL_FONT_COLOR:WrapTextInColorCode(owned .. '|n') or '') .. self:KeepShort(source), 1,1,1)
 end
 
 function Pin:KeepShort(text)

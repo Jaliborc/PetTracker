@@ -1,5 +1,5 @@
 <Ui>
-	<Script file="gossip.lua"/>
+	<!-->Script file="gossip.lua"/>-->
   <Script file="mapCanvas.lua"/>
   <Script file="mapSearch.lua"/>
   <Script file="objectives.lua"/>

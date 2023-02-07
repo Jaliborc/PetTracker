@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2022 João Cardoso
+Copyright 2012-2023 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -151,8 +151,7 @@ function Journal.List:update()
 			button.name:SetText(rival.name)
 			button.model.level:SetText(rival:GetLevel())
 			button.petTypeIcon:SetTexture(rival:GetTypeIcon())
-			local r,g,b = rival:GetColor()
-			button.model.quality:SetVertexColor(r, g, b)
+			button.model.quality:SetVertexColor(rival:GetColor():GetRGB())
 			button.selectedTexture:SetShown(rival.id == self.selected.id)
 
 			if button.model:GetDisplayInfo() ~= rival.model then
