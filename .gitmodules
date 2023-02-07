@@ -25,6 +25,7 @@
 [submodule "libs/MutexDelay-1.0"]
 	path = libs/MutexDelay-1.0
 	url = https://github.com/Jaliborc/MutexDelay-1.0.git
+
 [submodule "libs/DropExtend-1.0"]
 	path = libs/DropExtend-1.0
-	url = https://github.com/Jaliborc/DropExtend-1.0
+	url = https://github.com/Jaliborc/DropExtend-1.0.git
