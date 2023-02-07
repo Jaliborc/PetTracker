@@ -1,3 +1,6 @@
+#### 10.0.1
+* Tooltips: Fixed bug when mousing over units without a name.
+
 #### 10
 * Dragonlfight release!
 * Tooltip: Now shows collected pets (level, quality and breed) of a specie when mousing over a capturable critter in the world.
