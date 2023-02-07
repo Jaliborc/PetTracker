@@ -31,15 +31,6 @@ function Addon:OnEnable()
 	}})
 
 	self.sets, self.state = PetTracker_Sets, PetTracker_State
-	if self.sets.MainTutorial then
-		for k,v in pairs(CopyTable(self.sets)) do
-			self.sets[k] = nil
-			self.sets[k:gsub('^.', strlower)] = v
-		end
-
-		self.sets.tutorial = 12
-	end
-
 	if self.sets.tutorial == 12 then
 		CreateFrame('Frame', nil, InterfaceOptionsFrame or SettingsPanel):SetScript('OnShow', function()
 			LoadAddOn(ADDON .. '_Config')
