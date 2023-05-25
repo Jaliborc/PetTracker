@@ -1,25 +1,13 @@
 --[[
 Copyright 2012-2023 João Cardoso
-PetTracker is distributed under the terms of the GNU General Public License (Version 3).
-As a special exception, the copyright holders of this addon do not give permission to
-redistribute and/or modify it.
-
-This addon is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
-
-This file is part of PetTracker.
+All Rights Reserved
 --]]
 
 local Sushi, Addon = LibStub('Sushi-3.1'), PetTracker
 local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup(CreateAtlasMarkup('Mobile-Pets', 14,14) .. ' PetTracker'))
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
-local PATRONS = {{},{title='Jenkins',people={'Gnare','Justin Rusbatch','Seventeen','Grumpyitis','Justin Hall','Debora S Ogormanw','Johnny Rabbit'}},{title='Ambassador',people={'Julia F','Lolari ','Owen Pitcairn','Rafael Lins','Mediocre Monk','Joanie Nelson','Nitro ','Dodgen','Guidez ','Ptsdthegamer','Denise Mckinlay','Frosted(mrp)','Burt Humburg','Keks','Connie ','Adam Mann','Christie Hopkins','Kopernikus ','Bc Spear','Kendall Lane','Jury ','Dominik','Jeff Stokes','Tigran Andrew','Jeffrey Jones','Swallow@area52','Peter Hollaubek','Daniel  Di Battis','Teofan Bobarnea','Bobby Pagiazitis','Lars Norberg','Metadata','Michael Kinasz','Sam Ramji','The Patron'}}} -- generated patron list
+local PATRONS = {{},{title='Jenkins',people={'Gnare','Seventeen','Justin Hall','Debora S Ogormanw','Johnny Rabbit'}},{title='Ambassador',people={'Julia F','Lolari ','Rafael Lins','Joanie Nelson','Kopernikus ','Kelly Wolf','Dodgen','Nitro ','Guidez ','Ptsdthegamer','Denise Mckinlay','Burt Humburg','Swallow@area52','Adam Mann','Christie Hopkins','Bc Spear','Jury ','Jeff Stokes','Tigran Andrew','Jeffrey Jones','Peter Hollaubek','Bobby Pagiazitis','Michael Kinasz','Sam Ramji','Dave Burlingame','Syed Hamdani'}}} -- generated patron list
 local HELP_ICON = ' |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2023 João Cardoso'
 

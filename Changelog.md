@@ -1,4 +1,7 @@
-#### 10.0.1
+#### 10.1
+* Updated for Zaralek Cavern.
+
+##### 10.0.1
 * Tooltips: Fixed bug when mousing over units without a name.
 
 #### 10
@@ -25,7 +28,7 @@
 * Updated TOC for Shadowlands 9.1.5.
 * Replaced deprecated client APIs.
 
-#### 9.1.0
+#### 9.1
 * Updated for Chains of Domination.
 
 ##### 9.0.8
