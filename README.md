@@ -1,4 +1,4 @@
-![Preview](http://jaliborc.com/media/addons/large/pettracker/map%20pets.jpg)
+![Preview](http://jaliborc.com/media/addons/large/pettracker/map%20pets.webp)
 
 [![Install](http://img.shields.io/badge/install-curseforge-f16436)](https://www.curseforge.com/wow/addons/pettracker)
 [![Patreon](http://img.shields.io/badge/news-patreon-ff424d)](https://www.patreon.com/jaliborc)
@@ -14,4 +14,4 @@ Finally, it provides a journal of all major PVE encounters and saves your histor
 
 Now you are ready to catch them all.
 
-![Preview](http://jaliborc.com/media/addons/large/pettracker/tracker.jpg)
+![Preview](http://jaliborc.com/media/addons/large/pettracker/tracker.webp)
