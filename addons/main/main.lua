@@ -20,7 +20,7 @@ function Addon:OnEnable()
 
 	self.sets, self.state = PetTracker_Sets, PetTracker_State
 	if self.sets.tutorial == 12 then
-		CreateFrame('Frame', nil, InterfaceOptionsFrame or SettingsPanel):SetScript('OnShow', function()
+		CreateFrame('Frame', nil, SettingsPanel or InterfaceOptionsFrame):SetScript('OnShow', function()
 			LoadAddOn(ADDON .. '_Config')
 		end)
 	else
