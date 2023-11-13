@@ -7,7 +7,7 @@ local Sushi, Addon = LibStub('Sushi-3.1'), PetTracker
 local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup(CreateAtlasMarkup('Mobile-Pets', 14,14) .. ' PetTracker'))
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
-local PATRONS = {{},{title='Jenkins',people={'Gnare','Seventeen','Justin Hall','Debora S Ogormanw','Johnny Rabbit'}},{title='Ambassador',people={'Julia F','Lolari ','Rafael Lins','Dodgen','Kopernikus ','Ptsdthegamer','Burt Humburg','Kelly Wolf','Adam Mann','Christie Hopkins','Bc Spear','Jury ','Tigran Andrew','Jeffrey Jones','Swallow@area52','Peter Hollaubek','Bobby Pagiazitis','Michael Kinasz','Sam Ramji','Syed Hamdani','Raidek ','Thinkdesigner '}}} -- generated patron list
+local PATRONS = {{},{title='Jenkins',people={'Gnare','Adcantu','Justin Hall','Debora S Ogormanw','Johnny Rabbit','Francesco Rollo'}},{title='Ambassador',people={'Julia F','Lolari ','Dodgen','Kopernikus ','Ptsdthegamer','Burt Humburg','Adam Mann','Christie Hopkins','Bc Spear','Jury ','Tigran Andrew','Jeffrey Jones','Swallow@area52','Peter Hollaubek','Michael Kinasz','Sam Ramji','Kelly Wolf','Syed Hamdani','Thinkdesigner ','Charles Howarth','Harry J Hightower'}}} -- generated patron list
 local HELP_ICON = ' |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2023 João Cardoso'
 

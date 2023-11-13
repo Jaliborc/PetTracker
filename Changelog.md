@@ -1,3 +1,6 @@
+##### 10.2
+* Updated for Emerald Dream.
+
 ##### 10.1.1
 * Some users reported that Zaralek Cavern pets where not being shown in the correct mapID. Hotfixed the issue.
 
