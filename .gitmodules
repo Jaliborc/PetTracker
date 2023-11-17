@@ -6,9 +6,9 @@
 	path = libs/Poncho-2.0
 	url = git://github.com/Jaliborc/Poncho-2.0.git
 
-[submodule "Sushi-3.1"]
-	path = libs/Sushi-3.1
-	url = git://github.com/Jaliborc/Sushi-3.1.git
+[submodule "Sushi-3.2"]
+	path = libs/Sushi-3.2
+	url = git://github.com/Jaliborc/Sushi-3.2.git
 
 [submodule "CustomSearch-1.0"]
 	path = libs/CustomSearch-1.0

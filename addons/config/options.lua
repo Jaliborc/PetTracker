@@ -3,58 +3,69 @@ Copyright 2012-2023 João Cardoso
 All Rights Reserved
 --]]
 
-local Sushi, Addon = LibStub('Sushi-3.1'), PetTracker
-local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup(CreateAtlasMarkup('Mobile-Pets', 14,14) .. ' PetTracker'))
+local Sushi, Addon = LibStub('Sushi-3.2'), PetTracker
+local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup('|Tinterface/addons/pettracker/art/compass:16:16|t PetTracker'))
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
-local PATRONS = {{},{title='Jenkins',people={'Gnare','Adcantu','Justin Hall','Debora S Ogormanw','Johnny Rabbit','Francesco Rollo'}},{title='Ambassador',people={'Julia F','Lolari ','Dodgen','Kopernikus ','Ptsdthegamer','Burt Humburg','Adam Mann','Christie Hopkins','Bc Spear','Jury ','Tigran Andrew','Jeffrey Jones','Swallow@area52','Peter Hollaubek','Michael Kinasz','Sam Ramji','Kelly Wolf','Syed Hamdani','Thinkdesigner ','Charles Howarth','Harry J Hightower'}}} -- generated patron list
-local HELP_ICON = ' |T516770:13:13:0:0:64:64:14:50:14:50|t'
+local PATRONS = {{title='Jenkins',people={'Gnare','Adcantu','Justin Hall','Debora S Ogormanw','Johnny Rabbit','Francesco Rollo'}},{title='Ambassador',people={'Julia F','Lolari ','Dodgen','Kopernikus ','Ptsdthegamer','Burt Humburg','Adam Mann','Christie Hopkins','Bc Spear','Jury ','Tigran Andrew','Jeffrey Jones','Swallow@area52','Peter Hollaubek','Michael Kinasz','Sam Ramji','Kelly Wolf','Syed Hamdani','Thinkdesigner ','Charles Howarth','Harry J Hightower'}}} -- generated patron list
+local PATREON_ICON = '  |TInterface/Addons/PetTracker/art/patreon:12:12|t'
+local HELP_ICON = '  |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2023 João Cardoso'
 
 
 --[[ Startup ]]--
 
 function Options:OnEnable()
-	local faq = Sushi.OptionsGroup(self, HELP_LABEL .. HELP_ICON)
-	faq:SetSubtitle(L.FAQDescription)
-	faq:SetChildren(self.OnFAQ)
-	faq:SetFooter(FOOTER)
+	self.FAQ = Sushi.OptionsGroup(self, HELP_LABEL .. HELP_ICON)
+					:SetSubtitle(L.HelpDescription):SetFooter(FOOTER):SetChildren(self.OnHelp)
+	self.Credits = Sushi.OptionsGroup(self, 'Patrons' .. PATREON_ICON)
+					:SetSubtitle(L.PatronsDescription):SetFooter(FOOTER):SetOrientation('HORIZONTAL'):SetChildren(self.OnCredits)
 
-	local credits = Sushi.CreditsGroup(self, PATRONS, 'Patrons |TInterface/Addons/PetTracker/art/patreon:12:12|t')
-	credits:SetSubtitle('PetTracker is distributed for free and supported trough donations. A massive thank you to all the supporters on Patreon and Paypal who keep development alive. You can become a patron too at |cFFF96854patreon.com/jaliborc|r.', 'http://www.patreon.com/jaliborc')
-	credits:SetFooter(FOOTER)
-
-	self:SetCall('OnDefaults', self.OnDefaults)
 	self:SetCall('OnChildren', self.OnMain)
 	self:SetSubtitle(L.OptionsDescription)
 	self:SetFooter(FOOTER)
 end
 
-function Options:OnDefaults()
-	wipe(Addon.sets)
-	wipe(Addon.state)
-
-	Addon:SendSignal('OPTIONS_CHANGED')
-	Addon:SendSignal('OPTIONS_RESET')
-end
-
 function Options:OnMain()
 	self:Add('Header', TRACKING, GameFontHighlight, true)
-	self:AddCheck('TrackPets')
+	self:AddCheck('ZoneTracker')
 	self:AddCheck('SpecieIcons')
 	self:AddCheck('RivalPortraits')
 
-	self:Add('Header', L.Source5, GameFontHighlight, true)
+	self:Add('Header', COMBAT, GameFontHighlight, true)
 	self:AddCheck('Switcher')
 	self:AddCheck('AlertUpgrades')
 	self:AddCheck('Forfeit')
 end
 
-function Options:OnFAQ()
+function Options:OnHelp()
 	for i = 1, #L.FAQ, 2 do
 		self:Add('Header', L.FAQ[i], GameFontHighlight, true)
 		self:Add('Header', L.FAQ[i+1], GameFontDisable).bottom = 15
 	end
+
+	self:Add('RedButton', 'Show Tutorial'):SetWidth(200):SetCall('OnClick', function() Addon.Tutorials:Restart() end)
+	self:Add('RedButton', 'Ask Community'):SetWidth(200):SetCall('OnClick', function()
+		Sushi.Popup:External('bit.ly/discord-jaliborc')
+		SettingsPanel:Close(true)
+	end)
+end
+
+function Options:OnCredits()
+	for i, rank in ipairs(PATRONS) do
+		if rank.people then
+			self:Add('Header', rank.title, GameFontHighlight, true).top = i > 1 and 20 or 0
+
+			for j, name in ipairs(rank.people) do
+				self:Add('Header', name, i > 1 and GameFontHighlight or GameFontHighlightLarge):SetWidth(180)
+			end
+		end
+	end
+
+	self:Add('RedButton', 'Join Us'):SetWidth(200):SetCall('OnClick', function()
+		Sushi.Popup:External('patreon.com/jaliborc')
+		SettingsPanel:Close(true)
+	end).top = 20
 end
 
 

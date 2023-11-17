@@ -52,7 +52,7 @@ end
 --[[ API Override ]]--
 
 function Objectives:Update()
-	self:SetShown(Addon.sets.trackPets)
+	self:SetShown(Addon.sets.zoneTracker)
 	self:GetClass().Update(self)
 	self:SetShown(self:IsShown() and not self.Bar:IsMaximized())
 	self:UpdateMinimize()

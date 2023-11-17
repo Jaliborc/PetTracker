@@ -19,10 +19,9 @@ end
 function Journal:OnShow()
 	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, ADDON..'RivalEntry', 44, 0)
-	SetPortraitToTexture(self.PortraitContainer.portrait, 'Interface/Icons/PetJournalPortrait')
 
 	self.Inset:Hide()
-	self:SetScript('OnShow', nil)
+	self:SetScript('OnShow', self.OnSelect)
 	self.TitleContainer.TitleText:SetText(L.Rivals)
 	self.List.scrollBar.doNotHide = true
 	self.Count.Label:SetText(L.TotalRivals)
@@ -56,6 +55,26 @@ function Journal:OnShow()
 	self.Map:AddDataProvider(CreateFromMixins(MapExplorationDataProviderMixin))
 	self.Map:AddDataProvider(CreateFromMixins(GroupMembersDataProviderMixin))
 
+	local backdrop = self.portrait or self.PortraitContainer.portrait
+	backdrop:SetColorTexture(0, 0, 0)
+	backdrop:SetDrawLayer('BORDER')
+
+	local shade = backdrop:GetParent():CreateTexture(nil, 'ARTWORK')
+	shade:SetAtlas('perks-frost-BG')
+	shade:SetAllPoints(backdrop)
+
+	local portrait = backdrop:GetParent():CreateTexture(nil, 'OVERLAY')
+	portrait:SetTexture('Interface/Addons/PetTracker/art/logo')
+	portrait:SetPoint('BOTTOMLEFT', backdrop, 5, 5)
+	portrait:SetPoint('TOPRIGHT', backdrop, -5,-5)
+
+	local mask = backdrop:GetParent():CreateMaskTexture()
+	mask:SetTexture('Interface/CharacterFrame/TempPortraitAlphaMask')
+	mask:SetAllPoints(backdrop)
+	backdrop:AddMaskTexture(mask)
+	portrait:AddMaskTexture(mask)
+	shade:AddMaskTexture(mask)
+
 	for i = 1, 4 do
 		local loot = CreateFrame('ItemButton', '$parentLoot' .. i, self.Card, ADDON..'Reward')
 		loot:SetPoint('TOPRIGHT', -58 + 45 * (i % 2), - 45 * ceil(i/2))
@@ -73,7 +92,12 @@ function Journal:OnShow()
 	end
 
 	self:SetRival(Addon.Rival(Addon.RivalOrder[1]))
+	self:OnSelect()
 	self:SetTab(1)
+end
+
+function Journal:OnSelect()
+	WardrobeCollectionFrame.InfoButton:Hide()
 end
 
 

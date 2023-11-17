@@ -83,17 +83,18 @@ end
 --[[ Dropdown ]]--
 
 function Tracker:ToggleDropdown()
-	local drop = LibStub('Sushi-3.1').Dropdown:Toggle(self)
+	local drop = LibStub('Sushi-3.2').Dropdown:Toggle(self)
 	if drop then
 		drop:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 5, -12)
 		drop:SetChildren {
 			{
-				text = AUCTION_CATEGORY_BATTLE_PETS,
+				text = L.ZoneTracker, 
+				icon = 'Interface/Addons/PetTracker/art/compass',
 				isTitle = true, notCheckable = true
 			},
 			{
 				text = L.TrackPets,
-				checked = Addon.sets.trackPets,
+				checked = Addon.sets.zoneTracker,
 				func = Tracker.Toggle,
 				isNotRadio = true,
 			},
@@ -108,7 +109,7 @@ function Tracker:ToggleDropdown()
 end
 
 function Tracker:Toggle()
-	Addon.sets.trackPets = not Addon.sets.trackPets
+	Addon.sets.zoneTracker = not Addon.sets.zoneTracker
 	Addon:SendSignal('OPTIONS_CHANGED')
 end
 

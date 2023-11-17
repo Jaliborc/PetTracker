@@ -5,14 +5,14 @@ All Rights Reserved
 
 local ADDON, Addon = ...
 --local C = LibStub('C_Everywhere')
-local Sushi = LibStub('Sushi-3.1')
+local Sushi = LibStub('Sushi-3.2')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 local Button = Addon:NewModule('Compartment', {
     text = ADDON,
     notCheckable = true,
     keepShownOnClick = true,
-    icon = 'interface/addons/pettracker/art/thumb',
+    icon = 'interface/addons/pettracker/art/compass',
     menu = {
         {
             text = '|A:worldquest-tracker-questmarker:12:12|a  ' .. 'Zone Tracker',

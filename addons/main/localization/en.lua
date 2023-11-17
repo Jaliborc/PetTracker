@@ -27,13 +27,14 @@ L.StableTip = '|cffffd200Come here to heal your|npets for a small fee.|r'
 L.TellMore = 'Tell me more about yourself.'
 L.UpgradeAlert = 'Wild upgrades have appeared!'
 L.TotalRivals = 'Total Rivals'
+L.ZoneTracker = 'Zone Tracker'
 
 -- automatic. do not translate unless necessary
-L.TrackPets = GetSpellInfo(122026)
 L.Maximized = WINDOWED_MAXIMIZED
 L.Defeat = PVP_MATCH_DEFEAT:lower():gsub('^.', strupper)
 L.Victory = PVP_MATCH_VICTORY:lower():gsub('^.', strupper)
 L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
+L.TrackPets = GetSpellInfo(122026)
 
 for i = 1, C_PetJournal.GetNumPetSources() do
 	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
@@ -42,17 +43,20 @@ end
 -- options
 L.AlertUpgrades = 'Alert for Upgrades'
 L.AlertUpgradesTip = 'If disabled, an upgrades alert box will not be shown in combat, but upgrades will still be marked with a symbol (|TInterface/GossipFrame/AvailableQuestIcon:0:0:-1:-2|t).'
-L.FAQDescription = 'These are the most frequently asked questions. To see the tutorials again, reset the addon settings using the "Defaults" button at the lower left corner.'
 L.Forfeit = 'Prompt for Forfeit'
 L.ForfeitTip = 'If enabled, will ask whether to forfeit a wild battle when no upgrades are available.'
 L.OptionsDescription = 'These options allow you to toggle PetTracker general features on and off. Gotta catch them all!'
 L.RivalPortraits = 'Rival Portraits'
 L.RivalPortraitsTip = 'If enabled, rivals will be marked by their portraits when shown in the world and battle map.'
 L.SpecieIcons = 'Specie Icons'
-L.SpecieIconsTip = 'If disabled, pets will be marked by their type instead of species when shown in the world and battle map.'
+L.SpecieIconsTip = 'If enabled, pets will be marked by their species icon instead of type when shown in the world and battle map.'
 L.Switcher = 'Switcher'
 L.SwitcherTip = 'If enabled, the default UI for switching pets in combat will be replaced by an improved one.'
-L.TrackPetsTip = 'If enabled, a list of pet capture progress in the current zone will be displayed next to the quest objectives.'
+L.ZoneTrackerTip = 'If enabled, a list of pet capture progress in the current zone will be displayed next to the quest objectives.|n|n|cff20ff20You can also toggle this option from the Pet Journal.|r'
+
+-- help
+L.PatronsDescription = 'PetTracker is distributed for free and supported trough donations. A massive thank you to all the supporters on Patreon and Paypal who keep development alive. You can become a patron too at |cFFF96854patreon.com/jaliborc|r.'
+L.HelpDescription = 'Here we provide answers to the most frequently asked questions. We also recommend following the ingame tutorial. If neither solve your problem, you might consider asking for help on the PetTracker user community on discord.'
 
 L.FAQ = {
 	'How do I show/hide all pets on the map?',

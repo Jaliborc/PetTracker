@@ -5,7 +5,7 @@ All Rights Reserved
 
 local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.1').Glowbox(PetBattleFrame))
+local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.2').Glowbox(PetBattleFrame))
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Alerts:OnEnable()
@@ -24,7 +24,7 @@ function Alerts:Verify()
 	if not upgrades and Addon.Battle:IsWildBattle() and not self.popped and Addon.sets.forfeit then
 		self.popped = true
 
-		LibStub('Sushi-3.1').Popup {
+		LibStub('Sushi-3.2').Popup {
 				id = ADDON .. 'Alerts',
         text = L.AskForfeit, button1 = QUIT, button2 = NO,
         OnAccept = C_PetBattles.ForfeitGame,

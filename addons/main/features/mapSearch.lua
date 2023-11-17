@@ -11,7 +11,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 --[[ Startup ]]--
 
 function MapSearch:OnEnable()
-	local drop = LibStub('Sushi-3.1').Dropdown(UIParent)
+	local drop = LibStub('Sushi-3.2').Dropdown(UIParent)
 	drop:Hide()
 	drop:SetChildren(function() self:TrackingExtras(drop) end)
 	drop:SetBackdrop('NONE')
@@ -115,7 +115,7 @@ end
 --[[ Search Suggestions ]]--
 
 function MapSearch:ShowSuggestions(parent)
-	local drop = LibStub('Sushi-3.1').Dropdown(parent, nil, true)
+	local drop = LibStub('Sushi-3.2').Dropdown(parent, nil, true)
 	drop:SetPoint('TOP', parent, 'BOTTOM', 0, -15)
 	drop:SetChildren(function(drop)
 		drop:Add {

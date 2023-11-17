@@ -139,6 +139,11 @@ function Tutorials:Start()
 	self:TriggerTutorial(4)
 end
 
+function Tutorials:Restart()
+	Addon.sets.tutorial = nil
+	self:Start()
+end
+
 
 --[[ API ]]--
 
