@@ -6,26 +6,26 @@
 	path = libs/Poncho-2.0
 	url = git://github.com/Jaliborc/Poncho-2.0.git
 
-[submodule "Sushi-3.2"]
-	path = libs/Sushi-3.2
-	url = git://github.com/Jaliborc/Sushi-3.2.git
-
-[submodule "CustomSearch-1.0"]
-	path = libs/CustomSearch-1.0
-	url = git://github.com/Jaliborc/CustomSearch-1.0.git
-
 [submodule "CustomTutorials-2.1"]
 	path = libs/CustomTutorials-2.1
 	url = git://github.com/Jaliborc/CustomTutorials-2.1.git
 
-[submodule "libs/SecureTabs-2.0"]
+[submodule "SecureTabs-2.0"]
 	path = libs/SecureTabs-2.0
 	url = https://github.com/Jaliborc/SecureTabs-2.0.git
 
-[submodule "libs/MutexDelay-1.0"]
+[submodule "MutexDelay-1.0"]
 	path = libs/MutexDelay-1.0
 	url = https://github.com/Jaliborc/MutexDelay-1.0.git
 
-[submodule "libs/DropExtend-1.0"]
+[submodule "DropExtend-1.0"]
 	path = libs/DropExtend-1.0
 	url = https://github.com/Jaliborc/DropExtend-1.0.git
+
+[submodule "Sushi-3.2"]
+	path = libs/Sushi-3.2
+	url = git://github.com/Jaliborc/Sushi-3.2.git
+	
+[submodule "CustomSearch-1.0"]
+	path = libs/CustomSearch-1.0
+	url = git://github.com/Jaliborc/CustomSearch-1.0.git
