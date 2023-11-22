@@ -3,7 +3,7 @@ Copyright 2012-2023 João Cardoso
 All Rights Reserved
 --]]
 
-if IsAddOnLoaded('Carbonite.Quests') then
+if LibStub('C_Everywhere').Addons.IsAddOnLoaded('Carbonite.Quests') then
 	return
 end
 

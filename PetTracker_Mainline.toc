@@ -8,6 +8,6 @@
 ## OptionalDeps: WoWUnit
 ## SavedVariablesPerCharacter: PetTracker_State
 ## SavedVariables: PetTracker_Sets
-## Version: 10.2.1
+## Version: 10.2.2
 
 addons\main\main.xml

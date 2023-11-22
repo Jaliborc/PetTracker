@@ -40,11 +40,15 @@ end
 
 function Options:OnHelp()
 	for i = 1, #L.FAQ, 2 do
-		self:Add('Header', L.FAQ[i], GameFontHighlight, true)
-		self:Add('Header', L.FAQ[i+1], GameFontDisable).bottom = 15
+		self:Add('ExpandHeader', L.FAQ[i], GameFontHighlightSmall):SetExpanded(self[i]):SetCall('OnClick', function() self[i] = not self[i] end)
+
+		if self[i] then
+			local answer = self:Add('Header', L.FAQ[i+1], GameFontHighlightSmall)
+			answer.left, answer.right, answer.bottom = 16, 16, 16
+		end
 	end
 
-	self:Add('RedButton', 'Show Tutorial'):SetWidth(200):SetCall('OnClick', function() Addon.Tutorials:Restart() end)
+	self:Add('RedButton', 'Show Tutorial'):SetWidth(200):SetCall('OnClick', function() Addon.Tutorials:Restart() end).top = 10
 	self:Add('RedButton', 'Ask Community'):SetWidth(200):SetCall('OnClick', function()
 		Sushi.Popup:External('bit.ly/discord-jaliborc')
 		SettingsPanel:Close(true)

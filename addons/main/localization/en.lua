@@ -59,19 +59,19 @@ L.PatronsDescription = 'PetTracker is distributed for free and supported trough 
 L.HelpDescription = 'Here we provide answers to the most frequently asked questions. We also recommend following the ingame tutorial. If neither solve your problem, you might consider asking for help on the PetTracker user community on discord.'
 
 L.FAQ = {
-	'How do I show/hide all pets on the map?',
+	'How to show/hide all pets on the map?',
 	'Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".',
 
-	'How do I make the map display specific pets only?',
-	'There is a filter box at the top right corner of the world map. See the tutorial for common search examples.',
+	'How to make the map display specific pets only?',
+	'Click on the magnifying glass button at the top right corner of the map. There is a filter box under "Species". It makes suggestions of common searches, and you may see the tutorial for more examples.',
 
-	'How do I show my capture progress on the objectives again?',
-	'Open the Pet Journal and click "Track Pets" at the bottom right corner.',
+	'How to show/hide the progress in the current zone?',
+	'Open the Pet Journal and click "Zone Tracker" at the bottom right corner.',
 
-	'How do I display the pets I have captured in the zone objectives?',
-	'Click on the "Pets" header of the tracker and enable "Show Captured".',
+	'How to configure the zone tracker?',
+	'Click on the "Pets" header of the tracker and options will appear.',
 
-	'How do I move the enemy action bar?',
+	'In pet combat, how to move the enemy action bar?',
 	'Hold the shift key and drag the bar.',
 }
 
