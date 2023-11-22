@@ -1,4 +1,19 @@
-##### 10.2
+##### 10.2.2
+* All: Due to a technical difficulty, **10.2** and **10.2.1** were never actually released without my knowledge.
+* All: Fixed issue with build system dependency making builds less optimized than they should have been.
+* Upgraded to Sushi-3.2:
+  * Popup rework, with bugfixes and improved design.
+  * Fixed dropdown issue that could create lag, improved design.
+  * Function-chaining now possible.
+  * Other minor optimizations.
+* Improved the Help menu.
+
+##### 10.2.1
+* New logo, new face! Chosen by the community and made by wkryanchan.
+* Where sensible, added logo to interface elements to clarify they are part of the addon.
+* Made the Zone Tracker multiple toggle locations clearer to avoid user confusion.
+
+#### 10.2
 * Updated for Emerald Dream.
 
 ##### 10.1.1
@@ -113,7 +128,7 @@
   * Rearranged entire mod using the WildAddon-1.0 module based architecture.
   * Rewrote a cleaner internal API, both for static and object-oriented methods.
   * Object oriented programming now implemented using Poncho-2.0.
-  * Dropdowns, popups and settings panel now implemented using Sushi-3.1.
+  * Dropdowns, popups and settings panel now implemented using Sushi-3.2.
   * Timers now implemented using DelayMutex-1.0.
   * Definitively a lot more we forgot by now.
 

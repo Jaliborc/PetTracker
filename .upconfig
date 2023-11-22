@@ -9,6 +9,6 @@
   2.x.x
   3.x.x
 [ignore]
-  addons/main/tests/
-  libs/Sushi-3.2/tests/
-  libs/Poncho-2.0/Tests.lua
+  PetTracker/addons/main/tests/
+  PetTracker/libs/Sushi-3.2/tests/
+  PetTracker/libs/Poncho-2.0/Tests.lua

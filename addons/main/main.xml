@@ -1,6 +1,6 @@
 <Ui>
 	<Include file="..\..\libs\main.xml"/>
-	<Include file="localization\localization.xml"/>
+	<Include file="..\..\localization\localization.xml"/>
 
 	<Script  file="main.lua"/>
 	<Include file="api\api.xml"/>
