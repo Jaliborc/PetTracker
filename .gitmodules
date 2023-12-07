@@ -29,3 +29,6 @@
 [submodule "CustomSearch-1.0"]
 	path = libs/CustomSearch-1.0
 	url = git://github.com/Jaliborc/CustomSearch-1.0.git
+[submodule "libs/C_Everywhere"]
+	path = libs/C_Everywhere
+	url = https://github.com/Jaliborc/C_Everywhere

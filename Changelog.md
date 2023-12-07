@@ -1,3 +1,11 @@
+##### 10.2.4
+* Added support to the new native Addon Compartment functionality.
+* Small improvements to the new Help menu.
+* Libraries updated.
+
+##### 10.2.3
+* All: Added missing C_Everywhere embed.
+
 ##### 10.2.2
 * All: Due to a technical difficulty, **10.2** and **10.2.1** were never actually released without my knowledge.
 * All: Fixed issue with build system dependency making builds less optimized than they should have been.
