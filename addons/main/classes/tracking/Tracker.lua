@@ -90,19 +90,42 @@ function Tracker:ToggleDropdown()
 			{
 				text = L.ZoneTracker, 
 				icon = 'Interface/Addons/PetTracker/art/compass',
-				isTitle = true, notCheckable = true
+				isTitle = true
 			},
 			{
 				text = L.TrackPets,
 				checked = Addon.sets.zoneTracker,
 				func = Tracker.Toggle,
-				isNotRadio = true,
+				isNotRadio = true
 			},
 			{
 				text = L.CapturedPets,
 				checked = Addon.sets.capturedPets,
 				func = Tracker.ToggleCaptured,
-				isNotRadio = true,
+				isNotRadio = true
+			},
+			{
+				text = L.DisplayCondition,
+				notCheckable = true,
+				sublevel = function(self)
+					self:Add {
+						{
+							text = ALWAYS, quality = Addon.MaxQuality,
+							checked = Addon.sets.targetQuality == Addon.MaxQuality,
+							func = Tracker.SetGoal
+						},
+						{
+							text = L.MissingRares, quality = Addon.MaxPlayerQuality,
+							checked = Addon.sets.targetQuality == Addon.MaxPlayerQuality,
+							func = Tracker.SetGoal
+						},
+						{
+							text = L.MissingPets, quality = 1,
+							checked = Addon.sets.targetQuality == 1,
+							func = Tracker.SetGoal
+						}
+					}
+				end
 			}
 		}
 	end
@@ -115,5 +138,10 @@ end
 
 function Tracker:ToggleCaptured()
 	Addon.sets.capturedPets = not Addon.sets.capturedPets
+	Addon:SendSignal('OPTIONS_CHANGED')
+end
+
+function Tracker:SetGoal()
+	Addon.sets.targetQuality = self.quality
 	Addon:SendSignal('OPTIONS_CHANGED')
 end

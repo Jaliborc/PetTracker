@@ -6,6 +6,7 @@ All Rights Reserved
 local ADDON, Addon = ...
 local C = LibStub('C_Everywhere')
 local Addon = LibStub('WildAddon-1.0'):NewAddon(ADDON, Addon, 'MutexDelay-1.0')
+Addon.MaxPlayerQuality = 4
 Addon.MaxQuality = 6
 Addon.MaxLevel = 25
 
@@ -16,15 +17,14 @@ function Addon:OnEnable()
 	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
 	self.state = PetTracker_State or {}
-	self.sets = setmetatable(PetTracker_Sets or {}, {__index = {
-		zoneTracker = true, capturedPets = true, specieIcons = true, rivalPortraits = true,
+	self.sets = self:SetDefaults(PetTracker_Sets or {}, {
+		specieIcons = true, rivalPortraits = true,
+		zoneTracker = true, capturedPets = true, targetQuality = Addon.MaxPlayerQuality,
 		switcher = true, alertUpgrades = true, forfeit = true,
-	}})
+	})
 
 	if self.sets.tutorial == 12 then
-		(SettingsPanel or InterfaceOptionsFrame):HookScript('OnShow', function()
-			C.AddOns.LoadAddOn(ADDON .. '_Config')
-		end)
+		SettingsPanel.CategoryList:HookScript('OnShow', function() C.AddOns.LoadAddOn(ADDON .. '_Config') end)
 	else
 		C.AddOns.LoadAddOn(ADDON .. '_Config')
 	end

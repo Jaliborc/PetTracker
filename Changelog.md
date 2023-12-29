@@ -1,3 +1,6 @@
+##### 10.2.5
+* Added options to control when the Zone Tracker appears or is hidden.
+
 ##### 10.2.4
 * Added support to the new native Addon Compartment functionality.
 * Small improvements to the new Help menu.

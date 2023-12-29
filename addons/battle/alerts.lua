@@ -25,11 +25,9 @@ function Alerts:Verify()
 		self.popped = true
 
 		LibStub('Sushi-3.2').Popup {
-				id = ADDON .. 'Alerts',
-        text = L.AskForfeit, button1 = QUIT, button2 = NO,
-        OnAccept = C_PetBattles.ForfeitGame,
-				hideOnEscape = 1,
-    }
+			text = L.AskForfeit, button1 = QUIT, button2 = NO,
+			OnAccept = C_PetBattles.ForfeitGame
+    	}
 	end
 
   self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)
