@@ -1,3 +1,6 @@
+##### 10.2.6
+* All: Fixed issue with ColorPicker detected by the community.
+
 ##### 10.2.5
 * Added options to control when the Zone Tracker appears or is hidden.
 

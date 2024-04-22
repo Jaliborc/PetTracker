@@ -1,4 +1,4 @@
-## Interface: 100200
+## Interface: 100206
 ## Title: PetTracker
 ## IconTexture: Interface/Addons/PetTracker/art/compass
 ## Notes: Tracks pets in and out of combat, so you can catch|nthem all. Shows pet breeds & rarity, available PvE|nencounters and more.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/PetTracker/art/patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/PetTracker/art/paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/PetTracker/art/discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
@@ -8,6 +8,6 @@
 ## OptionalDeps: WoWUnit
 ## SavedVariablesPerCharacter: PetTracker_State
 ## SavedVariables: PetTracker_Sets
-## Version: 10.2.4
+## Version: 10.2.6
 
 addons\main\main.xml
