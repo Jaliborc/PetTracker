@@ -1,9 +1,9 @@
-![Preview](http://jaliborc.com/media/addons/large/pettracker/map%20pets.webp)
+![Preview](https://jaliborc.com/media/addons/large/pettracker/map%20pets.webp)
 
-[![Install](http://img.shields.io/badge/install-curseforge-f16436)](https://www.curseforge.com/wow/addons/pettracker)
-[![Patreon](http://img.shields.io/badge/news-patreon-ff424d)](https://www.patreon.com/jaliborc)
-[![Donate](http://img.shields.io/badge/donate-paypal-0079C1)](https://www.paypal.me/jaliborc)
-[![Community](http://img.shields.io/badge/community-discord-5865F2)](https://bit.ly/discord-jaliborc)
+[![Install](https://img.shields.io/badge/install-curseforge-f16436)](https://www.curseforge.com/wow/addons/pettracker)
+[![Patreon](https://img.shields.io/badge/news-patreon-ff424d)](https://www.patreon.com/jaliborc)
+[![Donate](https://img.shields.io/badge/donate-paypal-0079C1)](https://www.paypal.me/jaliborc)
+[![Community](https://img.shields.io/badge/community-discord-5865F2)](https://bit.ly/discord-jaliborc)
 
 # PetTracker :dog: :mouse: :tiger:
 PetTracker helps you build your pet collection and win pet battles by providing you with more information in a clean and concise manner.
@@ -15,4 +15,4 @@ Finally, it provides a journal of all major PVE encounters and saves your histor
 
 Now you are ready to catch them all.
 
-![Preview](http://jaliborc.com/media/addons/large/pettracker/tracker.webp)
+![Preview](https://jaliborc.com/media/addons/large/pettracker/tracker.webp)
