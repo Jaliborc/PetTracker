@@ -1,5 +1,8 @@
+##### 10.2.7
+* Updated TOC.
+
 ##### 10.2.6
-* All: Fixed issue with ColorPicker detected by the community.
+* Fixed issue with ColorPicker detected by the community.
 
 ##### 10.2.5
 * Added options to control when the Zone Tracker appears or is hidden.
@@ -13,8 +16,8 @@
 * All: Added missing C_Everywhere embed.
 
 ##### 10.2.2
-* All: Due to a technical difficulty, **10.2** and **10.2.1** were never actually released without my knowledge.
-* All: Fixed issue with build system dependency making builds less optimized than they should have been.
+* Due to a technical difficulty, **10.2** and **10.2.1** were never actually released without my knowledge.
+* Fixed issue with build system dependency making builds less optimized than they should have been.
 * Upgraded to Sushi-3.2:
   * Popup rework, with bugfixes and improved design.
   * Fixed dropdown issue that could create lag, improved design.
