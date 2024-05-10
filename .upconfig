@@ -8,6 +8,7 @@
   1.x.x
   2.x.x
   3.x.x
+  4.x.x
 [ignore]
   PetTracker/addons/main/tests/
   PetTracker/libs/Sushi-3.2/tests/
