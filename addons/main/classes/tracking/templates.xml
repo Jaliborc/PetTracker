@@ -56,4 +56,27 @@
 			</Frame>
 		</Frames>
 	</Frame>
+
+	<Frame name="PetTrackerSpecieLine" inherits="ObjectiveTrackerLineTemplate" virtual="true">
+		<Size x="235" y="15"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="Icon">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="-1"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+
+			<Layer level="OVERLAY">
+				<Texture parentKey="SubIcon">
+					<Size x="12" y="12"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeKey="$parent.Icon" relativePoint="BOTTOMRIGHT" x="-1" y="4"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
 </Ui>

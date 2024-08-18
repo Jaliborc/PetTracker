@@ -4,7 +4,7 @@ All Rights Reserved
 --]]
 
 local ADDON, Addon = ...
-local Tracker = Addon.TextList:NewClass('Tracker')
+local Tracker = Addon.Base:NewClass('Tracker', 'Frame')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
@@ -17,12 +17,12 @@ function Tracker:Construct()
 	f:RegisterSignal('OPTIONS_CHANGED', 'Update')
 	f:SetScript('OnShow', f.Update)
 	f:SetScript('OnHide', f.Clear)
-	f:SetSize(1,1)
+	f:SetSize(1,235)
 
+	f.Lines, f.MaxEntries = {}, 20
 	f.Bar = Addon.ProgressBar(f)
-	f.Anchor = f.Bar
-	f.Anchor.yOff = -10
-	f.MaxEntries = 0
+	f.Bar:SetPoint('TOPLEFT')
+	f.Bar.yOff = -10
 	return f
 end
 
@@ -30,10 +30,8 @@ end
 --[[ Update ]]--
 
 function Tracker:Update()
-	if self:IsVisible() then
-		self:Clear()
-		self:AddSpecies()
-	end
+	self:Clear()
+	self:AddSpecies()
 end
 
 function Tracker:AddSpecies()
@@ -42,7 +40,7 @@ function Tracker:AddSpecies()
 	for quality = 0, self:MaxQuality() do
 		for level = 0, Addon.MaxLevel do
 			for i, specie in ipairs(progress[quality][level] or {}) do
-				if self:Count() < self.MaxEntries then
+				if #self.Lines < self.MaxEntries then
 					self:AddSpecie(specie, quality, level)
 				else
 					break
@@ -52,7 +50,8 @@ function Tracker:AddSpecies()
 	end
 
 	self.Bar:SetProgress(progress)
-	self:SetHeight(self:Count() * 20 + 65)
+	self:SetShown(progress.total > 0)
+	self:SetHeight(#self.Lines * 20 + 65)
 end
 
 
@@ -62,21 +61,21 @@ function Tracker:AddSpecie(specie, quality, level)
 		local name, icon = specie:GetInfo()
 		local text = name .. (level > 0 and format(' (%s)', level) or '')
 		local r,g,b = self:GetColor(quality):GetRGB()
+		local anchor = self.Lines[#self.Lines] or self.Bar
 		
-		local line = self:Add(text, icon, source, r,g,b)
+		local line = Addon.SpecieLine(self, text, icon, source, r,g,b)
 		line:SetScript('OnClick', function() specie:Display() end)
+		line:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', anchor.xOff or 0, anchor.yOff or -4)
+
+		tinsert(self.Lines, line)
 	end
 end
 
-
---[[ Values ]]--
-
-function Tracker:MaxQuality()
-	return Addon.sets.capturedPets and Addon.MaxQuality or 0
-end
-
-function Tracker:GetColor(quality)
-	return Addon.sets.capturedPets and Addon:GetColor(quality) or WHITE_FONT_COLOR
+function Tracker:Clear()
+	for i, line in ipairs(self.Lines) do
+		line:Release()
+	end
+	wipe(self.Lines)
 end
 
 
@@ -144,4 +143,15 @@ end
 function Tracker:SetGoal()
 	Addon.sets.targetQuality = self.quality
 	Addon:SendSignal('OPTIONS_CHANGED')
+end
+
+
+--[[ Values ]]--
+
+function Tracker:MaxQuality()
+	return Addon.sets.capturedPets and Addon.MaxQuality or 0
+end
+
+function Tracker:GetColor(quality)
+	return Addon.sets.capturedPets and Addon:GetColor(quality) or WHITE_FONT_COLOR
 end

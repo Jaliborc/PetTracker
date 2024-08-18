@@ -34,7 +34,6 @@ function Bar:SetProgress(progress)
 	end
 
 	self.Overlay.Text:SetFormattedText(PLAYERS_FOUND_OUT_OF_MAX, owned, progress.total)
-	self:SetShown(progress.total > 0)
 end
 
 function Bar:IsMaximized()

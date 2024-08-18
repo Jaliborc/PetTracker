@@ -3,80 +3,31 @@ Copyright 2012-2024 João Cardoso
 All Rights Reserved
 --]]
 
-if LibStub('C_Everywhere').Addons.IsAddOnLoaded('Carbonite.Quests') then
+if C_AddOns.IsAddOnLoaded('Carbonite.Quests') then
 	return
 end
 
 local ADDON, Addon = ...
-local Parent, Minimize = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.HeaderMenu
-local Objectives = Addon:NewModule('Objectives', Addon.Tracker(Parent))
-
-do
-	OBJECTIVE_TRACKER_ADDONS = OBJECTIVE_TRACKER_ADDONS or {}
-	tinsert(OBJECTIVE_TRACKER_ADDONS, 0)
-	Objectives.Index = #OBJECTIVE_TRACKER_ADDONS
-end
-
-
---[[ Startup ]]--
+local Objectives = Addon:NewModule('Objectives', Addon.Tracker())
 
 function Objectives:OnEnable()
-	local header = CreateFrame('Button', 'PetTrackerObjectiveTrackerHeader', self, 'ObjectiveTrackerHeaderTemplate')
-	header:SetScript('OnClick', self.ToggleDropdown)
-	header:RegisterForClicks('anyUp')
-	header:SetPoint('TOPLEFT')
-	header:Show()
-	header.Text:SetText(PETS)
-	header.MinimizeButton:Hide()
-
-	self.Bar:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', -4, -10)
-	self.Bar:SetScript('OnMouseDown', self.ToggleOptions)
-	self.Header = header
-
-	hooksecurefunc('ObjectiveTracker_Update', function()
-		local off = self:GetUsedHeight()
-		local availableEntries = floor(((Parent.maxHeight or 0) - off - 45) / 20)
-
-		if availableEntries ~= self.MaxEntries then
-			self.MaxEntries = availableEntries
-			self:Update()
-		else
-			self:UpdateMinimize()
+	self.Module = Mixin(CreateFrame('Frame', nil, nil, 'ObjectiveTrackerModuleTemplate'), {uiOrder = 188, blockOffsetX = 15})
+	self.Module.Header:SetScript('OnMouseDown', function() self.ToggleDropdown(self.Module.Header) end)
+	self.Module:SetHeader(PETS)
+	self.Module.LayoutContents = function()
+		if Addon.sets.zoneTracker and self:IsShown() then
+			self.height = self:GetHeight()
+			self.Module:AddBlock(self)
 		end
+	end
 
-		self:SetPoint('TOPLEFT', Parent, -10, -off)
-	end)
+	self:SetParent(self.Module)
+	ObjectiveTrackerFrame:AddModule(self.Module)
 end
-
-
---[[ API Override ]]--
 
 function Objectives:Update()
-	self:SetShown(Addon.sets.zoneTracker)
-	self:GetClass().Update(self)
-	self:SetShown(self:IsShown() and not self.Bar:IsMaximized())
-	self:UpdateMinimize()
-
-	OBJECTIVE_TRACKER_ADDONS[self.Index] = self:IsShown() and self:GetHeight() or 0
-end
-
-function Objectives:UpdateMinimize()
-	if self:IsShown() and not Minimize:IsShown() then
-		Minimize:SetFrameLevel(max(Minimize:GetFrameLevel(), self.Header:GetFrameLevel()+2))
-		Minimize:SetPoint('RIGHT', self.Header, 'RIGHT')
-		Minimize:Show()
+	if Addon.sets.zoneTracker then
+		self:GetClass().Update(self)
 	end
-end
-
-function Objectives:GetUsedHeight()
-	local height = Parent.contentsHeight or 0
-	for i = 1, self.Index-1 do
-		height = height + OBJECTIVE_TRACKER_ADDONS[i]
-	end
-
-	if height > 0 then
-		height = height + 15
-	end
-
-	return height
+	self.Module:MarkDirty()
 end
