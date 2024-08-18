@@ -8,7 +8,7 @@ if LibStub('C_Everywhere').Addons.C_AddOns.IsAddOnLoaded('Carbonite.Quests') the
 end
 
 local ADDON, Addon = ...
-local Parent, Minimize = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.HeaderMenu
+local Parent, Minimize = ObjectiveTrackerBlocksFrame, ObjectiveTrackerFrame.Header  -- v11.x seems to change ObjectiveTrackerFrame.HeaderMenu to ObjectiveTrackerFrame.Header
 local Objectives = Addon:NewModule('Objectives', Addon.Tracker(Parent))
 
 do
