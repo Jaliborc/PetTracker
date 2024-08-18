@@ -3,7 +3,7 @@
 		<Size x="29" y="29"/>
 		<Layers>
 			<Layer level="BACKGROUND">
-				<Texture inherits="Spellbook-EmptySlot">
+				<Texture inherits="BasicFrameTemplate">  <!-- v11: Spellbook-EmptySlot to BasicFrameTemplate -->
 					<Anchors>
 						<Anchor point="CENTER"/>
 					</Anchors>
