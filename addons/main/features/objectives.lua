@@ -33,9 +33,8 @@ function Objectives:OnEnable()
 	self.Bar:SetScript('OnMouseDown', self.ToggleOptions)
 	self.Header = header
 
-	-- broken by 11.0.0 need replacement
-	--[[
-	hooksecurefunc('ObjectiveTracker_Update', function()
+	-- broken by 11.0.0: ObjectiveTracker_Update  --> ObjectiveTrackerManager, "UpdateAll"  as per https://github.com/Tercioo/World-Quest-Tracker/blob/db15d824fa4ba80e7bcdc30d126e52b001f36dc9/WorldQuestTracker_Tracker.lua#L1653 on 2024 08 17
+	hooksecurefunc(ObjectiveTrackerManager, "UpdateAll", function()
 		local off = self:GetUsedHeight()
 		local availableEntries = floor(((Parent.maxHeight or 0) - off - 45) / 20)
 
@@ -48,7 +47,6 @@ function Objectives:OnEnable()
 
 		self:SetPoint('TOPLEFT', Parent, -10, -off)
 	end)
-	]]--
 end
 
 
