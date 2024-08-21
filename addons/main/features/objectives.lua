@@ -14,10 +14,17 @@ function Objectives:OnEnable()
 	self.Module = Mixin(CreateFrame('Frame', nil, nil, 'ObjectiveTrackerModuleTemplate'), {uiOrder = 188, blockOffsetX = 15})
 	self.Module.Header:SetScript('OnMouseDown', function() self.ToggleDropdown(self.Module.Header) end)
 	self.Module:SetHeader(PETS)
+	
+	self.Module.IsComplete = function() end
 	self.Module.LayoutContents = function()
-		if Addon.sets.zoneTracker and self:IsShown() then
-			self.height = self:GetHeight()
-			self.Module:AddBlock(self)
+		if Addon.sets.zoneTracker then
+			self.MaxEntries = floor((self.Module.availableHeight - 103) / 19)
+			self:GetClass().Update(self)
+
+			if self:IsShown() then
+				self.height = self:GetHeight()
+				self.Module:AddBlock(self)
+			end
 		end
 	end
 
@@ -26,8 +33,5 @@ function Objectives:OnEnable()
 end
 
 function Objectives:Update()
-	if Addon.sets.zoneTracker then
-		self:GetClass().Update(self)
-	end
 	self.Module:MarkDirty()
 end

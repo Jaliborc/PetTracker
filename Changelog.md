@@ -1,3 +1,9 @@
+## 11.0.2
+* Map: pet species can once again be toggled and filtered.
+
+## 11.0.1
+* Zone Tracker: now better adapts to available space for objective tracking (tracker was not showing in zones with a lot of pets).
+
 ## 11.0.0
 * Updated for The War Within
 * Not yet included in this version:

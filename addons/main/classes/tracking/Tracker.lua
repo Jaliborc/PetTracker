@@ -19,7 +19,7 @@ function Tracker:Construct()
 	f:SetScript('OnHide', f.Clear)
 	f:SetSize(1,235)
 
-	f.Lines, f.MaxEntries = {}, 20
+	f.Lines, f.MaxEntries = {}, 30
 	f.Bar = Addon.ProgressBar(f)
 	f.Bar:SetPoint('TOPLEFT')
 	f.Bar.yOff = -10
@@ -51,7 +51,7 @@ function Tracker:AddSpecies()
 
 	self.Bar:SetProgress(progress)
 	self:SetShown(progress.total > 0)
-	self:SetHeight(#self.Lines * 20 + 65)
+	self:SetHeight(#self.Lines * 19 + 65)
 end
 
 
