@@ -18,10 +18,6 @@
 	path = libs/MutexDelay-1.0
 	url = https://github.com/Jaliborc/MutexDelay-1.0.git
 
-[submodule "DropExtend-1.0"]
-	path = libs/DropExtend-1.0
-	url = https://github.com/Jaliborc/DropExtend-1.0.git
-
 [submodule "Sushi-3.2"]
 	path = libs/Sushi-3.2
 	url = git://github.com/Jaliborc/Sushi-3.2.git
@@ -29,6 +25,7 @@
 [submodule "CustomSearch-1.0"]
 	path = libs/CustomSearch-1.0
 	url = git://github.com/Jaliborc/CustomSearch-1.0.git
-[submodule "libs/C_Everywhere"]
+
+[submodule "C_Everywhere"]
 	path = libs/C_Everywhere
-	url = https://github.com/Jaliborc/C_Everywhere
+	url = https://github.com/Jaliborc/C_Everywhere.git
