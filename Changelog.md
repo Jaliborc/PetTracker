@@ -1,7 +1,23 @@
-## 11.0.2
+### 11.0.5
+* Added official plugin art and updated welcome art.
+* Finished Korean locales.
+
+### 11.0.4
+* Zone Tracker: now reacts to the "Display Condition" setting once again.
+* Zone Tracker: reimplemented the option menu using the new official API.
+* Updated tutorial localization.
+* Added Korean locales.
+* Note: It is known that the tracker is causing items in the objectives panel not to be clickable. This will take a while to fix.
+
+### 11.0.3
+* Fixed error on config loading.
+* Updated tutorial for the new World Map and Zone Tracker implementations.
+* Improved art files size using modern .tga compression.
+
+### 11.0.2
 * Map: pet species can once again be toggled and filtered.
 
-## 11.0.1
+### 11.0.1
 * Zone Tracker: now better adapts to available space for objective tracking (tracker was not showing in zones with a lot of pets).
 
 ## 11.0.0

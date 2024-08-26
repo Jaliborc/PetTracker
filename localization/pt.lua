@@ -44,3 +44,53 @@ L.FAQ = {
 	'Como mostro as mascotes que já capturei no Rastreador de Zona?',
 	'Clique em Mascotes no Rastreador e ligue a opção Mostrar Capturados'
 }
+
+L.Tutorial = {
+[[Bem-vindo! Agora está a utilizar o |cffffd200PetTracker|r, criado por |cffffd200Jaliborc|r.
+
+Este tutorial opcional vai ajudá-lo a começar. Depois, pode voltar ao que é realmente importante: apanhar... hum... capturar todos!]],
+
+[[O |cffffd200Rastreador de Zona|r mostra quais os mascotes que lhe faltam na sua zona atual, a sua origem, e a raridade dos que já capturou.
+
+|A:NPE_LeftClick:14:14|a Clique no cabeçalho |cffffd200"Mascotes"|r para opções adicionais.]],
+
+[[Abra o |cffffd200Mapa do Mundo|r para ver o que o PetTracker pode fazer pela sua exploração.]],
+
+[[O PetTracker mostra as possíveis fontes de mascotes no mapa do mundo. Também mostra estábulos e informações adicionais sobre os domadores.
+
+Para filtrar ou ocultar essas localizações, |A:NPE_LeftClick:14:14|a abra o menu |cffffd200"Filtro de Mapa"|r.]],
+
+[[Pode filtrar quais os mascotes a mostrar escrevendo na caixa de |cffffd200"Filtrar Espécies"|r. Aqui estão alguns exemplos:
+
+• |cffffd200Gato|r para gatos.
+• |cffffd200Faltam|r para espécies que não possui.
+• |cffffd200Aquático|r para espécies aquáticas.
+• |cffffd200Missão|r para mascotes obtidos através de missões.
+• |cffffd200Floresta|r para espécies que habitam florestas.
+
+Operadores matemáticos também funcionam:
+• |cffffd200< Raro|r para espécies que lhe faltam com qualidade rara.
+• |cffffd200< 15|r para espécies com mascotes abaixo do nível 15.]],
+
+[[Abra o |cffffd200Diário de Mascotes|r para ver o que o PetTracker pode fazer para a sua navegação.]],
+
+[[Esta caixa de seleção permite-lhe ativar ou desativar o |cffffd200Rastreador de Zona|r. É especialmente útil se já escondeu o rastreador anteriormente.]],
+
+[[Abra o separador |cffffd200Rivais|r para saber mais sobre ele.]],
+
+[[O separador |cffffd200Rivais|r fornece informações sobre os encontros de batalha de mascotes existentes, como:
+
+• Mascotes inimigos e as suas habilidades.
+• Missões diárias e recompensas.
+• Localização dos encontros.]],
+
+[[Pode filtrar quais os rivais a mostrar escrevendo na caixa de pesquisa. Aqui estão alguns exemplos:
+
+• |cffffd200Aki|r para Aki a Escolhida.
+• |cffffd200Valor|r para rivais que concedem valor.
+• |cffffd200Draenor|r para rivais localizados em Draenor.
+• |cffffd200Épico|r para rivais com equipas de raridade épica.
+• |cffffd200> 20|r para rivais com nível acima de 20.]],
+
+[[O PetTracker regista as batalhas que teve com cada rival. Selecione uma batalha e clique em |cffffd200Carregar Equipa|r para recarregar rapidamente os mascotes que usou contra eles.]]
+}

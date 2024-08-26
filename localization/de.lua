@@ -59,43 +59,51 @@ L.FAQ = {
 }
 
 L.Tutorial = {
-[[Herzlich willkommen! Du benutzt jetzt |cFFF96854Jaliborcs|r |cffffd200PetTracker|r.
+[[Herzlich willkommen! Du benutzt jetzt |cffffd200PetTracker|r, von |cffffd200Jaliborc|r.
 
-Seit Pandaria hat sich viel verändert. Dieses Tutorial hilft dir loszulegen, damit du dich schnell wieder dem wirklich Wichtigen widmen kannst: Sie dir alle zu schnappen... ähm... alle Haustiere einzufangen!]],
+Dieses optionale Tutorial hilft dir loszulegen, damit du dich schnell wieder dem wirklich Wichtigen widmen kannst: Sie dir alle zu schnappen... ähm... alle Haustiere einzufangen!]],
 
-[[PetTracker hilft dir, deinen Fortschritt in der Zone, in der du dich befindest, zu überwachen.
+[[Der |cffffd200Zonen-Tracker|r zeigt dir noch fehlende Haustiere in deiner aktuellen Zone, ihren Ursprung und die Seltenheit derjenigen, die du gefangen hast.
 
-Der |cffffd200Zonen-Tracker|r zeigt dir noch fehlende Haustiere sowie ihren Ursprung an, dazu die Seltenheit derjenigen, die du gefangen hast.]],
+|A:NPE_LeftClick:14:14|a Klicke auf den Header |cffffd200"Begleiter"|r für zusätzliche Optionen.]],
 
-[[Klicke auf |cffffd200Begleiter|r, um den Tracker zu deaktivieren oder um zusätzliche Optionen zu aktivieren.]],
+[[Öffne die |cffffd200Weltkarte|r, um zu sehen, wie dir PetTracker bei deiner Erkundung helfen kann.]],
 
-[[Öffne die |cffffd200Weltkarte|r, um zu sehen, wie dir PetTracker beim Sammeln helfen kann.]],
+[[PetTracker zeigt die möglichen Quellen von Haustieren auf der Weltkarte an. Es zeigt auch Stallmeister und zusätzliche Informationen über Zähmer an.
 
-[[PetTracker zeigt möglichen Quellen von Haustieren auf der Weltkarte an, vom Spawnpunkt bis zum Händler. Es zeigt auch Stallmeister und zusätzliche Informationen über Zähmer an.
+Um diese Orte auszublenden oder zu filtern, |A:NPE_LeftClick:14:14|a öffne das |cffffd200"Filter"-Menü|r.]],
 
-Um diese Orte auszublenden, öffne das Tracking-Menü und deaktiviere |cffffd200Kampfhaustiere anzeigen|r.']],
-
-[[Durch Eingabe im Suchfeld wird gefiltert, welche Haustiere angezeigt werden. Hier sind einige Beispiele:
+[[Du kannst filtern, welche Haustiere angezeigt werden, indem du im |cffffd200"Filterarten"|r-Feld eingibst. Hier sind einige Beispiele:
 
 • |cffffd200Katze|r für Katzen.
 • |cffffd200Fehlt|r für nicht gesammelte Arten.
 • |cffffd200Aquatisch|r für aquatische Arten.
 • |cffffd200Quest|r für Arten, die als Questbelohnung erhalten werden.
-• |cffffd200Wald|r für Arten, die Wälder bewohnen.]],
+• |cffffd200Wald|r für Arten, die Wälder bewohnen.
 
-[[Öffne den |cffffd200Wildtierführer|r, um zu sehen, wie PetTracker dir in deiner Sammlung hilft.]],
+Mathematische Operatoren funktionieren auch:
+• |cffffd200< Selten|r für Arten, bei denen dir ein Haustier von seltener Qualität fehlt.
+• |cffffd200< 15|r für Arten mit Haustieren unter Level 15.]],
+
+[[Öffne den |cffffd200Wildtierführer|r, um zu sehen, wie PetTracker dir beim Durchsuchen hilft.]],
+
 [[Dieses Kästchen ermöglicht es, den |cffffd200Zonen-Tracker|r zu aktivieren. Besonders nützlich, wenn er zuvor versteckt wurde.]],
+
 [[Öffne den |cffffd200Rivalen|r-Reiter, um mehr darüber zu erfahren.]],
+
 [[Der |cffffd200Rivalen|r-Reiter liefert Informationen über vorhandene Haustierkampfbegegnungen, wie z.B.:
 
 • Gegnerische Haustiere und ihre Fähigkeiten.
 • Tägliche Quests und ihre Belohnungen.
 • Den jeweiligen Ort.]],
-[[Durch Eingabe im Suchfeld wird gefiltert, welche Haustiere angezeigt werden. Hier sind einige Beispiele:
 
-• |cffffd200Aki|r für Aki the Chosen.
+[[Du kannst filtern, welche Haustiere angezeigt werden, indem du im Suchfeld eingibst. Hier sind einige Beispiele:
+
+• |cffffd200Aki|r für Aki die Auserwählte.
+• |cffffd200Valor|r für Rivalen, die Tapferkeit gewähren.
 • |cffffd200Draenor|r für Rivalen in Draenor.
 • |cffffd200Episch|r für Rivalen mit Teams von epischer Qualität.
 • |cffffd200> 20|r für Rivalen über Level 20.]],
-[[PetTracker zeichnet alle Kämpfe mit Rivalen auf. Wähle einen Kampf und klicke auf |cffffd200Team laden|r, um die Haustiere, die du damals benutzt hast, zu laden.]],
-}
+
+[[PetTracker zeichnet die Kämpfe auf, die du mit jedem Rivalen hattest. Wähle einen Kampf und klicke auf |cffffd200Team laden|r, um schnell die Haustiere zu laden, die du damals benutzt hast.]]
+}	

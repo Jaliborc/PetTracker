@@ -81,27 +81,25 @@ L.FAQ = {
 L.Tutorial = {
 [[Welcome! You are now using |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
 
-This tutorial will help you to quickly get started. Then you can get back to do what is truly important: to catch... ahem... capture them all!]],
+This optional tutorial will help you get started. Then you can get back to do what is truly important: to catch... ahem... capture them all!]],
+[[The |cffffd200Zone Tracker|r displays which pets you are missing in your current zone, their origin, and the rarity of the ones you have captured.
 
-[[PetTracker will help you to monitor your progress in the zone you are in.
-
-The |cffffd200Zone Tracker|r displays which pets you are missing, their origin, and the rarity of the ones you have captured.]],
-
-[[Click on |cffffd200Pets|r to toggle the tracker or additional options.]],
-
+|A:NPE_LeftClick:14:14|a Click on the header |cffffd200"Pets"|r for additional options.]],
 [[Open the |cffffd200World Map|r to see what PetTracker can do for your exploration.]],
+[[PetTracker displays the possible sources of pets on the world map. It also shows stables and extra information about tamers.
 
-[[PetTracker displays the possible sources of pets on the world map, from spawn points to vendors. It also displays stables and extra information about tamers.
-
-To hide these locations, open the tracking menu and disable |cffffd200Species|r, under the |cffffd200Pets|r category.]],
-
-[[You can filter which pets are displayed by typing on the search box. Here are some examples:
+To filter or hide these locations, |A:NPE_LeftClick:14:14|a open the |cffffd200"Map Filter"|r menu.]],
+[[You can filter which pets are displayed by typing on the |cffffd200"Filter Species"|r box. Here are some examples:
 
 • |cffffd200Cat|r for cats.
 • |cffffd200Missing|r for species you do not own.
 • |cffffd200Aquatic|r for aquatic species.
-• |cffffd200Quest|r for species obtainable through questing.
-• |cffffd200Forest|r for species that inhabit forests.]],
+• |cffffd200Quest|r for pets obtainable through questing.
+• |cffffd200Forest|r for species that inhabit forests.
+
+Math operators also work:
+• |cffffd200< Rare|r for species missing a rare quality pet.
+• |cffffd200< 15|r for species with only pets below level 15.]],
 
 [[Open the |cffffd200Pet Journal|r to see what PetTracker can do for your browsing.]],
 [[This checkbox allows you to toggle the |cffffd200Zone Tracker|r. It is especially useful if you have hidden the tracker previously.]],

@@ -49,41 +49,49 @@ L.FAQ = {
 L.Tutorial = {
 [[Bienvenue! Vous utilisez dès à présent |cffffd200PetTracker|r, de |cffffd200Jaliborc|r.
 
-Beaucoup de choses ont changé depuis Pandaria, celà va rapidement vous aider à commencer. Vous allez pouvoir revenir à ce qui est le plus important: Attraper... et... tous les capturer!]],
+Ce tutoriel optionnel vous aidera à commencer. Vous pourrez ensuite revenir à ce qui est vraiment important: Attraper... euh... tous les capturer!]],
 
-[[PetTracker vous aidera à suivre votre progression dans la zone où vous vous trouvez.
+[[Le |cffffd200Suivi de Zone|r affiche les mascottes qui vous manquent dans votre zone actuelle, leur origine, et la rareté de celles que vous avez capturées.
 
-La |cffffd200Zone de Pistage|r vous affichera les mascottes qui vous manquent, leurs origines, et la rareté de celle que vous avez capturé.]],
+|A:NPE_LeftClick:14:14|a Cliquez sur l'en-tête |cffffd200"Mascottes"|r pour des options supplémentaires.]],
 
-[[Cliquez sur |cffffd200Mascottes|r pour afficher le suivi ou les options additionnelles.]],
+[[Ouvrez la |cffffd200Carte du Monde|r pour voir ce que PetTracker peut faire pour votre exploration.]],
 
-[[Ouvrez la |cffffd200Carte de Monde|r pour voir ce que PetTracker peut faire pour votre exploration.]],
+[[PetTracker affiche les sources possibles des mascottes sur la carte du monde. Il peut aussi afficher les écuries ainsi que d'autres informations à propos des dompteurs.
 
-[[PetTracker affiche les sources possibles des mascottes sur la carte du monde, des points d'apparitions aux vendeurs. Il peut aussi afficher les écuries ainsi que d'autres informations à propos des dompteurs.
+Pour filtrer ou masquer ces lieux, |A:NPE_LeftClick:14:14|a ouvrez le menu |cffffd200"Filtre de la Carte"|r.]],
 
-Pour masquer ces lieux, ouvrez le menu de suivi et desactivez |cffffd200Afficher les Mascottes|r.]],
-
-[[Vous pouvez aussi filtrer quelles mascottes sont affichées en tapant dans la zone de recherche. Voici quelques exemples:
+[[Vous pouvez filtrer quelles mascottes sont affichées en tapant dans la zone de recherche |cffffd200"Filtrer Espèces"|r. Voici quelques exemples:
 
 • |cffffd200Chat|r pour les chats.
 • |cffffd200Manquant|r pour ceux que vous ne possédez pas.
 • |cffffd200Aquatique|r pour les aquatiques.
 • |cffffd200Quête|r pour celles obtenables par des quêtes.
-• |cffffd200Forêt|r pour ceux que habite dans la forêt.]],
+• |cffffd200Forêt|r pour celles qui habitent dans la forêt.
+
+Les opérateurs mathématiques fonctionnent aussi:
+• |cffffd200< Rare|r pour les espèces dont vous n'avez pas de mascotte de qualité rare.
+• |cffffd200< 15|r pour les espèces avec des mascottes en dessous du niveau 15.]],
 
 [[Ouvrez le |cffffd200Codex des mascottes|r pour voir ce que PetTracker peut faire pour votre recherche.]],
-[[Cette case à cocher vous permet d'afficher la |cffffd200Zone de Pistage|r. Celà est particulièrement utile si vous avez masqué le suivi précédemment.]],
-[[Ouvrez l'onglet des |cffffd200Dresseurs|r pour en apprendre plus sur eux.]],
-[[L'onglet des |cffffd200Dresseurs|r vous informe sur leurs mascotttes, tels que:
 
-• Leurs capacitées.
+[[Cette case à cocher vous permet d'afficher le |cffffd200Suivi de Zone|r. C'est particulièrement utile si vous avez masqué le suivi précédemment.]],
+
+[[Ouvrez l'onglet des |cffffd200Dresseurs|r pour en apprendre plus sur eux.]],
+
+[[L'onglet des |cffffd200Dresseurs|r vous informe sur les rencontres de combats de mascottes existantes, tels que:
+
+• Les mascottes ennemies et leurs capacités.
 • Les quêtes journalières et les récompenses.
 • Le lieu de rencontre.]],
-[[Vous pouvez aussi filtrer quelles mascottes sont affichées en tapant dans la recherche. Voici quelques exemples:
+
+[[Vous pouvez filtrer quelles mascottes sont affichées en tapant dans la zone de recherche. Voici quelques exemples:
 
 • |cffffd200Aki|r pour Aki l’Élue.
+• |cffffd200Valor|r pour les dresseurs qui octroient de la vaillance.
 • |cffffd200Draenor|r pour les dresseurs se trouvant en Draenor.
 • |cffffd200Épique|r pour les dresseurs avec une équipe composée de mascottes épiques.
-• |cffffd200> 20|r pour les dresseurs supérieur au niveau 20.]],
-[[PetTracker enregistre les combats que vous avez fait contre chaque dresseurs. Sélectionner un combat et cliquez sur |cffffd200Charger l'équipe|r pour recharger rapidement les mascottes utilisées lors de ce combat.]]
-}
+• |cffffd200> 20|r pour les dresseurs supérieurs au niveau 20.]],
+
+[[PetTracker enregistre les combats que vous avez fait contre chaque dresseur. Sélectionnez un combat et cliquez sur |cffffd200Charger l'équipe|r pour recharger rapidement les mascottes utilisées lors de ce combat.]]
+}	

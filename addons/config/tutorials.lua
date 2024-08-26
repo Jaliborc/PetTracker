@@ -21,21 +21,19 @@ function Tutorials:OnEnable()
 end
 
 function Tutorials:Load()
-	local mapTrackingButton = Addon.MapSearch.Frames[WorldMapFrame]
-
 	self:RegisterTutorials {
 		title = ADDON,
 		savedvariable = Addon.sets, key = 'tutorial',
 
 		{
 			text = L.Tutorial[1],
-			image = 'Interface/Addons/PetTracker/Art/Pets',
+			image = 'Interface/Addons/PetTracker/art/welcome',
 			point = 'CENTER'
 		},
 		{
 			text = L.Tutorial[2],
 			point = 'TOPRIGHT', relPoint = 'TOPLEFT',
-			image = 'Interface/Addons/PetTracker/Art/Tracker',
+			image = 'Interface/Addons/PetTracker/art/tracker',
 			shineRight = 10, shineLeft = -35,
 			shineTop = 6, shineBottom = 0,
 			anchor = ObjectiveTrackerFrame,
@@ -45,15 +43,6 @@ function Tutorials:Load()
 		{
 			text = L.Tutorial[3],
 			point = 'TOPRIGHT', relPoint = 'TOPLEFT',
-			anchor = Addon.Objectives and Addon.Objectives.Header or Minimap,
-			shine = Addon.Objectives and Addon.Objectives.Header,
-			shineRight = 10, shineLeft = -20,
-			shineTop = 10, shineBottom = -7,
-			x = -30
-		},
-		{
-			text = L.Tutorial[4],
-			point = 'TOPRIGHT', relPoint = 'TOPLEFT',
 			anchor = MinimapCluster.ZoneTextButton,
 			shine = MinimapCluster.ZoneTextButton,
 			shineRight = -5, shineLeft = -12,
@@ -61,24 +50,21 @@ function Tutorials:Load()
 			y = -15
 		},
 		{
+			text = L.Tutorial[4],
+			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
+			image = 'Interface/Addons/PetTracker/art/map-filter',
+			anchor = WorldMapFrame,
+			x = 20, y = -160
+		},
+		{
 			text = L.Tutorial[5],
-			point = 'TOPRIGHT', relPoint = 'BOTTOMLEFT',
-			anchor = mapTrackingButton, shine = mapTrackingButton,
-			shineTop = 5, shineBottom = -5,
-			shineRight = 7, shineLeft = -5,
-			x = -5, y = -5
+			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
+			image = 'Interface/Addons/PetTracker/art/map-filter',
+			anchor = WorldMapFrame,
+			x = 20, y = -160
 		},
 		{
 			text = L.Tutorial[6],
-			point = 'TOPRIGHT', relPoint = 'BOTTOMLEFT',
-			shineTop = 6, shineBottom = -6,
-			shineRight = 6, shineLeft = -12,
-			shine = Addon.MapSearch.Editbox,
-			anchor = mapTrackingButton,
-			x = -5, y = -5
-		},
-		{
-			text = L.Tutorial[7],
 			point = 'BOTTOM', relPoint = 'TOP',
 			anchor = CollectionsMicroButton,
 			shine = CollectionsMicroButton,
@@ -87,7 +73,7 @@ function Tutorials:Load()
 			y = 10
 		},
 		{
-			text = L.Tutorial[8],
+			text = L.Tutorial[7],
 			point = 'BOTTOMLEFT', relPoint = 'TOPLEFT',
 			anchor = Addon.TrackToggle, shine = Addon.TrackToggle,
 			shineLeft = -4, shineRight = 4,
@@ -95,7 +81,7 @@ function Tutorials:Load()
 			x = 20
 		},
 		{
-			text = L.Tutorial[9],
+			text = L.Tutorial[8],
 			point = 'BOTTOMLEFT', relPoint = 'TOPRIGHT',
 			anchor = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
 			shine = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
@@ -104,13 +90,13 @@ function Tutorials:Load()
 			x = 20
 		},
 		{
-			text = L.Tutorial[10],
+			text = L.Tutorial[9],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
 			anchor = Addon.RivalsJournal,
 			x = 20
 		},
 		{
-			text = L.Tutorial[11],
+			text = L.Tutorial[10],
 			point = 'TOPLEFT', relPoint = 'BOTTOMRIGHT',
 			anchor = Addon.RivalsJournal and Addon.RivalsJournal.SearchBox,
 			shine = Addon.RivalsJournal and Addon.RivalsJournal.SearchBox,
@@ -119,7 +105,7 @@ function Tutorials:Load()
 			x = 15
 		},
 		{
-			text = L.Tutorial[12],
+			text = L.Tutorial[11],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
 			anchor = CollectionsJournal,
 			shine = Addon.RivalsJournal and Addon.RivalsJournal.Tab3,
@@ -129,14 +115,13 @@ function Tutorials:Load()
 		},
 	}
 
-	self:TriggerOn(mapTrackingButton, 5)
-	self:TriggerOn(Addon.MapSearch.Editbox, 7)
-	self:TriggerOn(Addon.TrackToggle, 9)
-	self:TriggerOn(Addon.RivalsJournal, 12)
+	self:TriggerOn(WorldMapFrame, 6)
+	self:TriggerOn(Addon.TrackToggle, 8)
+	self:TriggerOn(Addon.RivalsJournal, 11)
 end
 
 function Tutorials:Start()
-	self:TriggerTutorial(4)
+	self:TriggerTutorial(3)
 end
 
 function Tutorials:Restart()

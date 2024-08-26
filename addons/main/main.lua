@@ -18,7 +18,7 @@ function Addon:OnEnable()
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
 	self.state = PetTracker_State or {}
 	self.sets = self:SetDefaults(PetTracker_Sets or {}, {
-		specieIcons = true, rivalPortraits = true,
+		showSpecies = true, showStables = true, specieIcons = true, rivalPortraits = true,
 		zoneTracker = true, capturedPets = true, targetQuality = Addon.MaxPlayerQuality,
 		switcher = true, alertUpgrades = true, forfeit = true,
 	})
@@ -53,6 +53,19 @@ end
 
 
 --[[ Utility ]]--
+
+function Addon.ToggleOption(key)
+    Addon.SetOption(key, not Addon.sets[key])
+end
+
+function Addon.SetOption(key, value)
+    Addon.sets[key] = value
+    Addon:SendSignal('OPTIONS_CHANGED')
+end
+
+function Addon.GetOption(key)
+    return Addon.sets[key]
+end
 
 function Addon:GetColor(quality)
 	return quality > 0 and ITEM_QUALITY_COLORS[quality - 1].color or RED_FONT_COLOR

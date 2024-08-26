@@ -12,7 +12,6 @@
 	<Include file="Sushi-3.2\Sushi-3.2.xml"/>
 
 	<Script file="MutexDelay-1.0\MutexDelay-1.0.lua"/>
-	<Script file="DropExtend-1.0\DropExtend-1.0.lua"/>
 	<Script file="CustomSearch-1.0\CustomSearch-1.0.lua"/>
 	<Script file="LibPetJournal-2.0\LibPetJournal-2.0.lua"/>
 </Ui>

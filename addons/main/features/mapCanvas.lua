@@ -96,7 +96,7 @@ function MapCanvas:Draw(frame)
 		local mapID = frame:GetMapID()
 		local index = 1
 
-		if not Addon.sets.hideSpecies then
+		if Addon.sets.showSpecies then
 			local species = Addon.Maps:GetSpeciesIn(mapID)
 			for specie, spots in pairs(species) do
 				local specie = Addon.Specie(specie)
@@ -110,7 +110,7 @@ function MapCanvas:Draw(frame)
 			end
 		end
 
-		if not Addon.sets.hideStables then
+		if Addon.sets.showStables then
 			local stables = Addon.Maps:GetStablesIn(mapID)
 			for x, y in gmatch(stables, '(%w%w)(%w%w)') do
 				tinsert(self.Pins[frame], Addon.StablePin(frame, index, x,y))

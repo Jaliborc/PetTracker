@@ -21,9 +21,27 @@ function Tracker:Construct()
 
 	f.Lines, f.MaxEntries = {}, 30
 	f.Bar = Addon.ProgressBar(f)
+	f.Bar:SetScript('OnMouseDown', f.Menu)
 	f.Bar:SetPoint('TOPLEFT')
 	f.Bar.yOff = -10
 	return f
+end
+
+function Tracker:Menu()
+	MenuUtil.CreateContextMenu(self, function(_, drop)
+		drop:SetTag('PETTRACKER_ZONE')
+		drop:CreateTitle('|TInterface/Addons/PetTracker/art/compass:16:16|t PetTracker')
+		drop:CreateCheckbox(L.ZoneTracker, Addon.GetOption, Addon.ToggleOption, 'zoneTracker')
+		drop:CreateCheckbox(L.CapturedPets, Addon.GetOption, Addon.ToggleOption, 'capturedPets')
+
+		local get = function(v) return Addon.sets.targetQuality == v end
+		local set = function(v) Addon.SetOption('targetQuality', v) end
+
+		local target = drop:CreateButton(L.DisplayCondition)
+		target:CreateRadio(ALWAYS, get, set, Addon.MaxQuality)
+		target:CreateRadio(L.MissingRares, get, set, Addon.MaxPlayerQuality)
+		target:CreateRadio(L.MissingPets, get, set, 1)
+	end)
 end
 
 
@@ -76,73 +94,6 @@ function Tracker:Clear()
 		line:Release()
 	end
 	wipe(self.Lines)
-end
-
-
---[[ Dropdown ]]--
-
-function Tracker:ToggleDropdown()
-	local drop = LibStub('Sushi-3.2').Dropdown:Toggle(self)
-	if drop then
-		drop:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 5, -12)
-		drop:SetChildren {
-			{
-				text = L.ZoneTracker, 
-				icon = 'Interface/Addons/PetTracker/art/compass',
-				isTitle = true
-			},
-			{
-				text = L.TrackPets,
-				checked = Addon.sets.zoneTracker,
-				func = Tracker.Toggle,
-				isNotRadio = true
-			},
-			{
-				text = L.CapturedPets,
-				checked = Addon.sets.capturedPets,
-				func = Tracker.ToggleCaptured,
-				isNotRadio = true
-			},
-			{
-				text = L.DisplayCondition,
-				notCheckable = true,
-				sublevel = function(self)
-					self:Add {
-						{
-							text = ALWAYS, quality = Addon.MaxQuality,
-							checked = Addon.sets.targetQuality == Addon.MaxQuality,
-							func = Tracker.SetGoal
-						},
-						{
-							text = L.MissingRares, quality = Addon.MaxPlayerQuality,
-							checked = Addon.sets.targetQuality == Addon.MaxPlayerQuality,
-							func = Tracker.SetGoal
-						},
-						{
-							text = L.MissingPets, quality = 1,
-							checked = Addon.sets.targetQuality == 1,
-							func = Tracker.SetGoal
-						}
-					}
-				end
-			}
-		}
-	end
-end
-
-function Tracker:Toggle()
-	Addon.sets.zoneTracker = not Addon.sets.zoneTracker
-	Addon:SendSignal('OPTIONS_CHANGED')
-end
-
-function Tracker:ToggleCaptured()
-	Addon.sets.capturedPets = not Addon.sets.capturedPets
-	Addon:SendSignal('OPTIONS_CHANGED')
-end
-
-function Tracker:SetGoal()
-	Addon.sets.targetQuality = self.quality
-	Addon:SendSignal('OPTIONS_CHANGED')
 end
 
 

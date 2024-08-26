@@ -62,29 +62,31 @@ L.FAQ = {
 }
 
 L.Tutorial = {
-[[¡Bienvenido! Estás usando |cffffd200PetTracker|r, by |cffffd200Jaliborc|r.
+[[¡Bienvenido! Estás usando |cffffd200PetTracker|r, creado por |cffffd200Jaliborc|r.
 
-Este tutorial te ayudará rápidamente a comenzar. Después, podrás volver a hacer lo que es realmente importante: atrapar... ejem... ¡hazte con todas!]],
+Este tutorial opcional te ayudará a comenzar. Luego podrás volver a hacer lo que realmente importa: ¡atraparlos... ejem... capturarlos a todos!]],
 
-[[PetTracker te ayudará monitorizando tu progreso en la zona que estés.
+[[El |cffffd200Rastreador de Zona|r muestra qué mascotas te faltan en tu zona actual, su origen, y la rareza de las que has capturado.
 
-El |cffffd200Rastreador de Zona|r te mostrará que mascotas te estás dejando, su origen, y la rareza de las que hayas capturado.]],
-
-[[Haz click en |cffffd200Mascotas|r para activar o desactivar el rastreador o sus opciones adicionales.]],
+|A:NPE_LeftClick:14:14|a Haz clic en el encabezado |cffffd200"Mascotas"|r para opciones adicionales.]],
 
 [[Abre el |cffffd200Mapa del Mundo|r para ver en lo que te puede ayudar PetTracker en tu exploración.]],
 
-[[PetTracker muestra los posibles orígenes de las mascotas en el mapa del mundo, desde lugares de aparición a vendedores. También muestra los establos e información extra sobre los Rivales.
+[[PetTracker muestra las posibles fuentes de mascotas en el mapa del mundo. También muestra los establos e información adicional sobre los rivales.
 
-Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd200Mostrar Combates de Mascotas|r.]],
+Para filtrar o ocultar estas ubicaciones, |A:NPE_LeftClick:14:14|a abre el menú |cffffd200"Filtro del Mapa"|r.]],
 
-[[También puedes filtrar que mascotas se muestran tecleando en la caja de búsqueda. Algunos ejemplos:
+[[Puedes filtrar qué mascotas se muestran escribiendo en la caja de búsqueda |cffffd200"Filtrar Especies"|r. Aquí tienes algunos ejemplos:
 
 • |cffffd200Gato|r para buscar gatos.
-• |cffffd200Falta|r para especies que no tienes.
-• |cffffd200Agua|r para especies de agua.
-• |cffffd200Misión|r para especies que se consiguen haciendo misiones.
-• |cffffd200Bosque|r para especies que habitan en bosques.]],
+• |cffffd200Falta|r para especies que no posees.
+• |cffffd200Acuático|r para especies acuáticas.
+• |cffffd200Misión|r para mascotas obtenibles a través de misiones.
+• |cffffd200Bosque|r para especies que habitan en bosques.
+
+También funcionan los operadores matemáticos:
+• |cffffd200< Raro|r para especies que te faltan en calidad rara.
+• |cffffd200< 15|r para especies con mascotas por debajo del nivel 15.]],
 
 [[Abre el |cffffd200Diario de Mascotas|r para ver lo que PetTracker puede hacer por ti mientras lo examinas.]],
 [[Esta casilla te permite activar o desactivar el |cffffd200Rastreador de Zona|r. Es especialmente útil si ocultastes el rastreador alguna vez.]],
@@ -94,7 +96,7 @@ Para esconder esas localizaciones, abre el menú de rastreo y desactiva |cffffd2
 • Las mascotas del Rival y sus habilidades.
 • Misiones diarias y recompensas.
 • Localización del encuentro.]],
-[[También puedes filtrar que mascotas son mostradas escribiendo en el cajón de búsqueda. Algunos ejemplos:
+[[También puedes filtrar qué  mascotas son mostradas escribiendo en el cajón de búsqueda. Algunos ejemplos:
 
 • |cffffd200Aki|r para Aki la Elegida.
 • |cffffd200Talismán|r para rivales que otorgan Talismanes de recompensa.
