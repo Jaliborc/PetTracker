@@ -11,7 +11,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
 --[[ Startup ]]--
 
-function Tutorials:OnEnable()
+function Tutorials:OnLoad()
 	self:Load()
 	self:Start()
 

@@ -7,7 +7,7 @@ local MODULE =  ...
 local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Toggle = Addon:NewModule('TrackToggle', CreateFrame('CheckButton', ADDON .. 'TrackToggle', PetJournal, 'InterfaceOptionsCheckButtonTemplate'))
 
-function Toggle:OnEnable()
+function Toggle:OnLoad()
 	self:Update()
 	self:SetScript('OnClick', self.OnClick)
 	self:RegisterSignal('OPTIONS_CHANGED', 'Update')

@@ -5,7 +5,7 @@ All Rights Reserved
 
 local ADDON, Addon = ...
 local C = LibStub('C_Everywhere')
-local Addon = LibStub('WildAddon-1.0'):NewAddon(ADDON, Addon, 'MutexDelay-1.0')
+local Addon = LibStub('WildAddon-1.1'):NewAddon(ADDON, Addon, 'MutexDelay-1.0', 'StaleCheck-1.0')
 Addon.MaxPlayerQuality = 4
 Addon.MaxQuality = 6
 Addon.MaxLevel = 25
@@ -13,9 +13,7 @@ Addon.MaxLevel = 25
 
 --[[ Events ]]--
 
-function Addon:OnEnable()
-	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
-	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
+function Addon:OnLoad()
 	self.state = PetTracker_State or {}
 	self.sets = self:SetDefaults(PetTracker_Sets or {}, {
 		showSpecies = true, showStables = true, specieIcons = true, rivalPortraits = true,
@@ -28,6 +26,10 @@ function Addon:OnEnable()
 	else
 		C.AddOns.LoadAddOn(ADDON .. '_Config')
 	end
+
+	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
+	self:CheckForUpdates(ADDON, self.sets, 'interface/addons/pettracker/art/logo')
+	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
 
 	PetTracker_Sets, PetTracker_State = self.sets, self.state
 	AddonCompartmentFrame:RegisterAddon {

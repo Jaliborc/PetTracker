@@ -13,7 +13,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 --[[ Startup ]]--
 
-function Mods:OnEnable()
+function Mods:OnLoad()
   hooksecurefunc('PetJournal_UpdatePetCard', function(...) self:ModifyCard(...) end)
   hooksecurefunc('PetJournal_UpdatePetLoadOut', function(...) self:ModifyLoadOut(...) end)
 end

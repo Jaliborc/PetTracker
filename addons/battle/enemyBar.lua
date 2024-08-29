@@ -10,7 +10,7 @@ local Bar = Addon:NewModule('EnemyBar', CreateFrame('Frame', nil, PetBattleFrame
 
 --[[ Startup ]]--
 
-function Bar:OnEnable()
+function Bar:OnLoad()
 	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnShow', function() self:Hide() end)
 	PetBattleFrame.BottomFrame.PetSelectionFrame:HookScript('OnHide', function() self:Show() end)
 

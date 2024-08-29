@@ -3,7 +3,6 @@
 
 	<Script file="LibStub\LibStub.lua"/>
 	<Script file="CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
-	<Script file="AceEvent-3.0\AceEvent-3.0.lua"/>
 	<Script file="AceLocale-3.0\AceLocale-3.0.lua"/>
 	<Script file="WildAddon-1.0\WildAddon-1.0.lua"/>
 
@@ -12,6 +11,7 @@
 	<Include file="Sushi-3.2\Sushi-3.2.xml"/>
 
 	<Script file="MutexDelay-1.0\MutexDelay-1.0.lua"/>
+	<Script file="StaleCheck-1.0\StaleCheck-1.0.lua"/>
 	<Script file="CustomSearch-1.0\CustomSearch-1.0.lua"/>
 	<Script file="LibPetJournal-2.0\LibPetJournal-2.0.lua"/>
 </Ui>

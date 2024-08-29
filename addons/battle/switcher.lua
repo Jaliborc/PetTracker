@@ -10,7 +10,7 @@ local Swap = Addon:NewModule('Switcher', CreateFrame('Frame', ADDON .. 'Switcher
 
 --[[ Startup ]]--
 
-function Swap:OnEnable()
+function Swap:OnLoad()
 	self:RegisterEvent('PET_BATTLE_ACTION_SELECTED', 'Hide')
 	self:NewColumn(Enum.BattlePetOwner.Enemy, 'TOPRIGHT', -10)
 	self:NewColumn(Enum.BattlePetOwner.Ally, 'TOPLEFT', 10)
@@ -18,7 +18,7 @@ function Swap:OnEnable()
 	self:SetSize(840, 424)
 	self:Hide()
 
-	SetPortraitToTexture(self.PortraitContainer.portrait:GetName(), 'Interface/Icons/INV_Pet_SwapPet')
+	SetPortraitToTexture(self.PortraitContainer.portrait, 'Interface/Icons/INV_Pet_SwapPet')
 	self.TitleContainer.TitleText:SetText(SWITCH_PET)
 	self.Close = _G[self:GetName() .. 'CloseButton']
 

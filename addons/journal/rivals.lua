@@ -11,7 +11,7 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 --[[ Startup ]]--
 
-function Journal:OnEnable()
+function Journal:OnLoad()
 	self.PanelTab = LibStub('SecureTabs-2.0'):Add(CollectionsJournal, self, L.Rivals)
 	self:SetScript('OnShow', self.OnShow)
 end

@@ -10,7 +10,7 @@ local Listener = Addon:NewModule('BattleListener')
 
 --[[ Startup ]]--
 
-function Listener:OnEnable()
+function Listener:OnLoad()
 	if not Addon.state.casts then
 		self:Reset()
 	end

@@ -15,7 +15,7 @@ local FOOTER = 'Copyright 2012-2024 João Cardoso'
 
 --[[ Startup ]]--
 
-function Options:OnEnable()
+function Options:OnLoad()
 	self.Help = Sushi.OptionsGroup(self, HELP_LABEL .. HELP_ICON)
 					:SetSubtitle(L.HelpDescription):SetFooter(FOOTER):SetChildren(self.OnHelp)
 	self.Credits = Sushi.OptionsGroup(self, 'Patrons' .. PATREON_ICON)

@@ -6,7 +6,7 @@ All Rights Reserved
 local ADDON, Addon = ...
 local Tooltips = Addon:NewModule('Tooltips')
 
-function Tooltips:OnEnable()
+function Tooltips:OnLoad()
   hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', self.OnBattlePet)
   TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, self.OnUnit)
 end

@@ -6,7 +6,7 @@ local Units = Addon:NewModule('Units')
 
 --[[ Startup ]]--
 
-function Units:OnEnable()
+function Units:OnLoad()
 	hooksecurefunc('PetBattleUnitFrame_UpdateDisplay', function(p) self:UpdatePortrait(p) end)
   hooksecurefunc('PetBattleUnitTooltip_UpdateForUnit', function(t) self:UpdateTip(t) end)
 

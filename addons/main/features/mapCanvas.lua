@@ -9,16 +9,23 @@ local MapCanvas = Addon:NewModule('MapCanvas')
 
 --[[ Startup ]]--
 
-function MapCanvas:OnEnable()
+function MapCanvas:OnLoad()
 	self.Tip, self.Pins = Addon.MultiTip(UIParent), {}
 	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
 	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateAll')
+	self:RegisterEvent('CVAR_UPDATE', 'OnCVar')
 
 	hooksecurefunc(MapCanvasMixin, 'OnMapChanged', function(frame)
 		self:Init(frame)
 		self:Redraw(frame)
 	end)
+end
+
+function MapCanvas:OnCVar(var)
+	if var == 'showTamers' then
+		self:UpdateAll()
+	end
 end
 
 

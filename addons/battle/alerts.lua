@@ -8,7 +8,7 @@ local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
 local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.2').Glowbox(PetBattleFrame))
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
-function Alerts:OnEnable()
+function Alerts:OnLoad()
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
 	self:RegisterSignal('BATTLE_STARTED', 'Verify')
 	self:RegisterSignal('COLLECTION_CHANGED', 'Verify')

@@ -29,3 +29,6 @@
 [submodule "C_Everywhere"]
 	path = libs/C_Everywhere
 	url = https://github.com/Jaliborc/C_Everywhere.git
+[submodule "libs/StaleCheck-1.0"]
+	path = libs/StaleCheck-1.0
+	url = https://github.com/Jaliborc/StaleCheck-1.0

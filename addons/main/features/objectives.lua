@@ -10,7 +10,7 @@ end
 local ADDON, Addon = ...
 local Objectives = Addon:NewModule('Objectives', Addon.Tracker())
 
-function Objectives:OnEnable()
+function Objectives:OnLoad()
 	self.Module = Mixin(CreateFrame('Frame', nil, nil, 'ObjectiveTrackerModuleTemplate'), {uiOrder = 188, blockOffsetX = 15})
 	self.Module.Header:SetScript('OnMouseDown', self.Menu)
 	self.Module:SetHeader(PETS)

@@ -1,12 +1,15 @@
 ### 11.0.5
-* Added official plugin art and updated welcome art.
-* Finished Korean locales.
+* Map: Tamer portraits now correctly appear/disappear as a reaction to changing settings.
+* Combat: Fixed startup errors with the pet switcher and the enemy bar prediction.
+* Upgraded to WildAddon-1.1
 
 ### 11.0.4
 * Zone Tracker: now reacts to the "Display Condition" setting once again.
 * Zone Tracker: reimplemented the option menu using the new official API.
 * Updated tutorial localization.
 * Added Korean locales.
+* Added official plugin art and updated welcome art.
+* Added ability to detect new versions of the addon being available.
 * Note: It is known that the tracker is causing items in the objectives panel not to be clickable. This will take a while to fix.
 
 ### 11.0.3
