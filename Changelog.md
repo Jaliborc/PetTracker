@@ -1,3 +1,6 @@
+### 11.0.6
+* Added Khaz Algar and Darkmoon Faire to the pet database!
+
 ### 11.0.5
 * Map: Tamer portraits now correctly appear/disappear as a reaction to changing settings.
 * Combat: Fixed startup errors with the pet switcher and the enemy bar prediction.
