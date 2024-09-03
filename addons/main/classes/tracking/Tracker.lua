@@ -68,7 +68,6 @@ function Tracker:AddSpecies()
 	end
 
 	self.Bar:SetProgress(progress)
-	self:SetShown(progress.total > 0)
 	self:SetHeight(#self.Lines * 19 + 65)
 end
 
@@ -82,8 +81,8 @@ function Tracker:AddSpecie(specie, quality, level)
 		local anchor = self.Lines[#self.Lines] or self.Bar
 		
 		local line = Addon.SpecieLine(self, text, icon, source, r,g,b)
-		line:SetScript('OnClick', function() specie:Display() end)
 		line:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', anchor.xOff or 0, anchor.yOff or -4)
+		line:SetScript('OnClick', function() specie:Display() end)
 
 		tinsert(self.Lines, line)
 	end

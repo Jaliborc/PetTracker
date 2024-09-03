@@ -8,30 +8,70 @@ if C_AddOns.IsAddOnLoaded('Carbonite.Quests') then
 end
 
 local ADDON, Addon = ...
-local Objectives = Addon:NewModule('Objectives', Addon.Tracker())
+local Objectives = Addon:NewModule('Objectives', Addon.Tracker(ObjectiveTrackerFrame))
 
 function Objectives:OnLoad()
-	self.Module = Mixin(CreateFrame('Frame', nil, nil, 'ObjectiveTrackerModuleTemplate'), {uiOrder = 188, blockOffsetX = 15})
-	self.Module.Header:SetScript('OnMouseDown', self.Menu)
-	self.Module:SetHeader(PETS)
-	
-	self.Module.IsComplete = nop
-	self.Module.LayoutContents = function()
-		if Addon.sets.zoneTracker then
-			self.MaxEntries = floor((self.Module.availableHeight - 103) / 19)
-			self:GetClass().Update(self)
+	local header = CreateFrame('Frame', nil, self:GetParent(), 'ObjectiveTrackerModuleHeaderTemplate')
+	header.MinimizeButton:SetScript('OnClick', function() self:Toggle() end)
+	header:SetScript('OnMouseDown', self.Menu)
+	header:SetPoint('TOPLEFT', self, -15, 35)
+	header.Text:SetText(PETS)
 
-			if self:IsShown() and not self.Bar:IsMaximized() then
-				self.height = self:GetHeight()
-				self.Module:AddBlock(self)
-			end
-		end
-	end
+	self:RegisterSignal('OPTIONS_CHANGED', 'Layout')
+	self.Header = header
 
-	self:SetParent(self.Module)
-	ObjectiveTrackerFrame:AddModule(self.Module)
+	hooksecurefunc(self:GetParent(), 'Update', function()
+		self:Layout()
+	end)
 end
 
-function Objectives:Update()
-	self.Module:MarkDirty()
+function Objectives:Layout()
+	local new = not self.Header:IsShown()
+	local hasContent, offset = self:GetContent()
+	local isEnabled = hasContent and not self:GetParent().isCollapsed
+
+	if hasContent then
+		self:GetParent():Show()
+	end
+
+	if isEnabled and not self.collapsed then
+		self:SetPoint('TOPLEFT', 15, -offset)
+		self:Show()
+	else
+		self:Hide()
+	end
+
+	if new then
+		self.Header:PlayAddAnimation()
+	end
+
+	self.Header:SetShown(isEnabled)
+end
+
+function Objectives:GetContent()
+	if Addon.sets.zoneTracker then
+		local used = 0
+		for i, module in ipairs(self:GetParent().modules) do
+			local height = module:GetContentsHeight()
+			if height > 0 then
+				used = used + height + 10
+			end
+		end
+
+		local free = self:GetParent():GetAvailableHeight() - used
+		if free >= 103 then
+			self.MaxEntries = floor((free - 103) / 19)
+			self:Update()
+
+			return not self.Bar:IsMaximized(), used + 73
+		end
+	end
+end
+
+function Objectives:Toggle()
+	self.collapsed = not self.collapsed
+	self.Header:SetCollapsed(self.collapsed)
+	self:Layout()
+
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
 end

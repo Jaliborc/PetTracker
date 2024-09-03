@@ -38,5 +38,6 @@ end
 
 function Bar:IsMaximized()
 	local criteria = self.Bars[Addon.sets.targetQuality]
-	return criteria:GetValue() == select(2, criteria:GetMinMaxValues())
+	local max = select(2, criteria:GetMinMaxValues())
+	return max == 0 or criteria:GetValue() == max
 end

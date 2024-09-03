@@ -1,3 +1,6 @@
+### 11.0.7
+* Remade the Zone Tracker entirely, to not block using items from the quest tracker.
+
 ### 11.0.6
 * Added Khaz Algar and Darkmoon Faire to the pet database!
 
