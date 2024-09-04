@@ -1,6 +1,6 @@
 --[[
-Copyright 2012-2024 João Cardoso
-All Rights Reserved
+	Copyright 2012-2024 João Cardoso
+	All Rights Reserved
 --]]
 
 if C_AddOns.IsAddOnLoaded('Carbonite.Quests') then
@@ -34,17 +34,12 @@ function Objectives:Layout()
 		self:GetParent():Show()
 	end
 
-	if isEnabled and not self.collapsed then
-		self:SetPoint('TOPLEFT', 15, -offset)
-		self:Show()
-	else
-		self:Hide()
-	end
-
 	if new then
 		self.Header:PlayAddAnimation()
 	end
 
+	self:SetShown(isEnabled and not self.collapsed)
+	self:SetPoint('TOPLEFT', 15, -offset)
 	self.Header:SetShown(isEnabled)
 end
 

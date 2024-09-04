@@ -63,10 +63,10 @@ L.HelpDescription = 'Here we provide answers to the most frequently asked questi
 
 L.FAQ = {
 	'How to show/hide all pets on the map?',
-	'Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".',
+	'Click on the "Filters" button at the top right corner of the world map. Click on "Species" under "Pets".',
 
 	'How to make the map display specific pets only?',
-	'Click on the magnifying glass button at the top right corner of the map. There is a filter box under "Species". It makes suggestions of common searches, and you may see the tutorial for more examples.',
+	'Click on the "Filters" button at the top right corner of the world map. There is a search box under "Species". You can type queries like "missing" or "< rare"; see the tutorial for more examples.',
 
 	'How to show/hide the progress in the current zone?',
 	'Open the Pet Journal and click "Zone Tracker" at the bottom right corner.',

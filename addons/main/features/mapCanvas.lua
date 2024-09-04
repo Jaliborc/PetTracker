@@ -1,6 +1,6 @@
 --[[
-Copyright 2012-2024 João Cardoso
-All Rights Reserved
+	Copyright 2012-2024 João Cardoso
+	All Rights Reserved
 --]]
 
 local ADDON, Addon = ...
