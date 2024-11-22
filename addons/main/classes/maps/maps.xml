@@ -1,4 +1,15 @@
 <Ui>
+	<Frame name="PetTrackerMenuSearch" virtual="true">
+    	<Frames>
+			<EditBox parentKey="Box" inherits="SearchBoxTemplate">
+                <Anchors>
+					<Anchor point="TOPLEFT" x="4" y="0"/>
+                    <Anchor point="BOTTOMRIGHT" x="0" y="4"/>
+				</Anchors>
+            </EditBox>
+        </Frames>
+    </Frame>
+
 	<Script file="multiTip.lua"/>
 	<Script file="pin.lua"/>
 	<Script file="rivalPin.lua"/>

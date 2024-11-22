@@ -1,3 +1,12 @@
+### 11.0.9
+* World Map: Improved positioning of search box, because it was triggering my OCD.
+* Updated TOC.
+
+### 11.0.8
+* Zone Tracker: Now repositions apropriately when minimized.
+* Zone Tracker: Fixed error message that could occur sporadically when no pets are available.
+* FAQ: Updated answers to the blizzard UI changes.
+
 ### 11.0.7
 * Remade the Zone Tracker entirely, to not block using items from the quest tracker.
 

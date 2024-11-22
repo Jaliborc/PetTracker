@@ -7,7 +7,7 @@ local Sushi, Addon = LibStub('Sushi-3.2'), PetTracker
 local Options = PetTracker:NewModule('Options', Sushi.OptionsGroup('|Tinterface/addons/pettracker/art/compass:16:16|t PetTracker'))
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
-local PATRONS = {{title='Jenkins',people={'Gnare','Adcantu','Debora S Ogormanw','Johnny Rabbit','Shaun Potts'}},{title='Ambassador',people={'Julia F','Lolari ','Rafael Lins','Dodgen','Ptsdthegamer','Adam Mann','Bc Spear','Jury ','Swallow@area52','Peter Hollaubek','Michael Kinasz','Metadata','Kelly Wolf','Charles Howarth','Lisa','M Prieto','נעמי מקינו','Melinani King'}}} -- generated patron list
+local PATRONS = {{title='Jenkins',people={'Gnare','Debora S Ogormanw','Johnny Rabbit','Shaun Potts'}},{title='Ambassador',people={'Julia F','Lolari ','Rafael Lins','Dodgen','Ptsdthegamer','Adam Mann','Bc Spear','Jury ','Swallow@area52','Peter Hollaubek','Michael Kinasz','Metadata','Ds9293','Kelly Wolf','Charles Howarth','Lisa','M Prieto','נעמי מקינו'}}} -- generated patron list
 local PATREON_ICON = '  |TInterface/Addons/PetTracker/art/patreon:12:12|t'
 local HELP_ICON = '  |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2024 João Cardoso'

@@ -39,7 +39,7 @@ function Objectives:Layout()
 	end
 
 	self:SetShown(isEnabled and not self.collapsed)
-	self:SetPoint('TOPLEFT', 15, -offset)
+	self:SetPoint('TOPLEFT', 15, -(offset or 0))
 	self.Header:SetShown(isEnabled)
 end
 
