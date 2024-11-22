@@ -16,3 +16,20 @@ Finally, it provides a journal of all major PVE encounters and saves your histor
 Now you are ready to catch them all.
 
 ![Preview](https://jaliborc.com/media/addons/large/pettracker/tracker.webp)
+
+## FAQ
+
+How to show/hide all pets on the map?
+> Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".
+
+How to make the map display specific pets only?
+> Click on the magnifying glass button at the top right corner of the map. There is a filter box under "Species". It makes suggestions of common searches, and you may see the tutorial for more examples.
+
+How to show/hide the progress in the current zone?
+> Open the Pet Journal and click "Zone Tracker" at the bottom right corner.
+
+How to configure the zone tracker?
+> Click on the "Pets" header of the tracker and options will appear.
+
+In pet combat, how to move the enemy action bar?
+> Hold the shift key and drag the bar.
