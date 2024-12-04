@@ -46,10 +46,12 @@ end
 function Objectives:GetContent()
 	if Addon.sets.zoneTracker then
 		local used = 0
-		for i, module in ipairs(self:GetParent().modules) do
-			local height = module:GetContentsHeight()
-			if height > 0 then
-				used = used + height + 10
+		if self:GetParent().modules ~= nil then
+			for i, module in ipairs(self:GetParent().modules) do
+				local height = module:GetContentsHeight()
+				if height > 0 then
+					used = used + height + 10
+				end
 			end
 		end
 
