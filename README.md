@@ -18,7 +18,6 @@ Now you are ready to catch them all.
 ![Preview](https://jaliborc.com/media/addons/large/pettracker/tracker.webp)
 
 ## FAQ
-
 How to show/hide all pets on the map?
 > Click on the magnifying glass button at the top right corner of the map. Click on "Species" under "Pets".
 

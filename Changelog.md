@@ -1,3 +1,6 @@
+### 11.0.10
+* Added mechanisms to prevent two bugs that could be caused by other addons.
+
 ### 11.0.9
 * World Map: Improved positioning of search box, because it was triggering my OCD.
 * Updated TOC.
