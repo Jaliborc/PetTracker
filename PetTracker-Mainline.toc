@@ -9,6 +9,6 @@
 ## SavedVariablesPerCharacter: PetTracker_State
 ## SavedVariables: PetTracker_Sets
 ## Interface: 110007
-## Version: 11.0.10
+## Version: 11.0.11
 
 addons\main\main.xml

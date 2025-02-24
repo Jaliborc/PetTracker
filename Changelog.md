@@ -1,3 +1,8 @@
+### 11.0.11
+* Fixed bug with unit tooltips.
+* Fixed errors in some pet locations, such as unabtainable pets being listed in the Isle of Dorn, or misplaced pets from N'Zoth Assaults (thanks to Haembina).
+* Updated database.
+
 ### 11.0.10
 * Added mechanisms to prevent two bugs that could be caused by other addons.
 
