@@ -1,3 +1,7 @@
+### 11.1
+* Retail: Updated for the "Undermined" game patch.
+* Retail: Added support for the new addon list native grouping capabilities.
+
 ### 11.0.11
 * Fixed bug with unit tooltips.
 * Fixed errors in some pet locations, such as unabtainable pets being listed in the Isle of Dorn, or misplaced pets from N'Zoth Assaults (thanks to Haembina).
