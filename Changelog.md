@@ -1,9 +1,14 @@
+### 11.1.2
+* Switcher: Fixed issue causing pets to appear with the wrong quality.
+* Switcher: Unlike with the default UI, the switcher can now be toggled by clicking the switch pet button.
+* Journal: Fixed issue that was causing matches against rivals to be incorrectly stored.
+
 ### 11.1.1
-* All: Updated WildAddon library.
+* Updated WildAddon library.
 
 ### 11.1
-* Retail: Updated for the "Undermined" game patch.
-* Retail: Added support for the new addon list native grouping capabilities.
+* Updated for the "Undermined" game patch.
+* Added support for the new addon list native grouping capabilities.
 
 ### 11.0.11
 * Fixed bug with unit tooltips.

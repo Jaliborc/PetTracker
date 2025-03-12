@@ -3,14 +3,9 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MODULE =  ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local ADDON, Addon = (...):match('%w+'), _G[(...):match('%w+')]
 local Record = Addon.Base:NewClass('BattleRecord', 'Button', true)
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
-
-local ID_MATCH = strrep('%w', 12)
-local SPELLS_MATCH = strrep('(%w%w%w)', 3)
-local PET_MATCH = '(%w)' .. SPELLS_MATCH .. '(' .. ID_MATCH .. ')'
 
 function Record:Display(entry)
 	self:Unpack(entry)
@@ -40,13 +35,13 @@ function Record:Display(entry)
 end
 
 function Record:Unpack(entry)
-	local winner, date, petData = entry:match('^(%d)(%w%w%w)(.+)$')
+	local winner, date, petData = entry:match('^(%d):(%w+):(.+)$')
 
 	self.won = tonumber(winner) == Enum.BattlePetOwner.Ally
 	self.day, self.month, self.year = self:UnpackDate(date)
 	self.pets = {}
 
-	for health, spell1, spell2, spell3, id in petData:gmatch(PET_MATCH) do
+	for health, spell1, spell2, spell3, id in petData:gmatch('(%w):(%w+):(%w+):(%w+):(%w+)') do
 		tinsert(self.pets, {
 			id = 'BattlePet-0-' .. id,
 			health = tonumber(health, 16) / 15,

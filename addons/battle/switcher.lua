@@ -25,23 +25,14 @@ function Swap:OnLoad()
 	local oShow = PetBattlePetSelectionFrame_Show
 	function PetBattlePetSelectionFrame_Show(...)
 		if Addon.sets.switcher then
+			self:SetShown(PetBattleFrame.BottomFrame.SwitchPetButton:GetChecked())
 			self:Update()
-			self:Show()
 		else
 			oShow(...)
 		end
 	end
 
-	local oHide = PetBattlePetSelectionFrame_Hide
-	function PetBattlePetSelectionFrame_Hide(...)
-		self:Hide()
-		oHide(...)
-	end
-
-	local oFrame = PetBattleFrame.BottomFrame.PetSelectionFrame
-	function oFrame.IsShown(f)
-		return Addon.sets.switcher and self:IsShown() or self.IsShown(f)
-	end
+	hooksecurefunc('PetBattlePetSelectionFrame_Hide', GenerateClosure(self.Hide, self))
 end
 
 function Swap:NewColumn(owner, point, off)

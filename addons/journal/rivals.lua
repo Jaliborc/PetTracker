@@ -270,7 +270,7 @@ function Journal.Map:Display(rival)
 end
 
 function Journal.History:Display(rival)
-	local entries = Addon.sets.rivalHistory and Addon.sets.rivalHistory[rival.id] or {}
+	local entries = Addon.sets.history and Addon.sets.history[rival.id] or {}
 	self.Empty:SetShown(#entries == 0)
 	self:SetSelected(nil)
 

@@ -8,9 +8,9 @@ local Units = Addon:NewModule('Units')
 
 function Units:OnLoad()
 	hooksecurefunc('PetBattleUnitFrame_UpdateDisplay', function(p) self:UpdatePortrait(p) end)
-  hooksecurefunc('PetBattleUnitTooltip_UpdateForUnit', function(t) self:UpdateTip(t) end)
+	hooksecurefunc('PetBattleUnitTooltip_UpdateForUnit', function(t) self:UpdateTip(t) end)
 
-  self.BreedIcons, self.Bangs = {}, {}
+	self.BreedIcons, self.Bangs = {}, {}
 	self:RegisterSignal('COLLECTION_CHANGED', 'Update')
 	self:RegisterSignal('BATTLE_STARTED', 'Update')
 end

@@ -148,7 +148,7 @@ function Battle:GetModel()
 end
 
 function Battle:GetQuality()
-	return self:GetBreedQuality()
+	return self:GetBreedQuality() + 1
 end
 
 function Battle:GetType()

@@ -30,7 +30,7 @@ function Alerts:Verify()
     	}
 	end
 
-  self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)
+	self:SetShown(upgrades and not self.shown and Addon.sets.alertUpgrades)
 end
 
 function Alerts:Reset()

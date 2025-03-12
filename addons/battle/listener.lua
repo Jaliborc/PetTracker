@@ -11,7 +11,7 @@ local Listener = Addon:NewModule('BattleListener')
 --[[ Startup ]]--
 
 function Listener:OnLoad()
-	if not Addon.state.casts then
+	if not Addon.state.history then
 		self:Reset()
 	end
 
@@ -21,7 +21,7 @@ function Listener:OnLoad()
 end
 
 function Listener:Reset()
-	Addon.sets.rivalHistory = Addon.sets.rivalHistory or {}
+	Addon.sets.history = Addon.sets.history or {}
 	Addon.state.casts = {{id = {}, turn = {}}, {id = {}, turn = {}}, {id = {}, turn = {}}}
 	Addon.state.turn = 0
 end
@@ -29,7 +29,7 @@ end
 
 --[[ Events ]]--
 
-function Listener:OnMessage(_, message)
+function Listener:OnMessage(message)
 	local id = tonumber(message:match('^|T.-|t|cff......|HbattlePetAbil:(%d+)'))
 	if id then
 		local isHeal = message:find(ACTION_SPELL_HEAL)
@@ -56,18 +56,16 @@ function Listener:OnMessage(_, message)
 	end
 end
 
-function Listener:OnWinner(_, winner)
+function Listener:OnWinner(winner)
 	local rival = Addon.Battle:GetRival()
 	if rival then
-		local history = Addon.sets.rivalHistory[rival] or {}
-		local entry = tostring(winner) .. format('%03x', self:GetDate())
+		local history = Addon.sets.history[rival] or {}
+		local entry = format('%d:%x:', tostring(winner), self:GetDate())
 
 		for i = 1,3 do
 			local id, spell1, spell2, spell3 = C_PetJournal.GetPetLoadOutInfo(i)
 			if id then
-				entry = entry .. format('%01x', ceil(self:GetHealthPercentage(Enum.BattlePetOwner.Ally, i) * 15))
-							  			.. format('%03x', spell1) .. format('%03x', spell2) .. format('%03x', spell3)
-							  			.. id:sub(13)
+				entry = entry .. format('%01x:%x:%x:%x:%s:', ceil(self:GetHealthPercentage(Enum.BattlePetOwner.Ally, i) * 15), spell1, spell2, spell3, id:sub(13))
 			end
 		end
 
@@ -76,7 +74,7 @@ function Listener:OnWinner(_, winner)
 			tremove(history)
 		end
 
-		Addon.sets.rivalHistory[rival] = history
+		Addon.sets.history[rival] = history
 	end
 
 	self:Reset()
