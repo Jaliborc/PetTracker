@@ -25,7 +25,7 @@ function Swap:OnLoad()
 	local oShow = PetBattlePetSelectionFrame_Show
 	function PetBattlePetSelectionFrame_Show(...)
 		if Addon.sets.switcher then
-			self:SetShown(PetBattleFrame.BottomFrame.SwitchPetButton:GetChecked())
+			self:SetShown(PetBattleFrame.BottomFrame.SwitchPetButton:GetChecked() or C_PetBattles.ShouldShowPetSelect())
 			self:Update()
 		else
 			oShow(...)

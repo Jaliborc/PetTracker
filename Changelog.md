@@ -1,3 +1,7 @@
+### 11.1.3
+* Combat: Fixed bug with wild upgrade alert positioning.
+* Switcher: Fixed issue causing frame not to appear when player is forced to switch pet.
+
 ### 11.1.2
 * Switcher: Fixed issue causing pets to appear with the wrong quality.
 * Switcher: Unlike with the default UI, the switcher can now be toggled by clicking the switch pet button.

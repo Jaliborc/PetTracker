@@ -3,10 +3,9 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MODULE =  ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.2').Glowbox(PetBattleFrame))
+local ADDON, Addon = (...):match('[^_]+'), _G[(...):match('[^_]+')]
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+local Alerts = Addon:NewModule('Alerts', LibStub('Sushi-3.2').Glowbox(PetBattleFrame, L.UpgradeAlert, 'TOP'))
 
 function Alerts:OnLoad()
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'Reset')
@@ -14,9 +13,7 @@ function Alerts:OnLoad()
 	self:RegisterSignal('COLLECTION_CHANGED', 'Verify')
 	self:SetPoint('TOP', PetBattleFrame.ActiveEnemy.Icon, 'BOTTOM', 0, -20)
 	self:SetCall('OnClose', function() self.shown = true end)
-	self:SetText(L.UpgradeAlert)
 	self:SetFrameStrata('HIGH')
-	self:SetDirection('TOP')
 end
 
 function Alerts:Verify()
