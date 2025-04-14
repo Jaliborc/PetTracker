@@ -1,3 +1,6 @@
+### 11.1.4
+* Added species introduced in "Undermined".
+
 ### 11.1.3
 * Combat: Fixed bug with wild upgrade alert positioning.
 * Switcher: Fixed issue causing frame not to appear when player is forced to switch pet.
