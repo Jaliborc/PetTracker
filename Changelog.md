@@ -1,3 +1,6 @@
+### 11.1.5
+* Fixed issue assigning pet species in Undermine to the wrong map.
+
 ### 11.1.4
 * Added species introduced in "Undermined".
 
