@@ -3,7 +3,7 @@
 
 	<Script file="LibStub\LibStub.lua"/>
 	<Script file="AceLocale-3.0\AceLocale-3.0.lua"/>
-	<Script file="WildAddon-1.0\WildAddon-1.0.lua"/>
+	<Script file="WildAddon-1.1\WildAddon-1.1.lua"/>
 
 	<Include file="C_Everywhere\C_Everywhere.xml"/>
 	<Include file="Poncho-2.0\Poncho-2.0.xml"/>
