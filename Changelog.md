@@ -1,3 +1,7 @@
+### 11.1.6
+* Updated description to match the new addon list formatting.
+* Updated dependencies.
+
 ### 11.1.5
 * Fixed issue assigning pet species in Undermine to the wrong map.
 

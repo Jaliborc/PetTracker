@@ -41,7 +41,7 @@ function Bar:NewButton(i)
 	b:RegisterForDrag('LeftButton')
 	b:ClearHighlightTexture()
 	b:ClearPushedTexture()
-	b:UnregisterEvents()
+	b:UnregisterAllEvents()
 	b:SetFrameLevel(8-y)
 	b:Enable()
 	return b
