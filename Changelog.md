@@ -1,3 +1,7 @@
+### 11.1.7
+* Rival names are now dynamically localized based on server data.
+* Added mechanism that prevents duplicated rivals on the list.
+
 ### 11.1.6
 * Updated description to match the new addon list formatting.
 * Updated dependencies.

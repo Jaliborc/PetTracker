@@ -4,7 +4,7 @@
 --]]
 
 local ADDON, Addon = ...
-local MapCanvas = Addon:NewModule('MapCanvas')
+local MapCanvas = Addon:NewModule('MapCanvas', 'MutexDelay-1.0')
 
 
 --[[ Startup ]]--
@@ -12,6 +12,7 @@ local MapCanvas = Addon:NewModule('MapCanvas')
 function MapCanvas:OnLoad()
 	self.Tip, self.Pins = Addon.MultiTip(UIParent), {}
 	self.Tip:SetScript('OnUpdate', function() self:AnchorTip() end)
+	self:RegisterEvent('TOOLTIP_DATA_UPDATE', 'Delay', 0, 'UpdateAll')
 	self:RegisterSignal('COLLECTION_CHANGED', 'UpdateAll')
 	self:RegisterSignal('OPTIONS_CHANGED', 'UpdateAll')
 	self:RegisterEvent('CVAR_UPDATE', 'OnCVar')

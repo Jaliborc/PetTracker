@@ -13,13 +13,14 @@ function Rival:New(id)
 	local data = Addon.RivalInfo[id]
 	if data then
 		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
+		local tooltip = C_TooltipInfo.GetHyperlink(('unit:Creature-0-0-0-0-%d'):format(id))
 		local rival = self:Bind {
-			name = name, items = items, currencies = currencies,
+			id = id, items = items, currencies = currencies,
+			name = tooltip and tooltip.lines[1].leftText or name,
 			gold = tonumber(gold, 36),
 			quest = tonumber(quest, 36),
 			model = tonumber(model, 36),
-			map = tonumber(map, 36),
-			id = id
+			map = tonumber(map, 36)
 		}
 
 		for name, model, specie, level, quality in pets:gmatch('([^:]+):(%w%w%w%w)(%w%w%w)(%w)(%w)') do

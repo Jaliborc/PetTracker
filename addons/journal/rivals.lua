@@ -3,9 +3,8 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MODULE =  ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Journal = Addon:NewModule('RivalsJournal', _G[ADDON .. 'RivalsJournal'])
+local ADDON, Addon = (...):match('[^_]+'), _G[(...):match('[^_]+')]
+local Journal = Addon:NewModule('RivalsJournal', _G[ADDON .. 'RivalsJournal'], 'MutexDelay-1.0')
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 
@@ -13,15 +12,15 @@ local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Journal:OnLoad()
 	self.PanelTab = LibStub('SecureTabs-2.0'):Add(CollectionsJournal, self, L.Rivals)
-	self:SetScript('OnShow', self.OnShow)
+	self:SetScript('OnShow', self.OnStartup)
 end
 
-function Journal:OnShow()
+function Journal:OnStartup()
 	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, ADDON..'RivalEntry', 44, 0)
 
+	self.OnStartup = nop
 	self.Inset:Hide()
-	self:SetScript('OnShow', self.OnSelect)
 	self.TitleContainer.TitleText:SetText(L.Rivals)
 	self.List.scrollBar.doNotHide = true
 	self.Count.Label:SetText(L.TotalRivals)
@@ -91,12 +90,15 @@ function Journal:OnShow()
 		self.History[i] = record
 	end
 
+	self:SetScript('OnShow', self.OnShow)
+	self:SetScript('OnHide', self.UnregisterAll)
 	self:SetRival(Addon.Rival(Addon.RivalOrder[1]))
-	self:OnSelect()
 	self:SetTab(1)
+	self:OnShow()
 end
 
-function Journal:OnSelect()
+function Journal:OnShow()
+	self:RegisterEvent('TOOLTIP_DATA_UPDATE', self.Delay, 0, 'Refresh')
 	WardrobeCollectionFrame.InfoButton:Hide()
 end
 
@@ -104,10 +106,9 @@ end
 --[[ Actions ]]--
 
 function Journal:SetRival(rival)
-	self:Open()
 	self.List.selected = rival
-	self.List:update()
-	self:Update()
+	self:Refresh()
+	self:Open()
 end
 
 function Journal:Search(text)
@@ -143,6 +144,11 @@ end
 
 
 --[[ Redraw ]]--
+
+function Journal:Refresh()
+	self.List:update()
+	self:Update()
+end
 
 function Journal.List:update()
 	local self = Journal.List
@@ -192,7 +198,7 @@ function Journal:Update()
 	end
 
 	if self.Map:IsShown() then
-			self.Map:Display(rival)
+		self.Map:Display(rival)
 	end
 
 	if self.History:IsShown() then
