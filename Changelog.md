@@ -1,3 +1,11 @@
+### 11.1.9
+* Updated with workaround to serious flaw within Blizzard's EventRegistry.
+* Now takes advantage of the new delayed bag update event for slightly faster chain-selling at the merchant.
+
+### 11.1.8
+* TOC updated.
+* WildAddon-1.1 updated.
+
 ### 11.1.7
 * Rival names are now dynamically localized based on server data.
 * Added mechanism that prevents duplicated rivals on the list.
