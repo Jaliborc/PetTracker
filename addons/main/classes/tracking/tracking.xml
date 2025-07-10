@@ -56,7 +56,7 @@
 		</Frames>
 	</Frame>
 
-	<Frame name="PetTrackerSpecieLine" inherits="ObjectiveTrackerLineTemplate" virtual="true">
+	<Frame name="PetTrackerSpecieLine" virtual="true">
 		<Size x="235" y="15"/>
 		<Layers>
 			<Layer level="ARTWORK">
@@ -67,7 +67,6 @@
 					</Anchors>
 				</Texture>
 			</Layer>
-
 			<Layer level="OVERLAY">
 				<Texture parentKey="SubIcon">
 					<Size x="12" y="12"/>

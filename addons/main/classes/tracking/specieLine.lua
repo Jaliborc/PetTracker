@@ -10,7 +10,6 @@ function Line:New(parent, text, icon, subicon, r,g,b)
 	local line = self:Super(Line):New(parent)
 	line.r, line.g, line.b = r,g,b
 	line.Text:SetText(text)
-	line.Text:SetPoint('Left', line.Icon, 'Right', 8, 0)
 	line.SubIcon:SetTexture(subicon)
 	line.Icon:SetTexture(icon)
 	line.Icon:Show()
@@ -24,6 +23,11 @@ function Line:Construct()
 	local line = self:Super(Line):Construct()
 	line:SetScript('OnEnter', line.OnEnter)
 	line:SetScript('OnLeave', line.OnLeave)
+	line:RegisterForClicks('anyUp')
+
+	line.Text = line:CreateFontString(nil, 'ARTWORK', ObjectiveTrackerFrame and 'ObjectiveTrackerLineFont' or 'WatchFontTemplate')
+	line.Text:SetPoint('Left', line.Icon, 'Right', 8, 0)
+	line.Text:SetPoint('Right')
 	return line
 end
 

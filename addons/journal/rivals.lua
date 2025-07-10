@@ -99,7 +99,9 @@ end
 
 function Journal:OnShow()
 	self:RegisterEvent('TOOLTIP_DATA_UPDATE', self.Delay, 0, 'Refresh')
-	WardrobeCollectionFrame.InfoButton:Hide()
+	if WardrobeCollectionFrame.InfoButton then
+		WardrobeCollectionFrame.InfoButton:Hide()
+	end
 end
 
 
@@ -162,7 +164,7 @@ function Journal.List:update()
 		end
 	end
 
-	for i, button in ipairs(self.buttons) do
+	for i, button in ipairs(self.buttons or Addon.None) do
 		local rival = rivals[i + off]
 
 		if rival then

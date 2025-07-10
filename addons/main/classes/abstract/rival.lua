@@ -5,6 +5,7 @@ All Rights Reserved
 
 local ADDON, Addon = ...
 local Rival = Addon.Entity:NewClass('Rival')
+local C = LibStub('C_Everywhere')
 
 
 --[[ Construct ]]--
@@ -13,10 +14,10 @@ function Rival:New(id)
 	local data = Addon.RivalInfo[id]
 	if data then
 		local name, model, map, quest, gold, items, currencies, pets = data:match('^([^:]+):(%w%w%w%w)(%w%w)(%w%w%w)(%w)([^:]*):([^:]*):(.*)$')
-		local tooltip = C_TooltipInfo.GetHyperlink(('unit:Creature-0-0-0-0-%d'):format(id))
+		local tooltip = C.TooltipInfo.GetHyperlink(('unit:Creature-0-0-0-0-%d'):format(id))
 		local rival = self:Bind {
 			id = id, items = items, currencies = currencies,
-			name = tooltip and tooltip.lines[1].leftText or name,
+			name = tooltip and tooltip.lines[1] and tooltip.lines[1].leftText or name,
 			gold = tonumber(gold, 36),
 			quest = tonumber(quest, 36),
 			model = tonumber(model, 36),
@@ -51,8 +52,8 @@ end
 function Rival:GetMapName()
 	local map = self:GetMap()
 	if map then
-		local info = C_Map.GetMapInfo(map)
-		local parent = C_Map.GetMapInfo(info.parentMapID)
+		local info = C.Map.GetMapInfo(map)
+		local parent = C.Map.GetMapInfo(info.parentMapID)
 		return info.name .. ', ' .. parent.name
 	else
 		return UNKNOWN
@@ -80,7 +81,7 @@ function Rival:GetCompleteState()
 end
 
 function Rival:IsCompleted()
-	return C_QuestLog.IsQuestFlaggedCompleted(self.quest)
+	return C.QuestLog.IsQuestFlaggedCompleted(self.quest)
 end
 
 function Rival:GetRewards()
@@ -90,8 +91,8 @@ function Rival:GetRewards()
 		id = tonumber(id, 36)
 
 		tinsert(rewards, {
-			icon = GetItemIcon(id),
-			link = select(2, GetItemInfo(id)),
+			icon = C.Item.GetItemIconByID(id),
+			link = select(2, C.Item.GetItemInfo(id)),
 			count = tonumber(count, 36)
 		})
 	end
@@ -101,8 +102,8 @@ function Rival:GetRewards()
 		count = tonumber(count, 36)
 
 		tinsert(rewards, {
-			link = C_CurrencyInfo.GetCurrencyLink(id, count),
-			icon = C_CurrencyInfo.GetCurrencyInfo(id).iconFileID,
+			link = C.CurrencyInfo.GetCurrencyLink(id, count),
+			icon = C.CurrencyInfo.GetCurrencyInfo(id).iconFileID,
 			count = count
 		})
 	end
@@ -121,14 +122,14 @@ function Rival:GetAbstract()
 	end
 
 	for id in self.items:gmatch('(%w%w%w%w)%w') do
-		local name = GetItemInfo(tonumber(id, 36))
+		local name = C.Item.GetItemInfo(tonumber(id, 36))
 		if name then
 			text = text .. ' ' .. name
 		end
 	end
 
 	for id in self.currencies:gmatch('(%w%w)%w') do
-		local currency = C_CurrencyInfo.GetCurrencyInfo(tonumber(id, 36))
+		local currency = C.CurrencyInfo.GetCurrencyInfo(tonumber(id, 36))
 		if currency.name then
 			text = text .. ' ' .. currency.name
 		end

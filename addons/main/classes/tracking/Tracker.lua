@@ -21,27 +21,10 @@ function Tracker:Construct()
 
 	f.Lines, f.MaxEntries = {}, 30
 	f.Bar = Addon.ProgressBar(f)
-	f.Bar:SetScript('OnMouseDown', f.Menu)
+	f.Bar:SetScript('OnMouseDown', f.ToggleMenu)
 	f.Bar:SetPoint('TOPLEFT')
 	f.Bar.yOff = -10
 	return f
-end
-
-function Tracker:Menu()
-	MenuUtil.CreateContextMenu(self, function(_, drop)
-		drop:SetTag('PETTRACKER_ZONE')
-		drop:CreateTitle('|TInterface/Addons/PetTracker/art/compass:16:16|t PetTracker')
-		drop:CreateCheckbox(L.ZoneTracker, Addon.GetOption, Addon.ToggleOption, 'zoneTracker')
-		drop:CreateCheckbox(L.CapturedPets, Addon.GetOption, Addon.ToggleOption, 'capturedPets')
-
-		local get = function(v) return Addon.sets.targetQuality == v end
-		local set = function(v) Addon.SetOption('targetQuality', v) end
-
-		local target = drop:CreateButton(L.DisplayCondition)
-		target:CreateRadio(ALWAYS, get, set, Addon.MaxQuality)
-		target:CreateRadio(L.MissingRares, get, set, Addon.MaxPlayerQuality)
-		target:CreateRadio(L.MissingPets, get, set, 1)
-	end)
 end
 
 
@@ -82,7 +65,11 @@ function Tracker:AddSpecie(specie, quality, level)
 		
 		local line = Addon.SpecieLine(self, text, icon, source, r,g,b)
 		line:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', anchor.xOff or 0, anchor.yOff or -4)
-		line:SetScript('OnClick', function() specie:Display() end)
+		line:SetScript('OnClick', function(_, button)
+			if button == 'LeftButton' then
+				specie:Display()
+			end
+		end)
 
 		tinsert(self.Lines, line)
 	end
@@ -93,6 +80,30 @@ function Tracker:Clear()
 		line:Release()
 	end
 	wipe(self.Lines)
+end
+
+
+--[[ Menu ]]--
+
+function Tracker:ToggleMenu()
+	MenuUtil.CreateContextMenu(self, function(_, drop)
+		drop:SetTag('PETTRACKER_ZONE')
+		Tracker.CreateMenu(drop)
+	end)
+end
+
+function Tracker.CreateMenu(drop)
+	drop:CreateTitle('|TInterface/Addons/PetTracker/art/compass:16:16|t PetTracker')
+	drop:CreateCheckbox(L.ZoneTracker, Addon.GetOption, Addon.ToggleOption, 'zoneTracker')
+	drop:CreateCheckbox(L.CapturedPets, Addon.GetOption, Addon.ToggleOption, 'capturedPets')
+
+	local get = function(v) return Addon.sets.targetQuality == v end
+	local set = function(v) Addon.SetOption('targetQuality', v) end
+
+	local target = drop:CreateButton(L.DisplayCondition)
+	target:CreateRadio(ALWAYS, get, set, Addon.MaxQuality)
+	target:CreateRadio(L.MissingRares, get, set, Addon.MaxPlayerQuality)
+	target:CreateRadio(L.MissingPets, get, set, 1)
 end
 
 

@@ -6,16 +6,19 @@ All Rights Reserved
 local ADDON, Addon = ...
 local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 local Pin = Addon.Pin:NewClass('RivalPin', nil, 'EncounterJournalPinTemplate')
-Pin.FrameLevel = 'PIN_FRAME_LEVEL_ENCOUNTER'
+Pin.FrameLevel = 'PIN_FRAME_LEVEL_VEHICLE_BELOW_GROUP_MEMBER'
 
 
 --[[ Overrides ]]--
 
 function Pin:Construct()
 	local b = self:Super(Pin):Construct()
-	b.DefeatedOverlay:Hide()
 	b:SetScript('OnClick', b:GetClass().OnClick)
 	b:Show()
+
+	if b.DefeatedOverlay then
+		b.DefeatedOverlay:Hide()
+	end
 	return b
 end
 

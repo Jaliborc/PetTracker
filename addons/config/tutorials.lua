@@ -36,23 +36,25 @@ function Tutorials:Load()
 			image = 'Interface/Addons/PetTracker/art/tracker',
 			shineRight = 10, shineLeft = -35,
 			shineTop = 6, shineBottom = 0,
-			anchor = ObjectiveTrackerFrame,
-			shine = ObjectiveTrackerFrame,
-			x = -40
+			anchor = WatchFrame or ObjectiveTrackerFrame,
+			shine = WatchFrame or ObjectiveTrackerFrame,
+			x = -40,
 		},
 		{
 			text = L.Tutorial[3],
-			point = 'TOPRIGHT', relPoint = 'TOPLEFT',
-			anchor = MinimapCluster.ZoneTextButton,
-			shine = MinimapCluster.ZoneTextButton,
-			shineRight = -5, shineLeft = -12,
-			shineTop = 9, shineBottom = -9,
-			y = -15
+			point = 'TOPRIGHT',
+			anchor = MiniMapWorldMapButton or MinimapCluster.ZoneTextButton,
+			shine = MiniMapWorldMapButton or MinimapCluster.ZoneTextButton,
+			shineRight = MiniMapWorldMapButton and 4 or -5, shineLeft = MiniMapWorldMapButton and 2 or -12,
+			shineTop = MiniMapWorldMapButton and 0 or 9, shineBottom = MiniMapWorldMapButton and 0 or -9,
+			x = MiniMapWorldMapButton and -20 or 0, y = -30
 		},
 		{
 			text = L.Tutorial[4],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
 			image = 'Interface/Addons/PetTracker/art/map-filter',
+			shine = WorldMapFrame.WorldMapOptionsDropDown,
+			shineTop = 5, shineBottom = -5, shineRight = 5, shineLeft = -5,
 			anchor = WorldMapFrame,
 			x = 20, y = -160
 		},
@@ -60,6 +62,8 @@ function Tutorials:Load()
 			text = L.Tutorial[5],
 			point = 'TOPLEFT', relPoint = 'TOPRIGHT',
 			image = 'Interface/Addons/PetTracker/art/map-filter',
+			shine = WorldMapFrame.WorldMapOptionsDropDown,
+			shineTop = 5, shineBottom = -5, shineRight = 5, shineLeft = -5,
 			anchor = WorldMapFrame,
 			x = 20, y = -160
 		},
@@ -68,7 +72,7 @@ function Tutorials:Load()
 			point = 'BOTTOM', relPoint = 'TOP',
 			anchor = CollectionsMicroButton,
 			shine = CollectionsMicroButton,
-			shineTop = 7, shineBottom = -7,
+			shineTop = MiniMapWorldMapButton and -14 or 7, shineBottom = -7,
 			shineRight = 7, shineLeft = -7,
 			y = 10
 		},
@@ -85,7 +89,6 @@ function Tutorials:Load()
 			point = 'BOTTOMLEFT', relPoint = 'TOPRIGHT',
 			anchor = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
 			shine = Addon.RivalsJournal and Addon.RivalsJournal.PanelTab,
-			shineLeft = -5, shineRight = 5,
 			shineBottom = -2, shineTop = 5,
 			x = 20
 		},

@@ -34,8 +34,8 @@ L.ZoneTracker = 'Zone Tracker'
 
 -- automatic. do not translate unless necessary
 L.Maximized = WINDOWED_MAXIMIZED
-L.Defeat = PVP_MATCH_DEFEAT:lower():gsub('^.', strupper)
-L.Victory = PVP_MATCH_VICTORY:lower():gsub('^.', strupper)
+L.Defeat = BOSS_DEAD
+L.Victory = EMOTE101_TOKEN:lower():gsub('^.', strupper)
 L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
 L.TrackPets = C_Spell.GetSpellInfo(122026).name
 

@@ -3,17 +3,53 @@
 	All Rights Reserved
 --]]
 
-if C_AddOns.IsAddOnLoaded('Carbonite.Quests') then
+local ADDON, Addon = ...
+local Objectives = Addon:NewModule('Objectives', Addon.Tracker(ObjectiveTrackerFrame or WatchFrame))
+
+
+--[[ Classic ]]--
+
+if WatchFrame then
+	function Objectives:OnLoad()
+		local header = Addon.SpecieLine(self, PETS, nil,nil, NORMAL_FONT_COLOR:GetRGB())
+		header:SetScript('OnClick', self.ToggleMenu)
+		header.Text:SetPoint('LEFT')
+
+		self.Header = header
+		self:SetPoint('TOPLEFT', header, 'BOTTOMLEFT', 3, -3)
+		self:RegisterSignal('OPTIONS_CHANGED', WatchFrame_Update)
+
+		WatchFrame_AddObjectiveHandler(function(parent, anchor, _, width)
+			if Addon.sets.zoneTracker then
+				local point = anchor and 'BOTTOMLEFT' or 'TOPLEFT'
+				local at = anchor or self:GetParent()
+		
+				self.Header:SetPoint('TOPLEFT', at, point, 2, -4)
+				self.Bar:SetWidth(width - 5)
+				self:SetParent(parent)
+				self:Update()
+			end
+
+			local count = #self.Lines
+			local active = count > 0 and Addon.sets.zoneTracker
+			self:SetShown(active)
+
+			return active and self.Lines[count] or anchor, 0, count, 0
+		end)
+
+		Menu.ModifyMenu('MENU_WATCH_FRAME_HEADER', function(_, drop) self.CreateMenu(drop) end)
+	end
+
 	return
 end
 
-local ADDON, Addon = ...
-local Objectives = Addon:NewModule('Objectives', Addon.Tracker(ObjectiveTrackerFrame))
+
+--[[ Retail ]]--
 
 function Objectives:OnLoad()
 	local header = CreateFrame('Frame', nil, self:GetParent(), 'ObjectiveTrackerModuleHeaderTemplate')
 	header.MinimizeButton:SetScript('OnClick', function() self:Toggle() end)
-	header:SetScript('OnMouseDown', self.Menu)
+	header:SetScript('OnMouseDown', self.ToggleMenu)
 	header:SetPoint('TOPLEFT', self, -15, 35)
 	header.Text:SetText(PETS)
 

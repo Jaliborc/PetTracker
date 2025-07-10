@@ -32,15 +32,17 @@ function Addon:OnLoad()
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'OnBattle')
 
 	PetTracker_Sets, PetTracker_State = self.sets, self.state
-	AddonCompartmentFrame:RegisterAddon {
-		text = ADDON, keepShownOnClick = true, notCheckable = true,
-		icon = 'interface/addons/pettracker/art/compass',
-		func = function()
-			if C.AddOns.LoadAddOn(ADDON .. '_Config') then
-				Addon.Options:Open()
+	if AddonCompartmentFrame then
+		AddonCompartmentFrame:RegisterAddon {
+			text = ADDON, keepShownOnClick = true, notCheckable = true,
+			icon = 'interface/addons/pettracker/art/compass',
+			func = function()
+				if C.AddOns.LoadAddOn(ADDON .. '_Config') then
+					Addon.Options:Open()
+				end
 			end
-		end
-	}
+		}
+	end
 end
 
 function Addon:OnPetsChanged()

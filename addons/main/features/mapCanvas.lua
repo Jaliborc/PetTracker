@@ -68,20 +68,19 @@ end
 function MapCanvas:Init(frame)
 	if self.Pins[frame] then
 		return
-	else
-		self.Pins[frame] = {}
 	end
 
 	hooksecurefunc(frame, 'OnCanvasScaleChanged', function(f) self:Scale(f) end)
 	frame:HookScript('OnShow', function(f) self:Draw(f) end)
 	frame:HookScript('OnUpdate', function(f) self:AnchorTip(f) end)
 	frame:HookScript('OnHide', function(f) self:Clear(f) end)
+	self.Pins[frame] = {}
 end
 
 function MapCanvas:Redraw(frame)
-		self:Clear(frame)
-		self:Draw(frame)
-		self:Scale(frame)
+	self:Clear(frame)
+	self:Draw(frame)
+	self:Scale(frame)
 end
 
 function MapCanvas:Clear(frame)
@@ -89,14 +88,6 @@ function MapCanvas:Clear(frame)
 		pin:Release()
 	end
 	wipe(self.Pins[frame])
-end
-
-function MapCanvas:Validate(frame)
-	for provider in pairs(frame.dataProviders) do
-		if provider.RefreshAllData == PetTamerDataProviderMixin.RefreshAllData then
-			return true
-		end
-	end
 end
 
 function MapCanvas:Draw(frame)
@@ -143,4 +134,19 @@ function MapCanvas:Scale(frame)
 	for _, pin in ipairs(self.Pins[frame]) do
 		pin:SetCanvasScale(scale)
 	end
+end
+
+
+--[[ Client-Specific ]]--
+
+if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_DRAGONFLIGHT then
+	function MapCanvas:Validate(frame)
+		for provider in pairs(frame.dataProviders) do
+			if provider.RefreshAllData == PetTamerDataProviderMixin.RefreshAllData then
+				return true
+			end
+		end
+	end
+else
+	function MapCanvas:Validate(frame) return frame == WorldMapFrame end
 end

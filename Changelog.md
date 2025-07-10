@@ -1,6 +1,10 @@
+### 11.1.10
+* Added support for Mists of Pandaria.
+* Forcefully fixed issues in the Mists base UI.
+* Fixed bug with positioning of shines during tutorial.
+
 ### 11.1.9
 * Updated with workaround to serious flaw within Blizzard's EventRegistry.
-* Now takes advantage of the new delayed bag update event for slightly faster chain-selling at the merchant.
 
 ### 11.1.8
 * TOC updated.

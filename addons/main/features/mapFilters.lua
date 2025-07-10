@@ -35,3 +35,60 @@ function Filters:OnLoad()
         drop:CreateCheckbox(STABLES, Addon.GetOption, Addon.ToggleOption, 'showStables')
     end)
 end
+
+
+---- bruteforce-fixing blizzard classic code  (temporary, hopefully)
+if not Setup_Dropdown then
+    return
+end
+
+function Setup_Dropdown(self) -- why is this GLOBAL function for a specific menu just called this!? UH!? what are you doing!?
+    self.WorldMapOptionsDropDown:SetWidth(120)
+	self.WorldMapOptionsDropDown:SetSelectionText(function()
+		return MAP_OPTIONS_TEXT
+	end)
+
+    self.WorldMapOptionsDropDown:SetupMenu(function(dropdown, rootDescription)
+        rootDescription:SetTag('MENU_WORLD_MAP_TRACKING') -- you forgot this, very important
+
+        --[[local function IsCvarChecked(cvar) this is just local IsCvarChecked = GetCVarBool, with extra steps
+            return GetCVarBool(cvar)
+        end--]]
+
+        local function SetCvarChecked(cvar) 
+            SetCVar(cvar, not GetCVarBool(cvar))
+        end
+
+        if(GetCVarBool("questHelper")) then
+            WatchFrame.showObjectives = GetCVarBool("questPOI")
+
+            local questObjectives = rootDescription:CreateCheckbox(SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT, GetCVarBool, function(cvar)
+                WatchFrame.showObjectives = GetCVarBool(cvar) or nil
+                QuestLog_UpdateMapButton()
+                SetCvarChecked(cvar)
+            end, "questPOI")
+
+            questObjectives:SetTooltip(function(tooltip, elementDescription)
+                GameTooltip_SetTitle(tooltip,  OPTION_TOOLTIP_SHOW_QUEST_OBJECTIVES_ON_MAP)
+            end)
+
+        end
+
+        rootDescription:CreateCheckbox(SHOW_PET_BATTLES_ON_MAP_TEXT, GetCVarBool, SetCvarChecked, "showTamers") -- you forgot this too, was introduced in mists
+
+        local digSites = rootDescription:CreateCheckbox(ARCHAEOLOGY_SHOW_DIG_SITES, GetCVarBool, SetCvarChecked, "digSites")
+        digSites:SetTooltip(function(tooltip, elementDescription)
+            GameTooltip_SetTitle(tooltip,  OPTION_TOOLTIP_SHOW_DIG_SITES_ON_MAP)
+        end)
+
+        local mapEncounters = C_EncounterJournal.GetEncountersOnMap(MapUtil.GetDisplayableMapForPlayer())
+        if (#mapEncounters > 0) then
+            local showBosses = rootDescription:CreateCheckbox(SHOW_BOSSES_ON_MAP_TEXT, GetCVarBool, SetCvarChecked, "showBosses")
+            showBosses:SetTooltip(function(tooltip, elementDescription)
+                GameTooltip_SetTitle(tooltip,  OPTION_TOOLTIP_SHOW_BOSSES_ON_MAP)
+            end)
+        end
+    end)
+end
+
+---- hotfix end
