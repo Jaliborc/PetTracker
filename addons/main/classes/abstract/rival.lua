@@ -115,27 +115,28 @@ end
 --[[ Overrides ]]--
 
 function Rival:GetAbstract()
-	local text = self.name .. ' ' .. self:GetMapName() .. ' ' .. self:GetCompleteState()
+	local parts = {self.name, self:GetMapName(), self:GetCompleteState()}
 
 	for i, pet in ipairs(self) do
-		text = text .. ' ' .. pet:GetName() .. ' ' .. pet:GetTypeName()
+		tinsert(parts, pet:GetName())
+		tinsert(parts, pet:GetTypeName())
 	end
 
 	for id in self.items:gmatch('(%w%w%w%w)%w') do
 		local name = C.Item.GetItemInfo(tonumber(id, 36))
 		if name then
-			text = text .. ' ' .. name
+			tinsert(parts, name)
 		end
 	end
 
 	for id in self.currencies:gmatch('(%w%w)%w') do
 		local currency = C.CurrencyInfo.GetCurrencyInfo(tonumber(id, 36))
 		if currency.name then
-			text = text .. ' ' .. currency.name
+			tinsert(parts, currency.name)
 		end
 	end
 
-	return text
+	return table.concat(parts, ' ')
 end
 
 function Rival:GetType()

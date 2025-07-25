@@ -1,3 +1,10 @@
+### 11.1.12
+* Last version was broken because dummass me forgot to package in CallbackHandler.
+
+### 11.1.11
+* Moved back to a full addon-based event handling, as Blizzard's event registry is prone to event loss (thank you to the dev community for all the suggestions).
+* Optimized rival search engine.
+
 ### 11.1.10
 * Added support for Mists of Pandaria.
 * Forcefully fixed issues in the Mists base UI.
