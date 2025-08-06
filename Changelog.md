@@ -1,3 +1,6 @@
+## 11.2
+* Retail: Updated for Ghosts of K'aresh update.
+
 ### 11.1.12
 * Last version was broken because dummass me forgot to package in CallbackHandler.
 
