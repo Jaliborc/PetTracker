@@ -8,7 +8,7 @@
 ## OptionalDeps: WoWUnit
 ## SavedVariablesPerCharacter: PetTracker_State
 ## SavedVariables: PetTracker_Sets
-## Interface: 110200, 50500
-## Version: 11.2
+## Interface: 110205, 50501
+## Version: 11.2.1
 
 addons\main\main.xml

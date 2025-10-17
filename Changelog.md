@@ -1,3 +1,6 @@
+### 11.2.1
+* Retail: Updated TOC to 12.2.5.
+
 ## 11.2
 * Retail: Updated for Ghosts of K'aresh update.
 
