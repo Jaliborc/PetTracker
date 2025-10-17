@@ -18,7 +18,7 @@ function Addon:OnLoad()
 	self.sets = self:SetDefaults(PetTracker_Sets or {}, {
 		showSpecies = true, showStables = true, specieIcons = true, rivalPortraits = true,
 		zoneTracker = true, capturedPets = true, targetQuality = Addon.MaxPlayerQuality,
-		switcher = true, alertUpgrades = true, forfeit = true,
+		switcher = true, alertUpgrades = true, forfeit = true, minCaptureQuality = 1
 	})
 
 	if self.sets.tutorial == 12 then

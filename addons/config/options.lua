@@ -12,6 +12,7 @@ local PATREON_ICON = '  |TInterface/Addons/PetTracker/art/patreon:12:12|t'
 local HELP_ICON = '  |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2025 João Cardoso'
 
+local PET_QUALITIES = (function() local a = {}; for i = 1, Addon.MaxPlayerQuality do table.insert(a, {key = i, text = _G['BATTLE_PET_BREED_QUALITY'..i]}) end return a end) ();
 
 --[[ Startup ]]--
 
@@ -36,6 +37,8 @@ function Options:OnMain()
 	self:AddCheck('Switcher')
 	self:AddCheck('AlertUpgrades')
 	self:AddCheck('Forfeit')
+	
+	self:AddChoice('MinCaptureQuality', PET_QUALITIES)
 end
 
 function Options:OnHelp()
@@ -78,6 +81,12 @@ end
 
 function Options:AddCheck(id)
 	return self:AddSetting('Check', id)
+end
+
+function Options:AddChoice(id, entries)
+	local b = Options:AddSetting('DropChoice', id)
+	b:AddChoices(entries)
+	return b
 end
 
 function Options:AddSetting(class, id)

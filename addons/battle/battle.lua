@@ -54,10 +54,10 @@ function Battle:IsUpgrade()
 		if self:GetSpecie() and self:GetSource() == 5 then
 			local _, quality, level = self:GetBestOwned()
 
-			if self:GetQuality() > quality then
+			if self:GetQuality() > quality and self:GetQuality() >= Addon.sets.minCaptureQuality then
 				return true
 
-			elseif self:GetQuality() == quality then
+			elseif self:GetQuality() == quality and self:GetQuality() >= Addon.sets.minCaptureQuality then
 				if level > 20 then
 					level = level + 2
 				elseif level > 15 then
