@@ -1,3 +1,10 @@
+### 11.2.3
+* All: Made even more taint-safe and fixed issues found by user Teelolws with SecureTabs-2.0.
+* All: Minor safety improvement to StaleCheck-1.0.
+
+### 11.2.2
+* All: Added option to set a minimum quality of pets to be considered upgrades (if you're only catching rares, for example). Originally proposed by Bart97.
+
 ### 11.2.1
 * Retail: Updated TOC to 12.2.5.
 
