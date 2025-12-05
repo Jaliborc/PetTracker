@@ -1,3 +1,7 @@
+### 11.2.4
+* Retail: Added support for Midnight open beta.
+* Retail: Now flight mode button is hidden when in the rivals tabs.
+
 ### 11.2.3
 * All: Made even more taint-safe and fixed issues found by user Teelolws with SecureTabs-2.0.
 * All: Minor safety improvement to StaleCheck-1.0.

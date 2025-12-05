@@ -91,7 +91,7 @@ function Journal:OnStartup()
 	end
 
 	self:SetScript('OnShow', self.OnShow)
-	self:SetScript('OnHide', self.UnregisterAll)
+	self:SetScript('OnHide', self.OnHide)
 	self:SetRival(Addon.Rival(Addon.RivalOrder[1]))
 	self:SetTab(1)
 	self:OnShow()
@@ -99,8 +99,20 @@ end
 
 function Journal:OnShow()
 	self:RegisterEvent('TOOLTIP_DATA_UPDATE', self.Delay, 0, 'Refresh')
+
 	if WardrobeCollectionFrame.InfoButton then
 		WardrobeCollectionFrame.InfoButton:Hide()
+	end
+	if MountJournal.ToggleDynamicFlightFlyoutButton then
+		MountJournal.ToggleDynamicFlightFlyoutButton:Hide()
+	end
+end
+
+function Journal:OnHide()
+	self:UnregisterAll()
+
+	if MountJournal:IsShown() and MountJournal.ToggleDynamicFlightFlyoutButton then
+		MountJournal.ToggleDynamicFlightFlyoutButton:Show()
 	end
 end
 
