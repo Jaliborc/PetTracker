@@ -1,3 +1,7 @@
+### 11.2.5
+* Retail: Adeed workaround to SetPortraitToTexture having been removed on Midnight.
+* All: Added redundant safety checks to ensure a pet is capturable to be considered an upgrade, just in case.
+
 ### 11.2.4
 * Retail: Added support for Midnight open beta.
 * Retail: Now flight mode button is hidden when in the rivals tabs.

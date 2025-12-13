@@ -18,7 +18,7 @@ function Swap:OnLoad()
 	self:SetSize(840, 424)
 	self:Hide()
 
-	SetPortraitToTexture(self.PortraitContainer.portrait, 'Interface/Icons/INV_Pet_SwapPet')
+	self.PortraitContainer.portrait:SetTexture('Interface/Icons/INV_Pet_SwapPet')
 	self.TitleContainer.TitleText:SetText(SWITCH_PET)
 	self.Close = _G[self:GetName() .. 'CloseButton']
 
