@@ -1,3 +1,7 @@
+### 11.2.6
+* All: Added sound design to the pet upgrade popup.
+* All: Minor optimizations.
+
 ### 11.2.5
 * Retail: Adeed workaround to SetPortraitToTexture having been removed on Midnight.
 * All: Added redundant safety checks to ensure a pet is capturable to be considered an upgrade, just in case.

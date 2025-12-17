@@ -3,10 +3,9 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MODULE = ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local Tutorials = PetTracker:NewModule('Tutorials', 'CustomTutorials-2.1')
+local Addon = _G[(...):match('[^_]+')]
 local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
+local Tutorials = Addon:NewModule('Tutorials', 'CustomTutorials-2.1')
 
 
 --[[ Startup ]]--
@@ -22,7 +21,7 @@ end
 
 function Tutorials:Load()
 	self:RegisterTutorials {
-		title = ADDON,
+		title = 'PetTracker',
 		savedvariable = Addon.sets, key = 'tutorial',
 
 		{

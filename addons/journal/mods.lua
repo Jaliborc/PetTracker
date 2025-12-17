@@ -3,12 +3,11 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MODULE =  ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
+local Addon = _G[(...):match('[^_]+')]
 local Mods = Addon:NewModule('JournalMods')
 
 local STAT_NAMES = {PET_BATTLE_STAT_HEALTH, PET_BATTLE_STAT_POWER, PET_BATTLE_STAT_SPEED}
-local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 
 
 --[[ Startup ]]--

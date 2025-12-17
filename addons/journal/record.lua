@@ -3,9 +3,9 @@ Copyright 2012-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local ADDON, Addon = (...):match('%w+'), _G[(...):match('%w+')]
+local Addon = _G[(...):match('[^_]+')]
+local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 local Record = Addon.Base:NewClass('BattleRecord', 'Button', true)
-local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
 
 function Record:Display(entry)
 	self:Unpack(entry)

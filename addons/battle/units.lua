@@ -1,6 +1,10 @@
-local MODULE =  ...
-local ADDON, Addon = MODULE:match('[^_]+'), _G[MODULE:match('[^_]+')]
-local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+--[[
+Copyright 2012-2025 João Cardoso
+All Rights Reserved
+--]]
+
+local Addon = _G[(...):match('[^_]+')]
+local L = LibStub('AceLocale-3.0'):GetLocale('PetTracker')
 local Units = Addon:NewModule('Units')
 
 
