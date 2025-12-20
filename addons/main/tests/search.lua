@@ -55,6 +55,10 @@ function Tests:Quality()
 
 	IsTrue(Addon:Search(Rabbit, 'Poor'))
 	IsTrue(Addon:Search(Ram, 'Maximized Rare'))
+	
+	IsTrue(Addon:Search(Robot, 'Missing'))
+	IsTrue(Addon:Search(Robot, 'None'))
+	IsTrue(Addon:Search(Robot, 'Not Maximized'))
 	IsTrue(Addon:Search(Robot, 'Not Maximized Missing None'))
 
 	IsTrue(Addon:Search(Aki, 'Legendary'))
