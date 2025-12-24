@@ -50,8 +50,7 @@ function MapCanvas:AnchorTip()
 		for frame, pins in pairs(self.Pins) do
 			if frame:IsVisible() then
 				for _, pin in ipairs(pins) do
-					local focus = pin:IsMouseOver()
-					if focus then
+					if pin:IsMouseOver() then
 						pin:OnTooltip(self.Tip)
 					end
 				end
