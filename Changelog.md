@@ -1,3 +1,7 @@
+## 12.0.0
+* Updated TOC number for live Midnight servers.
+* Updated dependencies.
+
 ### 11.2.7
 * All: Here comes a christmas gift! Fixed the visual issues with pet tooltips on the auction house.
 
