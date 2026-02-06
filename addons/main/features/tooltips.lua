@@ -13,7 +13,13 @@ end
 
 function Tooltips.OnUnit(tip)
 	local name = TooltipUtil.GetDisplayedUnit(tip)
-	local specie = name and C_PetJournal.FindPetIDByName(name)
+
+	-- appears that FindPetIdByName can error out during an instance
+	local success, specie = pcall(C_PetJournal.FindPetIDByName, name)
+	if not success then
+		return
+	end
+
 	if specie then
 		local owned = Addon.Specie(specie):GetOwnedText()
 		if owned then
