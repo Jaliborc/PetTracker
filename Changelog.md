@@ -1,3 +1,6 @@
+### 12.0.1
+* Fixed issue on Midnight servers with tooltips inside of dungeons. _(by BombermanBaker)_
+
 ## 12.0.0
 * Updated TOC number for live Midnight servers.
 * Updated dependencies.
