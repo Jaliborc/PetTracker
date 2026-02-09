@@ -1,3 +1,6 @@
+### 12.0.2
+* Fixed issue with nil searches on the World Map and Rivals Tab.
+
 ### 12.0.1
 * Fixed issue on Midnight servers with tooltips inside of dungeons. _(by BombermanBaker)_
 
