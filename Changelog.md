@@ -1,3 +1,6 @@
+### 12.0.3
+* Fixed issue on retail which prevented automatic updates to the pet tracker on certain situations.
+
 ### 12.0.2
 * Fixed issue with nil searches on the World Map and Rivals Tab.
 

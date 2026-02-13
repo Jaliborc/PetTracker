@@ -4,7 +4,7 @@
 --]]
 
 local ADDON, Addon = ...
-local Objectives = Addon:NewModule('Objectives', Addon.Tracker(ObjectiveTrackerFrame or WatchFrame))
+local Objectives = Addon:NewModule('Objectives', Addon.Tracker(ObjectiveTrackerFrame or WatchFrame), 'MutexDelay-1.0')
 
 
 --[[ Classic ]]--
@@ -56,7 +56,7 @@ function Objectives:OnLoad()
 	self:RegisterSignal('OPTIONS_CHANGED', 'Layout')
 	self.Header = header
 
-	hooksecurefunc(self:GetParent(), 'Update', function()
+	hooksecurefunc(ObjectiveTrackerContainerMixin, 'Update', function()
 		self:Layout()
 	end)
 end
@@ -77,6 +77,10 @@ function Objectives:Layout()
 	self:SetShown(isEnabled and not self.collapsed)
 	self:SetPoint('TOPLEFT', 15, -(offset or 0))
 	self.Header:SetShown(isEnabled)
+
+	if self:IsVisible() then
+		self:Delay(5, 'Layout') -- reliancy fallback, in case of blizzard code changes
+	end
 end
 
 function Objectives:GetContent()
