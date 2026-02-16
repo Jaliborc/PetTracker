@@ -100,7 +100,7 @@ function Tracker.CreateMenu(drop)
 	local get = function(v) return Addon.sets.targetQuality == v end
 	local set = function(v) Addon.SetOption('targetQuality', v) end
 
-	local target = drop:CreateButton(L.DisplayCondition)
+	local target = drop:CreateButton(L.TargetQuality)
 	target:CreateRadio(ALWAYS, get, set, Addon.MaxQuality)
 	target:CreateRadio(L.MissingRares, get, set, Addon.MaxPlayerQuality)
 	target:CreateRadio(L.MissingPets, get, set, 1)

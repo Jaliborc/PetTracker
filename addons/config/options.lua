@@ -11,6 +11,8 @@ local PATRONS = {{title='Jenkins',people={'Gnare','Johnny Rabbit','Debora S Ogor
 local PATREON_ICON = '  |TInterface/Addons/PetTracker/art/patreon:12:12|t'
 local HELP_ICON = '  |T516770:13:13:0:0:64:64:14:50:14:50|t'
 local FOOTER = 'Copyright 2012-2026 João Cardoso'
+
+local DISPLAY_CONDITIONS = {{key=Addon.MaxQuality, text=ALWAYS}, {key=Addon.MaxPlayerQuality, text=L.MissingRares}, {key=1, text=L.MissingPets}}
 local PET_QUALITIES = {}
 
 for i = Addon.MaxPlayerQuality, 1, -1 do
@@ -34,6 +36,10 @@ end
 function Options:OnMain()
 	self:Add('Header', TRACKING, GameFontHighlight, true)
 	self:AddCheck('ZoneTracker')
+	if Addon.sets.zoneTracker then
+		self:AddChoice('TargetQuality', DISPLAY_CONDITIONS):SetSmall(true):SetKeys{top=8, bottom=10, left=30}
+	end
+
 	self:AddCheck('SpecieIcons')
 	self:AddCheck('RivalPortraits')
 

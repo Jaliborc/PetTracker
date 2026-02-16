@@ -1,3 +1,12 @@
+### 12.0.4 (beta)
+* Added "Display Condition" tracker setting to the options panel, per community request.
+* __Dataset Update:__
+  * Fixed Azumeryst Island.
+  * Added about 90 new rivals.
+  * Rivals are now additionally sorted by release date.
+  * Rival map pins now appear correctly despite zone scale.
+  * Correct data for Midnight zones still not available.
+
 ### 12.0.3
 * Fixed issue on retail which prevented automatic updates to the pet tracker on certain situations.
 

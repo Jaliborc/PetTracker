@@ -118,11 +118,11 @@ function MapCanvas:Draw(frame)
 		if Addon.sets.rivalPortraits and GetCVarBool('showTamers') then
 			local rivals = Addon.Maps:GetRivalsIn(mapID)
 			for rival, spot in pairs(rivals) do
-					local rival = Addon.Rival(rival)
-					local x, y = spot:match('(%w%w)(%w%w)')
+				local rival = Addon.Rival(rival)
+				local x, y = spot:match('(%w%w)(%w%w)')
 
-					tinsert(self.Pins[frame], Addon.RivalPin(frame, index, x,y, rival))
-					index = index + 1
+				tinsert(self.Pins[frame], Addon.RivalPin(frame, index, x,y, rival))
+				index = index + 1
 			end
 		end
 	end
