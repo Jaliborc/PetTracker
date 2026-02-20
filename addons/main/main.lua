@@ -4,7 +4,6 @@ All Rights Reserved
 --]]
 
 local ADDON, Addon = ...
-local C = LibStub('C_Everywhere')
 local Addon = LibStub('WildAddon-1.1'):NewAddon(ADDON, Addon, 'MutexDelay-1.0', 'StaleCheck-1.0')
 Addon.MaxPlayerQuality = 4
 Addon.MaxQuality = 6
@@ -22,9 +21,9 @@ function Addon:OnLoad()
 	})
 
 	if self.sets.tutorial == 12 then
-		SettingsPanel.CategoryList:HookScript('OnShow', function() C.AddOns.LoadAddOn(ADDON .. '_Config') end)
+		SettingsPanel.CategoryList:HookScript('OnShow', function() AddOnUtil.LoadAddOn(ADDON .. '_Config') end)
 	else
-		C.AddOns.LoadAddOn(ADDON .. '_Config')
+		AddOnUtil.LoadAddOn(ADDON .. '_Config')
 	end
 
 	LibStub('LibPetJournal-2.0').RegisterCallback(self, 'PostPetListUpdated', 'OnPetsChanged')
@@ -37,7 +36,7 @@ function Addon:OnLoad()
 			text = ADDON, keepShownOnClick = true, notCheckable = true,
 			icon = 'interface/addons/pettracker/art/compass',
 			func = function()
-				if C.AddOns.LoadAddOn(ADDON .. '_Config') then
+				if AddOnUtil.LoadAddOn(ADDON .. '_Config') then
 					Addon.Options:Open()
 				end
 			end
@@ -50,9 +49,7 @@ function Addon:OnPetsChanged()
 end
 
 function Addon:OnBattle()
-	if C.AddOns.LoadAddOn(ADDON .. '_Battle') then
-		self:SendSignal('BATTLE_STARTED')
-	end
+	AddOnUtil.LoadAddOn(ADDON .. '_Battle')
 end
 
 

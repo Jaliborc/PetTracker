@@ -15,8 +15,9 @@ function Units:OnLoad()
 	hooksecurefunc('PetBattleUnitTooltip_UpdateForUnit', function(t) self:UpdateTip(t) end)
 
 	self.BreedIcons, self.Bangs = {}, {}
+	self:RegisterEvent('PET_BATTLE_OPENING_START', 'Update')
 	self:RegisterSignal('COLLECTION_CHANGED', 'Update')
-	self:RegisterSignal('BATTLE_STARTED', 'Update')
+	self:Update()
 end
 
 function Units:Update()

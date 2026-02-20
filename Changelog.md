@@ -1,3 +1,6 @@
+### 12.0.5 (beta)
+* Fixed upgrade pet display issues that could occur first time a pet battle is done in a session (it was caused by CallbackHandler-1.0).
+
 ### 12.0.4 (beta)
 * Added "Display Condition" tracker setting to the options panel, per community request.
 * __Dataset Update:__
