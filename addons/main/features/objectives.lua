@@ -57,7 +57,7 @@ function Objectives:OnLoad()
 	self.Header = header
 
 	hooksecurefunc(ObjectiveTrackerContainerMixin, 'Update', function()
-		self:Layout()
+		self:Delay('Layout')
 	end)
 end
 
@@ -78,7 +78,7 @@ function Objectives:Layout()
 	self:SetPoint('TOPLEFT', 15, -(offset or 0))
 	self.Header:SetShown(isEnabled)
 
-	if self:IsVisible() then
+	if isEnabled then
 		self:Delay(5, 'Layout') -- reliancy fallback, in case of blizzard code changes
 	end
 end

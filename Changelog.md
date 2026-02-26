@@ -1,3 +1,6 @@
+### 12.0.6
+* Measure taken to attempt to prevent a mysterious FPS drop due to unknown causes.
+
 ### 12.0.5 (beta)
 * Fixed upgrade pet display issues that could occur first time a pet battle is done in a session (it was caused by CallbackHandler-1.0).
 
