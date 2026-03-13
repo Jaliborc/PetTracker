@@ -1,3 +1,6 @@
+### 12.0.7
+* Added workaround for Blizzard failing to update the expansion enum with the Midnight expansion in the MoP Classic client.
+
 ### 12.0.6
 * Measure taken to attempt to prevent a mysterious FPS drop due to unknown causes.
 
