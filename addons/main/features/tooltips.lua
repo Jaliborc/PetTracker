@@ -21,7 +21,7 @@ function Tooltips.OnUnit(tip)
 				local line = _G[tip:GetName() .. 'TextLeft' .. i]
 				local text = line:GetText()
 
-				if text and text:find('^' .. COLLECTED) then
+				if text and string.find(text, '^' .. COLLECTED) then
 					line:SetText(DIM_GREEN_FONT_COLOR:WrapTextInColorCode(owned))
 					return
 				end
