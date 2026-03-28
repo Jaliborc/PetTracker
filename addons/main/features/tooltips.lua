@@ -7,6 +7,7 @@ local ADDON, Addon = ...
 local Tooltips = Addon:NewModule('Tooltips')
 
 function Tooltips:OnLoad()
+	self.safe = scrubsecretvalues or function(...) return ... end
 	hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', self.OnBattlePet)
 	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, self.OnUnit)
 end
@@ -17,15 +18,18 @@ function Tooltips.OnUnit(tip)
 	if success and specie then
 		local owned = Addon.Specie(specie):GetOwnedText()
 		if owned then
+			local owned = DIM_GREEN_FONT_COLOR:WrapTextInColorCode(owned)
+
 			for i = 1, tip:NumLines() do
 				local line = _G[tip:GetName() .. 'TextLeft' .. i]
 				local text = line:GetText()
 
-				if text and text:find('^' .. COLLECTED) then
-					line:SetText(DIM_GREEN_FONT_COLOR:WrapTextInColorCode(owned))
-					return
+				if Tooltips.safe(text) and text:find('^' .. COLLECTED) then
+					return line:SetText(owned)
 				end
 			end
+
+			tip:AddLine(owned)
 		end
 	end
 end

@@ -1,3 +1,6 @@
+### 12.0.8
+* Added mechanism that checks if tooltip has been tainted with secret values even if unit is not secret, before trying to add information to it.
+
 ### 12.0.7
 * Added workaround for Blizzard failing to update the expansion enum with the Midnight expansion in the MoP Classic client.
 
