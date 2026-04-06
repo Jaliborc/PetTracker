@@ -1,3 +1,7 @@
+### 12.0.9
+* Updated pet locations database to Midnight (apologies for the delay!)
+* Further improved mechanisms that avoid tooltip elements tainted by Blizzard.
+
 ### 12.0.8
 * Added mechanism that checks if tooltip has been tainted with secret values even if unit is not secret, before trying to add information to it.
 

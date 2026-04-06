@@ -7,7 +7,6 @@ local ADDON, Addon = ...
 local Tooltips = Addon:NewModule('Tooltips')
 
 function Tooltips:OnLoad()
-	self.safe = scrubsecretvalues or function(...) return ... end
 	hooksecurefunc('BattlePetTooltipTemplate_SetBattlePet', self.OnBattlePet)
 	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, self.OnUnit)
 end
@@ -21,10 +20,8 @@ function Tooltips.OnUnit(tip)
 			local owned = DIM_GREEN_FONT_COLOR:WrapTextInColorCode(owned)
 
 			for i = 1, tip:NumLines() do
-				local line = _G[tip:GetName() .. 'TextLeft' .. i]
-				local text = line:GetText()
-
-				if Tooltips.safe(text) and text:find('^' .. COLLECTED) then
+				local line, text = Tooltips.GetLine(tip, i)
+				if text:find('^' .. COLLECTED) then
 					return line:SetText(owned)
 				end
 			end
@@ -58,4 +55,15 @@ function Tooltips.OnBattlePet(tip, data)
 
 		tip.data = nil
 	end)
+end
+
+function Tooltips.GetLine(tip, index)
+	if tip.GetPrimaryTooltipData then
+		local data = tip:GetPrimaryTooltipData()
+		local lines = data and data.lines
+		return tip:GetLeftLine(index), lines[index] and lines[index].leftText or ''
+	else
+		local line = _G[tip:GetName()..'TextLeft'..index]
+		return line, line:GetText() or ''
+	end
 end
