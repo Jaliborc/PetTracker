@@ -1,3 +1,6 @@
+### 12.0.10
+* Updated TOC numbers.
+
 ### 12.0.9
 * Updated pet locations database to Midnight (apologies for the delay!)
 * Further improved mechanisms that avoid tooltip elements tainted by Blizzard.
