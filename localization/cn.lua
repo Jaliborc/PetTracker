@@ -9,7 +9,7 @@ if not L then return end
 -- 主界面
 L.AddWaypoint = '添加导航点'
 L.AskForfeit = '没有可升级的宠物。是否退出战斗？'
-L.AvailableBreeds = '可能的品种'
+L.AvailableBreeds = '品种'
 L.Breed = '品种'
 L.BreedExplanation = '决定每级获得的属性如何分配。'
 L.CapturedPets = '显示已捕获'
@@ -18,7 +18,7 @@ L.TargetQuality = '显示条件'
 L.FilterSpecies = '筛选宠物种类'
 L.LoadTeam = '加载队伍'
 L.MissingPets = '缺失宠物'
-L.MissingRares = '缺失稀有宠物'
+L.MissingRares = '缺失精良宠物'
 L.Ninja = '忍者'
 L.NoHistory = '未曾与该对手对战过'
 L.NoneCollected = '未收集'
@@ -70,7 +70,7 @@ L.FAQ = {
 	'点击世界地图右上角的「地图筛选」按钮，点击「宠物种类」。',
 
 	'如何让地图仅显示特定宠物？',
-	'点击世界地图右上角的「地图筛选」按钮，在「宠物种类」下方搜索框中输入「缺失」或「< 稀有」等关键词。更多示例请参考教程。',
+	'点击世界地图右上角的「地图筛选」按钮，在「宠物种类」下方搜索框中输入「缺失」或「< 精良」等关键词。更多示例请参考教程。',
 
 	'如何显示/隐藏当前区域的收集进度？',
 	'打开宠物手册，点击右下角的「区域追踪器」。',
@@ -102,8 +102,8 @@ L.Tutorial = {
 • |cffffd200森林|r - 筛选栖息于森林的宠物
 
 还可使用数学运算符：
-• |cffffd200< 稀有|r - 筛选稀有品质以下宠物的种类
-• |cffffd200< 15|r - 筛选15级以下宠物的种类]],
+• |cffffd200< 精良|r - 筛选精良品质以下的宠物种类
+• |cffffd200< 15|r - 筛选15级以下的宠物种类]],
 
 [[打开 |cffffd200宠物手册|r，看看 PetTracker 如何优化你的浏览体验。]],
 [[此复选框可开关 |cffffd200区域追踪器|r。若你之前隐藏了追踪器，这会非常实用。]],
