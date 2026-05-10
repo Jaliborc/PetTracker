@@ -9,7 +9,7 @@ if not L then return end
 -- 主界面
 L.AddWaypoint = '添加导航点'
 L.AskForfeit = '没有可升级的宠物。是否退出战斗？'
-L.AvailableBreeds = '品种'
+L.AvailableBreeds = '可能的品种'
 L.Breed = '品种'
 L.BreedExplanation = '决定每级获得的属性如何分配。'
 L.CapturedPets = '显示已捕获'
