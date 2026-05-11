@@ -57,7 +57,7 @@ function Objectives:OnLoad()
 	self.Header = header
 
 	hooksecurefunc(ObjectiveTrackerContainerMixin, 'Update', function()
-		self:Delay('Layout')
+		self:Layout()
 	end)
 end
 

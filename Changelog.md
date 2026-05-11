@@ -1,3 +1,6 @@
+### 12.0.11
+* Removed delay in updating zone tracker layout.
+
 ### 12.0.10
 * Updated TOC numbers.
 
