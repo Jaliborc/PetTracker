@@ -1,4 +1,5 @@
 --[[
+	Chinese Simplified Localization
 	简体中文本地化
 --]]
 

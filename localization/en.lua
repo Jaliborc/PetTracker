@@ -38,6 +38,7 @@ L.Defeat = BOSS_DEAD
 L.Victory = EMOTE101_TOKEN:lower():gsub('^.', strupper)
 L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
 L.TrackPets = C_Spell.GetSpellInfo(122026).name
+L.TargetQualityTip = ''
 
 for i = 1, C_PetJournal.GetNumPetSources() do
 	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
@@ -57,7 +58,6 @@ L.SpecieIcons = 'Species Icons'
 L.SpecieIconsTip = 'If enabled, pets will be marked by their species icon instead of type when shown in the world and battle map.'
 L.Switcher = 'Switcher'
 L.SwitcherTip = 'If enabled, the default UI for switching pets in combat will be replaced by an improved one.'
-L.TargetQualityTip = ''
 L.ZoneTrackerTip = 'If enabled, a list of pet capture progress in the current zone will be displayed next to the quest objectives.|n|n|cff20ff20You can also toggle this option from the Pet Journal.|r'
 
 -- help
