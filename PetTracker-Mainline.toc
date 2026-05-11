@@ -2,6 +2,7 @@
 ## IconTexture: Interface/Addons/PetTracker/art/compass
 
 ## Notes: Tracks pets in and out of combat, so you can catch them all. Shows pet breeds & rarity, available PvE encounters and more.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/PetTracker/art/patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/PetTracker/art/paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/PetTracker/art/discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-zhCN: 追踪宠物，以便收集。显示宠物品种及品质，对战记录等等。|n|TInterface/Addons/PetTracker/art/patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/PetTracker/art/paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/PetTracker/art/discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
 ## Author: Jaliborc (João Cardoso)
 ## X-License: All Rights Reserved
 ## Category: Battle Pets
