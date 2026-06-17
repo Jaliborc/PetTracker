@@ -1,3 +1,7 @@
+### 12.0.12
+* Updated TOC for Retail and Mists.
+* Updated chinese localization. _(by 7peanuts)_
+
 ### 12.0.11
 * Removed delay in updating zone tracker layout.
 
