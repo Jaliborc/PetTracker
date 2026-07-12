@@ -1,3 +1,7 @@
+### 12.0.13
+* __Retail:__ Largely improved performance of objectives tracker.
+* __Burning Crusade:__ Updated TOC.
+
 ### 12.0.12
 * Updated TOC for Retail and Mists.
 * Updated chinese localization. _(by 7peanuts)_

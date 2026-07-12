@@ -163,12 +163,6 @@ for _, key in pairs {'Level', 'Quality'} do
 		for i, pet in ipairs(self) do
 			value = value + pet['Get' .. key](pet)
 		end
-
-		local t= floor(value / #self + .5)
-		if key == 'Quality' and t > 6 then
-			dump(self)
-			print(self.name, t)
-		end
-		return t
+		return floor(value / #self + .5)
 	end
 end

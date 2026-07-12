@@ -49,6 +49,7 @@ end
 function Objectives:OnLoad()
 	local header = CreateFrame('Frame', nil, self:GetParent(), 'ObjectiveTrackerModuleHeaderTemplate')
 	header.MinimizeButton:SetScript('OnClick', function() self:Toggle() end)
+	header:SetScript('OnShow', function() header:PlayAddAnimation() end)
 	header:SetScript('OnMouseDown', self.ToggleMenu)
 	header:SetPoint('TOPLEFT', self, -15, 35)
 	header.Text:SetText(PETS)
@@ -62,25 +63,15 @@ function Objectives:OnLoad()
 end
 
 function Objectives:Layout()
-	local new = not self.Header:IsShown()
 	local hasContent, offset = self:GetContent()
 	local isEnabled = hasContent and not self:GetParent().isCollapsed
-
-	if hasContent then
+	if isEnabled then
+		self:SetPoint('TOPLEFT', 15, -(offset or 0))
 		self:GetParent():Show()
 	end
 
-	if new then
-		self.Header:PlayAddAnimation()
-	end
-
 	self:SetShown(isEnabled and not self.collapsed)
-	self:SetPoint('TOPLEFT', 15, -(offset or 0))
 	self.Header:SetShown(isEnabled)
-
-	if isEnabled then
-		self:Delay(5, 'Layout') -- reliancy fallback, in case of blizzard code changes
-	end
 end
 
 function Objectives:GetContent()
@@ -97,8 +88,11 @@ function Objectives:GetContent()
 
 		local free = parent:GetAvailableHeight() - used
 		if free >= 103 then
-			self.MaxEntries = floor((free - 103) / 19)
-			self:Update()
+			local maxEntries = floor((free - 103) / 19)
+			if maxEntries ~= self.MaxEntries then
+				self.MaxEntries = maxEntries
+				self:Update()
+			end
 
 			return not self.Bar:IsMaximized(), used + 73
 		end
