@@ -138,14 +138,8 @@ end
 
 --[[ Client-Specific ]]--
 
-if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_DRAGONFLIGHT then
-	function MapCanvas:Validate(frame)
-		for provider in pairs(frame.dataProviders) do
-			if provider.RefreshAllData == PetTamerDataProviderMixin.RefreshAllData then
-				return true
-			end
-		end
-	end
-else
-	function MapCanvas:Validate(frame) return frame == WorldMapFrame end
+local isDragonflight = LE_EXPANSION_LEVEL_CURRENT >= (LE_EXPANSION_DRAGONFLIGHT or 9)
+
+function MapCanvas:Validate(frame)
+	return frame == WorldMapFrame or (isDragonflight and frame == BattlefieldMapFrame)
 end
