@@ -1,3 +1,6 @@
+### 12.1.1
+* Updated dependencies to latest versions.
+
 ## 12.1
 * Updated for The Curse of Ula'tek.
 
