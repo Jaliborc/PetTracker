@@ -53,11 +53,12 @@ function Rival:GetMapName()
 	local map = self:GetMap()
 	if map then
 		local info = C.Map.GetMapInfo(map)
-		local parent = C.Map.GetMapInfo(info.parentMapID)
-		return info.name .. ', ' .. parent.name
-	else
-		return UNKNOWN
+		if info then
+			local parent = C.Map.GetMapInfo(info.parentMapID)
+			return info.name .. (parent and (', ' .. parent.name) or '')
+		end
 	end
+	return UNKNOWN
 end
 
 function Rival:GetLocation()
