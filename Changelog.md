@@ -1,3 +1,6 @@
+### 12.1.2
+* __Mists:__ Fixed issue that prevented using search in the rivals panel.
+
 ### 12.1.1
 * Updated dependencies to latest versions.
 
