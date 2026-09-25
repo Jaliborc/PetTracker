@@ -1,3 +1,6 @@
+### 12.1.3
+* Updated Russian locale (by _Hubbotu_).
+
 ### 12.1.2
 * __Mists:__ Fixed issue that prevented using search in the rivals panel.
 
