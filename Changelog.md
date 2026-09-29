@@ -1,3 +1,6 @@
+### 12.1.4
+* Added internal ability to ignore species that are unobtainable in dataset generation: removed Thundering Serpent Hatchling.
+
 ### 12.1.3
 * Updated Russian locale (by _Hubbotu_).
 
