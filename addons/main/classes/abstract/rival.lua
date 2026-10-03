@@ -105,8 +105,8 @@ function Rival:GetRewards()
 		count = tonumber(count, 36)
 
 		tinsert(rewards, {
+			icon = (C.CurrencyInfo.GetCurrencyInfo(id) or Addon.None).iconFileID,
 			link = C.CurrencyInfo.GetCurrencyLink(id, count),
-			icon = C.CurrencyInfo.GetCurrencyInfo(id).iconFileID,
 			count = count
 		})
 	end

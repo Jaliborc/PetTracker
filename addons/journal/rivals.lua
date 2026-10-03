@@ -16,8 +16,13 @@ function Journal:OnLoad()
 end
 
 function Journal:OnStartup()
-	PetJournalTutorialButton:Hide()
 	HybridScrollFrame_CreateButtons(self.List, 'PetTrackerRivalEntry', 44, 0)
+	
+	if PetJournalTutorialButton then
+		PetJournalTutorialButton:Hide()
+	elseif PetJournal and PetJournal.MainHelpButton then
+		PetJournal.MainHelpButton:Hide()
+	end
 
 	self.OnStartup = nop
 	self.Inset:Hide()
