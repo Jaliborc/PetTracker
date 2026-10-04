@@ -6,6 +6,7 @@ All Rights Reserved
 local ADDON, Addon = ...
 local Predict = Addon:NewModule('Predict')
 
+Predict.AllBreeds = {3,4,5,6,7,8,9,10,11,12}
 Predict.BreedStats = {
 	[3] = {.5,.5,.5},
 	[4] = {0,2,0},
@@ -30,7 +31,7 @@ function Predict:Breed(specie, level, quality, health, power, speed)
 		power  = min(max(power / leveled - base[2], 0), 2)
 		speed  = min(max(speed / leveled - base[3], 0), 2)
 
-		for i, breed in pairs(breeds) do
+		for i, breed in ipairs(breeds or self.AllBreeds) do
 			local buff = self.BreedStats[breed]
 			local off = abs(health - buff[1]) + abs(power - buff[2]) + abs(speed - buff[3])
 			if off < best then
@@ -50,11 +51,11 @@ function Predict:Stats(specie, level, quality, breed)
 		local buff = self.BreedStats[breed]
 
 		return floor((base[1] + buff[1]) * leveled * 5 + 100.5),
-			   floor((base[1] + buff[1]) * leveled + .5),
-			   floor((base[2] + buff[2]) * leveled + .5)
+			   floor((base[2] + buff[2]) * leveled + .5),
+			   floor((base[3] + buff[3]) * leveled + .5)
 	end
 end
 
 function Predict:QualityScale(quality)
-	return 1 + 0.1 * quality
+	return 1 + 0.1 * (quality - 1)
 end

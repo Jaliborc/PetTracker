@@ -1,3 +1,6 @@
+### 12.1.5
+* Made multiple improvements to pet stat and breed prediction accuracy.
+
 ### 12.1.4
 * Added internal ability to ignore species that are unobtainable in dataset generation: removed Thundering Serpent Hatchling.
 

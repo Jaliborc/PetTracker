@@ -127,7 +127,8 @@ function Pet:GetInfo()
 end
 
 function Pet:GetStats()
-  return select(2, C_PetJournal.GetPetStats(self:GetID()))
+  local _, maxHealth, power, speed = C_PetJournal.GetPetStats(self:GetID())
+  return maxHealth, power, speed
 end
 
 function Pet:GetQuality()
