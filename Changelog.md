@@ -1,3 +1,6 @@
+### 12.1.6
+* Updated SecureTabs
+
 ### 12.1.5
 * Made multiple improvements to pet stat and breed prediction accuracy.
 
