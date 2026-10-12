@@ -44,6 +44,8 @@ L.TargetQualityTip = ''
 for i = 1, C_PetJournal.GetNumPetSources() do
 	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
 end
+L.Source5 = 'Битв.. питомцев'
+L.Source11 = 'Сокровище'
 
 -- options
 L.AlertUpgrades = 'Оповещать об улучшениях'

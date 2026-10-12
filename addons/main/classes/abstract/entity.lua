@@ -13,7 +13,9 @@ Entity.SourceIcons = {
 	'Interface/Archeology/Arch-Icon-Marker',
 	'Interface/Icons/Tracking_WildPet',
 	'Interface/AchievementFrame/UI-Achievement-TinyShield',
-	'Interface/GossipFrame/DailyQuestIcon'
+	'Interface/GossipFrame/DailyQuestIcon'',
+	[11] = 'Interface/WorldMap/TreasureChest_64', -- discovery (treasures)
+
 }
 
 function Entity:Display()
