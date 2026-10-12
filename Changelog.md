@@ -1,3 +1,9 @@
+### 12.1.7
+* Added 16 missing rivals.
+* Fixed some mistakes in the pet database.
+* Added source icon for discovery pets (by _Thunderwitch_).
+* Improved russian locales (by _Thunderwitch_).
+
 ### 12.1.6
 * Updated SecureTabs
 

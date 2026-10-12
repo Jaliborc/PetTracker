@@ -33,17 +33,7 @@ L.UpgradeAlert = 'Появились улучшения для диких пит
 L.TotalRivals = 'Всего соперников'
 L.ZoneTracker = 'Отслеживание зоны'
 
--- automatic. do not translate unless necessary
-L.Maximized = WINDOWED_MAXIMIZED
-L.Defeat = BOSS_DEAD
-L.Victory = EMOTE101_TOKEN:lower():gsub('^.', strupper)
-L.EnemyTeam = PET_BATTLE_COMBAT_LOG_ENEMY_TEAM:gsub('%s.', strupper)
-L.TrackPets = C_Spell.GetSpellInfo(122026).name
-L.TargetQualityTip = ''
-
-for i = 1, C_PetJournal.GetNumPetSources() do
-	L['Source' .. i] = _G['BATTLE_PET_SOURCE_' .. i]
-end
+-- required overrides
 L.Source5 = 'Битв.. питомцев'
 L.Source11 = 'Сокровище'
 
