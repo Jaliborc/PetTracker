@@ -1,3 +1,7 @@
+### 12.1.8
+* Fixed Exodar, Uldum and Vale of Eternal Blossoms locations.
+* TOC update.
+
 ### 12.1.7
 * Added 16 missing rivals.
 * Fixed some mistakes in the pet database.
