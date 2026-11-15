@@ -41,10 +41,7 @@ function Tip:AddLine(text, r,g,b, isHeader)
 
 	local i = self:NumLines()
 	if i > 1 then
-		local previous = self:GetLine(i - 1)
-		local line = self:GetLine(i)
-		line:SetPoint('TOPLEFT', previous, 'BOTTOMLEFT', 0, isHeader and -10 or -2)
-		line:SetFontObject(isHeader and GameTooltipHeaderText or GameTooltipText)
+		self:GetLine(i):SetFontObject(isHeader and GameTooltipHeaderText or GameTooltipText)
 
 		if isHeader then
 			self:GetStroke(i):Show()
@@ -58,6 +55,12 @@ function Tip:Show()
 	if self:IsShown() then
 		self:SetHeight(self:GetHeight() + self.NumStrokes * 8)
 		self:SetFrameStrata('FULLSCREEN_DIALOG')
+
+		for i = 2, self:NumLines() do
+			local line = self:GetLine(i)
+			local isHeader = line:GetFontObject() == GameTooltipHeaderText
+			line:SetPoint('TOPLEFT', self:GetLine(i - 1), 'BOTTOMLEFT', 0, isHeader and -10 or -2)
+		end
 	end
 end
 

@@ -54,6 +54,7 @@ function Objectives:OnLoad()
 	header:SetPoint('TOPLEFT', self, -15, 35)
 	header.Text:SetText(PETS)
 
+	self:GetParent().Header.MinimizeButton:HookScript('OnClick', function() self:Layout() end)
 	self:RegisterSignal('OPTIONS_CHANGED', 'Layout')
 	self.Header = header
 
@@ -64,12 +65,12 @@ end
 
 function Objectives:Layout()
 	local hasContent, offset = self:GetContent()
-	local isEnabled = hasContent and not self:GetParent().isCollapsed
-	if isEnabled then
+	if hasContent then
 		self:SetPoint('TOPLEFT', 15, -(offset or 0))
 		self:GetParent():Show()
 	end
 
+	local isEnabled = hasContent and not self:GetParent().isCollapsed
 	self:SetShown(isEnabled and not self.collapsed)
 	self.Header:SetShown(isEnabled)
 end
@@ -79,7 +80,7 @@ function Objectives:GetContent()
 		local parent = self:GetParent()
 		local used = 0
 
-		for i, module in ipairs(parent.modules or {}) do
+		for i, module in ipairs(parent.modules or Addon.None) do
 			local height = module:GetContentsHeight()
 			if height > 0 then
 				used = used + height + 10

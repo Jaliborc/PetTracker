@@ -1,3 +1,27 @@
+### 12.1.9
+* __All:__ Fixed visual issue with world map pin tooltips.
+* __Retail:__ Fixed issue in which collapsing the objectives tracker while only pets were being tracked would cause it to disappear.
+* __Multiple Data Updates__
+  * Fixed incorrect locations for Annuna, Iggy and Somnius, which no longer appear in The Waking Shores.
+  * Slithering Brownscale no longer appears in Tiragarde Sound (Azsuna, Stormheim and Val'sharah only).
+  * Bloodtusk is no longer listed in the Nazmir wild pet list.
+  * Added pet teams for the Broken Shore trainers Sissix, Madam Viciosa and Nameless Mystic.
+  * Fixed map locations for multiple pets in Stormwind City: Jade Crane Chick, Rabbit, Warbot, Blue Clockwork Rocket Bot, Squirrel, White Kitten, Hawk Owl, Great Horned Owl, Peddlefeet, Speedy, Mr. Wiggles, Whiskers the Rat, Spirit of Summer, Dark Phoenix Hatchling, Armadillo Pup, Scooter the Snail, Magic Lamp, Lil' Tarecgosa, Creepy Crate, Alliance Balloon and Stormwind Rat.
+  * Fixed map locations for the wild pets of Mechagon Island, and for rivals in Mechagon Island, Uldum, Vale of Eternal Blossoms, The Forbidden Reach and Undermine.
+  * Fixed map locations for Wild Duckling and Plucky Duckling in Valdrakken.
+  * Shadowy Oozeling now appears in Azj-Kahet - Lower.
+  * Fixed map locations for Silvermoon Broom, Rescued Dragonhawk Chick, Void-Infused Mindbreaker Fry and Cappy in Silvermoon City.
+  * Added wild pet locations in Uldum (Dung Beetle, Desert Spider, Mac Frog, Locust, Oasis Moth, Leopard Scorpid, Tol'vir Scarab and Emerald Boa), Vale of Eternal Blossoms (Effervescent Glowfly, Gilded Moth and Dancing Water Skimmer), The Exodar (Yellow Moth and White Moth), Tirisfal Glades (Rat), Arathi Highlands (Grasslands Cottontail), Ahn'Qiraj (Viscidus Globule, Anubisath Idol and Mini Mindslayer) and Tempest Keep (Pocket Reaver, Lesser Voidcaller and Phoenix Hawk Hatchling).
+  * Added rival locations in Suramar (Varenne and Felsoul Seer), Uldum (Obalis) and Vale of Eternal Blossoms (Aki the Chosen).
+  * Updated map locations for pets in Orgrimmar, Dalaran, Naxxramas, Blackwing Lair, The Deadmines, Serpentshrine Cavern, Karazhan, Deeprun Tram, Throne of Thunder, Siege of Orgrimmar, The Dreamgrove, Thunder Totem, Highmountain and Suramar.
+  * Updated rival locations in Uldum, The Maelstrom, Wailing Caverns, The Deadmines, Vale of Eternal Blossoms and The Forbidden Reach.
+  * Added and updated stable locations in Uldum, Ulduar, Thunder Totem, Azuremyst Isle, Stormwind City, Blackrock Depths, Gilneas City, Tazavesh, Valdrakken, Amirdrassil, The Wandering Isle, Val, Naigtal, Dalaran, Isle of Thunder, Ardenweald, Spires of Ascension, Tirisfal Glades, Vale of Eternal Blossoms, Silvermoon City, Eversong Woods and Elwynn Forest.
+  * Thundering Serpent Hatchling no longer (incorrectly) appears in Stormwind.
+  * Cockroach no longer (incorrectly) appears in Icecrown Citadel.
+  * Grey Moth no longer (incorrectly) appears in The Exodar.
+  * Removed Warbot from everywhere.
+* Note: The extensive data changes in this update result from a complete overhaul of the 15-year-old database build system. While this brings numerous improvements, I can't manually check everything on my own. If you spot any inaccuracies, please report them — it would be a great help! 
+
 ### 12.1.8
 * Fixed Exodar, Uldum and Vale of Eternal Blossoms locations.
 * TOC update.
