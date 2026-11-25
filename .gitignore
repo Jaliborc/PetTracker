@@ -1,4 +1,3 @@
-*.pyc
-Data/*.lua
 .DS_Store
+.drafts
 Icon_

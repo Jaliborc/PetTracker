@@ -17,12 +17,9 @@ end
 
 function Journal:OnStartup()
 	HybridScrollFrame_CreateButtons(self.List, 'PetTrackerRivalEntry', 44, 0)
-	
-	if PetJournalTutorialButton then
-		PetJournalTutorialButton:Hide()
-	elseif PetJournal and PetJournal.MainHelpButton then
-		PetJournal.MainHelpButton:Hide()
-	end
+	hooksecurefunc('MountJournal_UpdateMountDisplay', function() self:OnVisibility() end)
+	hooksecurefunc('PetJournal_UpdatePetLoadOut', function() self:OnVisibility() end)
+	hooksecurefunc('PetJournal_UpdatePetCard', function() self:OnVisibility() end)
 
 	self.OnStartup = nop
 	self.Inset:Hide()
@@ -104,20 +101,37 @@ end
 
 function Journal:OnShow()
 	self:RegisterEvent('TOOLTIP_DATA_UPDATE', self.Delay, 0, 'Refresh')
-
-	if WardrobeCollectionFrame.InfoButton then
-		WardrobeCollectionFrame.InfoButton:Hide()
-	end
-	if MountJournal.ToggleDynamicFlightFlyoutButton then
-		MountJournal.ToggleDynamicFlightFlyoutButton:Hide()
-	end
+	self:OnVisibility()
 end
 
 function Journal:OnHide()
 	self:UnregisterAll()
+	self:OnVisibility()
+end
 
-	if MountJournal:IsShown() and MountJournal.ToggleDynamicFlightFlyoutButton then
-		MountJournal.ToggleDynamicFlightFlyoutButton:Show()
+function Journal:OnVisibility()
+	local show = not self:IsVisible()
+
+	if PetJournalTutorialButton then
+		PetJournalTutorialButton:SetShown(show)
+	elseif PetJournal.MainHelpButton then
+		PetJournal.MainHelpButton:SetShown(show)
+	end
+
+	if PetJournal.PetCard and PetJournal.PetCard.modelScene then
+		PetJournal.PetCard.modelScene:SetShown(show)
+	end
+
+	if MountJournal.MountDisplay and MountJournal.MountDisplay.ModelScene then
+		MountJournal.MountDisplay.ModelScene:SetShown(show)
+	end
+
+	if MountJournal.ToggleDynamicFlightFlyoutButton then
+		MountJournal.ToggleDynamicFlightFlyoutButton:SetShown(show and MountJournal:IsShown())
+	end
+
+	if WardrobeCollectionFrame.InfoButton then
+		WardrobeCollectionFrame.InfoButton:SetShown(show)
 	end
 end
 

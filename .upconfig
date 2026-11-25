@@ -13,3 +13,8 @@
   PetTracker/addons/main/tests/
   PetTracker/libs/Sushi-3.2/tests/
   PetTracker/libs/Poncho-2.0/Tests.lua
+[checkpoint]
+  git 26669490df20f40cdfa2d3618f7c6cfd23d4316f
+  changelog_version 12.1.9
+  worktree_sha256 5f1ff69f207e580bf0f9284e2233dbba3cb6ec9cf94fad3ba9125193d920766b
+  reviewed_at 2026-11-17T19:06:02Z

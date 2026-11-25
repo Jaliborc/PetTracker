@@ -1,3 +1,7 @@
+### 12.1.10
+* Added workaround to visual bug in which rival 3D models could appear "cropped" in some situations.
+* Removed Leaping Leporid (not obtainable through normal collection).
+
 ### 12.1.9
 * __All:__ Fixed visual issue with world map pin tooltips.
 * __Retail:__ Fixed issue in which collapsing the objectives tracker while only pets were being tracked would cause it to disappear.
